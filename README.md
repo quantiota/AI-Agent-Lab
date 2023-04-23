@@ -6,7 +6,7 @@ Auto-GPT-Lab is an all-in-one development environment for working with the GPT-3
 Auto-GPT-Lab is also the basis for the AI Agent Farm, a modular system for developing and deploying AI agents. By using Auto-GPT-Lab as a module in the AI Agent Farm, users can easily connect their agents to real-time data streams and other sources of information, allowing for more sophisticated and accurate decision-making. With its flexible and modular design, Auto-GPT-Lab is a powerful tool for anyone working with GPT-3.5 models and data streams in their AI applications.
 
 
-Once you have set up a remote connection, you can use the Auto-GPT-Lab plugin as a development environment for working with GPT-3.5 models and data streams. The plugin includes a docker-compose configuration with QuestDB, Grafana, and Code-Server, providing a seamless interface for managing and querying data, visualizing results, and coding in real-time.
+Once you have set up a remote connection, you can use the Auto-GPT-Lab plugin as a development environment for working with GPT-3.5 models and data streams. 
 
 To use Auto-GPT-Lab with a remote JupyterHub or GitHub Codespace environment, follow these steps:
 
