@@ -10,10 +10,10 @@ Once you have set up a remote connection, you can use the Auto-GPT-Lab plugin as
 
 To use Auto-GPT-Lab with a remote JupyterHub or GitHub Codespace environment, follow these steps:
 
-Set up a remote JupyterHub or GitHub Codespace environment that includes the necessary dependencies for working with GPT-3.5 models and data streams.
+- Set up a remote JupyterHub or GitHub Codespace environment that includes the necessary dependencies for working with GPT-3.5 models and data streams.
 
-Launch the Auto-GPT-Lab plugin using the provided docker-compose file.
+- Launch the Auto-GPT-Lab plugin using the provided docker-compose file.
 
-Connect to the remote JupyterHub or GitHub Codespace environment from within the Code-Server interface provided by Auto-GPT-Lab.
+- Connect to the remote JupyterHub or GitHub Codespace environment from within the Code-Server interface provided by Auto-GPT-Lab.
 
 Start working with GPT-3.5 models and data streams, using the pre-installed tools and libraries that are included in your remote environment.
