@@ -8,7 +8,7 @@ Auto-GPT-Lab is also the basis for the AI Agent Farm, a modular system for devel
 
 To use Auto-GPT-Lab with a remote JupyterHub or GitHub Codespace environment, follow these steps:
 
-- Set up a remote JupyterHub or GitHub Codespace environment that includes the necessary dependencies for working with GPT-3.5 models and data streams.
+- Set up or use an existing remote JupyterHub or GitHub Codespace environment that includes the necessary dependencies for working with GPT-3.5 models and data streams.
 
 - Launch the Auto-GPT-Lab plugin using the provided docker-compose file.
 
