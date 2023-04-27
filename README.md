@@ -15,3 +15,10 @@ To use Auto-GPT-Lab with a remote JupyterHub or GitHub Codespace environment, fo
 - Connect to the remote JupyterHub or GitHub Codespace environment from within the Code-Server interface provided by Auto-GPT-Lab.
 
 Start working with GPT-3.5 models and data streams, using the pre-installed tools and libraries that are included in your remote environment.
+
+### AI Agent Lab Module Design
+
+ ![AI Agent Lab diagram](./ai-agent-lab-diagram.png)
+
+:pencil: this diagram has been generated using [app.diagrams.net](https://app.diagrams.net/)
+
