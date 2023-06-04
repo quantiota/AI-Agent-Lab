@@ -18,6 +18,6 @@ Start working with GPT-3.5 models and data streams, using the pre-installed tool
 ### AI Agent Lab Module Design
 
  ![AI Agent Lab diagram](./ai-agent-lab-diagram.png)
-
-:pencil: this diagram has been generated using [app.diagrams.net](https://app.diagrams.net/)
+ 
+:pencil: High resolution diagram [Application architecture diagram](https://raw.githubusercontent.com/BouarfaMahi/Auto-GPT-Lab-Plugin/master/ai-agent-lab-diagram.png)
 
