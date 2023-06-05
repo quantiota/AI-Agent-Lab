@@ -15,7 +15,7 @@ To use AI-Agent-Lab with a remote JupyterHub environment, follow these steps:
 
 Start working with GPT-3.5 models and data streams, using the pre-installed tools and libraries that are included in your remote environment.
 
-### AI Agent Lab Module Design
+### AI Agent Lab Architecture Diagram
 
  ![AI Agent Lab diagram](./ai-agent-lab-diagram.png)
  
