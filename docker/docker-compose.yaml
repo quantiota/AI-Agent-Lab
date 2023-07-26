@@ -42,8 +42,8 @@ services:
 
   chatgpt:
     build: ./chatgpt
-      ports:
-        - "5000:5000"
+    ports:
+      - "5000:5000"
 
   nginx:
     image: nginx:stable
