@@ -40,11 +40,6 @@ services:
       - QDB_PG_USER=admin
       - QDB_PG_PASSWORD=quest
 
-  chatgpt:
-    build: ./chatgpt
-    ports:
-      - "5000:5000"
-
   nginx:
     image: nginx:stable
     volumes:
