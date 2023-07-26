@@ -7,8 +7,8 @@ openai.api_key = 'your-openai-api-key'
 
 app = Flask(__name__)
 
-@app.route('/', methods=['POST'])
-def home():
+@app.route('/chat', methods=['POST'])
+def chat():
     message = request.form['message']
     response = openai.ChatCompletion.create(
       model="gpt-4.0-turbo",
@@ -18,4 +18,5 @@ def home():
         ]
     )
     return response.choices[0].message['content']
+
 
