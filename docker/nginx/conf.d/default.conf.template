@@ -176,7 +176,7 @@ server {
     ssl_stapling_verify on;
     add_header Strict-Transport-Security max-age=15768000;
 
-    # Managing literal requests to the Grafana front end
+    # Managing literal requests to the Chatgpt front end
     location / {
         proxy_pass http://chatgpt:5000;
 
