@@ -1,4 +1,0 @@
-# requirements.txt
-
-Flask==2.0.2
-openai==0.27.0
