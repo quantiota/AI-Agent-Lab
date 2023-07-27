@@ -48,9 +48,25 @@ Once the AI Agent container has been built, it can be deployed to a Docker regis
 - If deploying to a cloud provider, ensure the necessary cloud resources and permissions are correctly configured.
 - Set up logging and performance monitoring for the AI Agent.
 
-Additional considerations:
+### 6 Update the AI Agent Host docker-compose.yaml file
 
-- The AI Agent should handle a variety of tasks, understand and respond to a wide range of prompts and questions, and adapt to new information and situations.
-- Plan for how the AI Agent will handle data storage, model training, and updating the model for learning and improvement over time.
-- Include health checks for the AI Agent and its dependencies to ensure reliability.
-- For security, protect the AI Agent from unauthorized access, make sure it operates without errors, and guard against potential vulnerabilities such as injection attacks or data leaks.
+Once the Docker image is built and pushed to a Docker registry, it can be added as a service to a Docker Compose file for a more complex deployment involving other services (such as QuestDB, Grafana, and VSCode). Proper network connectivity, volumes, and environment variables should be set in the Docker Compose file to ensure seamless interaction between the services. Securely manage all sensitive data like API keys and user credentials.
+
+```
+services:
+  ...
+  ai-agent:
+    image: yourdockerregistry/ai-agent:tag
+    environment:
+      - LANGCHAIN_FRAMEWORK_CONFIG=/path/to/your/config
+      - OPENAI_API_KEY=yourOpenAIKey
+      - QUESTDB_PG_USER=admin
+      - QUESTDB_PG_PASSWORD=quest
+      - GRAFANA_API_KEY=yourGrafanaAPIKey
+      - VSCODE_API_KEY=yourVSCodeAPIKey
+    depends_on:
+      - questdb
+      - grafana
+      - vscode
+
+```
