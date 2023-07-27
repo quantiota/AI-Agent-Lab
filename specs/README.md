@@ -89,7 +89,7 @@ services:
   ai-agent-ui:
     image: yourdockerregistry/ai-agent-ui:tag
     ports:
-      - "8000:8000"
+      - "5000:5000"
     depends_on:
       - ai-agent
 ```
