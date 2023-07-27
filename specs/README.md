@@ -86,6 +86,12 @@ services:
       - questdb
       - grafana
       - vscode
+  ai-agent-ui:
+    image: yourdockerregistry/ai-agent-ui:tag
+    ports:
+      - "8000:8000"
+    depends_on:
+      - ai-agent
 ```
 
 You need to replace yourdockerregistry/ai-agent:tag with the name of your Docker image in the Docker registry. The depends_on field is used to define dependencies of your AI Agent. Here, I've assumed that your AI Agent depends on QuestDB, Grafana, and VSCode services.
