@@ -68,7 +68,7 @@ Also, the UI would need to interact with the Dockerized AI Agent service. This m
 
 ### 7 Update the AI Agent Host docker-compose.yaml file
 
-Once the Docker image is built and pushed to a Docker registry, it can be added as a service to a Docker Compose file for a more complex deployment involving other services (such as QuestDB, Grafana, and VSCode). Proper network connectivity, volumes, and environment variables should be set in the Docker Compose file to ensure seamless interaction between the services. Securely manage all sensitive data like API keys and user credentials.
+Once the Docker images are built and pushed to a Docker registry, they can be added as  services to a Docker Compose file for a more complex deployment involving other services (such as QuestDB, Grafana, and VSCode). Proper network connectivity, volumes, and environment variables should be set in the Docker Compose file to ensure seamless interaction between the services. Securely manage all sensitive data like API keys and user credentials.
 
 ```
 services:
