@@ -1,3 +1,5 @@
+## High-Level Spec for Developing an AI Agent with LangChain and OpenAI
+
 1. Create a Dockerfile that defines the AI Agent container.
 
 The Dockerfile should define the following:
