@@ -9,20 +9,29 @@ The Dockerfile should define the following:
 - The base image for the AI Agent container.
 - The dependencies that need to be installed in the AI Agent container.
 - The configuration files that need to be copied into the AI Agent container.
+- The working directory for the AI Agent within the container.
+- Commands or entry points to start the AI Agent when the container is run.
+- The source code for the AI Agent, which should be copied into the container.
+
 2. Install the LangChain framework in the AI Agent container.
 
-The LangChain framework is a Python library that can be used to build AI agents. The framework provides a number of features that can be used to develop AI agents, such as:
+The LangChain framework, a Python library used for building AI agents, should be installed with the following considerations:
 
-- The ability to interact with natural language.
-- The ability to learn and improve over time.
-- The ability to be deployed in a variety of environments.
+- The specific version of the LangChain library should be pinned for consistency.
+- All additional dependencies that LangChain requires should also be installed.
+
 3. Configure the AI Agent to interact with QuestDB, VSCode, and Grafana.
 
-The AI Agent will need to be configured to interact with QuestDB, VSCode, and Grafana. These tools can be used to:
+The AI Agent should be configured to interact with these tools as follows:
 
-- QuestDB: The AI Agent could interact with QuestDB using the QuestDB Python API. The API provides a number of functions that can be used to store and query data in QuestDB.
-- Grafana: The AI Agent could interact with Grafana using the Grafana REST API. The API provides a number of functions that can be used to create and manage dashboards in Grafana.
-- VSCode: The AI Agent could interact with VSCode using the VSCode API. The API provides a number of functions that can be used to edit code, run code, and debug code in VSCode.
+- QuestDB: Interact with QuestDB using the QuestDB Python API to store and query data.
+- Grafana: Interact with Grafana using the Grafana REST API to create and manage dashboards.
+- VSCode: Interact with VSCode using the VSCode API to edit, run, and debug code.
+
+Ensure that:
+
+- Credentials for these services are securely stored and accessed, potentially using Docker Secrets.
+- Proper network connectivity exists between the AI Agent and these services, possibly involving Docker network configuration or firewall rules adjustment.
 
 4. Configure the AI Agent to access OpenAI's API.
 
