@@ -24,7 +24,7 @@ The LangChain framework, a Python library used for building AI agents, should be
 
 The AI Agent should be configured to interact with these tools as follows:
 
-- QuestDB: Interact with QuestDB using the QuestDB Python API to store and query data.
+- QuestDB: Interact with QuestDB using either the PostgreSQL wire protocol or REST API to store and query data.    These methods allow for SQL INSERT, UPDATE, and SELECT operations.
 - Grafana: Interact with Grafana using the Grafana REST API to create and manage dashboards.
 - VSCode: Interact with VSCode using the VSCode API to edit, run, and debug code.
 
