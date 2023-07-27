@@ -18,9 +18,10 @@ The LangChain framework is a Python library that can be used to build AI agents.
 
 The AI Agent will need to be configured to interact with QuestDB, VSCode, and Grafana. These tools can be used to:
 
-- Store and query data.
-- Develop and debug AI agents.
-- Monitor the performance of AI agents.
+- QuestDB: The AI Agent could interact with QuestDB using the QuestDB Python API. The API provides a number of functions that can be used to store and query data in QuestDB.
+- Grafana: The AI Agent could interact with Grafana using the Grafana REST API. The API provides a number of functions that can be used to create and manage dashboards in Grafana.
+- VSCode: The AI Agent could interact with VSCode using the VSCode API. The API provides a number of functions that can be used to edit code, run code, and debug code in VSCode.
+
 4. Configure the AI Agent to access OpenAI's API.
 
 OpenAI's API provides access to a number of language models, including GPT-3. These models can be used by the AI Agent to generate text, translate languages, and write different kinds of creative content.
