@@ -1,5 +1,7 @@
 ## High-Level Spec for Developing an AI Agent with LangChain and OpenAI
 
+This spec is a good starting point for developing an AI Agent with LangChain and OpenAI on the AI Agent Host. The spec provides clear and concise instructions for how to develop an AI Agent, and it takes into account the features of the AI Agent Host.
+
 1. Create a Dockerfile that defines the AI Agent container.
 
 The Dockerfile should define the following:
