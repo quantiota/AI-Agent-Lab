@@ -128,14 +128,12 @@ You can develop the AI Agent container on the microserver without knowing the sp
 
 Here's how you can achieve this:
 
-1. API Specification: Define a clear and standardized API specification for communication between the AI Agent container on the microserver and the AI application on the GPU server. The API specification should outline the endpoints, request formats, and response formats that the AI Agent should use to interact with the AI application.
+1. **API Specification**: Define a clear and standardized API specification for communication between the AI Agent container on the microserver and the AI application on the GPU server. The API specification should outline the endpoints, request formats, and response formats that the AI Agent should use to interact with the AI application.
 
-2. Independent Development: You can develop the AI Agent container on the microserver separately from the AI application on the GPU server. As long as the AI Agent adheres to the API specification, it can be treated as a black box from the perspective of the AI application.
+2. **Independent Development**: You can develop the AI Agent container on the microserver separately from the AI application on the GPU server. As long as the AI Agent adheres to the API specification, it can be treated as a black box from the perspective of the AI application.
 
-3. API Documentation: Provide comprehensive documentation for the API used by the AI Agent container. This documentation should be made available to the developers working on the AI application, allowing them to understand how to interact with the AI Agent.
+3. **Mocking and Testing**: During development, you can use mocking techniques to simulate the behavior of the AI Agent container without actually running it on the microserver. This allows the AI application developers to test their code against the expected responses from the AI Agent.
 
-4. Mocking and Testing: During development, you can use mocking techniques to simulate the behavior of the AI Agent container without actually running it on the microserver. This allows the AI application developers to test their code against the expected responses from the AI Agent.
-
-5. Integration Testing: Once the AI Agent container is deployed on the microserver, you can perform integration testing to ensure that it communicates correctly with the AI application on the GPU server. This can be done by running both the AI Agent and the AI application in a controlled environment.
+4. **Integration Testing**: Once the AI Agent container is deployed on the microserver, you can perform integration testing to ensure that it communicates correctly with the AI application on the GPU server. This can be done by running both the AI Agent and the AI application in a controlled environment.
 
 By following these steps, you can achieve a decoupled and modular architecture, where the AI Agent container can be developed independently and integrated seamlessly with the AI application on the GPU server. This approach allows for flexibility and ease of development, as well as scalability and fault tolerance in the AI Agent Farm infrastructure.
