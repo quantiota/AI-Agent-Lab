@@ -101,8 +101,8 @@ and to define your domain name in the '**nginx.env**' file:
 
 ```
      # nginx/nginx.env
-
-     DOMAIN=yourdomain
+    
+      DOMAIN=yourdomain
 ```
 
 Remember to replace the placeholders with your actual domain, passwords, and usernames. 
