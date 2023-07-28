@@ -2,7 +2,25 @@
 
 This spec is a good starting point for developing an AI Agent with LangChain and OpenAI on the AI Agent Host. The spec provides clear and concise instructions for how to develop an AI Agent, and it takes into account the features of the AI Agent Host.
 
-### 1. Create a Dockerfile that defines the AI Agent container.
+
+### 1. Define a Clear and Standardized API Specification
+To enable seamless communication between the AI Agent on the microserver and the AI application on the GPU server, define a clear and standardized API specification. This specification should outline the following:
+
+- Endpoints: List all the endpoints that the AI Agent should use to interact with the AI application, including the specific methods (GET, POST, etc.) allowed for each endpoint.
+
+- Request Formats: Specify the expected format of the requests that the AI Agent should send to the AI application, including any required parameters or headers.
+
+- Response Formats: Describe the expected format of the responses that the AI Agent will receive from the AI application, including the necessary data fields and status codes.
+
+- Authentication: Define the authentication mechanism for the API, such as API keys or tokens, to ensure secure communication between the AI Agent and the AI application.
+
+By having a well-defined API specification, both the AI Agent and the AI application developers can work independently, knowing how their components should interact. The API documentation should be made available to the relevant teams, ensuring smooth integration and development within the distributed AI infrastructure.
+
+
+
+
+
+### 2. Create a Dockerfile that defines the AI Agent container.
 
 The Dockerfile should define the following:
 
@@ -13,14 +31,14 @@ The Dockerfile should define the following:
 - Commands or entry points to start the AI Agent when the container is run.
 - The source code for the AI Agent, which should be copied into the container.
 
-### 2. Install the LangChain framework in the AI Agent container.
+### 3. Install the LangChain framework in the AI Agent container.
 
 The LangChain framework, a Python library used for building AI agents, should be installed with the following considerations:
 
 - The specific version of the LangChain library should be pinned for consistency.
 - All additional dependencies that LangChain requires should also be installed.
 
-### 3. Configure the AI Agent to interact with QuestDB, VSCode, and Grafana.
+### 4. Configure the AI Agent to interact with QuestDB, VSCode, and Grafana.
 
 The AI Agent should be configured to interact with these tools as follows:
 
@@ -33,14 +51,14 @@ Ensure that:
 - Credentials for these services are securely stored and accessed, potentially using Docker Secrets.
 - Proper network connectivity exists between the AI Agent and these services, possibly involving Docker network configuration or firewall rules adjustment.
 
-### 4. Configure the AI Agent to access OpenAI's API.
+### 5. Configure the AI Agent to access OpenAI's API.
 
 The AI Agent should access OpenAI's API, which provides access to a number of language models such as GPT-3. Remember to:
 
 - Securely store the OpenAI API key, potentially using Docker Secrets or environment variables.
 - Implement error handling for potential issues with the API, such as rate limits or network problems.
 
-### 5. Build and deploy the AI Agent container.
+### 6. Build and deploy the AI Agent container.
 
 Once the AI Agent container has been built, it can be deployed to a Docker registry. The container can then be run on a variety of platforms, including cloud providers and on-premises servers. During this process:
 
@@ -50,7 +68,7 @@ Once the AI Agent container has been built, it can be deployed to a Docker regis
 
 
 
-### 6. Develop a User Interface for Interaction
+### 7. Develop a User Interface for Interaction
 Design and implement a user interface (UI) for user interaction with the AI Agent. The UI should:
 
 - Provide a prompt or input field where users can ask questions or provide commands to the AI Agent.
@@ -66,7 +84,7 @@ Also, the UI would need to interact with the Dockerized AI Agent service. This m
 
 
 
-### 7 Update the AI Agent Host docker-compose.yaml file
+### 8 Update the AI Agent Host docker-compose.yaml file
 
 Once the Docker images are built and pushed to a Docker registry, they can be added as  services to a Docker Compose file for a more complex deployment involving other services (such as QuestDB, Grafana, and VSCode). Proper network connectivity, volumes, and environment variables should be set in the Docker Compose file to ensure seamless interaction between the services. Securely manage all sensitive data like API keys and user credentials.
 
