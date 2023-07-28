@@ -99,7 +99,8 @@ QDB_PG_PASSWORD=quest
 ```
 and to define your domain name in the nginx.env file:
 
-```# nginx/nginx.env
+```
+    # nginx/nginx.env
 
     DOMAIN=yourdomain
 ```
