@@ -121,6 +121,15 @@ It's recommended to not hard-code sensitive data like API keys directly in the D
 Also, remember to appropriately configure the networking and volumes if your AI Agent needs to communicate with other services or needs access to certain directories in the filesystem.
 
 
+## APIs Documentation Links
+- [QuestDB REST API](https://questdb.io/docs/reference/api/rest/)
+- [QuestDB Postgres Wire Protocol](https://questdb.io/docs/reference/api/postgres/)
+- [Grafana HTTP API](https://grafana.com/docs/grafana/latest/http_api/)
+- [VSCode API](https://code.visualstudio.com/api/references/vscode-api)
+- [JupyterHub REST API](https://jupyterhub.readthedocs.io/en/stable/reference/rest.html)
+
+
+
 ## Decoupled Development: Building AI Agent Containers for Distributed AI Infrastructures
 
 
