@@ -4,7 +4,7 @@ This spec is a good starting point for developing an AI Agent with LangChain and
 
 
 ### 1. Define a Clear and Standardized API Specification
-To enable seamless communication between the AI Agent on the microserver and the AI application on the GPU server, define a clear and standardized API specification. This specification should outline the following:
+To enable seamless communication between the AI Agent on the microserver and the [AI application](https://github.com/quantiota/AI-Agent-Farm/tree/master/doc/ai-application) on the GPU server, define a clear and standardized API specification. This specification should outline the following:
 
 - Endpoints: List all the endpoints that the AI Agent should use to interact with the AI application, including the specific methods (GET, POST, etc.) allowed for each endpoint.
 
