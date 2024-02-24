@@ -1,4 +1,4 @@
-Here is a  practical and important step for ensuring the reliability and functionality of your AI Agent Lab setup. Creating code snippets for validation will not only help in testing the connections but also in debugging and documenting the process for future reference. Here are some general ideas for each connection validation:
+Here is a  practical and important step for ensuring the reliability and functionality of our AI Agent Lab setup. Creating code snippets for validation will not only help in testing the connections but also in debugging and documenting the process for future reference. Here are some general ideas for each connection validation:
 
 1. Code-Server (VSCode) Connection Validation
    
