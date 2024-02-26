@@ -6,7 +6,7 @@ FROM --platform=$BUILDPLATFORM python:3.10-alpine AS builder
 
 WORKDIR /app
 
-COPY requirements.txt chatbot/app
+COPY requirements.txt /app
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip3 install -r requirements.txt
 
@@ -27,4 +27,4 @@ addgroup -S docker
 adduser -S --shell /bin/bash --ingroup docker vscode
 EOF
 # install Docker tools (cli, buildx, compose)
-# COPY --from=gloursdocker/docker / /
+#COPY --from=gloursdocker/docker / /
