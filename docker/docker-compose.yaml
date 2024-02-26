@@ -39,6 +39,17 @@ services:
     env_file:
       - .env
 
+   
+  web:  # Flask application service
+    build:   # Specify the location of your Dockerfile and application code
+      context: chatbot/app
+      target: builder
+
+    ports:
+      - "5000:5000"  # Map port 5000 of the container to port 5000 on the host
+    volumes:
+      - ./chatbot/app:/app  # Optional: Mount the application directory for live reloading in development   
+
   nginx:
     image: nginx:stable
     volumes:
@@ -59,7 +70,7 @@ services:
       - vscode
       - grafana
       - questdb
-
+      - web
   # Refer to ./init.yaml to for initial SSL setup
   # add the following line in in crontab (5 am, every monday)
   #   0 5 * * 1 docker compose run certbot renew
