@@ -4,13 +4,13 @@ FROM --platform=$BUILDPLATFORM python:3.10-alpine AS builder
 # Switch to root user for permissions
 
 
-WORKDIR /app
+WORKDIR /chatbot
 
-COPY requirements.txt /app
+COPY requirements.txt /chatbot
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip3 install -r requirements.txt
 
-COPY . /app
+COPY . /chatbot
 
 ENTRYPOINT ["python3"]
 CMD ["app.py"]
