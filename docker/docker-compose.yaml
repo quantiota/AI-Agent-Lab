@@ -42,13 +42,13 @@ services:
    
   web:  # Flask application service
     build:   # Specify the location of your Dockerfile and application code
-      context: chatbot/app
+      context: chatbot
       target: builder
 
     ports:
       - "5000:5000"  # Map port 5000 of the container to port 5000 on the host
     volumes:
-      - ./chatbot/app:/app  # Optional: Mount the application directory for live reloading in development   
+      - ./chatbot:/app  # Optional: Mount the application directory for live reloading in development   
 
   nginx:
     image: nginx:stable
