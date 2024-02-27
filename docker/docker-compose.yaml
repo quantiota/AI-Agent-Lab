@@ -48,7 +48,9 @@ services:
     ports:
       - "5000:5000"  # Map port 5000 of the container to port 5000 on the host
     volumes:
-      - ./chatbot:/app  # Optional: Mount the application directory for live reloading in development   
+      - ./chatbot:/chatbot  # Optional: Mount the application directory for live reloading in development   
+    env_file:
+      - .env
 
   nginx:
     image: nginx:stable
