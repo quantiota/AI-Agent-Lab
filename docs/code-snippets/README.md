@@ -14,7 +14,9 @@ _Snippet Idea:_ Write a script that attempts to authenticate with the code-serve
 
 **Objective:** Validate the AI Agent's ability to connect to QuestDB either through the PostgreSQL interface or the REST HTTP API.
 
-_Snippet Idea for PostgreSQL:_ Use a PostgreSQL client library in the AI Agent's programming language to attempt a connection, run a simple query (e.g., SELECT version();), and check for a successful result. _Snippet Idea for REST API:_ Craft a simple HTTP GET request to the /exec endpoint with a basic SQL query and check for a successful JSON response containing query results.
+_Snippet Idea for PostgreSQL:_ Use a PostgreSQL client library in the AI Agent's programming language to attempt a connection, run a simple query (e.g., SELECT version();), and check for a successful result. 
+
+_Snippet Idea for REST API:_ Craft a simple HTTP GET request to the /exec endpoint with a basic SQL query and check for a successful JSON response containing query results.
 
 ### Grafana Connection Validation
 
