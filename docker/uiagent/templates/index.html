@@ -43,31 +43,10 @@
 <div class="container">
     <h1>OpenAI API Key Status</h1>
     <p>Is the OpenAI API Key set? <strong>{{ api_key_exists }}</strong></p>
-    <p>We describe the Flask-based service as a framework we are using for building an AI Agent. Flask provides a lightweight and flexible framework for web development in Python, making it a popular choice for creating web applications and APIs. When building an AI Agent, Flask can serve as the backend framework that handles HTTP requests, integrates with other services (like databases, external APIs, or tools like QuestDB, VSCode, and Grafana), and delivers responses to the user, possibly through a chat interface or a web-based UI.</p>
+    <p>We describe the Flask-based service as a framework we are using for building the AI Agent UI. Flask provides a lightweight and flexible framework for web development in Python, making it a popular choice for creating web applications and APIs. When building an AI Agent UI, Flask can serve as the backend framework that handles HTTP requests, integrates with other services (like databases, external APIs, or tools like QuestDB, VSCode, and Grafana), and delivers responses to the user, possibly through a chat interface or a web-based UI.</p>
 </div>
 
-<div class="container">
-    <h2>Code Snippets</h2>
-    <p>Here is a practical and important step for ensuring the reliability and functionality of our AI Agent Lab setup. Creating code snippets for validation will not only help in testing the connections but also in debugging and documenting the process for future reference.</p>
-    
-    <h3>Code-Server (VSCode) Connection Validation</h3>
-    <p><strong>Objective:</strong> Ensure the AI Agent can connect and authenticate with the code-server instance securely over HTTPS.</p>
-    <p><em>Snippet Idea:</em> Write a script that attempts to authenticate with the code-server using its API (if available) or by simulating a login through HTTPS requests. Check for a successful authentication response.</p>
-    
-    <h3>QuestDB Connection Validation</h3>
-    <p><strong>Objective:</strong> Validate the AI Agent's ability to connect to QuestDB either through the PostgreSQL interface or the REST HTTP API.</p>
-    <p><em>Snippet Idea for PostgreSQL:</em> Use a PostgreSQL client library in the AI Agent's programming language to attempt a connection, run a simple query (e.g., SELECT version();), and check for a successful result. <em>Snippet Idea for REST API:</em> Craft a simple HTTP GET request to the /exec endpoint with a basic SQL query and check for a successful JSON response containing query results.</p>
-    
-    <h3>Grafana Connection Validation</h3>
-    <p><strong>Objective:</strong> Ensure the AI Agent can communicate with Grafana's API for dashboard management and data visualization tasks.</p>
-    <p><em>Snippet Idea:</em> Use Grafana's API to fetch a list of dashboards or create a simple dashboard programmatically. Check for successful API responses to confirm connectivity and authentication.</p>
-    
-    <h3>OpenAI API Connection Validation</h3>
-    <p><strong>Objective:</strong> Verify the AI Agent's ability to call the OpenAI API for AI-related tasks.</p>
-    <p><em>Snippet Idea:</em> Implement a simple script that sends a test prompt to the OpenAI API (e.g., completing a sentence or generating a short text) and checks for a successful response containing generated text.</p>
-    
-    <p>For each snippet, ensure you handle errors gracefully and log any issues that arise. This will be crucial for troubleshooting and improving the system's robustness. Additionally, consider security best practices, especially when dealing with authentication and API keys.</p>
-</div>
+
 
 </body>
 </html>
