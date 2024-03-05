@@ -159,7 +159,7 @@ server {
 # HTTPS server to handle chatbotui
 server {
     listen 443 ssl;
-    server_name chatbot.${DOMAIN};
+    server_name chatbotui.${DOMAIN};
 
     ssl_certificate /etc/letsencrypt/live/chatbotui.${DOMAIN}/fullchain.pem;
     ssl_certificate_key /etc/letsencrypt/live/chatbotui.${DOMAIN}/privkey.pem;
