@@ -176,7 +176,7 @@ server {
 
     # Managing literal requests to the Chatbotui front end
     location / {
-        proxy_pass http://chatbotui:5000;
+        proxy_pass http://web:5000;
 
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header Host $host;
