@@ -4,13 +4,13 @@ FROM --platform=$BUILDPLATFORM python:3.10-alpine AS builder
 # Switch to root user for permissions
 
 
-WORKDIR /aiagentui
+WORKDIR /chatbotui
 
-COPY requirements.txt /aiagentui
+COPY requirements.txt /chatbotui
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip3 install -r requirements.txt
 
-COPY . /aiagentui
+COPY . /chatbotui
 
 ENTRYPOINT ["python3"]
 CMD ["app.py"]

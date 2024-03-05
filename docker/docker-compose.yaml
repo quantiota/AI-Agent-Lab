@@ -42,13 +42,13 @@ services:
    
   web:  # Flask application service
     build:   # Specify the location of your Dockerfile and application code
-      context: aiagentui
+      context: chatbotui
       target: builder
 
     ports:
       - "5000:5000"  # Map port 5000 of the container to port 5000 on the host
     volumes:
-      - ./aiagentui:/aiagentui  # Optional: Mount the application directory for live reloading in development   
+      - ./chatbotui:/chatbotui  # Optional: Mount the application directory for live reloading in development   
     env_file:
       - .env
 
