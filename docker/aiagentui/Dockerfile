@@ -10,7 +10,7 @@ COPY requirements.txt /aiagentui
 RUN --mount=type=cache,target=/root/.cache/pip \
     pip3 install -r requirements.txt
 
-COPY . /chatbot
+COPY . /aiagentui
 
 ENTRYPOINT ["python3"]
 CMD ["app.py"]
