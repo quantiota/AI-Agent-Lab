@@ -142,4 +142,3 @@ if __name__ == "__main__":
         for url in urls:
             executor.submit(start_websocket, url)
 
-
