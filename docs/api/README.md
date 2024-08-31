@@ -17,10 +17,6 @@ This repository contains the API definitions required to configure an AI Agent t
 
 
 
-
-
-
-
 ## QuestDB Integration
 
 The AI Agent can interact with QuestDB using two primary methods:
