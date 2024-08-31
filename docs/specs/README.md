@@ -121,6 +121,50 @@ It's recommended to not hard-code sensitive data like API keys directly in the D
 Also, remember to appropriately configure the networking and volumes if your AI Agent needs to communicate with other services or needs access to certain directories in the filesystem.
 
 
+### 9 Difference Between `ai-agent` and `ai-agent-ui` Services
+
+#### 1. **`ai-agent` Service**
+- **Purpose**: This service likely runs the backend or core functionality of the AI agent. It handles the processing, data retrieval, or any AI-related operations.
+- **Image**: `yourdockerregistry/ai-agent:tag` – Contains the main application logic for the AI agent.
+- **Environment Variables**: 
+  - `LANGCHAIN_FRAMEWORK_CONFIG`: Path to the configuration file for the LangChain framework.
+  - `OPENAI_API_KEY`: API key for accessing OpenAI services.
+  - `QUESTDB_PG_USER`: User for accessing the QuestDB database.
+  - `QUESTDB_PG_PASSWORD`: Password for accessing the QuestDB database.
+  - `GRAFANA_API_KEY`: API key for interacting with the Grafana API.
+  - `VSCODE_API_KEY`: API key for interacting with the VS Code server.
+- **Dependencies**: 
+  - `questdb`: Depends on the QuestDB service for database operations.
+  - `grafana`: Depends on the Grafana service, possibly for monitoring or visualization purposes.
+  - `vscode`: Depends on the VS Code service, possibly for code interaction or debugging features.
+
+#### 2. **`ai-agent-ui` Service**
+- **Purpose**: This service likely runs the frontend or user interface (UI) for interacting with the AI agent. It provides a web-based interface for user interaction.
+- **Image**: `yourdockerregistry/ai-agent-ui:tag` – Contains the UI components or the web application that interfaces with the AI agent.
+- **Ports**: 
+  - Exposes port `5000` on the host, making the UI accessible via this port.
+- **Dependencies**: 
+  - `ai-agent`: Depends on the `ai-agent` service, ensuring that the backend is available before the UI starts.
+
+#### **Key Differences**:
+
+- **Functionality**:
+  - `ai-agent` handles backend processing, including AI tasks, database interactions, and API integrations.
+  - `ai-agent-ui` handles the frontend, providing a user interface for interacting with the `ai-agent`.
+
+- **Image**:
+  - `ai-agent` uses an image tailored for backend operations.
+  - `ai-agent-ui` uses an image designed to serve the web-based frontend.
+
+- **Ports**:
+  - `ai-agent` does not expose any ports directly (in this configuration), meaning it may not interact with users or external requests.
+  - `ai-agent-ui` exposes port `5000`, making it accessible via a web browser or other HTTP client.
+
+- **Dependencies**:
+  - `ai-agent` depends on services (`questdb`, `grafana`, and `vscode`) that provide supporting functionality like data storage, monitoring, and development tools.
+  - `ai-agent-ui` only depends on the `ai-agent` service, ensuring the backend is available before the UI starts.
+
+
 ## APIs Documentation Links
 - [QuestDB REST API](https://questdb.io/docs/reference/api/rest/)
 - [QuestDB Postgres Wire Protocol](https://questdb.io/docs/reference/api/postgres/)
