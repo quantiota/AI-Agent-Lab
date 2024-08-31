@@ -3,7 +3,7 @@
 This repository contains the API definitions required to configure an AI Agent to interact with QuestDB, VSCode, and Grafana. Each integration allows the AI Agent to perform specific operations, such as querying databases, managing dashboards, and editing code. Below are the details of how the AI Agent interacts with each tool.
 
 ## Folder Structure
-
+```
 .
 ├── questdb/
 │   ├── postgresql_wire_protocol.md
@@ -13,6 +13,11 @@ This repository contains the API definitions required to configure an AI Agent t
 ├── vscode/
 │   ├── vscode_api.md
 └── README.md
+```
+
+
+
+
 
 
 
