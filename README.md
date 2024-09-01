@@ -28,7 +28,7 @@ Start working with GPT-3.5 models and data streams, using the pre-installed tool
 
 5. **AI Agent**: The AI Agent is the core backend service in the AI Agent Lab, handling AI processing, data retrieval, and related operations. 
 
-6. **AI Agent UI**: The AI Agent UI provides an intuitive and user-friendly interface for interacting with the AI agent. 
+6. **AI Agent UI**: The AI Agent UI provides an intuitive, web-based interface for interacting with the AI agent. 
 
 
 
