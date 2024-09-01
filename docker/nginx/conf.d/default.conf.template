@@ -14,7 +14,7 @@ map $http_upgrade $connection_upgrade {
 # HTTP server to redirect all 80 traffic to SSL/HTTPS
 server {
     listen 80;
-    server_name vscode.${DOMAIN} questdb.${DOMAIN} grafana.${DOMAIN}  chatbotui.${DOMAIN};
+    server_name vscode.${DOMAIN} questdb.${DOMAIN} grafana.${DOMAIN}  chat.${DOMAIN};
 
     # Tell all requests to port 80 to be 302 redirected to HTTPS
     location / {
