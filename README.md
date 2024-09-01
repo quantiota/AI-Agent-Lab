@@ -21,7 +21,7 @@ To use the AI Agent Lab, follow these steps:
 
 1. Set up or use an existing environment with [Docker](https://github.com/quantiota/AI-Agent-Farm/tree/master/doc/webapps/docker) installed.
 
-2. Clone the AI Agent Host repository and navigate to the docker directory.
+2. Clone the AI Agent Lab repository and navigate to the docker directory.
 ```
 git clone https://github.com/quantiota/AI-Agent-Lab.git
 cd AI-Agent-Lab/docker
@@ -38,7 +38,7 @@ docker compose up --build -d
 
 ```
 
-5. Once the services are up and running, you can access the AI Agent Host interfaces:
+5. Once the services are up and running, you can access the AI Agent Lab interfaces:
 
 - QuestDB: Visit https://questdb.domain.tld in your web browser.
 - Grafana: Visit https://grafana.domain.tld in your web browser.
@@ -48,7 +48,7 @@ docker compose up --build -d
 
 - Set up or use an existing remote JupyterHub that includes the necessary dependencies for working with your notebooks and data.
 
-- Connect to the remote JupyterHub environment from within the Code-Server interface provided by the AI Agent Host
+- Connect to the remote JupyterHub environment from within the Code-Server interface provided by the AI Agent Lab
 
 Start working with your notebooks and data, using the pre-installed tools and libraries that are included in your remote environment.
 
