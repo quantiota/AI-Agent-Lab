@@ -15,6 +15,27 @@ To use AI Agent Lab with a remote JupyterHub environment, follow these steps:
 
 Start working with GPT-3.5 models and data streams, using the pre-installed tools and libraries that are included in your remote environment.
 
+
+
+
+## Features
+
+## Features
+
+1. **QuestDB**: QuestDB is a high-performance, open-source time-series database. It allows for efficient storage and querying of time-series data, making it ideal for working with real-time data streams.
+
+2. **Grafana**: Grafana is a popular open-source platform for data visualization and monitoring. It provides a rich set of features for creating interactive dashboards and visualizing data from various sources.
+
+3. **Code-Server**: Code-Server is a web-based IDE based on Visual Studio Code. It provides a familiar coding environment with features such as code completion, syntax highlighting, and debugging capabilities.
+
+4. **Nginx**: Nginx is a widely-used web server and reverse proxy server. It enhances the AI Agent Host by providing additional functionality for routing and load balancing, improving performance and security
+
+5. **AI Agent**: The AI Agent is the core backend service in the AI Agent Lab, handling AI processing, data retrieval, and related operations. 
+
+6. **AI Agent UI**: The AI Agent UI provides an intuitive and user-friendly interface for interacting with the AI agent. 
+
+
+
 ## Getting Started
 
 To use the AI Agent Lab, follow these steps:
