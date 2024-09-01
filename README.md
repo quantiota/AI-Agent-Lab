@@ -24,7 +24,7 @@ Start working with GPT-3.5 models and data streams, using the pre-installed tool
 
 3. **Code-Server**: Code-Server is a web-based IDE based on Visual Studio Code. It provides a familiar coding environment with features such as code completion, syntax highlighting, and debugging capabilities.
 
-4. **Nginx**: Nginx is a widely-used web server and reverse proxy server. It enhances the AI Agent Host by providing additional functionality for routing and load balancing, improving performance and security
+4. **Nginx**: Nginx is a widely-used web server and reverse proxy server. It enhances the AI Agent Lab by providing additional functionality for routing and load balancing, improving performance and security
 
 5. **AI Agent**: The AI Agent is the core backend service in the AI Agent Lab, handling AI processing, data retrieval, and related operations. 
 
