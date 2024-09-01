@@ -15,12 +15,8 @@ To use AI Agent Lab with a remote JupyterHub environment, follow these steps:
 
 Start working with GPT-3.5 models and data streams, using the pre-installed tools and libraries that are included in your remote environment.
 
-
-
-
 ## Features
 
-## Features
 
 1. **QuestDB**: QuestDB is a high-performance, open-source time-series database. It allows for efficient storage and querying of time-series data, making it ideal for working with real-time data streams.
 
