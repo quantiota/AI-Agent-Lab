@@ -156,13 +156,13 @@ server {
     }
 }
 
-# HTTPS server to handle chatbotui
+# HTTPS server to handle chat
 server {
     listen 443 ssl;
-    server_name chatbotui.${DOMAIN};
+    server_name chat.${DOMAIN};
 
-    ssl_certificate /etc/letsencrypt/live/chatbotui.${DOMAIN}/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/chatbotui.${DOMAIN}/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/chat.${DOMAIN}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/chat.${DOMAIN}/privkey.pem;
 
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
     ssl_prefer_server_ciphers on;
@@ -174,7 +174,7 @@ server {
     ssl_stapling_verify on;
     add_header Strict-Transport-Security max-age=15768000;
 
-    # Managing literal requests to the Chatbotui front end
+    # Managing literal requests to the Chat front end
     location / {
         proxy_pass http://web:5000;
 
