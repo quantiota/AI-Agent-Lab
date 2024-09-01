@@ -17,7 +17,7 @@ Start working with GPT-3.5 models and data streams, using the pre-installed tool
 
 ## Getting Started
 
-To use the AI Agent Host, follow these steps:
+To use the AI Agent Lab, follow these steps:
 
 1. Set up or use an existing environment with [Docker](https://github.com/quantiota/AI-Agent-Farm/tree/master/doc/webapps/docker) installed.
 
