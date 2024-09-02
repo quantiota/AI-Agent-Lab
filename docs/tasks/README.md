@@ -1,25 +1,31 @@
-# AI Agent Development Plan
+# AI Agent and AI Agent UI Development Plan
 
 ## 1. Overview
-This document outlines the steps and tasks required to develop the AI Agent, which is responsible for processing user inputs, interacting with external services (QuestDB, Grafana, VS Code), and generating responses via the AI Agent UI.
+This document outlines the steps and tasks required to develop both the AI Agent and the AI Agent UI. The AI Agent is responsible for processing user inputs, interacting with external services (QuestDB, Grafana, VS Code), and generating responses. The AI Agent UI serves as the user interface for interacting with the AI Agent.
 
 ## 2. Development Environment Setup
 
 ### 2.1. Docker and Docker Compose Configuration
-- **Task**: Update the existing `docker-compose.yml` file to include the `ai-agent` service.
+- **Task**: Update the existing `docker-compose.yml` file to include both the `ai-agent` and `ai-agent-ui` services.
 - **Details**:
-  - Add the `ai-agent` service definition.
+  - Add the `ai-agent` and `ai-agent-ui` service definitions.
   - Configure environment variables (e.g., `OPENAI_API_KEY`, `QUESTDB_PG_USER`, `QUESTDB_PG_PASSWORD`, `GRAFANA_API_KEY`, `VSCODE_API_KEY`).
-  - Set up dependencies on QuestDB, Grafana, and VS Code.
-  - Ensure the `LANGCHAIN_FRAMEWORK_CONFIG` is correctly pointed to the appropriate configuration file.
+  - Set up dependencies for `ai-agent` on QuestDB, Grafana, and VS Code, and for `ai-agent-ui` on `ai-agent`.
+  - Ensure both services are correctly configured and linked.
 
 ### 2.2. Dockerfile Creation
-- **Task**: Create a Dockerfile for the AI Agent service.
+- **Task**: Create Dockerfiles for both the AI Agent and AI Agent UI services.
 - **Details**:
-  - Base the image on a suitable Python image (`python:3.x`).
-  - Install required dependencies (e.g., `langchain`, `psycopg2`, `requests`).
-  - Copy the AI Agent code and configuration files into the Docker image.
-  - Set the appropriate entry point for the AI Agent.
+  - **AI Agent**:
+    - Base the image on a suitable Python image (`python:3.x`).
+    - Install required dependencies (e.g., `langchain`, `psycopg2`, `requests`).
+    - Copy the AI Agent code and configuration files into the Docker image.
+    - Set the appropriate entry point for the AI Agent.
+  - **AI Agent UI**:
+    - Base the image on a suitable Python image (`python:3.x`).
+    - Install Flask and other necessary Python packages.
+    - Copy the UI code into the Docker image.
+    - Set the appropriate entry point for the Flask application.
 
 ### 2.3. Local Environment Setup (Optional)
 - **Task**: Set up a local Python virtual environment for development.
@@ -28,7 +34,7 @@ This document outlines the steps and tasks required to develop the AI Agent, whi
   - Install necessary Python packages (as listed in `requirements.txt`).
   - Set up environment variables locally for testing and development.
 
-## 3. AI Agent Core Logic
+## 3. AI Agent Development
 
 ### 3.1. Input Processing
 - **Task**: Implement logic to handle user inputs received from the AI Agent UI.
@@ -65,59 +71,74 @@ This document outlines the steps and tasks required to develop the AI Agent, whi
   - Manage authentication using the `VSCODE_API_KEY`.
   - Define input/output formats for code-related tasks.
 
-## 4. Performance and Optimization
+## 4. AI Agent UI Development
 
-### 4.1. API Efficiency
-- **Task**: Optimize API calls to minimize latency.
+### 4.1. UI Design and Setup
+- **Task**: Design the user interface layout and set up the Flask application.
+- **Details**:
+  - Create wireframes or mockups to outline the UI.
+  - Set up the Flask project structure, including templates and static files.
+
+### 4.2. Front-End Development
+- **Task**: Implement the HTML, CSS, and JavaScript for the UI.
+- **Details**:
+  - Use a CSS framework (e.g., Bootstrap or Tailwind CSS) for styling.
+  - Implement the chatbot interface using HTML and JavaScript.
+  - Integrate React.js (optional) for more dynamic and interactive components.
+
+### 4.3. Back-End Development
+- **Task**: Set up Flask routes and API endpoints for the UI.
+- **Details**:
+  - Create Flask routes to handle user inputs and send them to the AI Agent.
+  - Implement WebSocket communication (optional) for real-time updates.
+  - Ensure proper session management and authentication.
+
+### 4.4. Integration with AI Agent
+- **Task**: Connect the AI Agent UI with the AI Agent via RESTful APIs.
+- **Details**:
+  - Define API endpoints for sending user queries and receiving responses.
+  - Handle different response types (e.g., text, links, images) in the UI.
+  - Implement error handling and feedback mechanisms for the user.
+
+### 4.5. Testing and Debugging
+- **Task**: Test the UI for functionality, usability, and responsiveness.
+- **Details**:
+  - Write unit tests for Flask routes and API endpoints.
+  - Test the front-end for cross-browser compatibility and responsiveness.
+  - Debug any issues that arise during testing.
+
+## 5. Performance and Optimization
+
+### 5.1. API Efficiency
+- **Task**: Optimize API calls between the AI Agent and external services.
 - **Details**:
   - Implement request batching if possible.
   - Use caching mechanisms for frequently requested data or API calls.
   - Handle rate limiting gracefully.
 
-### 4.2. Database Query Optimization
+### 5.2. Database Query Optimization
 - **Task**: Optimize database interactions to ensure quick response times.
 - **Details**:
   - Review and optimize SQL queries.
   - Implement indexing or other performance-enhancing database techniques.
   - Consider query caching where applicable.
 
-### 4.3. Background Task Processing (Optional)
+### 5.3. Background Task Processing (Optional)
 - **Task**: Implement background task processing for long-running tasks.
 - **Details**:
   - Use Celery or another task queue to offload long-running processes.
   - Ensure tasks can be queued, executed asynchronously, and results communicated back to the AI Agent UI.
 
-## 5. Testing and Debugging
-
-### 5.1. Unit Testing
-- **Task**: Write unit tests for the AI Agent’s core logic.
-- **Details**:
-  - Focus on input processing, API interactions, and database operations.
-  - Use a testing framework like `pytest`.
-  - Mock external dependencies (e.g., API calls, database connections).
-
-### 5.2. Integration Testing
-- **Task**: Test the integration between the AI Agent and external services.
-- **Details**:
-  - Verify that the AI Agent correctly interacts with QuestDB, Grafana, and VS Code.
-  - Test real-world scenarios with the AI Agent UI.
-
-### 5.3. Debugging
-- **Task**: Debug any issues that arise during development and testing.
-- **Details**:
-  - Use logging and monitoring to trace issues.
-  - Ensure proper error handling and reporting within the AI Agent.
-
 ## 6. Documentation
 
 ### 6.1. Code Documentation
-- **Task**: Document the AI Agent’s codebase for maintainability.
+- **Task**: Document the AI Agent and AI Agent UI codebase for maintainability.
 - **Details**:
   - Add docstrings to functions, classes, and modules.
   - Comment on complex or non-obvious code sections.
 
 ### 6.2. User Documentation
-- **Task**: Write usage instructions for the AI Agent.
+- **Task**: Write usage instructions for the AI Agent and AI Agent UI.
 - **Details**:
   - Create a `README.md` detailing setup, configuration, and usage.
   - Provide examples of input formats and expected outputs.
@@ -131,9 +152,9 @@ This document outlines the steps and tasks required to develop the AI Agent, whi
 ## 7. Final Steps
 
 ### 7.1. Deployment Preparation
-- **Task**: Prepare the AI Agent for deployment.
+- **Task**: Prepare the AI Agent and AI Agent UI for deployment.
 - **Details**:
-  - Finalize Docker image and push to the Docker registry.
+  - Finalize Docker images and push to the Docker registry.
   - Ensure all environment variables and configurations are correctly set for production.
 
 ### 7.2. Final Testing
@@ -143,7 +164,7 @@ This document outlines the steps and tasks required to develop the AI Agent, whi
   - Conduct load testing to ensure performance under expected user load.
 
 ### 7.3. Deployment
-- **Task**: Deploy the AI Agent to the production environment.
+- **Task**: Deploy the AI Agent and AI Agent UI to the production environment.
 - **Details**:
   - Use the updated Docker Compose configuration to bring up all services.
   - Monitor logs and performance post-deployment to ensure stability.
@@ -151,4 +172,7 @@ This document outlines the steps and tasks required to develop the AI Agent, whi
 ---
 
 ## Estimated Time for Completion
-**Total Estimated Time**: 46-81 hours
+- **AI Agent Development**: 46-81 hours
+- **AI Agent UI Development**: 55-85 hours
+- **Total Estimated Time**: 101-166 hours
+
