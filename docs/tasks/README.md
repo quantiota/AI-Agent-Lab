@@ -53,9 +53,33 @@ This document outlines the steps and tasks required to develop both the AI Agent
 ### 3.3. Database Interaction with QuestDB
 - **Task**: Implement database queries and interactions using QuestDB.
 - **Details**:
-  - Use `psycopg2` or SQLAlchemy to connect to QuestDB.
-  - Write SQL queries to retrieve or store data as needed by the AI Agent.
-  - Ensure proper handling of database connections and transactions.
+
+  #### 3.3.1. PostgreSQL Wire Protocol
+  - **Use Case**: For applications where you need to perform standard SQL operations (INSERT, UPDATE, SELECT) efficiently.
+  - **Tools**: 
+    - **psycopg2**: A PostgreSQL adapter for Python that can be used to interact with QuestDB via the PostgreSQL wire protocol.
+    - **SQLAlchemy**: An ORM (Object-Relational Mapper) for abstracting and simplifying database interactions, which can be configured to work with QuestDB.
+  - **Implementation**:
+    - Establish a connection to QuestDB using the PostgreSQL wire protocol.
+    - Write and execute SQL queries for inserting, updating, and selecting data.
+    - Ensure connection pooling and proper handling of database transactions.
+
+  #### 3.3.2. REST API
+  - **Use Case**: When you prefer a more lightweight interaction or need to execute specific queries via HTTP requests.
+  - **Tools**:
+    - **Requests Library**: Use Python's `requests` library to interact with QuestDB's REST API.
+  - **Implementation**:
+    - Send HTTP requests to QuestDB's REST API endpoints for SQL queries.
+    - Handle responses, including parsing JSON data returned by SELECT queries.
+    - Implement error handling and retry logic for robust interactions.
+  
+  #### 3.3.3. Query Optimization and Best Practices
+  - **Use Case**: Optimize performance for data retrieval and manipulation.
+  - **Implementation**:
+    - Optimize SQL queries by indexing frequently accessed columns.
+    - Use batch inserts and updates when dealing with large datasets to reduce overhead.
+    - Monitor and analyze query performance, adjusting queries as needed to ensure efficiency.
+
 
 ### 3.4. Integration with Grafana
 - **Task**: Set up communication between the AI Agent and Grafana for data visualization.
