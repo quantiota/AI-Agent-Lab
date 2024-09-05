@@ -78,3 +78,17 @@ Start working with your notebooks and data, using the pre-installed tools and li
  
 :pencil: High resolution diagram [Application architecture diagram](https://raw.githubusercontent.com/quantiota/AI-Agent-Lab/master/ai-agent-lab-diagram.png)
 
+## References
+
+
+- Connect to a JupyterHub from Visual Studio Code. [Visual Studio Code](https://code.visualstudio.com/docs/datascience/jupyter-notebooks#_connect-to-a-remote-jupyter-server)
+
+- Create an API Token. [JupyterHub](https://jupyterhub.readthedocs.io/en/stable/howto/rest.html#create-an-api-token)
+
+- [Visual Studio Code](https://code.visualstudio.com/)
+
+- [QuestDB - The Fastest Open Source Time Series Database](https://questdb.io/)
+
+- [Grafana - The open observability platform](https://grafana.com/)
+
+- [Langchain](https://python.langchain.com)
