@@ -34,3 +34,13 @@ Based on the project description, you likely need sources related to:
 - **Fault Tolerance and Performance Monitoring**: Papers or reports on building resilient AI systems
 
 - **Technologies in the Docker Stack**: QuestDB, Grafana, Nginx, etc.
+
+
+# Keywords to Search:
+
+- Distributed Artificial Intelligence (DAI)
+- Multi-Agent Systems (MAS)
+- Agent-Based Modeling (ABM)
+- AI Infrastructure
+- AI Agents
+- Distributed Systems
