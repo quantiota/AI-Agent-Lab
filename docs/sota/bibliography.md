@@ -5,21 +5,28 @@
 [https://www.amazon.com/Artificial-Intelligence-A-Modern-Approach/dp/0134610997](https://www.amazon.com/Artificial-Intelligence-A-Modern-Approach/dp/0134610997)
 
 ## Academic Papers
-1. Kraus, S. (2022). *The Role of Artificial Intelligence in Multiagent Systems: Opportunities and Challenges*. AI Magazine, 43(1), 15-30. [https://doi.org/10.1609/aimag.v43i1.20664](https://doi.org/10.1609/aimag.v43i1.20664)
+1. 
 
-2. Mnih, V., Kavukcuoglu, K., Silver, D., et al. (2015). *Human-level control through deep reinforcement learning*. Nature, 518, 529-533. [https://doi.org/10.1038/nature14236](https://doi.org/10.1038/nature14236)
+2. 
 
 ## Articles
-1. Tang, H. (2023). *Edge Computing for IoT: The Future of Distributed Intelligence*. IoT Journal. [https://iotjournal.com/articles/edge-computing-iot](https://iotjournal.com/articles/edge-computing-iot)
+1. 
 
-2. Jones, S. (2024). *Definitive Guide to Testing LLM Applications*. AI Industry Reports. Available in the reports folder of the AI Agent Lab.
+2. 
+
 
 ## Websites
 1. LangChain. (2023). *Documentation for LangChain: Building Applications with Large Language Models (LLMs)*. [https://langchain.com/docs](https://langchain.com/docs)
 
 2. Docker. (2023). *Using Docker Compose for Multi-Container Applications*. [https://docs.docker.com/compose/](https://docs.docker.com/compose/)
 
----
+3. QuestDB. (2023). *QuestDB Documentation*. [https://questdb.io/docs](https://questdb.io/docs)
+
+4. Code-Server. (2023). *Code-Server: Run VS Code in the Browser*. [https://coder.com/docs/code-server/latest](https://coder.com/docs/code-server/latest)
+
+5. Grafana. (2023). *Grafana Documentation*. [https://grafana.com/docs/grafana/latest/](https://grafana.com/docs/grafana/latest/)
+
+
 
 # Potential Sources for the Bibliography
 
@@ -43,4 +50,4 @@ Based on the project description, you likely need sources related to:
 - Agent-Based Modeling (ABM)
 - AI Infrastructure
 - AI Agents
-- Distributed Systems
+- Distributed AI Systems
