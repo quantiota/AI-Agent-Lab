@@ -5,9 +5,8 @@
 [https://www.amazon.com/Artificial-Intelligence-A-Modern-Approach/dp/0134610997](https://www.amazon.com/Artificial-Intelligence-A-Modern-Approach/dp/0134610997)
 
 ## Academic Papers
-1. Gupta, A., Lanteigne, C., & Kingsbury, P. (2021). MOLe: A Metamodel for Distributed Machine Learning at the Edge. In Proceedings of the 4th International Workshop on Edge Systems, Analytics and Networking (EdgeSys '21). Association for Computing Machinery, New York, NY, USA, 7–12. DOI: [https://doi.org/10.1145/3434770.3459730](https://doi.org/10.1145/3434770.3459730)
-
-2. Luo, J., Wu, Q., Zhou, Y., Feng, S., & Li, W. (2022). EdgeAI-Bench: A Benchmark Suite for AI-Empowered Edge Computing Systems. IEEE Access, 10, 4195-4210. DOI: [https://doi.org/10.1109/ACCESS.2022.3141527](https://doi.org/10.1109/ACCESS.2022.3141527) 
+1. 
+2.
 
 ## Articles
 1. 
