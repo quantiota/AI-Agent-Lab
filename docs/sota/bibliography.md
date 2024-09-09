@@ -2,6 +2,7 @@
 
 ## Books
 1. Russell, S., & Norvig, P. (2020). *Artificial Intelligence: A Modern Approach*. 4th Edition. Pearson.
+[https://www.amazon.com/Artificial-Intelligence-A-Modern-Approach/dp/0134610997](https://www.amazon.com/Artificial-Intelligence-A-Modern-Approach/dp/0134610997)
 
 ## Academic Papers
 1. Kraus, S. (2022). *The Role of Artificial Intelligence in Multiagent Systems: Opportunities and Challenges*. AI Magazine, 43(1), 15-30. [https://doi.org/10.1609/aimag.v43i1.20664](https://doi.org/10.1609/aimag.v43i1.20664)
