@@ -11,7 +11,8 @@
 
 
 ## Articles
-1. 
+1. Langchain (2024). *Definitive Guide to Testing LLM Applications*. AI Industry Reports. Available in the reports folder of the AI Agent Lab.
+
 
 2. 
 
