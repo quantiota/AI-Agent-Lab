@@ -28,6 +28,8 @@
 
 5. Grafana. (2023). *Grafana Documentation*. [https://grafana.com/docs/grafana/latest/](https://grafana.com/docs/grafana/latest/)
 
+6. Streamlit. (2023). Streamlit Documentation: Create Interactive Web Apps with Python. [https://docs.streamlit.io/](https://docs.streamlit.io/)
+
 
 ## GitHub Repositories for AI Agent Lab
 
