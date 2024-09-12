@@ -31,7 +31,7 @@
 
 ## GitHub Repositories for AI Agent Lab
 
-1. AI Agent Lab - Core. (2024). Main GitHub Repository for AI Agent Lab Core Architecture. [Streamlit-agent](https://github.com/langchain-ai/streamlit-agent)
+1. AI Agent Lab - LangChain Streamlit Agents. (2024). Repository for LangChain agents implemented as Streamlit apps. . [Streamlit-agent](https://github.com/langchain-ai/streamlit-agent)
 
 
 
