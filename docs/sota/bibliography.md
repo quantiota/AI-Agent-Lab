@@ -7,6 +7,12 @@
 2. C aelen, O., & Blete, M.-A. (2023). Developing Apps with GPT-4 and ChatGPT: Build Intelligent Chatbots, Content Generators, and More. 1st Edition. [https://www.amazon.com/Developing-Apps-GPT-4-ChatGPT-Intelligent/dp/1098152484](https://www.amazon.com/Developing-Apps-GPT-4-ChatGPT-Intelligent/dp/1098152484)
 
 3. Auffarth, B. (2023). Generative AI with LangChain: Build large language model (LLM) apps with Python, ChatGPT and other LLMs. [https://www.amazon.com/Generative-AI-LangChain-language-ChatGPT/dp/1835083463](https://www.amazon.com/Generative-AI-LangChain-language-ChatGPT/dp/1835083463)
+ 
+4. Lim, G. (2023). LangChain Crash Course: Build OpenAI LLM powered Apps: Fast track to building OpenAI LLM powered Apps using Python. Paperback. [https://www.amazon.com/LangChain-Crash-Course-OpenAI-powered/dp/B0CHL1FMC4](https://www.amazon.com/LangChain-Crash-Course-OpenAI-powered/dp/B0CHL1FMC4
+)
+
+5. Ozdemir, S. (2023). Quick Start Guide to Large Language Models: Strategies and Best Practices for Using ChatGPT and Other LLMs. 1st Edition. Addison-Wesley Data & Analytics Series. [https://www.amazon.com/Quick-Start-Guide-Large-Language/dp/0138199191](https://www.amazon.com/Quick-Start-Guide-Large-Language/dp/0138199191)
+
 
 
 ## Academic Papers
