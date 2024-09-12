@@ -29,6 +29,11 @@
 5. Grafana. (2023). *Grafana Documentation*. [https://grafana.com/docs/grafana/latest/](https://grafana.com/docs/grafana/latest/)
 
 
+## GitHub Repositories for AI Agent Lab
+
+1. AI Agent Lab - Core. (2024). Main GitHub Repository for AI Agent Lab Core Architecture. [Streamlit-agent](https://github.com/langchain-ai/streamlit-agent)
+
+
 
 # Potential Sources for the Bibliography
 
