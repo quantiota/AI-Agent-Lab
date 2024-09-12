@@ -13,7 +13,7 @@
 
 5. Ozdemir, S. (2023). Quick Start Guide to Large Language Models: Strategies and Best Practices for Using ChatGPT and Other LLMs. 1st Edition. Addison-Wesley Data & Analytics Series. [https://www.amazon.com/Quick-Start-Guide-Large-Language/dp/0138199191](https://www.amazon.com/Quick-Start-Guide-Large-Language/dp/0138199191)
 
-
+6. Bouchard, L.-F., & Peters, L. (2024). Building LLMs for Production: Enhancing LLM Abilities and Reliability with Prompting, Fine-Tuning, and RAG. [https://www.amazon.com/Building-LLMs-Production-Reliability-Fine-Tuning/dp/B0D4FFPFW8](https://www.amazon.com/Building-LLMs-Production-Reliability-Fine-Tuning/dp/B0D4FFPFW8)
 
 ## Academic Papers
 1. 
