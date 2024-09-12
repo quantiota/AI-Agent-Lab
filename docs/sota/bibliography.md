@@ -4,10 +4,10 @@
 1. Russell, S., & Norvig, P. (2020). *Artificial Intelligence: A Modern Approach*. 4th Edition. Pearson.
 [https://www.amazon.com/Artificial-Intelligence-A-Modern-Approach/dp/0134610997](https://www.amazon.com/Artificial-Intelligence-A-Modern-Approach/dp/0134610997)
 
-2.C aelen, O., & Blete, M.-A. (2023). Developing Apps with GPT-4 and ChatGPT: Build Intelligent Chatbots, Content Generators, and More. 1st Edition. [https://www.amazon.com/Developing-Apps-GPT-4-ChatGPT-Intelligent/dp/1484293540](https://www.amazon.com/Developing-Apps-GPT-4-ChatGPT-Intelligent/dp/1484293540)
+2. C aelen, O., & Blete, M.-A. (2023). Developing Apps with GPT-4 and ChatGPT: Build Intelligent Chatbots, Content Generators, and More. 1st Edition. [https://www.amazon.com/Developing-Apps-GPT-4-ChatGPT-Intelligent/dp/1484293540](https://www.amazon.com/Developing-Apps-GPT-4-ChatGPT-Intelligent/dp/1484293540)
 
 3. Auffarth, B. (2023). Generative AI with LangChain: Build large language model (LLM) apps with Python, ChatGPT and other LLMs. [https://www.amazon.com/Generative-AI-LangChain-language-ChatGPT/dp/1805125221](https://www.amazon.com/Generative-AI-LangChain-language-ChatGPT/dp/1805125221)
-4. 
+
 
 ## Academic Papers
 1. 
