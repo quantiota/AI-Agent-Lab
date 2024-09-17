@@ -156,7 +156,7 @@ server {
     }
 }
 
-# HTTPS server to handle chat
+# HTTPS server to handle aiagentui
 server {
     listen 443 ssl;
     server_name aiagentui.${DOMAIN};
