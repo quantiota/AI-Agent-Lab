@@ -14,7 +14,7 @@ import traceback
 QDB_PG_NAME = os.getenv('QDB_PG_NAME', 'qdb')
 QDB_PG_USER = os.getenv('QDB_PG_USER', 'admin')
 QDB_PG_PASSWORD = os.getenv('QDB_PG_PASSWORD', 'quest')
-QDB_PG_HOST = os.getenv('QDB_PG_HOST', '192.168.1.13')
+QDB_PG_HOST = os.getenv('QDB_PG_HOST', 'docker_host_ip_address')
 QDB_PG_PORT = os.getenv('QDB_PG_PORT', '8812')
 
 # Logging Configuration
