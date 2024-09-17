@@ -159,10 +159,10 @@ server {
 # HTTPS server to handle chat
 server {
     listen 443 ssl;
-    server_name chat.${DOMAIN};
+    server_name aiagentui.${DOMAIN};
 
-    ssl_certificate /etc/letsencrypt/live/chat.${DOMAIN}/fullchain.pem;
-    ssl_certificate_key /etc/letsencrypt/live/chat.${DOMAIN}/privkey.pem;
+    ssl_certificate /etc/letsencrypt/live/aiagentui.${DOMAIN}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/aiagentui.${DOMAIN}/privkey.pem;
 
     ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
     ssl_prefer_server_ciphers on;
@@ -176,7 +176,7 @@ server {
 
     # Managing literal requests to the Chat front end
     location / {
-        proxy_pass http://web:5000;
+        proxy_pass http://aiagentui:5000;
 
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header Host $host;
