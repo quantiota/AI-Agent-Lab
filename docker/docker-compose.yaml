@@ -72,7 +72,7 @@ services:
       - vscode
       - grafana
       - questdb
-      - web
+      - aiagentui
   # Refer to ./init.yaml to for initial SSL setup
   # add the following line in in crontab (5 am, every monday)
   #   0 5 * * 1 docker compose run certbot renew
