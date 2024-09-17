@@ -97,7 +97,7 @@ docker compose -f init.yaml run certbot certonly -d grafana.yourdomain.tld
 
 
 ```
-docker compose -f init.yaml run certbot certonly -d chat.yourdomain.tld
+docker compose -f init.yaml run certbot certonly -d aiagentui.yourdomain.tld
 ```
 
 
