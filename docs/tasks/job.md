@@ -50,8 +50,10 @@ We have a detailed task breakdown and are open to developers choosing the tasks 
 
 ---
 
-### What We're Looking For:
+### Requirements:
 - Proficient in one or more of the technologies listed above
+- **Must have access to an Ubuntu local server with a fixed IP address and a domain name** 
+  for testing and deployment purposes.
 - Ability to work independently and deliver clean, well-documented code
 - Experience with API development and integration
 - Familiarity with Docker, DevOps practices, and modern web technologies
