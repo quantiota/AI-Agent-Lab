@@ -13,6 +13,7 @@ We have a detailed task breakdown and are open to developers choosing the tasks 
 - QuestDB (PostgreSQL)
 - Grafana (API integration)
 - VSCode API
+- Nginx
 - OpenAI API (NLP tasks)
 - Front-End: HTML, CSS (Bootstrap/Tailwind), JavaScript, React (optional)
 
