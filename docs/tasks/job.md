@@ -9,6 +9,7 @@ We have a detailed task breakdown and are open to developers choosing the tasks 
 
 ### Technologies Involved:
 - Python (Flask, APIs)
+- Langchain
 - Docker & Docker Compose
 - QuestDB (PostgreSQL)
 - Grafana (API integration)
