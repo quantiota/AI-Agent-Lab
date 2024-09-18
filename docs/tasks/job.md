@@ -19,7 +19,7 @@ We have a detailed task breakdown and are open to developers choosing the tasks 
 ### Project Phases and Tasks Available:
 
 #### **Phase 1: Infrastructure and Environment Setup**
-- **Task 1**: Docker and Docker Compose Configuration
+- **Task 1**: Docker and Docker Compose Configuration (optional)
 - **Task 2**: Dockerfile Creation for AI Agent and UI services
 - **Task 3**: Local Development Setup (Python virtual environment) (optional)
 
