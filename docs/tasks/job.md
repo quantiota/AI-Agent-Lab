@@ -1,9 +1,9 @@
 # Job Title:  
-Full-Stack Developer Needed for AI Agent and UI Development (Multiple Tasks Available)
+Developer Needed for AI Agent and UI Development (Multiple Tasks Available)
 
 ## Job Description:
 
-I’m looking for experienced developers to contribute to a complex AI-driven project called **AI Agent Lab**. This project involves the development of both an **AI Agent** responsible for processing user inputs and interacting with external services (e.g., QuestDB, Grafana, VSCode), and a **Flask-based AI Agent UI** that acts as the front-end for user interaction.
+I’m looking for experienced developers to contribute to a complex AI-driven project called **AI Agent Lab**. This OPen Source project involves the development of both an **AI Agent** responsible for processing user inputs and interacting with external services (e.g., QuestDB, Grafana, VSCode), and a **Flask-based AI Agent UI** that acts as the front-end for user interaction.
 
 We have a detailed task breakdown and are open to developers choosing the tasks they are most skilled in or interested in. You can work on individual tasks or multiple tasks depending on your expertise.
 
