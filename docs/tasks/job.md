@@ -55,7 +55,7 @@ We have a detailed task breakdown and are open to developers choosing the tasks 
 - Ability to work independently and deliver clean, well-documented code
 - Experience with API development and integration
 - Familiarity with Docker, DevOps practices, and modern web technologies
-- (Optional) Experience with AI and natural language processing (NLP)
+- (Required for relevant Tasks) Experience with AI and natural language processing (NLP)
 
 ---
 
