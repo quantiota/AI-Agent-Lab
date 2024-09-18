@@ -1,5 +1,5 @@
 # Job Title:  
-Developer Needed for AI Agent and UI Development (Choose Your Task)
+Developer Needed for AI Agent and UI Development (Multiple Tasks Available)
 
 ## Job Description:
 
@@ -9,7 +9,7 @@ We have a detailed task breakdown and are open to developers choosing the tasks 
 
 ### Technologies Involved:
 - Python (Flask, APIs)
-- Docker & Docker Compose (Fully functional)
+- Docker & Docker Compose
 - QuestDB (PostgreSQL)
 - Grafana (API integration)
 - VSCode API
@@ -21,31 +21,32 @@ We have a detailed task breakdown and are open to developers choosing the tasks 
 #### **Phase 1: Infrastructure and Environment Setup**
 - **Task 1**: Docker and Docker Compose Configuration
 - **Task 2**: Dockerfile Creation for AI Agent and UI services
+- **Task 3**: Local Development Setup (Python virtual environment) (optional)
 
 #### **Phase 2: AI Agent Development**
-- **Task 3**: Input Processing (validation, sanitization, and intent parsing)
-- **Task 4**: Interaction with OpenAI API for NLP
-- **Task 5**: Database Interaction with QuestDB (SQL, REST API, query optimization)
-- **Task 6**: Integration with Grafana (API to fetch/update dashboards)
-- **Task 7**: VSCode Integration for code execution and file management
+- **Task 4**: Input Processing (validation, sanitization, and intent parsing)
+- **Task 5**: Interaction with OpenAI API for NLPs
+- **Task 6**: Database Interaction with QuestDB (SQL, REST API, query optimization)
+- **Task 7**: Integration with Grafana (API to fetch/update dashboards)
+- **Task 8**: VSCode Integration for code execution and file management
 
 #### **Phase 3: AI Agent UI Development**
-- **Task 8**: UI Design and Setup (Flask, wireframes)
-- **Task 9**: Front-End Development (HTML, CSS, JavaScript, React)
-- **Task 10**: Flask Back-End Development (API endpoints, session management)
-- **Task 11**: Integration with AI Agent (REST API for data exchange)
+- **Task 9**: UI Design and Setup (Flask, wireframes)
+- **Task 10**: Front-End Development (HTML, CSS, JavaScript, React)
+- **Task 11**: Flask Back-End Development (API endpoints, session management)
+- **Task 12**: Integration with AI Agent (REST API for data exchange)
 
 #### **Phase 4: Performance and Optimization**
-- **Task 12**: API Efficiency (request batching, caching, rate limiting)
-- **Task 13**: Database Query Optimization (indexing, query optimization)
-- **Task 14**: Background Task Processing (optional, Celery or similar)
+- **Task 13**: API Efficiency (request batching, caching, rate limiting)
+- **Task 14**: Database Query Optimization (indexing, query optimization)
+- **Task 15**: Background Task Processing (optional, Celery or similar)
 
 #### **Phase 5: Testing, Performance, and Deployment**
-- **Task 15**: Final Testing and Debugging
-- **Task 16**: Deployment and Performance Monitoring
+- **Task 16**: Final Testing and Debugging
+- **Task 17**: Deployment and Performance Monitoring
 
 #### **Phase 6: Documentation**
-- **Task 17**: Code and API Documentation (README, setup instructions)
+- **Task 18**: Code and API Documentation (README, setup instructions)
 
 ---
 
@@ -54,7 +55,7 @@ We have a detailed task breakdown and are open to developers choosing the tasks 
 - Ability to work independently and deliver clean, well-documented code
 - Experience with API development and integration
 - Familiarity with Docker, DevOps practices, and modern web technologies
-- (Required for Task 4) Experience with AI and natural language processing (NLP)
+- (Required for relevant Tasks) Experience with AI and natural language processing (NLP)
 
 ---
 
