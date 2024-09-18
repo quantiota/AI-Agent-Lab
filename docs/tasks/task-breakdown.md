@@ -52,25 +52,33 @@
   - API module for Grafana interaction
 - **Estimated Time**: 6-8 hours
 
+### **Task 7: VSCode Integration**
+- **Skillset Required**: VSCode API (or custom integration), Python
+- **Task Description**: Implement integration with VSCode to handle code-related queries or tasks. This includes code execution, file editing, and more, leveraging the VSCode API.
+- **Deliverables**: 
+  - VSCode integration module that handles code execution and file management via API.
+  - Ensure API authentication using `VSCODE_API_KEY`.
+- **Estimated Time**: 10-12 hours
+
 ---
 
 ## **Phase 3: AI Agent UI Development**
 
-### **Task 7: Front-End Development**
+### **Task 8: Front-End Development**
 - **Skillset Required**: HTML, CSS (Bootstrap/Tailwind CSS), JavaScript, React (optional)
 - **Task Description**: Design and implement the chatbot interface using HTML, CSS, and JavaScript. Optionally integrate React for dynamic features.
 - **Deliverables**: 
   - Fully functioning front-end for the AI Agent UI
 - **Estimated Time**: 12-20 hours
 
-### **Task 8: Flask Back-End Development**
+### **Task 9: Flask Back-End Development**
 - **Skillset Required**: Python, Flask, Web API Development
 - **Task Description**: Set up Flask routes to handle user inputs and communicate with the AI Agent, including error handling and session management.
 - **Deliverables**: 
   - Flask back-end with working API endpoints
 - **Estimated Time**: 12-18 hours
 
-### **Task 9: AI Agent Integration with UI**
+### **Task 10: AI Agent Integration with UI**
 - **Skillset Required**: API Development, Python, Flask
 - **Task Description**: Connect the AI Agent UI to the AI Agent via REST APIs and handle different response types (e.g., text, images, links).
 - **Deliverables**: 
@@ -81,7 +89,7 @@
 
 ## **Phase 4: Testing, Performance, and Deployment**
 
-### **Task 10: Final Testing and Debugging**
+### **Task 11: Final Testing and Debugging**
 - **Skillset Required**: QA Testing, Python, Web Development
 - **Task Description**: Test both the AI Agent and UI for functionality, usability, and cross-browser compatibility.
 - **Deliverables**: 
@@ -89,7 +97,7 @@
   - Debugging documentation
 - **Estimated Time**: 10-12 hours
 
-### **Task 11: Deployment and Performance Monitoring**
+### **Task 12: Deployment and Performance Monitoring**
 - **Skillset Required**: DevOps, Docker, Performance Testing
 - **Task Description**: Deploy the AI Agent and AI Agent UI to production, optimize API calls, and ensure performance under expected load.
 - **Deliverables**: 
@@ -101,7 +109,7 @@
 
 ## **Phase 5: Documentation**
 
-### **Task 12: Code and API Documentation**
+### **Task 13: Code and API Documentation**
 - **Skillset Required**: Technical Writing, Python, API Documentation Tools
 - **Task Description**: Document the codebase, API endpoints, and provide setup instructions for both the AI Agent and UI.
 - **Deliverables**: 
