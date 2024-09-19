@@ -60,7 +60,7 @@ docker compose up --build -d
 - QuestDB: Visit https://questdb.domain.tld in your web browser.
 - Grafana: Visit https://grafana.domain.tld in your web browser.
 - Code-Server: Visit https://vscode.domain.tld in your web browser.
-- AI Agent UI: Visit https://chat.domain.tld in your web browser.
+- AI Agent UI: Visit https://agentui.domain.tld in your web browser.
 
 6. To connect the AI Agent Lab to a remote JupyterHub environment from Code-Server:
 
