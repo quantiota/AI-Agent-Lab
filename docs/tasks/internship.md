@@ -4,7 +4,7 @@
 As this task is designed to assess your ability to work independently, it’s crucial that you avoid seeking external help. Instead, please refer to internal documentation and resources (e.g., Docker, QuestDB, Grafana, VSCode) to resolve any issues you might encounter during the setup process. Part of this internship will involve troubleshooting and problem-solving, so demonstrating your ability to consult relevant documentation will be an important part of the evaluation.
 
 
-### Task: Install and Run the Docker Stack on Your Local Machine
+### Step1: Install and Run the Docker Stack on Your Local Machine
 
 As part of the interview process, we would like you to set up and run the Docker stack on your local machine, which will serve as your development environment during the internship. This will help us assess your familiarity with Docker and your ability to work with containerized services, as well as ensure that you are ready to begin development work.
 
