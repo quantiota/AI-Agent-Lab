@@ -3,7 +3,8 @@
 As part of the interview process, we would like you to set up and run the Docker stack on your local machine, which will serve as your development environment during the internship. This will help us assess your familiarity with Docker and your ability to work with containerized services, as well as ensure that you are ready to begin development work.
 
 #### Instructions:
-1. **Clone or download** the Docker stack repository (provide the link to your Docker Compose files or relevant repo).
+1. **Clone or download** the Docker stack repository 
+ https://github.com/quantiota/AI-Agent-Lab/
 2. **Install Docker and Docker Compose** on your local machine (if not already installed). Ensure you have the latest versions installed.
 3. **Run the Docker stack** using the provided `docker-compose.yml` file.
 4. Access the following services locally to ensure everything is working:
