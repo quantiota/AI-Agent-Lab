@@ -23,9 +23,20 @@ As part of the interview process, we would like you to set up and run the Docker
    - Check the **Grafana dashboard** (on **localhost:3000**) to ensure the data is being visualized properly.
 6. **Verify that all services** are running and accessible through your browser. The entire setup and testing process should take about **10 minutes** if Docker and Docker Compose are properly installed.
 
+
 #### What You Should Submit:
 - Confirmation that you’ve successfully set up the Docker stack and run the AI-Agent Lab.
 - Screenshots of the following:
    - **localhost:8080** (Code Server running on VSCode)
    - **localhost:9000** (QuestDB showing the data from the Binance folder)
    - **localhost:3000** (Grafana dashboard visualizing the processed data)
+
+
+
+ #### Important Note:
+
+As part of the first step of the interview process, we ask all applicants to complete the Docker stack setup task and provide the required screenshots as described. This step is essential to ensure that you are familiar with Docker and can set up the development environment required for this internship.
+
+If you are unable to complete this task or run the Docker stack, we kindly ask you to **withdraw your application** to allow us to focus on candidates who are technically prepared for the role.
+
+We appreciate your understanding and encourage you to apply for future opportunities once you have gained more experience in this area.
