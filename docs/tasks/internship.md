@@ -32,7 +32,7 @@ As part of the interview process, we would like you to set up and run the Docker
   3. **localhost:3000**: A screenshot of **Grafana** visualizing the **processed data from the Binance data stream**. Ensure that the Grafana dashboard is showing the correct visualization of the processed data from **QuestDB**.
 
 - **Ensure that the following is clear in each screenshot**:
-   - For **localhost:8080**: The terminal or editor in **VSCode** with the **`data-stream-processing.py`** file running and processing data.
+   - For **localhost:8080**: The terminal and editor in **VSCode** with the **`data-stream-processing.py`** file running and processing data.
    - For **localhost:9000**: The processed data from the **Binance data stream** visible in **QuestDB**.
    - For **localhost:3000**: The correct visualized data from the **Binance data stream** on the **Grafana dashboard**.
 
