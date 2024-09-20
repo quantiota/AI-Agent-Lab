@@ -27,7 +27,7 @@ As part of the interview process, we would like you to set up and run the Docker
 #### What You Should Submit:
 - **Confirmation** that you’ve successfully set up the Docker stack and run the AI-Agent Lab.
 - **Three specific screenshots** showing that the services are running and that the data from the data stream is being processed correctly:
-  1. **localhost:8080**: A screenshot of **Code Server (VSCode)** running on your local machine, showing the terminal or editor open with the **`data-stream-processing.py`** file in the **/notebooks/market-data/Binance/ folder**. Ensure that the terminal output shows that the data stream has started processing.
+  1. **localhost:8080**: A screenshot of **Code Server (VSCode)** running on your local machine, showing the terminal and editor open with the **`data-stream-processing.py`** file in the **/notebooks/market-data/Binance/ folder**. Ensure that the terminal output shows that the data stream has started processing.
   2. **localhost:9000**: A screenshot of **QuestDB** showing the **processed data from the Binance data stream**. Ensure that the screenshot clearly shows the relevant data in QuestDB after running **`data-stream-processing.py`**.
   3. **localhost:3000**: A screenshot of **Grafana** visualizing the **processed data from the Binance data stream**. Ensure that the Grafana dashboard is showing the correct visualization of the processed data from **QuestDB**.
 
