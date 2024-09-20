@@ -18,7 +18,7 @@ As part of the interview process, we would like you to set up and run the Docker
    - **localhost:9000** (QuestDB)
    - **localhost:3000** (Grafana)
 5. **Test the AI-Agent Lab**:
-   - Run the `data-stream-processing.py` file in the **Binance folder**.
+   - Run the `data-stream-processing.py` file in the **/notebooks/market-data/Binance/ folder**.
    - Verify that the data stream is being processed and check the data in **QuestDB** (available on **localhost:9000**).
    - Check the **Grafana dashboard** (on **localhost:3000**) to ensure the data is being visualized properly.
 6. **Verify that all services** are running and accessible through your browser. The entire setup and testing process should take about **10 minutes** if Docker and Docker Compose are properly installed.
@@ -26,7 +26,7 @@ As part of the interview process, we would like you to set up and run the Docker
 
 #### What You Should Submit:
 - Confirmation that you’ve successfully set up the Docker stack and run the AI-Agent Lab.
-- Screenshots of the following:
+- 3 Screenshots of the following:
    - **localhost:8080** (Code Server running on VSCode)
    - **localhost:9000** (QuestDB showing the data from the Binance folder)
    - **localhost:3000** (Grafana dashboard visualizing the processed data)
