@@ -25,11 +25,19 @@ As part of the interview process, we would like you to set up and run the Docker
 
 
 #### What You Should Submit:
-- Confirmation that you’ve successfully set up the Docker stack and run the AI-Agent Lab.
-- 3 Screenshots of the following:
-   - **localhost:8080** (Code Server running on VSCode)
-   - **localhost:9000** (QuestDB showing the data from the Binance folder)
-   - **localhost:3000** (Grafana dashboard visualizing the processed data)
+- **Confirmation** that you’ve successfully set up the Docker stack and run the AI-Agent Lab.
+- **Three specific screenshots** showing that the services are running and that the data from the data stream is being processed correctly:
+  1. **localhost:8080**: A screenshot of **Code Server (VSCode)** running on your local machine, showing the terminal or editor open with the **`data-stream-processing.py`** file in the **/notebooks/market-data/Binance/ folder**. Ensure that the terminal output shows that the data stream has started processing.
+  2. **localhost:9000**: A screenshot of **QuestDB** showing the **processed data from the Binance data stream**. Ensure that the screenshot clearly shows the relevant data in QuestDB after running **`data-stream-processing.py`**.
+  3. **localhost:3000**: A screenshot of **Grafana** visualizing the **processed data from the Binance data stream**. Ensure that the Grafana dashboard is showing the correct visualization of the processed data from **QuestDB**.
+
+- **Ensure that the following is clear in each screenshot**:
+   - For **localhost:8080**: The terminal or editor in **VSCode** with the **`data-stream-processing.py`** file running and processing data.
+   - For **localhost:9000**: The processed data from the **Binance data stream** visible in **QuestDB**.
+   - For **localhost:3000**: The correct visualized data from the **Binance data stream** on the **Grafana dashboard**.
+
+- **Screenshots should be clear** and demonstrate that the **data from the Binance data stream** is being processed and displayed correctly in all services.
+
 
 
 
