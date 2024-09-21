@@ -48,3 +48,28 @@ As part of the first step of the interview process, we ask all applicants to com
 If you are unable to complete this task or run the Docker stack, we kindly ask you to **withdraw your application** to allow us to focus on candidates who are technically prepared for the role.
 
 We appreciate your understanding and encourage you to apply for future opportunities once you have gained more experience in this area.
+
+
+
+
+
+## Step 2: Knowledge Assessment on LangChain and APIs
+
+### Instructions:
+
+Please answer the following questions to help us assess your knowledge and experience with **LangChain** and **APIs** relevant to the AI Agent Lab project.
+
+### 1. LangChain Knowledge:
+- Describe your experience with **LangChain**. Have you used it in any previous projects? If yes, please provide a brief overview of the project and how LangChain was implemented.
+- If you have not worked with LangChain before, how would you approach learning and integrating it into a project like AI Agent Lab? What resources would you consult, and what do you think are the key challenges in using LangChain?
+
+### 2. API Integration:
+- Share your experience with integrating **APIs** (e.g., OpenAI API, QuestDB API, Grafana API). Can you describe a project where you worked with APIs and what your role was in that integration?
+- What steps do you usually take to ensure the security and reliability of API interactions? Provide any examples or best practices you've used.
+
+### 3. Technical Problem-Solving:
+- Given the nature of the AI Agent Lab project, how would you design the integration of LangChain and APIs (like OpenAI, QuestDB, and Grafana) to create a seamless user experience? Describe the general flow of API requests and responses, and any challenges you foresee.
+
+---
+
+Please submit your responses by [insert deadline] for review. This will help us further evaluate your knowledge and fit for the project.
