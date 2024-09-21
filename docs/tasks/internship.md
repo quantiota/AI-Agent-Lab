@@ -72,4 +72,4 @@ Please answer the following questions to help us assess your knowledge and exper
 
 ---
 
-Please submit your responses by September 24 for review. This will help us further evaluate your knowledge and fit for the project.
+Please submit your responses within 72 hours for review. This will help us further evaluate your knowledge and fit for the project.
