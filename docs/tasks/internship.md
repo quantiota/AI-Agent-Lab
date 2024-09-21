@@ -67,9 +67,9 @@ Please answer the following questions to help us assess your knowledge and exper
 - Share your experience with integrating **APIs** (e.g., OpenAI API, QuestDB API, Grafana API). Can you describe a project where you worked with APIs and what your role was in that integration?
 - What steps do you usually take to ensure the security and reliability of API interactions? Provide any examples or best practices you've used.
 
-### 3. Technical Problem-Solving:
+### 3. Technical Problem-Solving (optional):
 - Given the nature of the AI Agent Lab project, how would you design the integration of LangChain and APIs (like OpenAI, QuestDB, and Grafana) to create a seamless user experience? Describe the general flow of API requests and responses, and any challenges you foresee.
 
 ---
 
-Please submit your responses by September 23 for review. This will help us further evaluate your knowledge and fit for the project.
+Please submit your responses by September 24 for review. This will help us further evaluate your knowledge and fit for the project.
