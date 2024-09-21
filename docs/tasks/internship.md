@@ -68,7 +68,7 @@ Please answer the following questions to help us assess your knowledge and exper
 - What steps do you usually take to ensure the security and reliability of API interactions? Provide any examples or best practices you've used.
 
 ### 3. Technical Problem-Solving (optional):
-- Given the nature of the AI Agent Lab project, how would you design the integration of LangChain and APIs (like OpenAI, QuestDB, and Grafana) to create a seamless user experience? Describe the general flow of API requests and responses, and any challenges you foresee.
+- Given the nature of the AI Agent Lab project, how would you design the integration of LangChain and APIs (like OpenAI, QuestDB, and Grafana) to create a seamless user experience? Describe the general flow of API requests and responses, and any challenges you foresee. Check the docs folder for ressources to assist with this task.
 
 ---
 
