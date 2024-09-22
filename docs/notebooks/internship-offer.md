@@ -26,7 +26,7 @@ Each set of notebooks should focus on a different type of data stream or machine
 - Create, test, and maintain **multiple sets of notebooks**:
   1. A **data stream processing notebook** for each type of **live market data source**, utilizing the **TA-Lib Python package** for technical analysis.
   2. A **machine learning notebook** for each set, implementing models that analyze the processed data.
-
+  3. Ensure the notebooks are user-friendly, providing templates for those new to data science and machine learning.
 ### **Preferred Skills:**
 - **Experience** with ML and Deep Learning models, particularly in real-time applications like **market data**.
 - Proficiency in **Python**, especially libraries like **TensorFlow, PyTorch, Scikit-learn, Pandas, NumPy**, and **TA-Lib**.
