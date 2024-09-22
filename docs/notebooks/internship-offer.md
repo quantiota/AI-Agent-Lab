@@ -7,22 +7,19 @@ We are looking for an enthusiastic intern with experience in **Machine Learning 
 The AI Agent Lab already provides a seamless interface for managing and querying data, visualizing results, and real-time coding using GPT-3.5 models. We aim to expand the project’s capabilities by adding ready-to-use **live data stream processing notebooks** integrated with machine learning models. These will allow users to experiment with **market data** and **ML algorithms** in real-time, providing a streamlined environment for data scientists.
 
 ### **Your Role:**
-- Develop notebooks that handle **live data streams**, specifically focused on **market data** (e.g., stock prices, financial data, cryptocurrency) in conjunction with **machine learning models**.
-- Integrate machine learning models into these notebooks for tasks such as:
-  - Predicting market trends (regression)
-  - Detecting patterns (clustering, classification)
-  - Time-series analysis for financial forecasting
-- Use **TA-Lib** for technical analysis and integrate its functions into the notebooks to process market data.
-- Ensure the notebooks are optimized for use with GPT-3.5 models, providing a simple and clear workflow for users to follow.
-- Collaborate with the team to create and integrate machine learning templates for quick experimentation with live market data.
-- Explore the potential integration of other live data sources (Twitter API, financial news, etc.) for additional context and insights.
+- Develop **multiple sets of notebooks**, with each set consisting of:
+  1. A **data processing notebook** focused on handling **live data streams** (e.g., stock prices, financial data, cryptocurrency).
+  2. A corresponding **machine learning notebook** that applies various ML models to analyze the processed data, for tasks such as:
+     - Predicting market trends (regression)
+     - Detecting patterns (clustering, classification)
+     - Time-series analysis for financial forecasting.
+  
+Each set of notebooks should focus on a different type of data stream or machine learning technique, providing users with ready-to-use templates for various data science tasks.
 
 ### **Responsibilities:**
-- Create, test, and maintain notebooks designed to process and analyze **live market data streams** alongside machine learning models.
-- Use **TA-Lib** to implement technical analysis algorithms in the data processing notebooks.
-- Develop and implement machine learning algorithms such as **classification, regression,** and **time-series forecasting** models.
-- Collaborate on building **NLP models** for tasks like **sentiment analysis** of financial news or social media data related to market movements.
-- Ensure the notebooks are user-friendly, providing templates for those new to **data science** and **machine learning**.
+- Create, test, and maintain **multiple sets of notebooks**:
+  1. A **data stream processing notebook** for each type of **live market data source**, utilizing the **TA-Lib Python package** for technical analysis.
+  2. A **machine learning notebook** for each set, implementing models that analyze the processed data.
 
 ### **Preferred Skills:**
 - **Experience** with ML and Deep Learning models, particularly in real-time applications like **market data**.
@@ -33,7 +30,7 @@ The AI Agent Lab already provides a seamless interface for managing and querying
 
 ### **Internship Details:**
 - **Position**: Remote Intern (AI Agent Lab - Market Data)
-- **Stipend**: ...  per month
+- **Stipend**: ₹10,000 per month
 - **Start Date**: October 1, 2024
 - **Duration**: 3 months, with potential for extension based on performance
 - **Work Mode**: Remote
