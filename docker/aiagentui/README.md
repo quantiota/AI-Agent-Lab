@@ -1,3 +1,7 @@
+## AI Agent UI Overview
+
+We describe the Flask-based service as a framework we are using for building the AI Agent UI. Flask provides a lightweight and flexible framework for web development in Python, making it a popular choice for creating web applications and APIs. When building an AI Agent UI, Flask can serve as the backend framework that handles HTTP requests, and delivers responses to the user, possibly through a chat interface or a web-based UI.
+
 The AI Agent UI serves as the graphical interface for users to interact with the underlying AI Agent, facilitating a user-friendly experience for engaging with the AI Agent's functionalities. Here's a detailed description of how the AI Agent UI interacts with the AI Agent:
 
 ### Purpose and Functionality:
