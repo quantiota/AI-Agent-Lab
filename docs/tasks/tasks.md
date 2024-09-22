@@ -68,9 +68,8 @@ We have a detailed task breakdown and are open to developers choosing the tasks 
 - Include examples of similar work you've done (links to repositories or websites).
 - Provide a time estimate for the task(s) you select.
 
-We will hire multiple freelancers, so feel free to apply even if you’re only interested in one or two tasks. The project is ongoing, and there's potential for long-term collaboration if this phase goes well.
+We will hire multiple developers, so feel free to apply even if you’re only interested in one or two tasks. The project is ongoing, and there's potential for long-term collaboration if this phase goes well.
 
 ---
 
-### Budget:  
-Hourly or fixed-rate depending on the task(s) selected. Please include your rate and estimated hours for your chosen tasks in your proposal.
+
