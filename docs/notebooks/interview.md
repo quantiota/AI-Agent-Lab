@@ -50,23 +50,24 @@ If you are unable to complete this task or run the Docker stack, we kindly ask y
 We appreciate your understanding and encourage you to apply for future opportunities once you have gained more experience in this area.
 
 
+
 ### Step 2: Knowledge Assessment on Live Data Streams and Machine Learning
 
 #### Instructions:
 
-Please answer the following questions to help us assess your knowledge and experience with **live data streams** and **machine learning** relevant to the AI Agent Lab project.
+Please answer the following questions to help us assess your knowledge and experience with **live data streams**, **machine learning**, and **TA-Lib** relevant to the AI Agent Lab project.
 
 ### 1. Live Data Streams Knowledge:
-- Describe your experience working with **live data streams** (e.g., financial market data, stock prices, cryptocurrency). Have you worked with any real-time data sources before? If yes, please provide a brief overview of the project and the technologies you used.
+- Describe your experience working with **live data streams** (e.g., financial market data, stock prices, cryptocurrency). Have you worked with any real-time data sources before? If yes, please provide a brief overview of the project and the technologies you used, including **TA-Lib** if applicable.
 - If you have not worked with live data streams before, how would you approach integrating them into the AI Agent Lab? What resources would you consult, and what do you think are the key challenges in handling live data streams?
 
-### 2. Machine Learning and API Integration:
-- Share your experience with integrating **machine learning models** to process real-time data (e.g., regression, time-series forecasting, classification). Can you describe a project where you implemented machine learning algorithms with real-time data?
-- What steps do you usually take to ensure the accuracy, reliability, and performance of machine learning models when processing live data? Provide any examples or best practices you've used.
+### 2. Machine Learning, TA-Lib, and API Integration:
+- Share your experience with integrating **machine learning models** to process real-time data (e.g., regression, time-series forecasting, classification). Have you used **TA-Lib** in any of your projects? Can you describe a project where you implemented machine learning algorithms with real-time data and used **TA-Lib** for technical analysis?
+- What steps do you usually take to ensure the accuracy, reliability, and performance of machine learning models when processing live data? Provide any examples or best practices you've used, especially when incorporating **TA-Lib**.
 
 ### 3. Technical Problem-Solving (optional):
-- Given the nature of the AI Agent Lab project, how would you design the integration of **live data streams** and **machine learning models** to process market data in real-time? Describe the general flow of data and the machine learning model’s role in making predictions or analyzing trends.
+- Given the nature of the AI Agent Lab project, how would you design the integration of **live data streams**, **TA-Lib**, and **machine learning models** to process market data in real-time? Describe the general flow of data and the machine learning model’s role in making predictions or analyzing trends. **Check the docs folder** for resources to assist with this task.
 
 ---
 
-Please submit your responses within 24 hours for review. This will help us further evaluate your knowledge and fit for the project.
+Please submit your responses within 72 hours for review. This will help us further evaluate your knowledge and fit for the project.
