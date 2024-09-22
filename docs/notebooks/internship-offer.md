@@ -15,9 +15,9 @@ The AI Agent Lab already provides a seamless interface for managing and querying
      - Time-series analysis for financial forecasting.
   3. Ensure the notebooks are optimized for use with GPT-3.5 models, providing a simple and clear
 workow for users to follow.
-4. Collaborate with the team to create and integrate machine learning templates for quick
+  4. Collaborate with the team to create and integrate machine learning templates for quick
 experimentation with live market data.
-5. Explore the potential integration of other live data sources (Twitter API, nancial news, etc.) for
+  5. Explore the potential integration of other live data sources (Twitter API, nancial news, etc.) for
 additional context and insights
   
 Each set of notebooks should focus on a different type of data stream or machine learning technique, providing users with ready-to-use templates for various data science tasks.
