@@ -36,7 +36,7 @@ Each set of notebooks should focus on a different type of data stream or machine
 
 ### **Internship Details:**
 - **Position**: Remote Intern (AI Agent Lab - Market Data)
-- **Stipend**: ... per month
+- **Stipend**: ₹ 10,000 per month
 - **Start Date**: October 1, 2024
 - **Duration**: 3 months, with potential for extension based on performance
 - **Work Mode**: Remote

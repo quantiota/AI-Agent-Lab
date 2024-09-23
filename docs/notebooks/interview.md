@@ -66,7 +66,7 @@ Please answer the following questions to help us assess your knowledge and exper
 - What steps do you usually take to ensure the accuracy, reliability, and performance of machine learning models when processing live data? Provide any examples or best practices you've used, especially when incorporating **TA-Lib**.
 
 ### 3. Technical Problem-Solving (optional):
-- Given the nature of the AI Agent Lab project, how would you design the integration of **live data streams**, **TA-Lib**, and **machine learning models** to process market data in real-time? Describe the general flow of data and the machine learning model’s role in making predictions or analyzing trends. **Check the docs folder** for resources to assist with this task.
+- Given the nature of the AI Agent Lab project, how would you design the integration of **live data streams**, **TA-Lib**, and **machine learning models** to process market data in real-time? Describe the general flow of data and the machine learning model’s role in making predictions or analyzing trends. 
 
 ---
 
