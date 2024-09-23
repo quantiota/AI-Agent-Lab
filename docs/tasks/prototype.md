@@ -47,3 +47,5 @@ This simple prototype will serve as the foundation for building more complex fea
 - **Modular Backend**: Each API integration (OpenAI, QuestDB, Grafana, Code-Server) is modular, enabling future expansion without significant refactoring.
 - **Secure Direct Access**: Users can access detailed data and visualizations directly in **QuestDB**, **Grafana**, and **Code-Server** via HTTPS, ensuring that the AI Agent UI remains focused on automation and task management.
 
+
+
