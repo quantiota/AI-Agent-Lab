@@ -1,51 +1,61 @@
-## AI Agent and AI Agent UI Prototype Definition
+## AI Agent and AI Agent UI Prototype Definition (Natural Language Focus)
 
 ### Objective:
-The goal is to build a simple yet robust AI Agent and AI Agent UI prototype that interacts with **QuestDB**, **Grafana**, **Code-Server**, and **OpenAI** via their APIs, without directly displaying database query results or visualizations in the UI. This prototype will serve as a strong foundation for future feature development while keeping the core architecture intact.
+The goal is to develop a foundational AI Agent and AI Agent UI prototype where users interact **exclusively through natural language**. The backend, powered by **LangChain**, handles all interactions with external services such as **QuestDB**, **Grafana**, **Code-Server**, and **OpenAI** via their APIs. The prototype will abstract away all technical details, allowing users to ask questions and issue commands in plain text, while the AI Agent translates those requests into the necessary backend operations.
 
 ### AI Agent Prototype (Backend)
 
-1. **Interaction with OpenAI API**:
-   - Allow the AI agent to take user input (e.g., a question or query) and process it using the OpenAI GPT model.
-   - The response from OpenAI can be returned as simple text output or logged in the backend.
+1. **Interaction with OpenAI (GPT-3.5)**:
+   - The AI agent uses **GPT-3.5** to process user requests and understand the intent behind the natural language input.
+   - The AI agent identifies whether the user query requires data from QuestDB, visualizations from Grafana, or actions in Code-Server, based on the context.
 
-2. **Interaction with QuestDB API**:
-   - Enable the AI agent to execute predefined SQL queries on QuestDB via its API.
-   - Focus on triggering queries without displaying the results in the UI.
-   - The query results will be available for further visualization in Grafana or through direct access to QuestDB’s console.
+2. **LangChain’s Tool Management**:
+   - **LangChain** will orchestrate the flow of API requests. Depending on the task (data retrieval, visualization, script execution), it will determine the necessary tools to fulfill the user’s request.
+   - For example, LangChain will decide whether to retrieve data from QuestDB, call the Grafana API for visualization, or interact with Code-Server to run a script.
 
-3. **Interaction with Grafana API**:
-   - Allow the AI agent to trigger updates or fetch predefined dashboards from Grafana.
-   - Instead of visualizing data in the AI Agent UI, provide quick links to open specific Grafana dashboards in a new tab.
+3. **QuestDB Integration (SQL Queries Abstracted)**:
+   - When the user asks a data-related question (e.g., "What was the average Bitcoin price last week?"), GPT-3.5 translates the natural language input into an appropriate **SQL query**.
+   - The **SQLDatabaseChain module** in LangChain interacts with QuestDB by generating the query and executing it behind the scenes. The user is unaware of the SQL query, seeing only the result in plain text or as a summary.
+   - For example, QuestDB might return the average price, which GPT-3.5 will summarize as: "The average Bitcoin price last week was $27,500."
 
-4. **Interaction with Code-Server API**:
-   - Integrate the AI agent with Code-Server for simple task automation, such as opening predefined files or running scripts.
-   - Provide triggers to open Code-Server directly from the UI rather than displaying content in the UI.
+4. **Grafana Integration (Visualization)**:
+   - If the user requests a visualization (e.g., "Show me the price trend for Bitcoin last week"), **LangChain** will call the **Grafana API** to generate a visual representation of the data.
+   - Instead of displaying the raw data, the user will be given a link or an embedded chart from Grafana that displays the result visually.
+
+5. **Code-Server Interaction (File/Script Automation)**:
+   - The AI agent can also interact with **Code-Server** to automate tasks such as running scripts or managing files based on user commands.
+   - For example, a user might ask: "Run the data processing script for market data," and the AI agent will trigger the appropriate action in Code-Server without exposing the technical steps to the user.
 
 ### AI Agent UI Prototype (Frontend)
 
-1. **Task Orchestration**:
-   - The UI will provide a simple interface for triggering tasks like:
-     - Sending user input to OpenAI.
-     - Executing predefined SQL queries on QuestDB.
-     - Opening or running files in Code-Server.
-     - Triggering specific visualizations in Grafana.
-   
-2. **Quick Navigation**:
-   - Instead of displaying data or visualizations, the UI will offer links or buttons to quickly navigate to **QuestDB**, **Grafana**, or **Code-Server** through their HTTPS interfaces.
-   - Users can view their data or results directly within those secure tools.
+1. **Natural Language Interface**:
+   - The UI will provide a **text input box** where users can interact with the AI agent through natural language.
+   - The interface will be clean and simple, focusing on allowing users to input queries like:
+     - "What is the latest stock price for Bitcoin?"
+     - "Show me a chart of Bitcoin prices over the last week."
+     - "Run the script to process market data."
+   - The AI Agent processes these requests and provides results without requiring the user to know any technical details.
 
-3. **Status and Logs**:
-   - Display brief status messages or logs (e.g., “Query executed successfully,” “Data sent to Grafana,” or “File opened in Code-Server”) to inform users of task completion.
-   - No detailed data or visualizations will be displayed in the UI.
+2. **Task Automation**:
+   - The AI agent will automate backend tasks based on natural language requests, such as:
+     - **Fetching data** from QuestDB.
+     - **Generating visualizations** through Grafana.
+     - **Running scripts** in Code-Server.
+   - Users will only see the results (e.g., a summary from GPT-3.5 or a link to a Grafana dashboard).
+
+3. **Quick Links and Feedback**:
+   - The UI will offer **quick links** for users to navigate to detailed views in **QuestDB** or **Grafana**, if they need to explore the data further.
+   - The system will also display feedback like "Data retrieved successfully" or "Script executed" to confirm task completion.
+
+4. **No Display of Raw Data**:
+   - The user interface will not display raw SQL queries, database outputs, or other technical details. Instead, all interactions will be in **natural language**, and results will be returned as **summaries** or **visualizations** as requested by the user.
 
 ### Foundation for Future Development:
-This simple prototype will serve as the foundation for building more complex features, ensuring that the core architecture remains intact as new functionalities are added. The focus is on modularity and scalability, allowing additional APIs or integrations to be implemented without needing to overhaul the existing codebase.
+This prototype serves as the base for more complex future features. The architecture will remain modular, allowing new services to be added easily without altering the fundamental design. The focus will always remain on **natural language interaction** to abstract the technical complexity from the user.
 
 ### Key Features:
-- **Simple and Clean UI**: Focused on task orchestration, providing users with a lightweight, easy-to-use interface.
-- **Modular Backend**: Each API integration (OpenAI, QuestDB, Grafana, Code-Server) is modular, enabling future expansion without significant refactoring.
-- **Secure Direct Access**: Users can access detailed data and visualizations directly in **QuestDB**, **Grafana**, and **Code-Server** via HTTPS, ensuring that the AI Agent UI remains focused on automation and task management.
+- **Natural Language Processing**: The AI
+
 
 
 
