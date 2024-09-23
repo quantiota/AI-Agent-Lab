@@ -21,7 +21,7 @@ The goal is to develop a foundational **AI Agent and AI Agent UI prototype** whe
 
 ### 4. Grafana Integration (Visualization):
 - If the user requests a visualization (e.g., "Show me the price trend for Bitcoin last week"), **LangChain** will call the **Grafana API** to generate a time-series chart.
-- Instead of displaying the raw data, the user will be given a link that displays the result visually.
+- Instead of displaying the raw data, the user will be given a link that displays the result visually in Grafana.
 
 ### 5. Code-Server Interaction (File/Script Automation):
 - The AI agent can also interact with **Code-Server** to automate tasks such as running scripts or managing files based on user commands.
