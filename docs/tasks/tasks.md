@@ -1,7 +1,6 @@
-# Job Title:  
-Developer Needed for AI Agent and UI Development (Multiple Tasks Available)
+#  AI Agent and UI Development (Multiple Tasks Available)
 
-## Job Description:
+## Description:
 
 I’m looking for experienced developers to contribute to a complex AI-driven project called **AI Agent Lab**. This Open Source project involves the development of both an **AI Agent** responsible for processing user inputs and interacting with external services (e.g., QuestDB, Grafana, VSCode), and a **Flask-based AI Agent UI** that acts as the front-end for user interaction.
 
@@ -54,8 +53,6 @@ We have a detailed task breakdown and are open to developers choosing the tasks 
 
 ### Requirements:
 - Proficient in one or more of the technologies listed above
-- **Must have access to an Ubuntu local server with a fixed IP address and a domain name** 
-  for testing and deployment purposes.
 - Ability to work independently and deliver clean, well-documented code
 - Experience with API development and integration
 - Familiarity with Docker, DevOps practices, and modern web technologies
