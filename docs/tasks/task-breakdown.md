@@ -26,6 +26,9 @@
   - Document outlining the local development setup
 - **Estimated Time**: 2-3 hours
 
+
+### **Total Estimated Time for Phase 1**: 11-17 hours
+
 ---
 
 ## **Phase 2: AI Agent Development**
@@ -66,6 +69,8 @@
   - Ensure API authentication using `VSCODE_API_KEY`.
 - **Estimated Time**: 10-12 hours
 
+
+### **Total Estimated Time for Phase 2**: 44-61 hours
 ---
 
 ## **Phase 3: AI Agent UI Development**
@@ -98,6 +103,8 @@
   - API integration between AI Agent and UI
 - **Estimated Time**: 10-12 hours
 
+### **Total Estimated Time for Phase 3**: 40-58 hours
+
 ---
 
 ## **Phase 4: Performance and Optimization**
@@ -123,6 +130,8 @@
   - Working background task system
 - **Estimated Time**: 8-10 hours
 
+
+### **Total Estimated Time for Phase 4**: 18-24 hours
 ---
 
 ## **Phase 5: Testing, Performance, and Deployment**
@@ -143,6 +152,8 @@
   - Performance monitoring dashboard (using Grafana/Prometheus)
 - **Estimated Time**: 12-15 hours
 
+
+### **Total Estimated Time for Phase 5**: 22-27 hours
 ---
 
 ## **Phase 6: Documentation**
@@ -155,6 +166,8 @@
   - README file for setup and usage
 - **Estimated Time**: 5-7 hours
 
+
+### **Total Estimated Time for Phase 6**: 5-7 hours
 
 ## **Phase 7: Project Management and Communication**
 
@@ -181,3 +194,7 @@
   - Stakeholder communication plan
   - Stakeholder meeting notes and action items
 - **Estimated Time**: Ongoing throughout the project
+
+### **Total Estimed for Phase 7**: Ongoing throughout the project (no fixed time)
+
+### **Overall Total Estimated Time for Phases 1 to 6**: 140-194 hours
