@@ -196,5 +196,6 @@
 - **Estimated Time**: Ongoing throughout the project
 
 ### **Total Estimed for Phase 7**: Ongoing throughout the project (no fixed time)
+---
 
-### **Overall Total Estimated Time for Phases 1 to 6**: 140-194 hours
+## **Overall Total Estimated Time for Phases 1 to 6**: 140-194 hours
