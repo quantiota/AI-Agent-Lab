@@ -21,5 +21,10 @@ Your primary responsibility is to begin by reviewing the **SOTA folder**. This f
 - **Update the SOTA folder:** Add the new research to the appropriate sections, such as the Bibliography, Research Notes, or Papers folders.
 - **Create the SOTA Summary:** Once the new research is compiled, create the **SOTA_Summary.pdf** for a high-level overview of the research.
 
+
+### Estimated Duration
+This task, including the learning of cutting-edge technologies that may not yet be fully understood by the intern, is expected to take approximately **1 month** to complete.
+
+
 If you have any questions or need guidance on which areas to focus on, don't hesitate to ask. Good luck, and welcome aboard!
 
