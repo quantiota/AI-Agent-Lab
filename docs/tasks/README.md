@@ -195,8 +195,5 @@ This document outlines the steps and tasks required to develop both the AI Agent
 
 ---
 
-## Estimated Time for Completion
-- **AI Agent Development**: 46-81 hours
-- **AI Agent UI Development**: 55-85 hours
-- **Total Estimated Time**: 101-166 hours
+
 
