@@ -35,11 +35,13 @@
 
 3. QuestDB. (2023). *QuestDB Documentation*. [https://questdb.io/docs](https://questdb.io/docs)
 
-4. Code-Server. (2023). *Code-Server: Run VS Code in the Browser*. [https://coder.com/docs/code-server/latest](https://coder.com/docs/code-server/latest)
+4. QuestDB. (2023). *QuestDB DocumentatioTutorials*. [https://questdb.io/blog/tags/tutorial](https://questdb.io/blog/tags/tutorial)
 
-5. Grafana. (2023). *Grafana Documentation*. [https://grafana.com/docs/grafana/latest/](https://grafana.com/docs/grafana/latest/)
+5. Code-Server. (2023). *Code-Server: Run VS Code in the Browser*. [https://coder.com/docs/code-server/latest](https://coder.com/docs/code-server/latest)
 
-6. Streamlit. (2023). Streamlit Documentation: Create Interactive Web Apps with Python. [https://streamlit.io/generative-ai/](https://streamlit.io/generative-ai/)
+6. Grafana. (2023). *Grafana Documentation*. [https://grafana.com/docs/grafana/latest/](https://grafana.com/docs/grafana/latest/)
+
+7. Streamlit. (2023). Streamlit Documentation: Create Interactive Web Apps with Python. [https://streamlit.io/generative-ai/](https://streamlit.io/generative-ai/)
 
 
 ## GitHub Repositories for AI Agent Lab
