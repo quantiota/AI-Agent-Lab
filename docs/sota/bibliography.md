@@ -35,7 +35,7 @@
 
 3. QuestDB. (2023). *QuestDB Documentation*. [https://questdb.io/docs](https://questdb.io/docs)
 
-4. QuestDB. (2023). *QuestDB DocumentatioTutorials*. [https://questdb.io/blog/tags/tutorial](https://questdb.io/blog/tags/tutorial)
+4. QuestDB. (2023). *QuestDB Tutorials*. [https://questdb.io/blog/tags/tutorial](https://questdb.io/blog/tags/tutorial)
 
 5. Code-Server. (2023). *Code-Server: Run VS Code in the Browser*. [https://coder.com/docs/code-server/latest](https://coder.com/docs/code-server/latest)
 
