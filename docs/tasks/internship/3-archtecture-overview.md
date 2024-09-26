@@ -40,7 +40,7 @@ graph TD
 ## Components
 
 - **Nginx**: Acts as a reverse proxy, routing requests to the appropriate services.
-- **AI Agent UI**: The user interface for interacting with the AI Agent.
+- **AI Agent UI**: (To be developed) The user interface for interacting with the AI Agent.
 - **AI Agent**: (To be developed) The core component that processes data and interacts with other services via their APIs.
 - **QuestDB**: A time-series database for storing and querying data.
 - **Grafana**: A platform for monitoring and observability.
