@@ -13,7 +13,7 @@ questdb["QuestDB<br>(Port 9000, 9009, 8812, 9003)"]
 aiagentui["AI Agent UI<br>(Port 5000)"]
 nginx["Nginx<br>(Port 80, 443)"]
 certbot["Certbot"]
-aiagent["AI Agent"]
+aiagent["AI Agent<br><br>"]
 end
 User((User))
 User -->|Interacts with| nginx
