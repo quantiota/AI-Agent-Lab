@@ -15,7 +15,7 @@ nginx["Nginx<br>(Port 80, 443)"]
 certbot["Certbot"]
 aiagent["AI Agent<br><br>"]
 end
-User((User))
+User((User<br>))
 User -->|Interacts with| nginx
 nginx -->|Routes requests| aiagentui
 nginx -->|Routes requests| codeserver
