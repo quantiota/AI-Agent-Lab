@@ -11,7 +11,7 @@
    - You **only need to add the following new volume mapping** to the existing Docker configuration:
      - Map the `docker` folder on your local machine to `/home/coder/project/docker` inside the container.
    - Do **not modify** the existing mappings or configuration except for this new addition.
-   - If you're only modifying certain containers and don’t need to rebuild the entire stack, you can target specific services: `docker-compose up -d --build <service-name>`
+   - If you're only modifying certain containers and don’t need to rebuild the entire stack, you can target specific services: `docker-compose up -d --build <service-name>`. This can save time by only rebuilding the container you're actively working on.
 
 
    Mapping the docker folder within the code-server is a good idea for easily modifying the Docker setup. By having the docker folder accessible inside the code-server, you can quickly edit the configuration files (like docker-compose.yml, Dockerfile, etc.) directly from the development environment, without needing to switch to a different tool or manually sync changes.
