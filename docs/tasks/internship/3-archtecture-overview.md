@@ -18,27 +18,26 @@ graph TD
     nginx -->|Routes requests to| vscode
     nginx -->|Routes requests to| grafana
     nginx -->|Routes requests to| questdb
-    aiagentui |Interacts with| aiagent
+    aiagentui -->|Sends requests to| aiagent
+    aiagent -->|Sends responses to| aiagentui
     aiagent -->|Processes data| questdb
     aiagent -->|Updates| grafana
     aiagent -->|May use| vscode
     grafana -->|Queries data from| questdb
     certbot -->|Manages SSL Certificates for| nginx
     
-    %% Dependencies
     nginx -.->|depends on| aiagentui
     nginx -.->|depends on| vscode
     nginx -.->|depends on| grafana
     nginx -.->|depends on| questdb
     grafana -.->|depends on| questdb
     
-    %% External Services
-    aiagent -->|May connect to| OpenAI[OpenAI API]
+    aiagent -->|May connect to| OpenAI["OpenAI API"]
     
-    %% Styling
     classDef toDevelop fill:#f9f,stroke:#333,stroke-width:2px;
     class aiagent toDevelop;
 ```
+
 
 
 
