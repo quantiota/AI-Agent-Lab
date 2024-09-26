@@ -6,35 +6,34 @@ The following diagram illustrates the architecture of the AI Agent lab:
 
 ```mermaid
 graph TD
-    subgraph Docker_Services
-        codeserver["code-server (Port 8080)"]
-        grafana["Grafana (Port 3000)"]
-        questdb["QuestDB (Port 9000, 9009, 8812, 9003)"]
-        aiagentui["AI Agent UI (Port 5000)"]
-        nginx["Nginx (Port 80, 443)"]
-        certbot["Certbot"]
-        aiagent["AI Agent"]
-    end
-    User -->|Interacts with| nginx
-    nginx -->|Routes requests to| aiagentui
-    nginx -->|Routes requests to| codeserver
-    nginx -->|Routes requests to| grafana
-    nginx -->|Routes requests to| questdb
-    aiagentui -->|Sends requests to| aiagent
-    aiagent -->|Sends responses to| aiagentui
-    aiagent <-->|Queries/Writes data via API| questdb
-    aiagent <-->|Updates dashboards via API| grafana
-    aiagent <-->|Executes code via API| codeserver
-    grafana -->|Queries data from| questdb
-    certbot -->|Manages SSL Certificates for| nginx
-    
-    aiagent <-->|Sends requests/Receives responses| OpenAI["OpenAI API"]
-
-    
-    classDef toDevelop fill:#f9f,stroke:#333,stroke-width:2px;
-    class aiagent toDevelop;
-    classDef external fill:#f0f0f0,stroke:#333,stroke-dasharray: 5 5;
-    class OpenAI external;
+subgraph Docker Services
+codeserver["code-server<br>(Port 8080)"]
+grafana["Grafana<br>(Port 3000)"]
+questdb["QuestDB<br>(Port 9000, 9009, 8812, 9003)"]
+aiagentui["AI Agent UI<br>(Port 5000)"]
+nginx["Nginx<br>(Port 80, 443)"]
+certbot["Certbot"]
+aiagent["AI Agent"]
+end
+User((User))
+User -->|Interacts with| nginx
+nginx -->|Routes requests| aiagentui
+nginx -->|Routes requests| codeserver
+nginx -->|Routes requests| grafana
+nginx -->|Routes requests| questdb
+aiagentui -->|Sends requests| aiagent
+aiagent -->|Sends responses| aiagentui
+aiagent <-->|Queries/Writes data| questdb
+aiagent <-->|Updates dashboards| grafana
+aiagent <-->|Executes code| codeserver
+grafana -->|Queries data| questdb
+certbot -->|Manages SSL Certificates| nginx
+OpenAI["OpenAI API"]
+aiagent <-->|Sends requests/Receives responses| OpenAI
+classDef toDevelop fill:#f9f,stroke:#333,stroke-width:2px;
+class aiagent toDevelop;
+classDef external fill:#f0f0f0,stroke:#333,stroke-dasharray: 5 5;
+class OpenAI external;
 ```
 
 ## Components
@@ -100,34 +99,3 @@ For all APIs:
 - Implement retry mechanisms with exponential backoff for handling temporary failures.
 - Use appropriate authentication methods as required by each API.
 
-```mermaid
-graph TD
-subgraph Docker Services
-codeserver["code-server<br>(Port 8080)"]
-grafana["Grafana<br>(Port 3000)"]
-questdb["QuestDB<br>(Port 9000, 9009, 8812, 9003)"]
-aiagentui["AI Agent UI<br>(Port 5000)"]
-nginx["Nginx<br>(Port 80, 443)"]
-certbot["Certbot"]
-aiagent["AI Agent"]
-end
-User((User))
-User -->|Interacts with| nginx
-nginx -->|Routes requests| aiagentui
-nginx -->|Routes requests| codeserver
-nginx -->|Routes requests| grafana
-nginx -->|Routes requests| questdb
-aiagentui -->|Sends requests| aiagent
-aiagent -->|Sends responses| aiagentui
-aiagent <-->|Queries/Writes data| questdb
-aiagent <-->|Updates dashboards| grafana
-aiagent <-->|Executes code| codeserver
-grafana -->|Queries data| questdb
-certbot -->|Manages SSL Certificates| nginx
-OpenAI["OpenAI API"]
-aiagent <-->|Sends requests/Receives responses| OpenAI
-classDef toDevelop fill:#f9f,stroke:#333,stroke-width:2px;
-class aiagent toDevelop;
-classDef external fill:#f0f0f0,stroke:#333,stroke-dasharray: 5 5;
-class OpenAI external;
-```
