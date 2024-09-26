@@ -2,6 +2,8 @@
 
 # Architecture Overview
 
+## Architecture Diagram
+
 The following diagram illustrates the architecture of the AI Agent lab:
 
 ```mermaid
