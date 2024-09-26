@@ -31,17 +31,19 @@
 ## Websites
 1. LangChain. (2023). *Documentation for LangChain: Building Applications with Large Language Models (LLMs)*. [https://langchain.com/docs](https://langchain.com/docs)
 
-2. Docker. (2023). *Using Docker Compose for Multi-Container Applications*. [https://docs.docker.com/compose/](https://docs.docker.com/compose/)
+2. LangChain. (2023). *LangChain Community: Join the LangChain Community*. [https://langchain.com/join-community](https://langchain.com/join-community)
 
-3. QuestDB. (2023). *QuestDB Documentation*. [https://questdb.io/docs](https://questdb.io/docs)
+3. Docker. (2023). *Using Docker Compose for Multi-Container Applications*. [https://docs.docker.com/compose/](https://docs.docker.com/compose/)
 
-4. QuestDB. (2023). *QuestDB Tutorials*. [https://questdb.io/blog/tags/tutorial](https://questdb.io/blog/tags/tutorial)
+4. QuestDB. (2023). *QuestDB Documentation*. [https://questdb.io/docs](https://questdb.io/docs)
 
-5. Code-Server. (2023). *Code-Server: Run VS Code in the Browser*. [https://coder.com/docs/code-server/latest](https://coder.com/docs/code-server/latest)
+5. QuestDB. (2023). *QuestDB Tutorials*. [https://questdb.io/blog/tags/tutorial](https://questdb.io/blog/tags/tutorial)
 
-6. Grafana. (2023). *Grafana Documentation*. [https://grafana.com/docs/grafana/latest/](https://grafana.com/docs/grafana/latest/)
+6. Code-Server. (2023). *Code-Server: Run VS Code in the Browser*. [https://coder.com/docs/code-server/latest](https://coder.com/docs/code-server/latest)
 
-7. Streamlit. (2023). Streamlit Documentation: Create Interactive Web Apps with Python. [https://streamlit.io/generative-ai/](https://streamlit.io/generative-ai/)
+7. Grafana. (2023). *Grafana Documentation*. [https://grafana.com/docs/grafana/latest/](https://grafana.com/docs/grafana/latest/)
+
+8. Streamlit. (2023). Streamlit Documentation: Create Interactive Web Apps with Python. [https://streamlit.io/generative-ai/](https://streamlit.io/generative-ai/)
 
 
 ## GitHub Repositories for AI Agent Lab
