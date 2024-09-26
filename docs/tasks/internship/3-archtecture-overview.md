@@ -15,7 +15,7 @@ graph TD
         aiagentui["AI Agent UI (Port 5000)"]
         nginx["Nginx (Port 80, 443)"]
         certbot["Certbot"]
-        aiagent["AI Agent\n(To be developed)"]
+        aiagent["AI Agent"]
     end
     User -->|Interacts with| nginx
     nginx -->|Routes requests to| aiagentui
