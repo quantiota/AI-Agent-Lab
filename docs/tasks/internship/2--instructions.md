@@ -12,6 +12,7 @@
      - Map the `docker` folder on your local machine to `/home/coder/project/docker` inside the container.
    - Do **not modify** the existing mappings or configuration except for this new addition.
 
+   Mapping the docker folder within the code-server is a good idea for easily modifying the Docker setup. By having the docker folder accessible inside the code-server, you can quickly edit the configuration files (like docker-compose.yml, Dockerfile, etc.) directly from the development environment, without needing to switch to a different tool or manually sync changes.
 
 3. **Perform Tasks on the Provided Dedicated Server**  
    - We will provide you with access to a **dedicated server** to perform all development tasks.
