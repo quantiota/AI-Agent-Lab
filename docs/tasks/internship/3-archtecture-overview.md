@@ -101,7 +101,7 @@ For all APIs:
 - Use appropriate authentication methods as required by each API.
 
 ```mermaid
-graph LR
+graph TD
 subgraph Docker Services
 codeserver["code-server<br>(Port 8080)"]
 grafana["Grafana<br>(Port 3000)"]
@@ -111,7 +111,8 @@ nginx["Nginx<br>(Port 80, 443)"]
 certbot["Certbot"]
 aiagent["AI Agent"]
 end
-User((User)) -->|Interacts with| nginx
+User((User))
+User -->|Interacts with| nginx
 nginx -->|Routes requests| aiagentui
 nginx -->|Routes requests| codeserver
 nginx -->|Routes requests| grafana
@@ -123,7 +124,8 @@ aiagent <-->|Updates dashboards| grafana
 aiagent <-->|Executes code| codeserver
 grafana -->|Queries data| questdb
 certbot -->|Manages SSL Certificates| nginx
-aiagent <-->|Sends requests/Receives responses| OpenAI["OpenAI API"]
+OpenAI["OpenAI API"]
+aiagent <-->|Sends requests/Receives responses| OpenAI
 classDef toDevelop fill:#f9f,stroke:#333,stroke-width:2px;
 class aiagent toDevelop;
 classDef external fill:#f0f0f0,stroke:#333,stroke-dasharray: 5 5;
