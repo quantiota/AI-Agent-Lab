@@ -100,7 +100,7 @@ For all APIs:
 - Implement retry mechanisms with exponential backoff for handling temporary failures.
 - Use appropriate authentication methods as required by each API.
 
-mermaid
+```mermaid
 graph LR
 subgraph Docker Services
 codeserver["code-server<br>(Port 8080)"]
@@ -128,3 +128,4 @@ classDef toDevelop fill:#f9f,stroke:#333,stroke-width:2px;
 class aiagent toDevelop;
 classDef external fill:#f0f0f0,stroke:#333,stroke-dasharray: 5 5;
 class OpenAI external;
+```
