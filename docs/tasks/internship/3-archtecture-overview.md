@@ -58,8 +58,7 @@ The main focus for development is the AI Agent component. This component will:
    - **code-server API**: For executing code or scripts remotely.
 3. Interact with external APIs for enhanced functionality:
    - **OpenAI API**: For natural language processing and generation tasks.
-   - **Custom API 1**: (Describe the purpose of this API)
-   - **Custom API 2**: (Describe the purpose of this API)
+
 
 When developing the AI Agent, consider the following:
 
@@ -78,7 +77,7 @@ When integrating with the various APIs, keep the following in mind:
    - Implement connection pooling and error handling for robust interactions.
    - Consider implementing caching mechanisms to optimize performance.
 
-2. **External APIs (OpenAI, Custom API 1, Custom API 2)**:
+2. **External APIs (OpenAI)**:
    - Implement rate limiting and error handling to manage API usage effectively.
    - Use asynchronous programming techniques for improved performance when making multiple API calls.
    - Ensure proper security measures for handling API keys and sensitive data.
@@ -88,14 +87,3 @@ For all APIs:
 - Implement retry mechanisms with exponential backoff for handling temporary failures.
 - Use appropriate authentication methods as required by each API.
 
-## Getting Started
-
-(Add instructions for setting up and running the project using Docker Compose)
-
-## Contributing
-
-(Add guidelines for contributing to the project)
-
-## License
-
-(Add license information)
