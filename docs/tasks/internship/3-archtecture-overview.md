@@ -1,8 +1,6 @@
-# AI Agent Lab
 
-This project is an AI Agent lab environment using Docker services. It includes components for development (code-server), data storage (QuestDB), visualization (Grafana), and an AI Agent UI, all orchestrated with Docker Compose.
 
-## Architecture Overview
+# Architecture Overview
 
 The following diagram illustrates the architecture of the AI Agent lab:
 
