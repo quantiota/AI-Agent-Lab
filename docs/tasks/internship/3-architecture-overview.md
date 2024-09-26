@@ -37,14 +37,25 @@ class OpenAI external;
 ```
 
 ## Architecture Highlights:
-- **AI Agent**: The main AI service that handles requests from the AI Agent UI and interacts with **QuestDB**, **Grafana**, and **code-server**. It also communicates with the **OpenAI API** for natural language processing tasks.
-- **AI Agent UI**: The user interface (Flask-based), handling user requests and returning AI Agent responses.
-- **code-server**: Added as a service running on port **8080**, allowing the AI Agent to execute code.
-- **Grafana**: Visualizes data by querying QuestDB, with updates handled by the AI Agent.
-- **QuestDB**: The core database for querying and storing data, interacting with both Grafana and the AI Agent. 
-- **OpenAI API**: External API for AI capabilities, like generating responses based on user input, integrated with the AI Agent.
-- **Nginx**: Acts as a reverse proxy, routing user requests to **AI Agent UI**, **code-server**, **Grafana**, and **QuestDB**.
-- **Certbot**: Manages SSL certificates for secure communication, integrated with Nginx.
+- **AI Agent**: The core AI service that processes user requests from the AI Agent UI. It interacts with various components:
+  - **QuestDB**: Queries and writes data for storage and retrieval.
+  - **Grafana**: Updates dashboards to visualize data and insights.
+  - **code-server**: Executes code and scripts to perform tasks.
+  - **OpenAI API**: Communicates with the external API for natural language processing and AI capabilities.
+
+- **AI Agent UI**: A user-friendly interface (Flask-based) that allows users to interact with the AI Agent. It sends user requests to the AI Agent and displays the generated responses.
+
+- **code-server**: An integrated development environment (IDE) accessible through the browser on port **8080**. It enables the AI Agent to execute code and scripts seamlessly.
+
+- **Grafana**: A powerful data visualization platform that creates dashboards by querying data from QuestDB. The AI Agent updates these dashboards to provide real-time insights.
+
+- **QuestDB**: A high-performance time-series database that serves as the central data storage for the AI Agent. It efficiently handles data querying and storage, interacting with both Grafana and the AI Agent.
+
+- **OpenAI API**: An external API that provides advanced AI capabilities, such as natural language processing and generation. The AI Agent integrates with this API to enhance its functionality and performance.
+
+- **Nginx**: A robust web server and reverse proxy that routes incoming user requests to the appropriate services, including the AI Agent UI, code-server, Grafana, and QuestDB.
+
+- **Certbot**: An automated certificate management tool that simplifies the process of obtaining and renewing SSL certificates. It integrates with Nginx to enable secure communication over HTTPS.
 
 
 
