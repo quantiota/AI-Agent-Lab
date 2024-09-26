@@ -31,8 +31,7 @@ graph TD
     certbot -->|Manages SSL Certificates for| nginx
     
     aiagent -->|Calls OpenAI API| OpenAI["OpenAI API"]
-    aiagent -->|Calls Custom API 1| API1["Custom API 1"]
-    aiagent -->|Calls Custom API 2| API2["Custom API 2"]
+
     
     classDef toDevelop fill:#f9f,stroke:#333,stroke-width:2px;
     class aiagent toDevelop;
