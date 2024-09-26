@@ -7,6 +7,10 @@
 2. **Set Up the AI Agent Lab Devbox**  
    - Use the **AI Agent Lab** as your dedicated development environment (devbox). This is mandatory for all tasks.
    - The **AI Agent Lab** is already set up with Docker, QuestDB, Grafana, and other essential tools. You will need to use this stack to develop, test, and debug.
+   - You **only need to add the following new volume mapping** to the existing Docker configuration:
+     - Map the `docker` folder on your local machine to `/home/coder/project/docker` inside the container.
+   - Do **not modify** the existing mappings or configuration except for this new addition.
+
 
 3. **Perform Tasks on the Provided Dedicated Server**  
    - We will provide you with access to a **dedicated server** to perform all development tasks.
