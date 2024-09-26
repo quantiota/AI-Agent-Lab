@@ -1,3 +1,5 @@
+
+
 ## Architecture Overview
 
 The following diagram illustrates the architecture of the AI Agent lab:
@@ -20,24 +22,18 @@ graph TD
     nginx -->|Routes requests to| questdb
     aiagentui -->|Sends requests to| aiagent
     aiagent -->|Sends responses to| aiagentui
-    aiagent -->|Processes data| questdb
-    aiagent -->|Updates| grafana
-    aiagent -->|May use| vscode
+    aiagent -->|Queries/Writes data| questdb
+    aiagent -->|Updates dashboards| grafana
+    aiagent -->|Executes code| vscode
     grafana -->|Queries data from| questdb
     certbot -->|Manages SSL Certificates for| nginx
     
-    nginx -.->|depends on| aiagentui
-    nginx -.->|depends on| vscode
-    nginx -.->|depends on| grafana
-    nginx -.->|depends on| questdb
-    grafana -.->|depends on| questdb
-    
-    aiagent -->|May connect to| OpenAI["OpenAI API"]
+    aiagent -->|Calls OpenAI API| OpenAI["OpenAI API"]
+    aiagent -->|Calls Custom API 1| API1["Custom API 1"]
+    aiagent -->|Calls Custom API 2| API2["Custom API 2"]
     
     classDef toDevelop fill:#f9f,stroke:#333,stroke-width:2px;
     class aiagent toDevelop;
+    classDef external fill:#f0f0f0,stroke:#333,stroke-dasharray: 5 5;
+    class OpenAI,API1,API2 external;
 ```
-
-
-
-
