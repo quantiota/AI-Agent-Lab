@@ -30,7 +30,7 @@ graph TD
     grafana -->|Queries data from| questdb
     certbot -->|Manages SSL Certificates for| nginx
     
-    aiagent -->|Calls OpenAI API| OpenAI["OpenAI API"]
+    aiagent <-->|Sends requests/Receives responses| OpenAI["OpenAI API"]
 
     
     classDef toDevelop fill:#f9f,stroke:#333,stroke-width:2px;
@@ -54,11 +54,11 @@ graph TD
 The main focus for development is the AI Agent component. This component will:
 
 1. Interact with the AI Agent UI to receive requests and send responses.
-2. Communicate with other services using their respective APIs:
+2. Communicate with internal services using their respective APIs:
    - **QuestDB API**: For querying and writing time-series data.
    - **Grafana API**: For creating and updating dashboards programmatically.
    - **code-server API**: For executing code or scripts remotely.
-3. Connect to external APIs for enhanced functionality:
+3. Interact with external APIs for enhanced functionality:
    - **OpenAI API**: For natural language processing and generation tasks.
    - **Custom API 1**: (Describe the purpose of this API)
    - **Custom API 2**: (Describe the purpose of this API)
@@ -75,21 +75,20 @@ When developing the AI Agent, consider the following:
 
 When integrating with the various APIs, keep the following in mind:
 
-1. **QuestDB API**: 
-   - Use the appropriate client library or HTTP API endpoints for efficient data insertion and querying.
-   - Implement connection pooling and error handling for robust database interactions.
+1. **Internal APIs (QuestDB, Grafana, code-server)**:
+   - Use appropriate client libraries or HTTP API endpoints for efficient communication.
+   - Implement connection pooling and error handling for robust interactions.
+   - Consider implementing caching mechanisms to optimize performance.
 
-2. **Grafana API**:
-   - Utilize the Grafana HTTP API to programmatically create and update dashboards.
-   - Consider implementing a caching mechanism to avoid excessive API calls.
-
-3. **code-server API**:
-   - Use the code-server API to execute code remotely and retrieve results.
-   - Implement proper security measures to prevent unauthorized code execution.
-
-4. **External APIs** (OpenAI, Custom API 1, Custom API 2):
+2. **External APIs (OpenAI, Custom API 1, Custom API 2)**:
    - Implement rate limiting and error handling to manage API usage effectively.
    - Use asynchronous programming techniques for improved performance when making multiple API calls.
+   - Ensure proper security measures for handling API keys and sensitive data.
+
+For all APIs:
+- Log API interactions for debugging and monitoring purposes.
+- Implement retry mechanisms with exponential backoff for handling temporary failures.
+- Use appropriate authentication methods as required by each API.
 
 ## Getting Started
 
