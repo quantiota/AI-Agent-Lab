@@ -67,6 +67,19 @@ When developing the AI Agent, consider the following:
 - Design clear and informative Grafana dashboards for real-time monitoring of the AI Agent's performance and outputs.
 - Utilize code-server for dynamic code execution and potential automated updates to the AI Agent itself.
 - Develop a modular architecture that allows for easy integration of additional APIs or services in the future.
+  
+  
+## AI Agent UI Development
+
+The AI Agent UI serves as the primary interface for users to interact with the AI Agent. When developing the UI, consider the following:
+
+- Design an intuitive and user-friendly interface that allows users to easily input requests and view responses from the AI Agent.
+- Implement real-time updates to display the AI Agent's processing status and any relevant outputs.
+- Ensure the UI is responsive and compatible with various devices and screen sizes.
+- Integrate with the AI Agent backend using appropriate API endpoints for seamless communication.
+- Implement error handling and user feedback mechanisms to provide a smooth user experience.
+
+
 
 ## API Integration Guidelines
 
