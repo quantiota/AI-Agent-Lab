@@ -40,17 +40,5 @@ graph TD
     class aiagent toDevelop;
 ```
 
-## Components
 
-- **Nginx**: Acts as a reverse proxy, routing requests to the appropriate services.
-- **AI Agent UI**: The user interface for interacting with the AI Agent.
-- **AI Agent**: (To be developed) The core component that processes data and interacts with other services.
-- **QuestDB**: A time-series database for storing and querying data.
-- **Grafana**: A platform for monitoring and observability.
-- **VSCode**: An integrated development environment for coding and script execution.
-- **Certbot**: Manages SSL certificates for secure HTTPS connections.
-
-## Development Focus
-
-The main focus for development is the AI Agent component. This component will interact with the AI Agent UI, process data using QuestDB, update visualizations in Grafana, and potentially use VSCode for running scripts or additional development tasks. It may also connect to external services like the OpenAI API.
 
