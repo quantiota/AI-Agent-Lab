@@ -34,7 +34,7 @@ graph TD
     classDef toDevelop fill:#f9f,stroke:#333,stroke-width:2px;
     class aiagent toDevelop;
     classDef external fill:#f0f0f0,stroke:#333,stroke-dasharray: 5 5;
-    class OpenAI,API1,API2 external;
+    class OpenAI external;
 ```
 
 ## Components
