@@ -54,14 +54,3 @@ graph TD
 
 The main focus for development is the AI Agent component. This component will interact with the AI Agent UI, process data using QuestDB, update visualizations in Grafana, and potentially use VSCode for running scripts or additional development tasks. It may also connect to external services like the OpenAI API.
 
-## Getting Started
-
-(Add instructions for setting up and running the project using Docker Compose)
-
-## Contributing
-
-(Add guidelines for contributing to the project)
-
-## License
-
-(Add license information)
