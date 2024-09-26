@@ -68,7 +68,7 @@ When developing the AI Agent, consider the following:
 - Utilize code-server for dynamic code execution and potential automated updates to the AI Agent itself.
 - Develop a modular architecture that allows for easy integration of additional APIs or services in the future.
   
-  
+
 ## AI Agent UI Development
 
 The AI Agent UI serves as the primary interface for users to interact with the AI Agent. When developing the UI, consider the following:
@@ -100,3 +100,31 @@ For all APIs:
 - Implement retry mechanisms with exponential backoff for handling temporary failures.
 - Use appropriate authentication methods as required by each API.
 
+mermaid
+graph LR
+subgraph Docker Services
+codeserver["code-server<br>(Port 8080)"]
+grafana["Grafana<br>(Port 3000)"]
+questdb["QuestDB<br>(Port 9000, 9009, 8812, 9003)"]
+aiagentui["AI Agent UI<br>(Port 5000)"]
+nginx["Nginx<br>(Port 80, 443)"]
+certbot["Certbot"]
+aiagent["AI Agent"]
+end
+User((User)) -->|Interacts with| nginx
+nginx -->|Routes requests| aiagentui
+nginx -->|Routes requests| codeserver
+nginx -->|Routes requests| grafana
+nginx -->|Routes requests| questdb
+aiagentui -->|Sends requests| aiagent
+aiagent -->|Sends responses| aiagentui
+aiagent <-->|Queries/Writes data| questdb
+aiagent <-->|Updates dashboards| grafana
+aiagent <-->|Executes code| codeserver
+grafana -->|Queries data| questdb
+certbot -->|Manages SSL Certificates| nginx
+aiagent <-->|Sends requests/Receives responses| OpenAI["OpenAI API"]
+classDef toDevelop fill:#f9f,stroke:#333,stroke-width:2px;
+class aiagent toDevelop;
+classDef external fill:#f0f0f0,stroke:#333,stroke-dasharray: 5 5;
+class OpenAI external;
