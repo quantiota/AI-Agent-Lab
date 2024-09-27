@@ -5,7 +5,7 @@
 2. **Source**: Refer to the **SOTA Summary** section in `sota-summary.pdf` to build the LangChain diagram.
 3. **Diagram Format**: The diagram should include key components such as:
    - **Input Processing**
-   - **Language Models (LLM)** such as OpenAI or Hugging Face
+   - **Language Models (LLM)** such as OpenAI
    - **Chains** for sequential operations
    - **Agents** for dynamic decision-making
    - **Memory** for conversational context
