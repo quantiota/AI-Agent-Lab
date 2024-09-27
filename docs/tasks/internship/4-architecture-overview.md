@@ -28,6 +28,7 @@ aiagent -->|Sends responses| aiagentui
 aiagent <-->|Queries/Writes data| questdb
 aiagent <-->|Updates dashboards| grafana
 aiagent <-->|Executes code| codeserver
+codeserver -->|Ingests data| questdb
 grafana -->|Queries data| questdb
 certbot -->|Manages SSL Certificates| nginx
 OpenAI["OpenAI API"]
