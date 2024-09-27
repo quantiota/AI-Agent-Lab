@@ -1,52 +1,54 @@
-## Task: Create Optimized Engineering Prompts for Financial Data in the Database
+## Task: Create Optimized Engineering Prompts for Live Financial Data in the Database
 
 ### Instructions:
 1. **File**: Use the `prompt-engineering.md` file to document the optimized prompts you create.
-2. **Objective**: Engineer prompts that query the **financial data stored in the database**, and return the response on the **user interface** along with a **link to the relevant Grafana dashboard** for visualization.
+2. **Objective**: Engineer prompts that query **live financial data streams** stored in the database, return the response on the **user interface**, and include a **link to the relevant Grafana dashboard** for real-time visualization.
 
-### Key Guidelines for Financial Data Prompt Engineering:
+### Key Guidelines for Financial Data Prompt Engineering (Live Data):
 
-- **Database Queries**: All prompts should be designed to query relevant financial data stored in the database, such as Bitcoin price movements, technical indicators, and trading volumes.
-- **User Interface**: The AI Agent will return the response on the user interface, so prompts must be clear and structured to provide the user with concise, actionable insights.
-- **Grafana Dashboard Links**: For each response, include a link to the relevant Grafana dashboard that visualizes the queried data. This will allow users to further explore the data.
-- **Optimization**: Ensure that prompts retrieve precise, relevant data from the database efficiently, and the results are clearly displayed on the user interface.
+- **Live Data Streams**: The prompts should be designed to query live, continuously updated financial data (e.g., Bitcoin price movements, trading volumes, and technical indicators) from the database.
+- **Real-Time Results**: Ensure that the AI Agent provides up-to-date, real-time results on the user interface, reflecting the current state of the market.
+- **Grafana Dashboard Link**: Each response must include a link to a **real-time Grafana dashboard**, where users can further explore the live data stream.
+- **Optimization**: The prompts should focus on retrieving relevant live data efficiently and ensuring the results are clearly displayed with an active link to the Grafana dashboard for live data visualization.
 
-### Example Prompt Structures for Database-Focused Financial Data with Grafana Links:
+### Example Prompt Structures for Live Data Streams with Grafana Links:
 
 1. **Moving Average (MA)**:
-   - Query Bitcoin price data and calculate the moving average with a link to the Grafana dashboard for further visualization.
-   - **Example**: "Query the Bitcoin price data stored in the database and calculate the 50-day and 200-day moving averages. Display the results on the UI and include a link to the Grafana dashboard for moving averages."
+   - Query live Bitcoin price data and calculate the moving average in real time, with a link to the Grafana dashboard for live monitoring.
+   - **Example**: "Query the live Bitcoin price data in the database and calculate the 50-day and 200-day moving averages in real time. Display the results on the UI and include a link to the live Grafana dashboard for moving averages."
 
 2. **Relative Strength Index (RSI)**:
-   - Retrieve RSI data and provide a link to Grafana for visualizing the RSI trend.
-   - **Example**: "Query Bitcoin price data from the last 14 days in the database, calculate the RSI, and display the results on the UI with a link to the Grafana RSI dashboard."
+   - Retrieve real-time RSI data from live streams and link to Grafana for visualization.
+   - **Example**: "Query live Bitcoin price data from the database, calculate the RSI in real time, and display the results with a link to the live Grafana RSI dashboard."
 
 3. **Volatility Analysis**:
-   - Analyze volatility based on price fluctuations and link to Grafana's volatility dashboard.
-   - **Example**: "Retrieve Bitcoin price data for the past month from the database, analyze volatility, and provide a link to the Grafana dashboard showing price volatility."
+   - Analyze live volatility based on real-time price fluctuations, with a Grafana link for continuous monitoring.
+   - **Example**: "Retrieve live Bitcoin price data from the database, analyze volatility in real time, and display the results on the UI with a link to the live Grafana volatility dashboard."
 
 4. **Trading Volume Analysis**:
-   - Query trading volume data and link to a Grafana chart displaying volume trends.
-   - **Example**: "Query Bitcoin trading volume for the past 30 days from the database, display the key trends on the UI, and include a link to the Grafana dashboard for trading volume."
+   - Query live trading volume data and link to a real-time Grafana dashboard for visualization.
+   - **Example**: "Query live Bitcoin trading volume data from the database, display the key trends in real time, and include a link to the live Grafana dashboard for trading volume."
 
 5. **Support and Resistance Levels**:
-   - Identify key support and resistance levels with a link to the Grafana dashboard.
-   - **Example**: "Query Bitcoin price data from the last 6 months stored in the database, calculate support and resistance levels, display the results, and include a link to the Grafana dashboard for further exploration."
+   - Identify live support and resistance levels based on real-time data, with a link to Grafana for ongoing updates.
+   - **Example**: "Query live Bitcoin price data from the database, calculate real-time support and resistance levels, display the results, and include a link to the live Grafana dashboard for support/resistance analysis."
 
 ### Deliverable:
 For each prompt, document the following in the **`prompt-engineering.md`** file:
-- **Prompt**: The financial data-focused prompt querying the database.
-- **Objective**: The goal or task the prompt is trying to achieve (e.g., calculating technical indicators, identifying trends).
-- **Test Results**: Notes on how the AI Agent displayed the response on the UI and included the link to the relevant Grafana dashboard.
+- **Prompt**: The financial data-focused prompt querying live data streams from the database.
+- **Objective**: The goal or task the prompt is trying to achieve (e.g., calculating real-time technical indicators, analyzing live trends).
+- **Test Results**: Notes on how the AI Agent displayed the live data response on the UI and included a working link to the relevant live Grafana dashboard.
 - **Iterations**: List any adjustments made to the prompt and the resulting improvements in the AI’s responses.
 
 ### Example Entry:
 
 ```markdown
 ### Prompt: 
-"Query the Bitcoin price data stored in the database and calculate the 50-day and 200-day moving averages. Display the results on the UI and include a link to the Grafana dashboard for moving averages."
+"Query the live Bitcoin price data in the database and calculate the 50-day and 200-day moving averages in real time. Display the results on the UI and include a link to the live Grafana dashboard for moving averages."
 
-- **Objective**: To retrieve moving average data from the database and link it to the relevant Grafana dashboard for visualization.
-- **Test Results**: The initial response did not display the Grafana link.
-- **Iteration 1**: Adjusted the prompt to explicitly mention including the link to Grafana for moving averages.
-- **Outcome**: The response included the correct moving average data and a working Grafana dashboard link. Optimized.
+- **Objective**: To retrieve moving average data from the live data stream in the database and link it to the relevant live Grafana dashboard for real-time monitoring.
+- **Test Results**: The initial response included outdated data, not reflecting the live stream.
+- **Iteration 1**: Adjusted the prompt to explicitly mention querying live data and updated the link to Grafana's real-time dashboard.
+- **Outcome**: The prompt returned accurate, real-time moving average data with a working Grafana link for live monitoring. Optimized.
+
+
