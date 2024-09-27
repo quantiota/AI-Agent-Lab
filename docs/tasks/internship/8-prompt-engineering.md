@@ -2,51 +2,55 @@
 
 ### Instructions:
 1. **File**: Use the `prompt-engineering.md` file to document the optimized prompts you create.
-2. **Objective**: Engineer prompts that return the most optimized and relevant responses from the **financial data stored in the database**, particularly focusing on cryptocurrency data like **Bitcoin**.
+2. **Objective**: Engineer prompts that return the most optimized and relevant responses from the **financial data stored in the database**, particularly focusing on cryptocurrency data like **Bitcoin** and incorporating **technical indicators** for analysis.
 
 ### Key Guidelines for Financial Data Prompt Engineering:
 
-- **Database Focus**: Ensure that all prompts are designed to query and retrieve relevant financial data directly from the database. The AI should process and analyze the data stored in the database, such as historical price movements, trading volumes, and other key financial metrics.
-- **Clarity**: Make sure the prompts are clear and specify the relevant data in the database that needs to be queried (e.g., time ranges, specific data fields).
-- **Optimization**: Ensure that the prompts are efficient and retrieve precise, actionable financial insights from the database, avoiding redundant or irrelevant data.
-- **Iterative Testing**: After testing the prompts, refine them to improve the accuracy and efficiency of the database queries and results.
+- **Database Focus**: Ensure all prompts are designed to query and retrieve financial data directly from the database, including price movements, trading volumes, and technical indicators.
+- **Technical Indicators**: Integrate common technical indicators such as Moving Averages (MA), Relative Strength Index (RSI), Bollinger Bands, and more to enhance financial analysis.
+- **Optimization**: Ensure that the prompts are efficient and return relevant, actionable financial insights from the database, avoiding unnecessary or redundant data.
+- **Iterative Testing**: Refine and optimize the prompts after testing, focusing on accurate technical analysis using the data retrieved from the database.
 
-### Example Prompt Structures for Database-Focused Financial Data:
+### Example Prompt Structures for Database-Focused Financial Data and Technical Indicators:
 
-1. **Historical Price Query**:
-   - Retrieve historical price data for specific timeframes.
-   - **Example**: "Query the Bitcoin price data stored in the database for the last 7 days and summarize the key price changes."
+1. **Moving Average (MA)**:
+   - Query the database for Bitcoin price data and calculate a moving average for a specified period.
+   - **Example**: "Retrieve Bitcoin price data from the database and calculate the 50-day and 200-day moving averages. Analyze if the price is above or below these moving averages."
 
-2. **Trading Volume Analysis**:
-   - Query trading volume data to provide insights on market activity.
-   - **Example**: "Retrieve Bitcoin trading volume from the database for the past 30 days and analyze the most significant changes in trading activity."
+2. **Relative Strength Index (RSI)**:
+   - Calculate the RSI to assess whether Bitcoin is overbought or oversold.
+   - **Example**: "Query Bitcoin price data from the past 14 days in the database and calculate the RSI. Indicate whether Bitcoin is in an overbought or oversold condition based on the RSI value."
 
-3. **Price Comparison**:
-   - Compare the price of Bitcoin at two specific points in time using the data in the database.
-   - **Example**: "Compare the Bitcoin price stored in the database from January 1st to March 1st and explain the key factors that led to any price changes."
+3. **Bollinger Bands**:
+   - Use Bollinger Bands to analyze Bitcoin price volatility.
+   - **Example**: "Retrieve Bitcoin price data for the past 20 days from the database and calculate Bollinger Bands. Analyze whether the price is trading near the upper or lower band."
 
-4. **Volatility Analysis**:
-   - Query data on price fluctuations to assess volatility over a given period.
-   - **Example**: "Query the Bitcoin price fluctuations for the past month in the database and assess the volatility during this period."
+4. **Exponential Moving Average (EMA)**:
+   - Use EMA to analyze recent price trends.
+   - **Example**: "Query Bitcoin price data for the last 30 days in the database and calculate the 12-day and 26-day exponential moving averages. Analyze whether the short-term trend is bullish or bearish."
 
-5. **Correlation with External Events**:
-   - Analyze the relationship between external events and Bitcoin price data stored in the database.
-   - **Example**: "Retrieve Bitcoin price data for the day after the recent Federal Reserve announcement and analyze how the price was affected."
+5. **MACD (Moving Average Convergence Divergence)**:
+   - Analyze price momentum using MACD.
+   - **Example**: "Retrieve Bitcoin price data for the past 60 days from the database and calculate the MACD. Indicate if there are any bullish or bearish crossovers."
+
+6. **Support and Resistance Levels**:
+   - Identify key support and resistance levels based on historical data.
+   - **Example**: "Query the Bitcoin price data stored in the database for the past 6 months and calculate key support and resistance levels based on previous highs and lows."
 
 ### Deliverable:
 For each prompt, document the following in the **`prompt-engineering.md`** file:
 - **Prompt**: The financial data-focused prompt querying the database.
-- **Objective**: The goal or task the prompt is trying to achieve (e.g., retrieving historical price data, analyzing trading volumes).
-- **Test Results**: Notes on how the AI responded to the prompt, including the accuracy and optimization of the data retrieved from the database.
+- **Objective**: The goal or task the prompt is trying to achieve (e.g., calculating technical indicators, identifying trends).
+- **Test Results**: Notes on how the AI responded to the prompt, including the accuracy and optimization of the technical analysis based on the data retrieved from the database.
 - **Iterations**: List any adjustments made to the prompt and the resulting improvements in the AI’s responses.
 
 ### Example Entry:
 
 ```markdown
 ### Prompt: 
-"Query the Bitcoin price data stored in the database for the last 7 days and summarize the key price changes."
+"Retrieve Bitcoin price data from the database and calculate the 50-day and 200-day moving averages. Analyze if the price is above or below these moving averages."
 
-- **Objective**: To retrieve and summarize Bitcoin price changes from the database for the past 7 days.
-- **Test Results**: The initial response included irrelevant data outside the specified time range.
-- **Iteration 1**: Adjusted prompt to: "Only query the Bitcoin price data from the last 7 days stored in the database."
-- **Outcome**: The response was refined to include only the relevant data. Optimized.
+- **Objective**: To calculate and analyze the 50-day and 200-day moving averages for Bitcoin using data stored in the database.
+- **Test Results**: The initial response did not accurately retrieve the correct moving averages.
+- **Iteration 1**: Adjusted prompt to specify "only the last 50 and 200 days" for better accuracy in the query.
+- **Outcome**: The prompt now returns accurate moving average values. Optimized.
