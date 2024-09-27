@@ -15,7 +15,7 @@
 
 ### Example Structure for Connection Tests:
 
-```markdown
+
 ## Connection Tests
 
 ### Test Case 1: Code-Server (VSCode) Connection Validation
