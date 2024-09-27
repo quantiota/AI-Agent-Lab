@@ -50,7 +50,7 @@ For each prompt, document the following in the **`prompt-engineering.md`** file:
 - **Test Results**: The initial response included outdated data, not reflecting the live stream.
 - **Iteration 1**: Adjusted the prompt to explicitly mention querying live data and updated the link to Grafana's real-time dashboard.
 - **Outcome**: The prompt returned accurate, real-time moving average data with a working Grafana link for live monitoring. Optimized.
-
+```
 
 ### Creating a Library of Optimized Engineering Prompts for Market Data
 
