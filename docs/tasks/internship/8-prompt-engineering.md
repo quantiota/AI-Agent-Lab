@@ -1,12 +1,12 @@
-## Task: Create Optimized Engineering Prompts for Live Financial Data in the Database
+## Task: Create Optimized Engineering Prompts for Live Market Data in the Database
 
 ### Instructions:
 1. **File**: Use the `prompt-engineering.md` file to document the optimized prompts you create.
-2. **Objective**: Engineer prompts that query **live financial data streams** stored in the database, return the response on the **user interface**, and include a **link to the relevant Grafana dashboard** for real-time visualization.
+2. **Objective**: Engineer prompts that query **live market data streams** stored in the database, return the response on the **user interface**, and include a **link to the relevant Grafana dashboard** for real-time visualization.
 
-### Key Guidelines for Financial Data Prompt Engineering (Live Data):
+### Key Guidelines for Market Data Prompt Engineering (Live Data):
 
-- **Live Data Streams**: The prompts should be designed to query live, continuously updated financial data (e.g., Bitcoin price movements, trading volumes, and technical indicators) from the database.
+- **Live Data Streams**: The prompts should be designed to query live, continuously updated market data (e.g., Bitcoin price movements, trading volumes, and technical indicators) from the database.
 - **Real-Time Results**: Ensure that the AI Agent provides up-to-date, real-time results on the user interface, reflecting the current state of the market.
 - **Grafana Dashboard Link**: Each response must include a link to a **real-time Grafana dashboard**, where users can further explore the live data stream.
 - **Optimization**: The prompts should focus on retrieving relevant live data efficiently and ensuring the results are clearly displayed with an active link to the Grafana dashboard for live data visualization.
@@ -35,7 +35,7 @@
 
 ### Deliverable:
 For each prompt, document the following in the **`prompt-engineering.md`** file:
-- **Prompt**: The financial data-focused prompt querying live data streams from the database.
+- **Prompt**: The market data-focused prompt querying live data streams from the database.
 - **Objective**: The goal or task the prompt is trying to achieve (e.g., calculating real-time technical indicators, analyzing live trends).
 - **Test Results**: Notes on how the AI Agent displayed the live data response on the UI and included a working link to the relevant live Grafana dashboard.
 - **Iterations**: List any adjustments made to the prompt and the resulting improvements in the AI’s responses.
@@ -52,3 +52,8 @@ For each prompt, document the following in the **`prompt-engineering.md`** file:
 - **Outcome**: The prompt returned accurate, real-time moving average data with a working Grafana link for live monitoring. Optimized.
 
 
+### Creating a Library of Optimized Engineering Prompts for Market Data
+
+To further enhance the financial capabilities of the AI Agent Lab, we can develop a **library of optimized engineering prompts** specifically designed for **market data**. This library will serve as a repository of well-tested prompts that allow the AI Agent to retrieve and analyze financial metrics, such as price movements, technical indicators, and market trends, from the database. By standardizing and organizing these prompts, the library will ensure consistency in querying financial data, allowing the AI Agent to generate highly accurate and actionable insights.
+
+This collection of prompts can be continuously expanded and refined to cover a wide range of market data tasks, such as calculating technical indicators (e.g., Moving Averages, RSI, Bollinger Bands) or generating risk assessments, market forecasts, and trend analyses. Additionally, the prompts will be optimized to query live data streams and link seamlessly with the Grafana dashboards, ensuring real-time data monitoring and analysis.
