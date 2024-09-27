@@ -2,55 +2,51 @@
 
 ### Instructions:
 1. **File**: Use the `prompt-engineering.md` file to document the optimized prompts you create.
-2. **Objective**: Engineer prompts that return the most optimized and relevant responses from the **financial data stored in the database**, particularly focusing on cryptocurrency data like **Bitcoin** and incorporating **technical indicators** for analysis.
+2. **Objective**: Engineer prompts that query the **financial data stored in the database**, and return the response on the **user interface** along with a **link to the relevant Grafana dashboard** for visualization.
 
 ### Key Guidelines for Financial Data Prompt Engineering:
 
-- **Database Focus**: Ensure all prompts are designed to query and retrieve financial data directly from the database, including price movements, trading volumes, and technical indicators.
-- **Technical Indicators**: Integrate common technical indicators such as Moving Averages (MA), Relative Strength Index (RSI), Bollinger Bands, and more to enhance financial analysis.
-- **Optimization**: Ensure that the prompts are efficient and return relevant, actionable financial insights from the database, avoiding unnecessary or redundant data.
-- **Iterative Testing**: Refine and optimize the prompts after testing, focusing on accurate technical analysis using the data retrieved from the database.
+- **Database Queries**: All prompts should be designed to query relevant financial data stored in the database, such as Bitcoin price movements, technical indicators, and trading volumes.
+- **User Interface**: The AI Agent will return the response on the user interface, so prompts must be clear and structured to provide the user with concise, actionable insights.
+- **Grafana Dashboard Links**: For each response, include a link to the relevant Grafana dashboard that visualizes the queried data. This will allow users to further explore the data.
+- **Optimization**: Ensure that prompts retrieve precise, relevant data from the database efficiently, and the results are clearly displayed on the user interface.
 
-### Example Prompt Structures for Database-Focused Financial Data and Technical Indicators:
+### Example Prompt Structures for Database-Focused Financial Data with Grafana Links:
 
 1. **Moving Average (MA)**:
-   - Query the database for Bitcoin price data and calculate a moving average for a specified period.
-   - **Example**: "Retrieve Bitcoin price data from the database and calculate the 50-day and 200-day moving averages. Analyze if the price is above or below these moving averages."
+   - Query Bitcoin price data and calculate the moving average with a link to the Grafana dashboard for further visualization.
+   - **Example**: "Query the Bitcoin price data stored in the database and calculate the 50-day and 200-day moving averages. Display the results on the UI and include a link to the Grafana dashboard for moving averages."
 
 2. **Relative Strength Index (RSI)**:
-   - Calculate the RSI to assess whether Bitcoin is overbought or oversold.
-   - **Example**: "Query Bitcoin price data from the past 14 days in the database and calculate the RSI. Indicate whether Bitcoin is in an overbought or oversold condition based on the RSI value."
+   - Retrieve RSI data and provide a link to Grafana for visualizing the RSI trend.
+   - **Example**: "Query Bitcoin price data from the last 14 days in the database, calculate the RSI, and display the results on the UI with a link to the Grafana RSI dashboard."
 
-3. **Bollinger Bands**:
-   - Use Bollinger Bands to analyze Bitcoin price volatility.
-   - **Example**: "Retrieve Bitcoin price data for the past 20 days from the database and calculate Bollinger Bands. Analyze whether the price is trading near the upper or lower band."
+3. **Volatility Analysis**:
+   - Analyze volatility based on price fluctuations and link to Grafana's volatility dashboard.
+   - **Example**: "Retrieve Bitcoin price data for the past month from the database, analyze volatility, and provide a link to the Grafana dashboard showing price volatility."
 
-4. **Exponential Moving Average (EMA)**:
-   - Use EMA to analyze recent price trends.
-   - **Example**: "Query Bitcoin price data for the last 30 days in the database and calculate the 12-day and 26-day exponential moving averages. Analyze whether the short-term trend is bullish or bearish."
+4. **Trading Volume Analysis**:
+   - Query trading volume data and link to a Grafana chart displaying volume trends.
+   - **Example**: "Query Bitcoin trading volume for the past 30 days from the database, display the key trends on the UI, and include a link to the Grafana dashboard for trading volume."
 
-5. **MACD (Moving Average Convergence Divergence)**:
-   - Analyze price momentum using MACD.
-   - **Example**: "Retrieve Bitcoin price data for the past 60 days from the database and calculate the MACD. Indicate if there are any bullish or bearish crossovers."
-
-6. **Support and Resistance Levels**:
-   - Identify key support and resistance levels based on historical data.
-   - **Example**: "Query the Bitcoin price data stored in the database for the past 6 months and calculate key support and resistance levels based on previous highs and lows."
+5. **Support and Resistance Levels**:
+   - Identify key support and resistance levels with a link to the Grafana dashboard.
+   - **Example**: "Query Bitcoin price data from the last 6 months stored in the database, calculate support and resistance levels, display the results, and include a link to the Grafana dashboard for further exploration."
 
 ### Deliverable:
 For each prompt, document the following in the **`prompt-engineering.md`** file:
 - **Prompt**: The financial data-focused prompt querying the database.
 - **Objective**: The goal or task the prompt is trying to achieve (e.g., calculating technical indicators, identifying trends).
-- **Test Results**: Notes on how the AI responded to the prompt, including the accuracy and optimization of the technical analysis based on the data retrieved from the database.
+- **Test Results**: Notes on how the AI Agent displayed the response on the UI and included the link to the relevant Grafana dashboard.
 - **Iterations**: List any adjustments made to the prompt and the resulting improvements in the AI’s responses.
 
 ### Example Entry:
 
 ```markdown
 ### Prompt: 
-"Retrieve Bitcoin price data from the database and calculate the 50-day and 200-day moving averages. Analyze if the price is above or below these moving averages."
+"Query the Bitcoin price data stored in the database and calculate the 50-day and 200-day moving averages. Display the results on the UI and include a link to the Grafana dashboard for moving averages."
 
-- **Objective**: To calculate and analyze the 50-day and 200-day moving averages for Bitcoin using data stored in the database.
-- **Test Results**: The initial response did not accurately retrieve the correct moving averages.
-- **Iteration 1**: Adjusted prompt to specify "only the last 50 and 200 days" for better accuracy in the query.
-- **Outcome**: The prompt now returns accurate moving average values. Optimized.
+- **Objective**: To retrieve moving average data from the database and link it to the relevant Grafana dashboard for visualization.
+- **Test Results**: The initial response did not display the Grafana link.
+- **Iteration 1**: Adjusted the prompt to explicitly mention including the link to Grafana for moving averages.
+- **Outcome**: The response included the correct moving average data and a working Grafana dashboard link. Optimized.
