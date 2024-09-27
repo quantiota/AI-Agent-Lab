@@ -54,3 +54,34 @@
 - **Expected Outcome**: The OpenAI API returns a valid AI-generated response.
 - **Actual Outcome**: OpenAI API responded successfully.
 - **Status**: Passed
+
+
+
+## User Interface Tests
+
+### Test Case 1: AI Agent UI Response
+- **Description**: Validate that the AI Agent UI correctly returns responses from the AI Agent.
+- **Steps**:
+  1. User sends a query through the UI.
+  2. The AI Agent processes the query and returns the result.
+- **Expected Outcome**: AI Agent UI returns the correct response based on the user's query.
+- **Actual Outcome**: The response was returned as expected.
+- **Status**: Passed
+
+### Test Case 2: Error Handling in the UI
+- **Description**: Test how the AI Agent UI handles invalid or unexpected inputs.
+- **Steps**:
+  1. User sends an invalid query.
+  2. Check if the UI displays an appropriate error message.
+- **Expected Outcome**: The UI should display a meaningful error message for invalid inputs.
+- **Actual Outcome**: The error message was displayed as expected.
+- **Status**: Passed
+
+### Test Case 3: UI Performance Under Load
+- **Description**: Ensure that the AI Agent UI handles high user traffic efficiently.
+- **Steps**:
+  1. Simulate multiple users sending queries simultaneously.
+  2. Monitor the response times and check for slowdowns or errors.
+- **Expected Outcome**: The UI should handle high traffic without significant delays or failures.
+- **Actual Outcome**: The UI maintained performance under load.
+- **Status**: Passed
