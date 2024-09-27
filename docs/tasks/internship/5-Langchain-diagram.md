@@ -64,5 +64,3 @@ Agents -->|Interacts with| Tools
 Tools -->|Queries data| Database["Database<br>(e.g., QuestDB)"]
 Tools -->|Interacts with| ExternalAPI["External API<br>(e.g., OpenAI API)"]
 LangChain -->|Returns results| User
-classDef langchain fill:#f0e68c,stroke:#333,stroke-width:2px;
-class InputProcessing,LLM,Chains,Agents,Memory,Tools langchain;
