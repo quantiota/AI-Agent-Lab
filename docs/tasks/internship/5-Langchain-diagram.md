@@ -2,7 +2,7 @@
 
 ### Instructions:
 1. **File**: Use the `langchain-diagram.md` file as the destination for the diagram.
-2. **Source**: Refer to the **SOTA Summary** section in `sota-summary.pdf` to build the LangChain diagram.
+2. **Source**: Refer to the **SOTA** folder in `sota-summary.pdf` to build the LangChain diagram.
 3. **Diagram Format**: The diagram should include key components such as:
    - **Input Processing**
    - **Language Models (LLM)** such as OpenAI
