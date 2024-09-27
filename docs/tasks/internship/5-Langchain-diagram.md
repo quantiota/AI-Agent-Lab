@@ -40,7 +40,7 @@ graph TD
     Tools -->|Interacts with| ExternalAPI["External API<br>(e.g., OpenAI API)"]
 
     LangChain -->|Returns results| User
-
+```
 
 
 ```mermaid
