@@ -47,3 +47,12 @@ Here’s a list of the main tools and technologies you’ll be working with:
 - **Grafana**: For data visualization (integrated via database links).
 - **GPT-3.5**: Language model for querying and interfacing with the AI Agent Lab.
 
+
+
+### Final Note
+
+We’re excited to see your contributions to the **AI Agent Lab** project! Your role in utilizing SQL-based technical analysis will be instrumental in making the lab more flexible and robust. Should you have any questions or need further clarification, feel free to reach out to the team.
+
+
+
+
