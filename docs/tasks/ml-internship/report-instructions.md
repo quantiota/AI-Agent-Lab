@@ -23,7 +23,7 @@ Your internship report should follow the structure outlined below:
    Provide a detailed breakdown of each task assigned, including:
    - Task description.
    - Approach and methods used.
-   - Tools and technologies applied (e.g., LangChain, Grafana, QuestDB, TA-Lib).
+   - Tools and technologies applied (e.g., TensorFlow, PyTorch, Scikit-learn).
    - Outcomes or deliverables (with relevant links, screenshots, or code snippets if applicable).
 
 ### 5. **Challenges Faced**
@@ -44,7 +44,7 @@ Your internship report should follow the structure outlined below:
 
 - **Deadline:** The report should be submitted within **2 weeks** of the internship end date.
 - **Format:** Submit the report in Markdown (`.md`) format. 
-- **Location:** Save the report as `report.md` in the `ai-internship` folder of the project repository.
+- **Location:** Save the report as `report.md` in the `ml-internship` folder of the project repository.
 - **Review:** The report will be reviewed by the internship supervisor, and feedback will be provided if necessary.
 
 ---
