@@ -1,6 +1,11 @@
 # Delivered Python Files and SQL Templates
 
-This document tracks the Python scripts and SQL templates delivered as part of the internship. Each script and SQL file should meet the following criteria:
+This document tracks the delivery of **several sets of Python scripts and SQL templates** as part of the internship. Each set consists of:
+- A Python script for live data stream processing.
+- A Python script for machine learning analysis.
+- SQL templates for technical indicators used in the data processing.
+
+Each script and SQL file should meet the following criteria:
 - Efficiently handle live data stream processing.
 - Apply machine learning models to analyze processed data.
 - Use SQL-based queries for technical indicators from the database.
@@ -8,12 +13,13 @@ This document tracks the Python scripts and SQL templates delivered as part of t
 
 ## File Delivery Checklist
 
-### Python Scripts
+### Python Script Sets
 
-| Script Name                | Description                                                     | Status    | Date Delivered | Comments/Notes                   |
-|----------------------------|-----------------------------------------------------------------|-----------|----------------|----------------------------------|
-| `data-stream-processing.py` | Ingests live market data streams, applies SQL-based technical indicators for analysis. | In Progress | N/A            | Handles live data ingestion and SQL query execution for technical analysis. |
-| `ml-processing.py`          | Applies machine learning models to analyze processed data from live streams (e.g., regression, clustering, time-series analysis). | In Progress | N/A            | To implement regression and clustering models on SQL query results. |
+| Set Name                   | Script Name                | Description                                                     | Status    | Date Delivered | Comments/Notes                   |
+|----------------------------|----------------------------|-----------------------------------------------------------------|-----------|----------------|----------------------------------|
+| Set 1: Data Stream and ML   | `data-stream-processing.py` | Ingests live market data streams, applies SQL-based technical indicators for analysis. | In Progress | N/A            | Handles live data ingestion and SQL query execution for technical analysis. |
+|                            | `ml-processing.py`          | Applies machine learning models to analyze processed data from live streams (e.g., regression, clustering, time-series analysis). | In Progress | N/A            | To implement regression and clustering models on SQL query results. |
+| Set 2: Additional Models    | (To be defined)             | Further sets will include more specialized scripts for different machine learning models and data processing techniques. | Not Started | N/A            | Future sets will focus on specific models and data sources. |
 
 ### SQL Templates for Technical Indicators
 
@@ -27,11 +33,13 @@ This document tracks the Python scripts and SQL templates delivered as part of t
 ## Submission Guidelines
 
 1. Ensure all Python scripts and SQL templates are committed to the designated repository.
-2. Each script and SQL template should have proper comments and documentation for readability and maintainability.
+2. Each set of scripts and SQL templates should have proper comments and documentation for readability and maintainability.
 3. Scripts must be tested with real-time data and SQL queries to ensure they meet performance benchmarks.
 4. Update this document with the status of each script and SQL template, and include notes where necessary.
 
 ## Notes
 
-- Python scripts should integrate smoothly with the existing AI Agent Lab infrastructure and handle SQL queries for technical indicators.
+- Python script sets should integrate smoothly with the existing AI Agent Lab infrastructure and handle SQL queries for technical indicators.
 - SQL templates should be reusable and easily modifiable for additional technical indicators.
+
+
