@@ -26,7 +26,7 @@ Agents["Agents<br>(Dynamic decision-making)"]
 Memory["Memory<br>(Stores conversation state)"]
 Tools["Tools<br>(External services, data retrievers)"]
 end
-LangChain -->|Processes input| InputProcessing
+
 InputProcessing -->|Sends request| LLM
 LLM -->|Returns response| InputProcessing
 InputProcessing -->|Feeds into| Chains
