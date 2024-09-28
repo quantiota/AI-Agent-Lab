@@ -1,6 +1,6 @@
 # Internship Report Instructions
 
-This document provides guidelines for preparing the final internship report for the **Quant-AI-Agent-Lab** internship. Please ensure all required sections are completed thoroughly and accurately before submitting.
+This document provides guidelines for preparing the final internship report for the **AI-Agent-Lab** internship. Please ensure all required sections are completed thoroughly and accurately before submitting.
 
 ## Report Structure
 
