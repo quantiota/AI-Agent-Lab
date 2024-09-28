@@ -23,7 +23,7 @@ Your internship report should follow the structure outlined below:
    Provide a detailed breakdown of each task assigned, including:
    - Task description.
    - Approach and methods used.
-   - Tools and technologies applied (e.g., LangChain, Grafana, QuestDB, TA-Lib).
+   - Tools and technologies applied (e.g., LangChain, Grafana, QuestDB).
    - Outcomes or deliverables (with relevant links, screenshots, or code snippets if applicable).
 
 ### 5. **Challenges Faced**
