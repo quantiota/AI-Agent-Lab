@@ -29,7 +29,7 @@ Each script and SQL file should meet the following criteria:
 | `ema.sql`      | SQL query for calculating the Exponential Moving Average (EMA). | Not Started | N/A            | Will use it in data stream processing. |
 | `rsi.sql`      | SQL query for calculating the Relative Strength Index (RSI). | Not Started | N/A            | To be integrated for trend analysis. |
 | `macd.sql`     | SQL query for calculating the Moving Average Convergence Divergence (MACD). | Not Started | N/A            | Will be used in data stream and machine learning tasks. |
-
+| `macd.sql`     | SQL query for calculating the Moving Average Convergence Divergence (MACD). | Not Started | N/A            | Will be used in data stream and machine learning tasks. |
 ## Submission Guidelines
 
 1. Ensure all Python scripts and SQL templates are committed to the designated repository.
