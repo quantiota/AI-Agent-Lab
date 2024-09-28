@@ -7,9 +7,7 @@ The `ta-library` contains a collection of SQL queries to compute technical indic
 
 ### How to Use
 
-1. **Run Queries**: Execute the SQL queries from this library on your QuestDB instance to calculate technical indicators.
-
-2. **Visualize in Grafana**: Once you have QuestDB connected to Grafana, you can visualize these indicators in a custom dashboard by running the queries as data sources.
+**Visualize in Grafana**: Once you have QuestDB connected to Grafana, you can visualize these indicators in a custom dashboard by running the queries as data sources.
 
 
 
