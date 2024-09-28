@@ -36,7 +36,7 @@ Agents -->|Interacts with| Tools
 Tools -->|Queries data| Database["Database<br>(e.g., QuestDB)"]
 Tools -->|Interacts with| ExternalAPI["External API<br>(e.g., OpenAI API)"]
 LangChain -->|Returns results| User
-
+```
 
 ```mermaid
 graph TD
