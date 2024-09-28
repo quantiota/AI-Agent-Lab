@@ -19,7 +19,7 @@
 graph TD
 User["User<br>(Provides input)"] -->|Interacts with| LangChain
 subgraph LangChain
-InputProcessing["Input Processing<br>(Validates)"]
+InputProcessing["Input Processing<br>(Validates and preprocesses input)"]
 LLM["Language Model<br>(e.g., OpenAI)"]
 Chains["Chains<br>(Sequence of operations)"]
 Agents["Agents<br>(Dynamic decision-making)"]
