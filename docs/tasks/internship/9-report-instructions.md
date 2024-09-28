@@ -16,7 +16,7 @@ Your internship report should follow the structure outlined below:
    Provide a brief overview of your internship experience, summarizing the main tasks completed, key achievements, and any significant insights gained.
 
 ### 3. **Introduction**
-   - Brief introduction to the **Quant-AI-Agent-Lab** project.
+   - Brief introduction to the **AI-Agent-Lab** project.
    - Your role and objectives during the internship.
 
 ### 4. **Tasks and Deliverables**
