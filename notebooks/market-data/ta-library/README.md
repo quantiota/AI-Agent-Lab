@@ -24,8 +24,8 @@ SELECT timestamp time,
        avg(price)
        OVER (PARTITION BY symbol
              ORDER BY timestamp
-             RANGE 1 HOUR PRECEDING ) moving_average_1h,
+             RANGE 1 MINUTE PRECEDING ) moving_average_1m,
 FROM trades
 WHERE $__timeFilter(timestamp)
-AND   symbol = $Pairs
+AND   symbol = '$Pairs'
 ```
