@@ -47,22 +47,6 @@ Here’s a list of the main tools and technologies you’ll be working with:
 - **Grafana**: For data visualization (integrated via database links).
 - **GPT-3.5**: Language model for querying and interfacing with the AI Agent Lab.
 
-### Why We Need These Processing Files
-
-The **AI Agent Lab** requires a set of predefined processing templates to ensure that data science users, students, professionals, and researchers have ready-to-use tools for handling live data streams. These files are essential for several reasons:
-
-1. **Ease of Use**:  
-   By providing pre-built templates, we remove the complexity of setting up live data stream processors from scratch. This allows users to focus on their core tasks—whether it's data analysis, research, or development—without needing to spend time on configuration.
-
-2. **Accessibility for All Skill Levels**:  
-   These processing files are designed to be easily accessible for a wide range of users, from beginners in data science to experienced professionals. By having ready-to-use templates, students and researchers can dive directly into experimentation and analysis without needing to build the system's infrastructure.
-
-3. **Accelerating Research and Development**:  
-   For professionals and researchers, time is critical. Ready-to-use processing files provide a jump-start to their projects, allowing them to focus on data insights and model optimization rather than building custom data ingestion pipelines.
-
-4. **Standardized Workflow**:  
-   The templates establish a standardized workflow across different user groups, ensuring consistency in how data is processed and analyzed. This reduces errors, ensures best practices are followed, and makes collaboration easier across various teams and disciplines.
-
 
 ### Why We Need These Processing Files
 
