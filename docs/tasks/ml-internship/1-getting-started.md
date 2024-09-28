@@ -6,11 +6,11 @@ We are excited to have you as a part of the team working on our cutting-edge AI 
 
 ### Project Overview
 
-The **AI Agent Lab** is a platform for processing live data streams, particularly focused on financial market data, with the integration of machine learning (ML) models. Your primary task will be to create sets of Jupyter notebooks that process live market data and analyze it using machine learning algorithms, while utilizing SQL queries for technical analysis from the database.
+The **AI Agent Lab** is a platform for processing live data streams, particularly focused on financial market data, with the integration of machine learning (ML) models. Your primary task will be to create sets of Jupyter notebooks that process live market data and analyze it using machine learning algorithms, while utilizing SQL queries from the database for technical analysis indicators.
 
 ### Internship Role and Responsibilities
 
-You will focus on developing notebooks that process and analyze live data streams, replacing the TA-Lib Python package with SQL query-based indicators for technical analysis. The notebooks should provide users with a streamlined workflow for real-time analysis of market data. Your specific responsibilities include:
+You will focus on developing notebooks that process and analyze live data streams, utilizing SQL query-based indicators for technical analysis. The notebooks should provide users with a streamlined workflow for real-time analysis of market data. Your specific responsibilities include:
 
 1. **Data Stream Processing Notebooks:**
    - Create notebooks that handle live data streams (e.g., stock prices, cryptocurrency).
@@ -40,7 +40,7 @@ You will focus on developing notebooks that process and analyze live data stream
 Here’s a list of the main tools and technologies you’ll be working with:
 
 - **Python**: Primary language for notebook development.
-- **SQL Queries**: For technical indicators and querying data from the database (replacing TA-Lib).
+- **SQL Queries**: For technical indicators and querying data from the database.
 - **TensorFlow/PyTorch/Scikit-learn**: Machine learning libraries for model implementation.
 - **Pandas/NumPy**: Data manipulation and analysis.
 - **Docker**: The AI Agent Lab runs in a Dockerized environment, so you will need to ensure your notebooks are compatible with our Docker setup.
@@ -60,7 +60,7 @@ Here’s a list of the main tools and technologies you’ll be working with:
 
 3. **Understand SQL-based Technical Indicators:**
    - Review the `ta-library` folder containing SQL queries for common technical indicators such as moving averages, RSI, MACD, etc.
-   - These SQL queries will replace the TA-Lib package for performing technical analysis in your notebooks.
+   - These SQL queries will be used to perform technical analysis in your notebooks.
 
 4. **Start with Data Stream Processing:**
    - Develop your first notebook focused on live data stream ingestion (market data).
@@ -91,5 +91,5 @@ Here’s a list of the main tools and technologies you’ll be working with:
 
 ### Final Note
 
-We’re excited to see your contributions to the **AI Agent Lab** project! Your role in replacing TA-Lib with SQL-based technical analysis will be instrumental in making the lab more flexible and robust. Should you have any questions or need further clarification, feel free to reach out to the team.
+We’re excited to see your contributions to the **AI Agent Lab** project! Your role in utilizing SQL-based technical analysis will be instrumental in making the lab more flexible and robust. Should you have any questions or need further clarification, feel free to reach out to the team.
 
