@@ -7,7 +7,7 @@ This document provides guidelines for preparing the final internship report for 
 Your internship report should follow the structure outlined below:
 
 ### 1. **Cover Page**
-   - Title: Internship Report for Quant-AI-Agent-Lab
+   - Title: Internship Report for AI-Agent-Lab
    - Your full name
    - Internship duration (start date - end date)
    - Date of submission
