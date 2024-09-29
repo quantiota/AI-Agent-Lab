@@ -7,6 +7,12 @@
 The following diagram illustrates the architecture of the AI Agent lab:
 
 ```mermaid
+---
+config:
+  look: classic
+  theme: base
+  layout: dagre
+---
 graph TD
 subgraph Docker Services
 codeserver["code-server<br>(Port 8080)"]
