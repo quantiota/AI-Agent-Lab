@@ -22,6 +22,7 @@ Key concepts to learn in QuestDB:
 
 Resources for learning:
 - [QuestDB Documentation](https://questdb.io/docs/)
+- [QuestDB Tutorials](https://questdb.io/blog/tags/tutorial/)
 - Pre-built SQL templates in the AI Agent Lab for technical analysis queries.
 
 ---
