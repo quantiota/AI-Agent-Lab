@@ -16,6 +16,13 @@
 
 
 ```mermaid
+
+---
+config:
+  look: classic
+  theme: base
+  layout: dagre
+---
 graph TD
 User["User<br>(Provides input)"] -->|Interacts with| LangChain
 subgraph LangChain
