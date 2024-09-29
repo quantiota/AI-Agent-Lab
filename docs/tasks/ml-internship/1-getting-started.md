@@ -1,74 +1,53 @@
-# Internship Getting Started Guide
+### Learning QuestDB and Grafana
 
-## Welcome to the AI Agent Lab!
+As part of your internship, it's crucial to develop a solid understanding of two key tools: **QuestDB** and **Grafana**. These tools form the backbone of our data management and visualization processes in the **AI Agent Lab**. This section will guide you through the basics of both and how you will use them in your work.
 
-We are excited to have you as a part of the team working on our cutting-edge AI Agent Lab project focused on live data stream processing for market data. This guide will help you get started and provide an overview of your responsibilities, tools, and the workflow you’ll follow during the internship.
+#### QuestDB: High-Performance SQL Database
 
-### Project Overview
+**QuestDB** is a fast and efficient time-series database designed for high-speed data ingestion and querying. In the AI Agent Lab, QuestDB is used to store live financial market data streams and provide fast, real-time access to this data through SQL queries.
 
-The **AI Agent Lab** is a platform for processing live data streams, particularly focused on financial market data, with the integration of machine learning (ML) models. Your primary task will be to create Python scripts that process live market data and analyze it using machine learning algorithms, while utilizing SQL queries from the database for technical analysis indicators.
+Key concepts to learn in QuestDB:
 
-### Internship Role and Responsibilities
+1. **Time-Series Data**:
+   - Learn how to handle time-series data efficiently. QuestDB is optimized for this type of data, which includes live market data such as stock prices, cryptocurrency values, and other financial indicators.
+   
+2. **SQL Queries for Technical Analysis**:
+   - You will use SQL to query the database for technical analysis indicators. These include queries for moving averages, relative strength index (RSI), MACD, and more. You will be provided with a set of query templates to get started, which you can customize and extend.
+   
+3. **Data Ingestion**:
+   - Understand how data is ingested into QuestDB. This involves learning about how live data streams (such as market prices) are continuously added to the database and how you can query this data in real-time.
 
-You will focus on developing Python scripts that process and analyze live data streams, utilizing SQL query-based indicators for technical analysis. The scripts should provide users with a streamlined workflow for real-time analysis of market data. Your specific responsibilities include:
+4. **Performance Optimization**:
+   - Learn how to optimize your SQL queries to ensure they return data quickly, even as the volume of data in QuestDB grows.
 
-1. **Data Stream Processing Scripts:**
-   - Create Python scripts that handle live data streams (e.g., stock prices, cryptocurrency).
-   - Use SQL queries from the database to perform technical analysis on this data (e.g., moving averages, RSI, MACD).
-   - Ensure the data stream processing is optimized for real-time performance.
+Resources for learning:
+- [QuestDB Documentation](https://questdb.io/docs/)
+- Pre-built SQL templates in the AI Agent Lab for technical analysis queries.
 
-2. **Machine Learning Scripts:**
-   - Develop Python scripts that use the processed data for tasks such as:
-     - Predicting market trends (regression models)
-     - Pattern detection (clustering, classification)
-     - Time-series forecasting for financial markets
-   - Integrate models with data returned from SQL queries for a smooth workflow.
+---
 
-3. **Optimization for GPT-3.5:**
-   - Ensure the scripts are designed to interact effectively with the GPT-3.5 models, allowing users to query the data and ML models in real-time.
-   - Create simple, clear workflows that new users can easily follow.
+#### Grafana: Real-Time Data Visualization
 
-4. **Exploring Additional Data Sources:**
-   - Investigate potential integration with other live data sources such as Twitter, financial news, or additional APIs to provide more context for your analysis.
+**Grafana** is a powerful open-source platform for monitoring and visualizing data from various sources, including databases like QuestDB. In the **AI Agent Lab**, Grafana is used to visualize live data streams and the results of your technical analysis and machine learning models.
 
-5. **Collaboration and Documentation:**
-   - Collaborate with the team to ensure seamless integration of the scripts into the AI Agent Lab.
-   - Document your process and solutions, providing clear instructions for users on how to use your scripts and query the database.
+Key concepts to learn in Grafana:
 
-### Tools and Technologies
+1. **Dashboards and Panels**:
+   - Learn how to create and configure Grafana dashboards. These dashboards display live data from QuestDB, providing a visual representation of the technical analysis results. For example, you can visualize moving averages or price trends on a real-time graph.
+   
+2. **Data Sources**:
+   - Understand how Grafana connects to QuestDB as a data source. You will work with predefined dashboards that pull live market data from QuestDB, but you’ll also be expected to create your own panels for specific analyses.
+   
+3. **Alerts and Notifications**:
+   - Set up alerts in Grafana that trigger based on certain conditions, such as a sudden change in stock prices or a pattern detected by a machine learning model.
+   
+4. **Performance Monitoring**:
+   - Use Grafana to monitor the overall system performance of the AI Agent Lab, including data ingestion rates, query response times, and system health metrics.
 
-Here’s a list of the main tools and technologies you’ll be working with:
+Resources for learning:
+- [Grafana Documentation](https://grafana.com/docs/)
+- Pre-configured Grafana dashboards in the AI Agent Lab for reference.
 
-- **Python**: Primary language for script development.
-- **SQL Queries**: For technical indicators and querying data from the database.
-- **TensorFlow/PyTorch/Scikit-learn**: Machine learning libraries for model implementation.
-- **Pandas/NumPy**: Data manipulation and analysis.
-- **Docker**: The AI Agent Lab runs in a Dockerized environment, so you will need to ensure your scripts are compatible with our Docker setup.
-- **Grafana**: For data visualization (integrated via database links).
-- **GPT-3.5**: Language model for querying and interfacing with the AI Agent Lab.
+---
 
-
-### Why We Need These Processing Files
-
-The **AI Agent Lab** requires a set of predefined processing templates to ensure that data science users, students, professionals, researchers, and even the AI Agent itself have ready-to-use tools for handling live data streams. These files are essential for several reasons:
-
-1. **Ease of Use**:  
-   By providing pre-built templates, we remove the complexity of setting up live data stream processors from scratch. This allows users, including the AI Agent, to focus on core tasks—whether it's data analysis, research, or development—without needing to spend time on configuration.
-
-2. **Accessibility for All Skill Levels**:  
-   These processing files are designed to be easily accessible for a wide range of users, from beginners in data science to experienced professionals. By having ready-to-use templates, students, researchers, and the AI Agent can dive directly into experimentation and analysis without needing to build the system's infrastructure.
-
-3. **Accelerating Research and Development**:  
-   For professionals, researchers, and the AI Agent, time is critical. Ready-to-use processing files provide a jump-start to their projects, allowing them to focus on data insights and model optimization rather than building custom data ingestion pipelines.
-
-4. **Standardized Workflow**:  
-   The templates establish a standardized workflow across different user groups, ensuring consistency in how data is processed and analyzed. This reduces errors, ensures best practices are followed, and makes collaboration easier across various teams and disciplines.
-
-
-### Final Note
-
-WWe’re excited to see your contributions to the **AI Agent Lab** project! Your role in utilizing SQL-based technical analysis and integrating Python data stream processing and machine learning tasks will be instrumental in making the lab more flexible and robust. Should you have any questions or need further clarification, feel free to reach out to the team.
-
-
-
-
+Both QuestDB and Grafana are integral to your work in processing and visualizing financial data streams. Spend time getting comfortable with these tools as they will greatly enhance your ability to develop effective data processing and analysis scripts.
