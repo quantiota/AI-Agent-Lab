@@ -16,7 +16,6 @@
 
 
 ```mermaid
-
 ---
 config:
   look: classic
@@ -42,5 +41,7 @@ Agents -->|Uses state| Memory
 Agents -->|Interacts with| Tools
 Tools -->|Queries data| Database["Database<br>(e.g., QuestDB)"]
 Tools -->|Interacts with| ExternalAPI["External API<br>(e.g., OpenAI API)"]
+Tools -->|Processes Data Stream| DataStream["Data Stream<br>(Real-time data processing)"]
+Tools -->|Handles Machine Learning| ML["Machine Learning<br>(Python-based processing)"]
 LangChain -->|Returns results| User
 ```
