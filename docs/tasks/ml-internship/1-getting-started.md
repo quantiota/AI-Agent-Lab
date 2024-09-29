@@ -67,7 +67,7 @@ The **AI Agent Lab** requires a set of predefined processing templates to ensure
 
 ### Final Note
 
-We’re excited to see your contributions to the **AI Agent Lab** project! Your role in utilizing SQL-based technical analysis will be instrumental in making the lab more flexible and robust. Should you have any questions or need further clarification, feel free to reach out to the team.
+WWe’re excited to see your contributions to the **AI Agent Lab** project! Your role in utilizing SQL-based technical analysis and integrating Python data stream processing and machine learning tasks will be instrumental in making the lab more flexible and robust. Should you have any questions or need further clarification, feel free to reach out to the team.
 
 
 
