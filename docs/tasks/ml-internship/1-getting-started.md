@@ -1,8 +1,8 @@
-## Learning QuestDB and Grafana
+# Learning QuestDB and Grafana
 
 As part of your internship, it's crucial to develop a solid understanding of two key tools: **QuestDB** and **Grafana**. These tools form the backbone of our data management and visualization processes in the **AI Agent Lab**. This section will guide you through the basics of both and how you will use them in your work.
 
-### QuestDB: High-Performance SQL Database
+## QuestDB: High-Performance SQL Database
 
 **QuestDB** is a fast and efficient time-series database designed for high-speed data ingestion and querying. In the AI Agent Lab, QuestDB is used to store live financial market data streams and provide fast, real-time access to this data through SQL queries.
 
@@ -27,7 +27,7 @@ Resources for learning:
 
 ---
 
-### Grafana: Real-Time Data Visualization
+## Grafana: Real-Time Data Visualization
 
 **Grafana** is a powerful open-source platform for monitoring and visualizing data from various sources, including databases like QuestDB. In the **AI Agent Lab**, Grafana is used to visualize live data streams and the results of your technical analysis and machine learning models.
 
@@ -54,7 +54,7 @@ Resources for learning:
 Both QuestDB and Grafana are integral to your work in processing and visualizing financial data streams. Spend time getting comfortable with these tools as they will greatly enhance your ability to develop effective data processing and analysis scripts.
 
 
-### Estimated Duration
+## Estimated Duration
 
 This task, including the learning of cutting-edge technologies that may not yet be fully understood by the intern, is expected to take approximately 1 month to complete.
 
