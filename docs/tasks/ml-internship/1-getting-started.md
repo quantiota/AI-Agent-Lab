@@ -51,3 +51,10 @@ Resources for learning:
 ---
 
 Both QuestDB and Grafana are integral to your work in processing and visualizing financial data streams. Spend time getting comfortable with these tools as they will greatly enhance your ability to develop effective data processing and analysis scripts.
+
+
+### Estimated Duration
+
+This task, including the learning of cutting-edge technologies that may not yet be fully understood by the intern, is expected to take approximately 1 month to complete.
+
+If you have any questions or need guidance on which areas to focus on, don't hesitate to ask. Good luck, and welcome aboard!
