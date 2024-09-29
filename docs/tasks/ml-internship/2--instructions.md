@@ -1,4 +1,4 @@
-### **Internship Instructions: Forking the Project and Using AI Agent Lab**
+# **Internship Instructions: Forking the Project and Using AI Agent Lab**
 
 1. **Fork the Project**  
    - Begin by forking the project repository to your own GitHub account.
