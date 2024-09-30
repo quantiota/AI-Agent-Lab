@@ -3,7 +3,7 @@
 **Description**:  
 This internship is a continuation of our Machine Learning internship and focuses on promoting the AI Agent Lab to academic institutions, particularly universities. The AI Agent Lab is a cutting-edge platform designed to facilitate experimentation with AI-driven applications, live data streams, and advanced machine learning capabilities. Your role will be to demonstrate its potential as a teaching and research tool for students and educators.
 
-**Duration**: 2-3 months  
+**Duration**: 1 year  
 **Location**: Remote  
 **Compensation**: Based on performance and milestones achieved
 
