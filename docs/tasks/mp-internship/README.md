@@ -13,7 +13,7 @@ This internship is a continuation of our Machine Learning internship and focuses
 - Develop partnerships with professors and research departments for pilot programs.
 - Assist in creating tutorials and educational resources that highlight the platform’s capabilities in AI, machine learning, and data stream processing.
 - Participate in workshops and webinars for university students and staff to demonstrate the AI Agent Lab in action.
-- **Create and manage free Udemy courses** to introduce the AI Agent Lab to a broader audience, especially focusing on educational content for universities.
+- Create and manage free Udemy courses to introduce the AI Agent Lab to a broader audience, especially focusing on educational content for universities.
 - Gather feedback from academic partners to improve the AI Agent Lab’s educational offerings.
 
 ## Required Skills
