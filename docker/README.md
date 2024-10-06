@@ -123,7 +123,6 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 Since the '**.env**' file already exists in the docker folder, please update it to include or modify the necessary variables as needed for your setup:
 
 ```
-
 # VSCode
 PASSWORD=yourpassword
 
@@ -133,6 +132,12 @@ GRAFANA_QUESTDB_PASSWORD=quest
 # QuestDB
 QDB_PG_USER=admin
 QDB_PG_PASSWORD=quest
+QDB_PG_NAME=qdb
+QDB_PG_HOST=docker_host_ip_address
+QDB_PG_PORT=8812
+
+# Chatbot
+OPENAI_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ```
 and to define your domain name in the '**nginx.env**' file:
