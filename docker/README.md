@@ -136,17 +136,14 @@ QDB_PG_NAME=qdb
 QDB_PG_HOST=docker_host_ip_address
 QDB_PG_PORT=8812
 
+# VSCode Grafana QuestDB AI Agent UI
+DOMAIN=yourdomain
+
 # Chatbot
 OPENAI_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 ```
-and to define your domain name in the '**nginx.env**' file:
 
-```
-     # nginx/nginx.env
-    
-      DOMAIN=yourdomain
-```
 
 Remember to replace the placeholders with your actual domain, passwords, and usernames. 
 
