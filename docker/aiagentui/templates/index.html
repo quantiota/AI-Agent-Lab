@@ -1,94 +1,315 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Check API Key</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f0f0f0;
-            color: #333;
-        }
-        .container {
-            width: 70%;
-            background-color: #fff;
-            padding: 20px;
-            margin: auto; /* Center the container */
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            border-radius: 8px;
-            margin-top: 20px; /* Add some space at the top */
-        }
-        h1, h2, h3 {
-            color: #005a9c;
-        }
-        p, ul {
-            line-height: 1.6;
-        }
-        strong {
-            color: green;
-        }
-        .code-snippet {
-            background-color: #f9f9f9;
-            border-left: 3px solid #005a9c;
-            padding: 10px;
-            margin-top: 20px;
-            font-family: monospace;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Agent Lab Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    :root {
+      --primary-color: #4d4d4d;
+      --background-color: #1e1e1e;
+      --panel-background: #252526;
+      --text-color: #d4d4d4;
+      --border-color: #3c3c3c;
+      --hover-color: #3a3a3a;
+      --input-background: #333333;
+    }
+
+    body, html {
+      height: 100%;
+      background-color: var(--background-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 0;
+    }
+
+    .navbar {
+      background-color: var(--panel-background);
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .navbar-brand {
+      color: var(--primary-color) !important;
+    }
+
+    .card {
+      background-color: var(--panel-background);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+      border-radius: 8px;
+    }
+
+    .service-btn {
+      margin-top: 10px;
+      background-color: var(--primary-color);
+      color: #fff;
+      border: none;
+    }
+
+    .service-btn:hover {
+      background-color: var(--hover-color);
+    }
+
+    .container-full {
+      height: 100vh;
+      display: flex;
+    }
+
+    .left-panel {
+      background-color: var(--panel-background);
+      padding: 20px;
+      overflow-y: auto;
+      border-right: 1px solid var(--border-color);
+      height: 100%;
+    }
+
+    .logo {
+      height: 40px;
+      width: auto;
+      margin-bottom: 15px; /* Space between logo and text */
+    }
+
+    .card-body {
+      display: block; /* Stack elements vertically */
+      text-align: left;
+    }
+
+    .left-panel h4 {
+      margin-bottom: 20px;
+      text-align: left;
+    }
+
+    /* Right panel (chatbot) */
+    .right-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: var(--panel-background);
+      padding: 20px;
+      height: 100%;
+    }
+
+    .right-panel-header {
+      background-color: var(--primary-color);
+      color: white;
+      text-align: center;
+      padding: 15px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    .right-panel-body {
+      flex-grow: 1;
+      overflow-y: auto;
+      padding: 15px;
+      background-color: var(--background-color);
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+    }
+
+    .right-panel-footer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px;
+    }
+
+    .right-panel-footer input {
+      flex-grow: 1;
+      padding: 10px;
+      border-radius: 20px;
+      background-color: var(--input-background);
+      border: 1px solid var(--border-color);
+      color: var(--text-color);
+    }
+
+    .right-panel-footer button {
+      background-color: var(--primary-color);
+      color: white;
+      padding: 10px 15px;
+      border-radius: 50%;
+      border: none;
+    }
+
+    .right-panel-footer button:hover {
+      background-color: var(--hover-color);
+    }
+
+    .file-upload-btn {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 15px;
+      cursor: pointer;
+    }
+
+    .file-upload-btn:hover {
+      background-color: var(--hover-color);
+    }
+
+    .support-card .card-body {
+      display: block; /* Ensure support card items stack properly */
+      text-align: left;
+    }
+
+      /* Footer Styles */
+      footer {
+      background-color: var(--panel-background);
+      color: var(--text-color);
+      text-align: center;
+      padding: 15px;
+      border-top: 1px solid var(--border-color);
+      font-size: 14px;
+    }
+
+    footer a {
+      color: var(--primary-color);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      color: var(--hover-color);
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="https://github.com/quantiota/AI-Agent-Lab" target="_blank" rel="noopener noreferrer" >AI Agent Lab</a>
+    </div>
+  </nav>
 
-<div class="container">
-    <h1>OpenAI API Key Status</h1>
-    <p>Is the OpenAI API Key set? <strong>{{ api_key_exists }}</strong></p>
+  <div class="container-full">
+    <div class="col-md-4 left-panel">
+      <h4>Service Links</h4>
+
+      <div class="card mb-4">
+        <div class="card-body">
+          <img src="/static/images/logo-coder.svg" alt="VSCode Logo" class="logo">
+          <h5 class="card-title">Code server</h5>
+          <p class="card-text">Access your VSCode environment.</p>
+          <a href="http://localhost:8080" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">Open VSCode</a>
+        </div>
+      </div>
+
+      <div class="card mb-4">
+        <div class="card-body">
+          <img src="/static/images/logo-questdb.svg" alt="QuestDB Logo" class="logo">
+          <h5 class="card-title">QuestDB</h5>
+          <p class="card-text">Access your QuestDB for time-series data.</p>
+          <a href="http://localhost:9000" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">Open QuestDB</a>
+        </div>
+      </div>
+
+
+      <div class="card mb-4">
+        <div class="card-body">
+          <img src="/static/images/logo-grafana.svg" alt="Grafana Logo" class="logo">
+            <h5 class="card-title">Grafana</h5>
+            <p class="card-text">Visualize data and monitor system metrics.</p>
+            <a href="http://localhost:3000" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">Open Grafana</a>
+          </div>
+        </div>
+
+
+      <div class="card mb-4">
+        <div class="card-body">
+          <img src="/static/images/logo-prometheus.svg" alt="Prometheus Logo" class="logo">
+            <h5 class="card-title">Prometheus</h5>
+            <p class="card-text">Monitor CPU and memory in real-time.</p>
+            <a href="http://localhost:3000/d/rYdddlPWj/node-exporter-full" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">View System Metrics</a>
+          </div>
+        </div>
+  
+    
+<!-- Service controle 
+
+    <div class="card mb-4 support-card">
+      <div class="card-body">
+        <h5 class="card-title">Service Control</h5>
+        <p class="card-text">Restart Services.</p>
+        <a href="http://localhost:5000/restart/docker-vscode-1"  target="_blank" rel="noopener noreferrer" class="btn file-upload-btn w-100">VSCode</a>
+        <a href="http://localhost:5000/restart/docker-questdb-1" target="_blank" rel="noopener noreferrer" class="btn file-upload-btn w-100 mt-2">QuestDB</a>
+        <a href="http://localhost:5000/restart/docker-grafana-1" target="_blank" rel="noopener noreferrer" class="btn file-upload-btn w-100 mt-2">Grafana</a>
+     
+      </div>
     </div>
 
+    -->
 
-<div class="container">
-    <h1>AI Agent UI Overview</h1>
-    <p>We describe the Flask-based service as a framework we are using for building the AI Agent UI. Flask provides a lightweight and flexible framework for web development in Python, making it a popular choice for creating web applications and APIs. When building an AI Agent UI, Flask can serve as the backend framework that handles HTTP requests, and delivers responses to the user, possibly through a chat interface or a web-based UI.</p>
+      <!-- Additional service links here -->
 
-    <p>The AI Agent UI serves as the graphical interface for users to interact with the underlying AI Agent, facilitating a user-friendly experience for engaging with the AI Agent's functionalities. Here's a detailed description of how the AI Agent UI interacts with the AI Agent:</p>
-    
-    <h2>Purpose and Functionality:</h2>
-    <ul>
-        <li><strong>User Interface</strong>: The AI Agent UI presents a chatbot interface, providing users with a conversational experience. Users can input queries, commands, or requests using natural language, and the UI displays responses from the AI Agent.</li>
-        <li><strong>Interaction Flow</strong>: When a user inputs a query or command into the UI, the UI captures this input and sends it to the AI Agent. The AI Agent processes the request, which may involve complex computations, data retrieval from databases (like QuestDB), or interactions with other services (like Grafana for visualizations or VS Code for code-related queries).</li>
-        <li><strong>Response Handling</strong>: Once the AI Agent generates a response, it sends this back to the AI Agent UI, which then displays the information to the user. The response can be in various forms, including text, links, images, or even interactive elements, depending on the AI Agent's capabilities and the nature of the request.</li>
-    </ul>
-    
-    <h2>Technical Interaction:</h2>
-    <ul>
-        <li><strong>API Communication</strong>: The AI Agent UI communicates with the AI Agent through a defined API, using HTTP requests or WebSocket connections. This API specifies endpoints for sending user requests and receiving responses, ensuring structured and efficient communication between the UI and the AI Agent.</li>
-        <li><strong>Data Format</strong>: Communication between the AI Agent UI and the AI Agent typically involves structured data formats, such as JSON, allowing for the exchange of complex requests and responses. For instance, a user's query is sent as a JSON object, and the AI Agent's response is returned in a JSON format that the UI can parse and display.</li>
-        <li><strong>Session Management</strong>: The AI Agent UI handles session management, maintaining context between user interactions. This is crucial for providing a coherent conversational experience, where the AI Agent can reference previous queries or responses within a session to provide contextually relevant responses.</li>
-    </ul>
-    
-    <h2>Security and Performance:</h2>
-    <ul>
-        <li><strong>Authentication and Authorization</strong>: The AI Agent UI implements security measures to authenticate users and ensure that only authorized users can interact with the AI Agent. This might involve login mechanisms, tokens, or OAuth.</li>
-        <li><strong>Performance Optimization</strong>: The UI is designed to handle asynchronous communication with the AI Agent, ensuring that the user interface remains responsive even when the AI Agent is processing complex requests. This may involve displaying loading indicators or incremental updates to keep the user informed of the status.</li>
-    </ul>
-    
-    <h2>User Experience:</h2>
-    <ul>
-        <li><strong>Intuitive Design</strong>: The UI is designed to be intuitive and easy to use, with clear prompts and feedback to guide the user through interacting with the AI Agent.</li>
-        <li><strong>Error Handling</strong>: It gracefully handles errors or invalid inputs, providing users with helpful feedback to correct their queries or understand what went wrong.</li>
-    </ul>
-    
-    <p>In summary, the AI Agent UI acts as the bridge between the user and the AI Agent's sophisticated capabilities, ensuring that users can access and benefit from these capabilities through a straightforward and engaging conversational interface.
+      <div class="card mb-4 support-card">
+        <div class="card-body">
+          <h5 class="card-title">Support</h5>
+          <p class="card-text">Get help and documentation for your AI Agent Lab.</p>
+          <a href="https://github.com/quantiota/AI-Agent-Lab" target="_blank" rel="noopener noreferrer" class="btn file-upload-btn w-100">Help Docs</a>
+          <a href="https://github.com/quantiota/AI-Agent-Lab/issues" target="_blank" rel="noopener noreferrer" class="btn file-upload-btn w-100 mt-2">Contact Support</a>
+        </div>
+      </div>
+  </div>
 
+   
+      <!-- Right Side: Chatbot Panel -->
+      <div class="col-md-8 right-panel">
+        <div class="right-panel-header">AI Agent UI</div>
+  
+        <!-- Chatbot Body -->
+        <div id="chatbot-body" class="right-panel-body">
+          <!-- Chat messages will appear here -->
+        </div>
+  
+        <!-- Chatbot Footer -->
+        <div class="right-panel-footer">
+          <input type="text" id="chatbot-input" placeholder="Type a message..." class="form-control flex-grow-1">
+          <button onclick="sendMessage()" class="btn">&#9658;</button>
+          <label for="file-upload" class="btn file-upload-btn">Upload File</label>
+          <input type="file" id="file-upload" class="d-none">
+        </div>
+      </div>
     </div>
 
-
-
-
-
-
-
-
-</body>
-</html>
-
+        <!-- Footer -->
+        <footer>
+          <p>&copy; 2024 Quantiota. All rights reserved. | <a href="https://github.com/quantiota/AI-Agent-Lab">GitHub</a> | <a href="https://github.com/quantiota/AI-Agent-Lab/issues">Support</a></p>
+        </footer>
+      </div>
+  
+    <script>
+      function sendMessage() {
+        const message = document.getElementById('chatbot-input').value;
+        if (message.trim() !== '') {
+          appendMessage('user', message);
+          document.getElementById('chatbot-input').value = '';
+          setTimeout(() => appendMessage('bot', 'Processing...'), 500);
+        }
+      }
+  
+      function appendMessage(sender, text) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('chat-message', `${sender}-message`);
+        const messageText = document.createElement('span');
+        messageText.classList.add('message-text');
+        messageText.textContent = text;
+        messageDiv.appendChild(messageText);
+        document.getElementById('chatbot-body').appendChild(messageDiv);
+        document.getElementById('chatbot-body').scrollTop = document.getElementById('chatbot-body').scrollHeight;
+      }
+  
+      document.getElementById('file-upload').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+          appendMessage('user', `File uploaded: ${file.name}`);
+          setTimeout(() => {
+            appendMessage('bot', `File ${file.name} received and processed.`);
+          }, 1000);
+        }
+      });
+    </script>
+  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+  </html>
