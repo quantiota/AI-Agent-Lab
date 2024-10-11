@@ -66,7 +66,7 @@ services:
       - "80:80"
       - "443:443"
     env_file:
-      - ./nginx/nginx.env
+      - .env
     command: /bin/bash -c "envsubst '$$DOMAIN' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && exec nginx -g 'daemon off;'"
     depends_on:
       - vscode

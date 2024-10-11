@@ -1,6 +1,13 @@
 from flask import Flask, render_template, abort
 import os
 
+
+domain = os.environ.get('DOMAIN', 'Domain not set')
+
+# Print the domain to the console to verify it's loaded
+# print(f"DOMAIN environment variable: {domain}")
+
+
 app = Flask(__name__)
 
 # Define the valid container names
@@ -13,7 +20,7 @@ valid_containers = {
 @app.route('/')
 def hello():
     api_key_exists = "Yes" if os.environ.get('OPENAI_API_KEY') else "No"
-    return render_template('index.html', api_key_exists=api_key_exists)
+    return render_template('index.html', api_key_exists=api_key_exists, domain=domain)
 
 @app.route('/restart/<container_name>', methods=['GET'])
 def restart_container(container_name):
@@ -28,4 +35,5 @@ def restart_container(container_name):
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+
 
