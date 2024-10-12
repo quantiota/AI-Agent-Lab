@@ -53,6 +53,12 @@
       background-color: var(--hover-color);
     }
 
+    .logo {
+   height: 40px;
+   width: auto;
+   margin-bottom: 15px;
+}
+
     .container-full {
       height: 100vh;
       display: flex;
@@ -64,12 +70,6 @@
       overflow-y: auto;
       border-right: 1px solid var(--border-color);
       height: 100%;
-    }
-
-    .logo {
-      height: 40px;
-      width: auto;
-      margin-bottom: 15px; /* Space between logo and text */
     }
 
     .card-body {
@@ -156,6 +156,30 @@
       text-align: left;
     }
 
+    /* OpenAI API Key Form Enhancements */
+    #api-key-input {
+      background-color: var(--input-background);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    #api-key-input::placeholder {
+      color: var(--text-color);
+      opacity: 0.7;
+    }
+
+    #openai-api-form button {
+      background-color: #00a67f; /* OpenAI's green color */
+      border: none;
+    }
+
+    #openai-api-form button:hover {
+      background-color: #007d5a; /* Darker green on hover */
+    }
+
+
       /* Footer Styles */
       footer {
       background-color: var(--panel-background);
@@ -225,22 +249,42 @@
             <a href="https://grafana.{{ domain }}/d/rYdddlPWj/node-exporter-full" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">View System Metrics</a>
           </div>
         </div>
+
+
+
+
+    <!-- OpenAI API Key Input Block -->
+    <div class="card mb-4">
+      <div class="card-body">
+        <img src="/static/images/logo-openai.svg" alt="OpenAI Logo" class="logo">
+        <h5 class="card-title">OpenAI API Key</h5>
+        <p class="card-text">Enter your OpenAI API key to access the AI features.</p>
+        <form id="openai-api-form">
+          <div class="mb-3">
+            <input type="text" id="api-key-input" class="form-control" placeholder="Enter your OpenAI API key">
+          </div>
+          <button type="submit" class="btn service-btn w-100">Submit API Key</button>
+        </form>
+      </div>
+    </div>
+
+
   
     
-<!-- Service controle  
+<!-- Service controle      - -->
 
     <div class="card mb-4 support-card">
       <div class="card-body">
         <h5 class="card-title">Service Control</h5>
         <p class="card-text">Restart Services.</p>
-        <a href="https://aiagentui.{{ domain }}/restart/docker-vscode-1"  target="_blank" rel="noopener noreferrer" class="btn file-upload-btn w-100">VSCode</a>
-        <a href="https://aiagentui.{{ domain }}/restart/docker-questdb-1" target="_blank" rel="noopener noreferrer" class="btn file-upload-btn w-100 mt-2">QuestDB</a>
-        <a href="https://aiagentui.{{ domain }}/restart/docker-grafana-1" target="_blank" rel="noopener noreferrer" class="btn file-upload-btn w-100 mt-2">Grafana</a>
+        <a href="https://aiagentui.{{ domain }}/restart/docker-vscode-1"  target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">VSCode</a>
+        <a href="https://aiagentui.{{ domain }}/restart/docker-questdb-1" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100 mt-2">QuestDB</a>
+        <a href="https://aiagentui.{{ domain }}/restart/docker-grafana-1" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100 mt-2">Grafana</a>
      
       </div>
     </div>
 
-    - -->
+
 
       <!-- Additional service links here -->
 
@@ -280,38 +324,49 @@
         </footer>
       </div>
   
-    <script>
-      function sendMessage() {
-        const message = document.getElementById('chatbot-input').value;
-        if (message.trim() !== '') {
-          appendMessage('user', message);
-          document.getElementById('chatbot-input').value = '';
-          setTimeout(() => appendMessage('bot', 'Processing...'), 500);
+      <script>
+        document.getElementById('openai-api-form').addEventListener('submit', function(event) {
+          event.preventDefault();
+          const apiKey = document.getElementById('api-key-input').value;
+          if (apiKey.trim() !== '') {
+            alert('API Key Submitted: ' + apiKey);
+            // TODO: Add logic to handle the OpenAI API key submission
+          } else {
+            alert('Please enter your API key.');
+          }
+        });
+    
+        function sendMessage() {
+          const message = document.getElementById('chatbot-input').value;
+          if (message.trim() !== '') {
+            appendMessage('user', message);
+            document.getElementById('chatbot-input').value = '';
+            setTimeout(() => appendMessage('bot', 'Processing...'), 500);
+          }
         }
-      }
-  
-      function appendMessage(sender, text) {
-        const messageDiv = document.createElement('div');
-        messageDiv.classList.add('chat-message', `${sender}-message`);
-        const messageText = document.createElement('span');
-        messageText.classList.add('message-text');
-        messageText.textContent = text;
-        messageDiv.appendChild(messageText);
-        document.getElementById('chatbot-body').appendChild(messageDiv);
-        document.getElementById('chatbot-body').scrollTop = document.getElementById('chatbot-body').scrollHeight;
-      }
-  
-      document.getElementById('file-upload').addEventListener('change', function(event) {
-        const file = event.target.files[0];
-        if (file) {
-          appendMessage('user', `File uploaded: ${file.name}`);
-          setTimeout(() => {
-            appendMessage('bot', `File ${file.name} received and processed.`);
-          }, 1000);
+    
+        function appendMessage(sender, text) {
+          const messageDiv = document.createElement('div');
+          messageDiv.classList.add('chat-message', `${sender}-message`);
+          const messageText = document.createElement('span');
+          messageText.classList.add('message-text');
+          messageText.textContent = text;
+          messageDiv.appendChild(messageText);
+          document.getElementById('chatbot-body').appendChild(messageDiv);
+          document.getElementById('chatbot-body').scrollTop = document.getElementById('chatbot-body').scrollHeight;
         }
-      });
-    </script>
-  
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
-  </html>
+    
+        document.getElementById('file-upload').addEventListener('change', function(event) {
+          const file = event.target.files[0];
+          if (file) {
+            appendMessage('user', `File uploaded: ${file.name}`);
+            setTimeout(() => {
+              appendMessage('bot', `File ${file.name} received and processed.`);
+            }, 1000);
+          }
+        });
+      </script>
+    
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </body>
+    </html>
