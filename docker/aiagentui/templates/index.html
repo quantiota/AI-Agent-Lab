@@ -212,6 +212,14 @@
       background-color: #007d5a; /* Darker green on hover */
     }
 
+    .predefined-question {
+  background-color: var(--input-background); /* Or another color */
+  color: var(--text-color);
+  padding: 10px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  text-align: left;
+}
 
       /* Footer Styles */
       footer {
@@ -242,7 +250,7 @@
   </nav>
 
   <div class="container-full">
-    <div class="col-md-4 left-panel">
+    <div class="col-md-3 left-panel">
       <h4>Service Links</h4>
 
       <div class="card mb-4">
@@ -308,6 +316,7 @@
 
     <div class="card mb-4 support-card">
       <div class="card-body">
+        <img src="/static/images/logo-docker.svg" alt="Docker Logo" class="logo">
         <h5 class="card-title">Service Control</h5>
         <p class="card-text">Restart Services.</p>
         <a href="https://aiagentui.{{ domain }}/restart/docker-vscode-1"  target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">VSCode</a>
@@ -323,6 +332,7 @@
 
       <div class="card mb-4 support-card">
         <div class="card-body">
+          <img src="/static/images/logo-github.svg" alt="Github Logo" class="logo">
           <h5 class="card-title">Support</h5>
           <p class="card-text">Get help and documentation for your AI Agent Lab.</p>
           <a href="https://github.com/quantiota/AI-Agent-Lab" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">Help Docs</a>
@@ -333,16 +343,31 @@
 
    
       <!-- Right Side: Chatbot Panel -->
+
+
+  
+
+
       <div class="col-md-8 right-panel">
         <div class="right-panel-header">AI Agent UI</div>
-  
+
+
+        
+
+
+          <!-- Predefined Question Block -->
+ 
         <!-- Chatbot Body -->
         <div id="chatbot-body" class="right-panel-body">
           <!-- Chat messages will appear here -->
         </div>
   
+
+
         <!-- Chatbot Footer -->
         <div class="right-panel-footer">
+
+
           <input type="text" id="chatbot-input" placeholder="Type a message..." class="form-control flex-grow-1">
           <button onclick="sendMessage()" class="btn">&#9658;</button>
           <label for="file-upload" class="btn file-upload-btn">Upload File</label>
