@@ -78,11 +78,7 @@ Start working with your notebooks and data, using the pre-installed tools and li
 
 
 
-### AI Agent UI
 
- ![AI Agent UI](./ai-agent-ui.png)
- 
-:pencil: High resolution diagram [AI Agent UI](https://raw.githubusercontent.com/quantiota/AI-Agent-Lab/master/ai-agent-ui.png)
 
 ## References
 
