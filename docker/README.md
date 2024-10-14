@@ -215,6 +215,25 @@ datasources:
 
 Make sure your Prometheus server is configured to scrape metrics from the Node Exporter.
 
+```
+#  /etc/prometheus/prometheus.yml
+
+global:
+  scrape_interval: 10s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'node_exporter_metrics'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['docker_host_ip_address:9100']
+
+      ```
+
 ### 6 Launching the Docker Stack and Starting Services
 
 After completing these steps, you can bring up the Docker stack using the following command:
