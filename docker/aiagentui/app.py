@@ -3,12 +3,15 @@ import os
 import json
 import openai
 import requests
+import docker
 
 # Load domain.ltd from environment variable
 domain = os.environ.get('DOMAIN', 'Domain not set')
 
 
 app = Flask(__name__)
+
+client = docker.DockerClient(base_url='unix://var/run/docker.sock')
 
 # Define the valid container names
 valid_containers = {
@@ -80,7 +83,9 @@ def restart_container(container_name):
     # Check if the container name is valid
     if container_name in valid_containers:
         # Restart the specified container
-        os.system(f'docker restart {container_name}')
+        container = client.containers.get(container_name)
+        container.restart()
+        #os.system(f'docker restart {container_name}')
         return f'{valid_containers[container_name]} ({container_name}) restarted successfully!', 200
     else:
         # If the container name is not valid, return a 404 error
@@ -88,6 +93,11 @@ def restart_container(container_name):
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+
+
+
+
+
 
 
 

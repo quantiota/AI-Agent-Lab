@@ -48,7 +48,8 @@ services:
     ports:
       - "5000:5000"  # Map port 5000 of the container to port 5000 on the host
     volumes:
-      - ./aiagentui:/aiagentui  # Optional: Mount the application directory for live reloading in development   
+      - ./aiagentui:/aiagentui  # Optional: Mount the application directory for live reloading in development  
+      - /var/run/docker.sock:/var/run/docker.sock   
     env_file:
       - .env
 
