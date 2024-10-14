@@ -81,6 +81,12 @@
       border-radius: 8px;
     }
 
+
+    .card-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
     .service-btn {
       margin-top: 10px;
       background-color: var(--primary-color);
@@ -275,9 +281,12 @@
       color: var(--hover-color);
       text-decoration: underline;
     }
+
+    
   </style>
 </head>
 <body>
+  <!--
   <nav class="navbar navbar-expand-lg navbar-light">
     <div class="container-fluid">
       <a class="navbar-brand" href="https://github.com/quantiota/AI-Agent-Lab" target="_blank" rel="noopener noreferrer">
@@ -285,9 +294,19 @@
       </a>
     </div>
   </nav>
+-->
 
   <div class="container-full">
     <div class="col-md-4 left-panel">
+      
+    
+          <div class="card mb-4">
+            <div class="card-body">
+              <img src="/static/images/logo-aiagentlab.svg" alt="VSCode Logo" class="logo">
+              <h5 class="card-title">AI Agent Lab</h5>
+              <p class="card-text">Experimenting with AI-Driven Applications in Real-Time, Powered by Data Streams and ML Processors.</p>
+                 </div>
+          </div>
       <h4>Service Links</h4>
 
       <div class="card mb-4">
@@ -314,7 +333,7 @@
           <img src="/static/images/logo-grafana.svg" alt="Grafana Logo" class="logo">
             <h5 class="card-title">Grafana</h5>
             <p class="card-text">Visualize data and monitor system metrics.</p>
-            <a href="https://grafana.{{ domain }}" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">Open Grafana</a>
+            <a href="https://grafana.{{ domain }}/dashboards" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">Open Grafana</a>
           </div>
         </div>
 
@@ -387,9 +406,8 @@
           <a href="https://github.com/quantiota/AI-Agent-Lab/issues" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100 mt-2">Contact Support</a>
         </div>
       </div>
-  </div>
+    </div>
 
-   
       <!-- Right Side: Chatbot Panel -->
 
 
