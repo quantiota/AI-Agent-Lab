@@ -232,7 +232,7 @@ scrape_configs:
     static_configs:
       - targets: ['docker_host_ip_address:9100']
 
-      ```
+```
 
 ### 6 Launching the Docker Stack and Starting Services
 
