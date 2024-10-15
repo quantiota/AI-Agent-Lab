@@ -28,6 +28,31 @@
       padding: 0;
     }
 
+
+    .logout-btn {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      font-size: 14px;
+    }
+
+    .logout-btn:hover {
+      background-color: var(--hover-color);
+    }
+
+    .navbar {
+      background-color: var(--panel-background);
+      padding: 10px;
+    }
+
+    .navbar-brand {
+      color: white;
+    }
+
+
+
 /* General styling to unify logo alignment */
 .container-fluid, .left-panel {
   padding-left: 0px; /* Ensures same left padding for both the navbar and the left panel */
@@ -43,35 +68,15 @@
 
 
 
-/* Navbar-specific adjustments */
-.navbar-brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: white;
-  font-size: 30px;
-  padding-left: 0; /* Remove any extra padding from navbar-brand */
-}
 
-.navbar {
-  padding-left: 20px; /* Align with left panel content */
-}
+
 
 /* Service card-specific adjustments */
 .left-panel .card-body {
   padding-left: 0; /* Ensure no extra padding inside the card-body */
 }
 
-/* Adjustments for responsiveness */
-@media (max-width: 768px) {
-  .navbar-brand {
-    font-size: 24px;
-  }
 
-  .navbar-brand img, .logo {
-    height: 30px;
-  }
-}
 
 .grafana-iframe {
     border: none;
@@ -97,7 +102,6 @@
     .row {
       margin-bottom: 20px;
     }
-
 
 
     .card {
@@ -315,59 +319,70 @@
 </head>
 <body>
   
-   
+     <!-- Navigation bar with Logout button -->
+  <nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">AI Agent Lab Dashboard</a>
+
+      <!-- Align the logout button to the right -->
+      <div class="ms-auto">
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </div>
+    </div>
+  </nav>
+
   <div class="container-fluid">
 
+
+
+    <!-- First Row with AI Agent Lab Card -->
     <div class="row">
-      <!-- Card 0 -->
-      <div class="card mb-4">
-        <div class="card-body">
-          <img src="/static/images/logo-aiagentlab.svg" alt="VSCode Logo" class="logo">
-          <h5 class="card-title">AI Agent Lab</h5>
-          <p class="card-text">Experimenting with AI-Driven Applications in Real-Time, Powered by Data Streams and ML Processors.</p>
-             </div>
-      </div>
 
-
-
-
-    <!-- Row for Grafana Dashboards -->
-    <div class="row">
-      <!-- Card 1 -->
-      <div class="col-lg-4 col-md-6">
+      <div class="col-12">
         <div class="card">
           <div class="card-body">
+            <img src="/static/images/logo-aiagentlab.svg" alt="AI Agent Lab Logo" class="logo">
            
-            <iframe src="https://grafana.{{ domain }}/d-solo/rYdddlPWj/node-exporter-full?orgId=1&refresh=1m&theme=dark&panelId=77" width="400" height="250" frameborder="0"></iframe>
-  
-          </div>
+            <h5 class="card-title">AI Agent Lab</h5>
+            <p class="card-text">Experimenting with AI-Driven Applications in Real-Time, Powered by Data Streams and ML Processors.</p>
+             </div>
         </div>
       </div>
 
-      <!-- Card 2 -->
-      <div class="col-lg-4 col-md-6">
-        <div class="card">
-          <div class="card-body">
-            
-            <iframe src="https://grafana.{{ domain }}/d-solo/rYdddlPWj/node-exporter-full?orgId=1&refresh=1m&theme=dark&panelId=78" width="400" height="250" frameborder="0"></iframe>
- 
-          </div>
-        </div>
-      </div>
+  </div>
 
-      <!-- Card 3 -->
-      <div class="col-lg-4 col-md-6">
-        <div class="card">
-          <div class="card-body">
-            
-            <iframe src="https://grafana.{{ domain }}/d-solo/rYdddlPWj/node-exporter-full?orgId=1&refresh=1m&theme=dark&panelId=74" width="400" height="250" frameborder="0"></iframe>
   
-          </div>
-        </div>
+
+ <!-- Row for Grafana Dashboards -->
+ <div class="row">
+  <!-- Card 1 -->
+  <div class="col-lg-4 col-md-6 mb-0">
+    <div class="card">
+      <div class="card-body">
+        <iframe src="https://grafana.{{ domain }}/d-solo/rYdddlPWj/node-exporter-full?orgId=1&refresh=1m&theme=dark&panelId=77" class="grafana-iframe" frameborder="0"></iframe>
       </div>
     </div>
   </div>
 
+  <!-- Card 2 -->
+  <div class="col-lg-4 col-md-6 mb-0">
+    <div class="card">
+      <div class="card-body">
+        <iframe src="https://grafana.{{ domain }}/d-solo/rYdddlPWj/node-exporter-full?orgId=1&refresh=1m&theme=dark&panelId=78" class="grafana-iframe" frameborder="0"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- Card 3 -->
+  <div class="col-lg-4 col-md-6 mb-0">
+    <div class="card">
+      <div class="card-body">
+        <iframe src="https://grafana.{{ domain }}/d-solo/rYdddlPWj/node-exporter-full?orgId=1&refresh=1m&theme=dark&panelId=74" class="grafana-iframe" frameborder="0"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
 
 
   <div class="container-full">
