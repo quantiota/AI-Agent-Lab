@@ -50,6 +50,7 @@
 
 1. AI Agent Lab - LangChain Streamlit Agents. (2024). Repository for LangChain agents implemented as Streamlit apps. [Streamlit-agent](https://github.com/langchain-ai/streamlit-agent)
 
+2. AI Agent Lab - Chatbot Implementations (2024). Repository for Chatbot Implementations with Langchain + Streamlit. [Streamlit-agent](https://github.com/shashankdeshpande/langchain-chatbot)
 
 
 # Potential Sources for the Bibliography
