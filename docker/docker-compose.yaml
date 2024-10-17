@@ -49,7 +49,8 @@ services:
       - "5000:5000"  # Map port 5000 of the container to port 5000 on the host
     volumes:
       - ./aiagentui:/aiagentui  # Optional: Mount the application directory for live reloading in development  
-      - /var/run/docker.sock:/var/run/docker.sock   
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./uploads:/aiagentui/uploads   
     env_file:
       - .env
 
@@ -89,3 +90,4 @@ services:
 volumes:
   grafana-data:
   questdb-data:
+s
