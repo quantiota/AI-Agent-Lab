@@ -61,7 +61,7 @@ server {
 
         proxy_buffering off;
 
-                # Timeout settings to handle long connections
+        # Timeout settings to handle long connections
         proxy_connect_timeout 15s;
         proxy_send_timeout 15s;
         proxy_read_timeout 15s;
@@ -113,7 +113,7 @@ server {
 
         proxy_buffering off;
 
-                # Timeout settings to handle long connections
+        # Timeout settings to handle long connections
         proxy_connect_timeout 15s;
         proxy_send_timeout 15s;
         proxy_read_timeout 15s;
