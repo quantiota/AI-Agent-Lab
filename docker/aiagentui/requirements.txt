@@ -2,3 +2,4 @@ flask
 openai
 requests
 docker
+werkzeug

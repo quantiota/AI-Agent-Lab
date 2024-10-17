@@ -1,15 +1,20 @@
-from flask import Flask, render_template, request, abort, jsonify
+from flask import Flask, render_template, request, abort, jsonify, redirect, url_for, abort, flash
 import os
 import json
 import openai
 import requests
 import docker
+from werkzeug.utils import secure_filename
 
 # Load domain.ltd from environment variable
 domain = os.environ.get('DOMAIN', 'Domain not set')
-
+secret_key = os.environ.get('SECRET_KEY', 'default_secret_key') 
 
 app = Flask(__name__)
+app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
+app.config['UPLOAD_EXTENSIONS'] = ['.csv', '.sql', '.pdf', '.txt']
+app.config['UPLOAD_PATH'] = '/aiagentui/uploads'
+app.secret_key = 'your_secret_key'
 
 client = docker.DockerClient(base_url='unix://var/run/docker.sock')
 
@@ -91,15 +96,26 @@ def restart_container(container_name):
         # If the container name is not valid, return a 404 error
         abort(404, description=f"Container {container_name} not found")
 
+
+
+
+
+# Uploading File
+
+@app.route('/upload', methods=['POST'])
+def upload_files():
+    uploaded_file = request.files['file']
+    filename = secure_filename(uploaded_file.filename)
+    if filename != '':
+        file_ext = os.path.splitext(filename)[1]
+        if file_ext not in app.config['UPLOAD_EXTENSIONS']:
+             
+            abort(400, description=f"Invalid file extension: {file_ext}. Allowed extensions are {', '.join(app.config['UPLOAD_EXTENSIONS'])}.")
+        uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
+        flash('File uploaded successfully!', 'success')  # Flash success message
+    return redirect(url_for('index'))
+
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
-
-
-
-
-
-
-
-
-
-
