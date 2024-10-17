@@ -8,6 +8,19 @@
   <link href="/static/css/style.css" rel="stylesheet">
 </head>
 <body>
+
+      <!-- Display flashed success messages -->
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        <div>
+          {% for category, message in messages %}
+            <div class="alert alert-{{ category }}">
+              {{ message }}
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
   
      <!-- Navigation bar with Logout button -->
   <nav class="navbar navbar-expand-lg">
@@ -151,6 +164,24 @@
           </div>
         
 
+
+  <!-- File Upload Input Block -->
+
+<!-- Error message -->
+<div id="error-message" style="color:red; display:none;"></div>
+
+<div class="card mb-4">
+  <div class="card-body">
+    <img src="/static/images/upload-icon.svg" alt="Upload icon" class="logo">
+    <h5 class="card-title">Upload a File</h5>
+    
+    <form id="upload-form" action="/upload" method="POST" enctype="multipart/form-data">
+      <input type="file" id="file" name="file" class="form-control mb-2" required>
+      <button type="button" onclick="validateFile(event)" class="btn service-btn w-100">Upload</button>
+    </form>
+  </div>
+</div>
+
     
 <!-- Service controle      - -->
 
@@ -208,8 +239,7 @@
 
           <input type="text" id="chatbot-input" placeholder="Type a message..." class="form-control flex-grow-1">
           <button onclick="sendMessage()" class="btn">&#9658;</button>
-          <label for="file-upload" class="btn file-upload-btn">Upload CSV</label>
-          <input type="file" id="file-upload" class="d-none">
+          
         </div>
       </div>
     </div>
@@ -220,7 +250,7 @@
         <footer class="d-flex justify-content-between align-items-center p-3">
           <!-- Left side: Logo -->
           <div class="footer-logo">
-            <img src="/static/images/logo-aiagentlab.svg" alt="ai agent lab logo" class="logo" />
+            <img src="/static/images/logo-aiagentlab-gray.svg" alt="ai agent lab logo" class="logo" />
           </div>
         
           <!-- Center: Text -->
