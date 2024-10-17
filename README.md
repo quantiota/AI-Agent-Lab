@@ -83,6 +83,8 @@ Start working with your notebooks and data, using the pre-installed tools and li
 
 For optimal performance, the AI Agent Lab requires the following hardware setup:
 
+![Microserver gen8](./microserver-gen8.png)
+
 - **Server**: HP Microserver GEN8
 - **Processor**: Quad-core CPU
 - **Primary Storage**: 250GB SSD
