@@ -14,4 +14,8 @@ The `uploads` folder is used to store files that are uploaded through the AI Age
      - `.sql` (SQL scripts)
      - `.pdf` (PDF documents)
      - `.txt` (Text files)
+     - 
+3. **Server-Side Storage**:
+   - This folder is mounted within the `aiagentui` Docker container at `/aiagentui/uploads`, which allows seamless interaction between the web app and the containerized environment.
+   - The host machine also has access to the `uploads` directory, so files are stored persistently on both the host and the container.
    
