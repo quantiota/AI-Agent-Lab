@@ -45,3 +45,38 @@ function appendMessage(sender, text) {
     document.getElementById('chatbot-body').appendChild(messageDiv);
     document.getElementById('chatbot-body').scrollTop = document.getElementById('chatbot-body').scrollHeight;
 }
+
+
+function validateFile(event) {
+    // Prevent form submission by default
+    event.preventDefault();
+
+    // Get the uploaded file input and its value
+    const fileInput = document.getElementById('file');
+    const filePath = fileInput.value;
+
+    // Allowed file extensions
+    const allowedExtensions = ['.csv', '.sql', '.pdf', '.txt'];
+
+    // Check if a file was selected
+    if (!filePath) {
+        const errorMsg = 'Please select a file before uploading.';
+        document.getElementById('error-message').innerText = errorMsg;
+        document.getElementById('error-message').style.display = 'block';
+        return; // Stop further execution
+    }
+
+    // Extract the file extension and convert to lowercase
+    const fileExtension = filePath.substring(filePath.lastIndexOf('.')).toLowerCase();
+
+    // Validate file extension
+    if (!allowedExtensions.includes(fileExtension)) {
+        const errorMsg = `Invalid file extension: ${fileExtension}. Allowed extensions are ${allowedExtensions.join(', ')}.`;
+        document.getElementById('error-message').innerText = errorMsg;
+        document.getElementById('error-message').style.display = 'block';
+    } else {
+        // Hide error message if the file is valid and submit the form
+        document.getElementById('error-message').style.display = 'none';
+        document.getElementById('upload-form').submit();  // Submit the form if validation passed
+    }
+}

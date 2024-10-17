@@ -257,19 +257,6 @@
     background-color: var(--hover-color);
   }
   
-  .file-upload-btn {
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 8px 15px;
-    cursor: pointer;
-  }
-  
-  .file-upload-btn:hover {
-    background-color: var(--hover-color);
-  }
-  
   
   .support-card .card-body {
     display: block;
@@ -354,4 +341,10 @@
     width: 100px;
     /* Adjust width to balance the layout */
   }
-  
+     /* Adjust form in left panel */
+.left-panel form input[type="file"] {
+  background-color: var(--input-background);
+  color: var(--text-color);
+  border: 1px solid var(--border-color);
+  margin-bottom: 10px;
+}
