@@ -149,6 +149,11 @@ DOMAIN=domain.tld
 # Chatbot
 OPENAI_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
+
+# secret key
+
+SECRET_KEY=your_very_secure_secret_key
+
 ```
 
 
