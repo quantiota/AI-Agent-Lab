@@ -22,7 +22,8 @@ client = docker.DockerClient(base_url='unix://var/run/docker.sock')
 valid_containers = {
     'docker-vscode-1': 'VSCode Container',
     'docker-questdb-1': 'QuestDB Container',
-    'docker-grafana-1': 'Grafana Container'
+    'docker-grafana-1': 'Grafana Container',
+    'docker-nginx-1': 'Nginx Container'
 }
 
 @app.route('/')
