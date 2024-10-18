@@ -107,4 +107,4 @@ For optimal performance, the AI Agent Lab requires the following hardware setup:
 
 - [Langchain](https://python.langchain.com)
  
-- MicroServer Gen8. [StorageReview.com](https://www.storagereview.com/review/hp-proliant-microserver-gen8-review)
+- [MicroServer Gen8](https://www.storagereview.com/review/hp-proliant-microserver-gen8-review)
