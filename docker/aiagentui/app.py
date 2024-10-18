@@ -13,7 +13,7 @@ domain = os.environ.get('DOMAIN', 'Domain not set')
 secret_key = os.environ.get('SECRET_KEY', 'default_secret_key') 
 
 app = Flask(__name__)
-app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024
+app.config['MAX_CONTENT_LENGTH'] = 50*1024 * 1024
 app.config['UPLOAD_EXTENSIONS'] = ['.csv', '.sql', '.pdf', '.txt']
 app.config['UPLOAD_PATH'] = '/aiagentui/uploads'
 app.secret_key = 'your_secret_key'

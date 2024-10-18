@@ -82,6 +82,20 @@ function validateFile(event) {
 }
 
 
+// File Size Limit
+
+document.querySelector('input[type="file"]').addEventListener('change', function() {
+    var fileSize = this.files[0].size / 1024 / 1024; // in MB
+    if (fileSize > 50) { // 50MB limit
+        alert('File size exceeds 100 MB');
+        this.value = ''; // Reset the input
+    }
+});
+
+
+
+// Nginx  restart
+
 function restartNginx() {
     // Show a message to the user
     document.getElementById('nginx-message').style.display = 'block';
