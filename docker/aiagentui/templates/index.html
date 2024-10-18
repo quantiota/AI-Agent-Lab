@@ -183,20 +183,23 @@
 </div>
 
     
-<!-- Service controle      - -->
+<!-- Service control -->
 
-    <div class="card mb-4 support-card">
-      <div class="card-body">
-        <img src="/static/images/logo-docker.svg" alt="Docker Logo" class="logo">
-        <h5 class="card-title">Docker</h5>
-        <p class="card-text">Restart Services.</p>
-        <a href="https://aiagentui.{{ domain }}/restart/docker-vscode-1"  target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">VSCode</a>
-        <a href="https://aiagentui.{{ domain }}/restart/docker-questdb-1" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100 mt-2">QuestDB</a>
-        <a href="https://aiagentui.{{ domain }}/restart/docker-grafana-1" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100 mt-2">Grafana</a>
-        <a href="https://aiagentui.{{ domain }}/restart/docker-nginx-1" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100 mt-2">Nginx</a>
-     
-      </div>
-    </div>
+<div class="card mb-4 support-card">
+  <div class="card-body">
+    <img src="/static/images/logo-docker.svg" alt="Docker Logo" class="logo">
+    <h5 class="card-title">Docker</h5>
+    <p class="card-text">Restart Services.</p>
+    <a href="https://aiagentui.{{ domain }}/restart/docker-vscode-1" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">VSCode</a>
+    <a href="https://aiagentui.{{ domain }}/restart/docker-questdb-1" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100 mt-2">QuestDB</a>
+    <a href="https://aiagentui.{{ domain }}/restart/docker-grafana-1" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100 mt-2">Grafana</a>
+    
+    <!-- Button for Nginx with JavaScript to trigger restart via AJAX -->
+    <button onclick="restartNginx()" class="btn service-btn w-100 mt-2">Nginx</button>
+
+    <div id="nginx-message" style="display:none; color: green;">Nginx is restarting. Please wait...</div>
+  </div>
+</div>
 
       <!-- Additional service links here -->
 

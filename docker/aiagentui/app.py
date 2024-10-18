@@ -5,6 +5,8 @@ import openai
 import requests
 import docker
 from werkzeug.utils import secure_filename
+import time
+
 
 # Load domain.ltd from environment variable
 domain = os.environ.get('DOMAIN', 'Domain not set')
@@ -23,7 +25,7 @@ valid_containers = {
     'docker-vscode-1': 'VSCode Container',
     'docker-questdb-1': 'QuestDB Container',
     'docker-grafana-1': 'Grafana Container',
-    'docker-nginx-1': 'Nginx Container'
+   # 'docker-nginx-1': 'Nginx Container'
 }
 
 @app.route('/')
@@ -91,13 +93,27 @@ def restart_container(container_name):
         # Restart the specified container
         container = client.containers.get(container_name)
         container.restart()
-        #os.system(f'docker restart {container_name}')
-        return f'{valid_containers[container_name]} ({container_name}) restarted successfully!', 200
+        # Flash a success message to the user
+        flash(f'{valid_containers[container_name]} ({container_name}) is restarting. Please wait a few moments.', 'info')
+
+        # Redirect back to the index page (or dashboard)
+        return redirect(url_for('index'))
     else:
         # If the container name is not valid, return a 404 error
         abort(404, description=f"Container {container_name} not found")
 
 
+
+
+
+@app.route('/restart/nginx', methods=['GET'])
+def restart_nginx():
+    # Restart the Nginx container
+    container = client.containers.get('docker-nginx-1')
+    container.restart()
+
+    # Return a simple response since the user doesn't need to see it
+    return 'Nginx restart initiated', 200
 
 
 

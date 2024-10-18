@@ -80,3 +80,20 @@ function validateFile(event) {
         document.getElementById('upload-form').submit();  // Submit the form if validation passed
     }
 }
+
+
+function restartNginx() {
+    // Show a message to the user
+    document.getElementById('nginx-message').style.display = 'block';
+  
+    // Send an AJAX request to restart Nginx
+    fetch('/restart/nginx')
+      .then(response => response.text())
+      .then(data => {
+        console.log('Nginx restart initiated');
+        // Optionally, you could add more logic here if needed
+      })
+      .catch(error => {
+        console.error('Error restarting Nginx:', error);
+      });
+  }
