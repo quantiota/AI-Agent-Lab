@@ -133,6 +133,43 @@ def upload_files():
     return redirect(url_for('index'))
 
 
+#  Delete Files
+
+@app.route('/delete-file', methods=['POST'])
+def delete_file():
+    # Get the filename from the form data
+    filename = request.form.get('filename')
+    
+    if not filename:
+        return jsonify({'error': 'Filename is required'}), 400
+
+    # Create the full path to the file
+    file_path = os.path.join(app.config['UPLOAD_PATH'], filename)
+    
+    try:
+        # Check if the file exists and delete it
+        if os.path.exists(file_path):
+            os.remove(file_path)
+            return jsonify({'success': f'File {filename} deleted successfully'}), 200
+        else:
+            return jsonify({'error': 'File not found'}), 404
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+
+# List the Files in the Server
+
+@app.route('/list-files', methods=['GET'])
+def list_files():
+    try:
+        files = os.listdir(app.config['UPLOAD_PATH'])
+        return jsonify({'files': files}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500     
+
+
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

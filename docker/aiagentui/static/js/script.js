@@ -92,6 +92,48 @@ document.querySelector('input[type="file"]').addEventListener('change', function
     }
 });
 
+ // Function to fetch and display the list of uploaded files
+ function fetchFiles() {
+    fetch('/list-files')
+      .then(response => response.json())
+      .then(data => {
+        const fileList = document.getElementById('file-list');
+        fileList.innerHTML = '';
+
+        data.files.forEach(file => {
+          const fileElement = document.createElement('div');
+          fileElement.className = 'file-item';
+          fileElement.innerHTML = `
+            <span>${file}</span>
+            <button onclick="deleteFile('${file}')">Delete</button>
+          `;
+          fileList.appendChild(fileElement);
+        });
+      });
+  }
+
+  // Function to delete a file using AJAX
+  function deleteFile(filename) {
+    fetch('/delete-file', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({ filename }),
+    })
+    .then(response => response.json())
+    .then(result => {
+      if (result.success) {
+        alert(result.success);
+        fetchFiles();  // Refresh the file list
+      } else {
+        alert(result.error);
+      }
+    });
+  }
+
+  // Call fetchFiles to display the list of files when the page loads
+  window.onload = fetchFiles;
 
 
 // Nginx  restart

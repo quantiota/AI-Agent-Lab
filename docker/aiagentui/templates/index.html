@@ -172,15 +172,30 @@
 
 <div class="card mb-4">
   <div class="card-body">
-    <img src="/static/images/upload-icon.svg" alt="Upload icon" class="logo">
+    <img src="/static/images/logo-upload.svg" alt="Logo Upload" class="logo">
     <h5 class="card-title">Upload a File</h5>
-    
+    <div id="progress-container">
+      <div id="progress-bar" style="width: 0%; height: 20px; background-color: green;"></div>
+  </div>
     <form id="upload-form" action="/upload" method="POST" enctype="multipart/form-data">
       <input type="file" id="file" name="file" class="form-control mb-2" required>
       <button type="button" onclick="validateFile(event)" class="btn service-btn w-100">Upload</button>
     </form>
   </div>
 </div>
+
+
+
+          <!-- DElete Uploaded File -->
+          <div class="card mb-4">
+            <div class="card-body">
+              <img src="/static/images/logo-delete.svg" alt="Delete Logo" class="logo">
+              <h5 class="card-title">Delete Uploaded Files</h5>
+              <div id="file-list">
+                <!-- Dynamically generated list of uploaded files will go here -->
+              </div>
+            </div>
+          </div>
 
     
 <!-- Service control -->
