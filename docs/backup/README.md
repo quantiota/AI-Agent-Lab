@@ -14,7 +14,7 @@ To mount the RAID storage volume to the backup directory, add the following line
 ```
 UUID=<RAID-storage-UUID> /backup ext4 defaults 0 0
 ```
-Replace " &lt;RAID-storage-UUID &gt;" with the UUID obtained from the previous step. Finally, use the command "mount -a" to mount the RAID storage volume to the backup directory. Now, the RAID storage volume will be automatically mounted to the backup directory upon system startup.
+Replace " &lt;RAID-storage-UUID &gt;" with the UUID obtained from the previous step. Finally, use the command "mount -t" to mount the RAID storage volume to the backup directory. Now, the RAID storage volume will be automatically mounted to the backup directory upon system startup.
   
   
   To mount a RAID storage volume to the backup directory /backup, you can use a command like this:
