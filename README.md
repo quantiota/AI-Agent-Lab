@@ -87,6 +87,7 @@ For optimal performance, the AI Agent Lab requires the following hardware setup:
 - **Processor**: Quad-core CPU
 - **Primary Storage**: 250GB SSD
 - **Memory**: 16GB of RAM
+- **Controler**: HP Smart Array P410
 - **Additional Storage**: 4x1TB RAID data storage
 - **Operating System**: Ubuntu 22.04 Server
 

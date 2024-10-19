@@ -20,9 +20,9 @@ Replace " &lt;RAID-storage-UUID &gt;" with the UUID obtained from the previous s
   To mount a RAID storage volume to the backup directory /backup, you can use a command like this:
 
   ```
-  sudo mount -t ext4 /dev/md0 /backup
+  sudo mount -t ext4 /dev/sdbx /backup
   ```
-  Here, ext4 is the file system type, /dev/md0 is the device name of the RAID storage volume, and /backup is the mount point. Note that you may need to adjust the file system type and device name based on your specific setup. Also, the sudo command is used to run the command with administrative privileges.
+  Here, ext4 is the file system type, /dev/sdbx is the device name of the RAID storage volume, and /backup is the mount point. Note that you may need to adjust the file system type and device name based on your specific setup. Also, the sudo command is used to run the command with administrative privileges.
 
 
 
