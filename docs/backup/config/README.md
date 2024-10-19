@@ -11,5 +11,5 @@ This folder contains configuration files and scripts for automating backups usin
 
 ## Additional Resources
 
-rsnapshot [Documentation](http://rsnapshot.org/) 
-Cron How-To: [Cron Tutorial](https://help.ubuntu.com/community/CronHowto)
+- rsnapshot [Documentation](http://rsnapshot.org/) 
+- Cron How-To: [Cron Tutorial](https://help.ubuntu.com/community/CronHowto)
