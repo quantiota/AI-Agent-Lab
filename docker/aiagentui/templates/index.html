@@ -1,293 +1,370 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Agent Lab Dashboard</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="/static/css/style.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agent Lab Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
 </head>
+
 <body>
 
-      <!-- Display flashed success messages -->
-      {% with messages = get_flashed_messages(with_categories=true) %}
-      {% if messages %}
-        <div>
-          {% for category, message in messages %}
-            <div class="alert alert-{{ category }}">
-              {{ message }}
-            </div>
-          {% endfor %}
+    <!-- Display flashed success messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %} {% if messages %}
+    <div>
+        {% for category, message in messages %}
+        <div class="alert alert-{{ category }}">
+            {{ message }}
         </div>
-      {% endif %}
-    {% endwith %}
-  
-     <!-- Navigation bar with Logout button -->
-  <nav class="navbar navbar-expand-lg">
+        {% endfor %}
+    </div>
+    {% endif %} {% endwith %}
+
+    <!-- Navigation bar with Logout button -->
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">AI Agent Lab Dashboard</a>
+
+            <!-- Align the logout button to the right -->
+            <div class="ms-auto">
+                <button class="logout-btn" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">AI Agent Lab Dashboard</a>
-
-      <!-- Align the logout button to the right -->
-      <div class="ms-auto">
-        <button class="logout-btn" onclick="logout()">Logout</button>
-      </div>
-    </div>
-  </nav>
-
-  <div class="container-fluid">
 
 
 
-    <!-- First Row with AI Agent Lab Card -->
-    <div class="row">
+        <!-- First Row with AI Agent Lab Card -->
+        <div class="row">
 
-      <div class="col-12">
-        <div class="card">
-          <div class="card-body">
-            <img src="/static/images/logo-aiagentlab.svg" alt="AI Agent Lab Logo" class="logo">
-           
-            <h5 class="card-title">AI Agent Lab</h5>
-            <p class="card-text">Experimenting with AI-Driven Applications in Real-Time, Powered by Data Streams and ML Processors.</p>
-             </div>
-        </div>
-      </div>
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <img src="/static/images/logo-aiagentlab.svg" alt="AI Agent Lab Logo" class="logo">
 
-  </div>
-
-  
-
- <!-- Row for Grafana Dashboards -->
- <div class="row">
-  <!-- Card 1 -->
-  <div class="col-lg-4 col-md-6 mb-0">
-    <div class="card">
-      <div class="card-body">
-        <iframe src="https://grafana.{{ domain }}/d-solo/rYdddlPWj/node-exporter-full?orgId=1&refresh=1m&theme=dark&panelId=77" class="grafana-iframe" frameborder="0"></iframe>
-      </div>
-    </div>
-  </div>
-
-  <!-- Card 2 -->
-  <div class="col-lg-4 col-md-6 mb-0">
-    <div class="card">
-      <div class="card-body">
-        <iframe src="https://grafana.{{ domain }}/d-solo/rYdddlPWj/node-exporter-full?orgId=1&refresh=1m&theme=dark&panelId=78" class="grafana-iframe" frameborder="0"></iframe>
-      </div>
-    </div>
-  </div>
-
-  <!-- Card 3 -->
-  <div class="col-lg-4 col-md-6 mb-0">
-    <div class="card">
-      <div class="card-body">
-        <iframe src="https://grafana.{{ domain }}/d-solo/rYdddlPWj/node-exporter-full?orgId=1&refresh=1m&theme=dark&panelId=74" class="grafana-iframe" frameborder="0"></iframe>
-      </div>
-    </div>
-  </div>
-</div>
-</div>
-
-
-  <div class="container-full">
-    <div class="col-md-4 left-panel">
-
-      <h4>Service Links</h4>
-
-      <div class="card mb-4">
-        <div class="card-body">
-          <img src="/static/images/logo-coder.svg" alt="VSCode Logo" class="logo">
-          <h5 class="card-title">Code server</h5>
-          <p class="card-text">Access your VSCode environment.</p>
-          <a href="https://vscode.{{ domain }}" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">Open VSCode</a>
-        </div>
-      </div>
-
-      <div class="card mb-4">
-        <div class="card-body">
-          <img src="/static/images/logo-questdb.svg" alt="QuestDB Logo" class="logo">
-          <h5 class="card-title">QuestDB</h5>
-          <p class="card-text">Access your QuestDB for time-series data.</p>
-          <a href="https://questdb.{{ domain }}" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">Open QuestDB</a>
-        </div>
-      </div>
-
-
-      <div class="card mb-4">
-        <div class="card-body">
-          <img src="/static/images/logo-grafana.svg" alt="Grafana Logo" class="logo">
-            <h5 class="card-title">Grafana</h5>
-            <p class="card-text">Visualize data and monitor system metrics.</p>
-            <a href="https://grafana.{{ domain }}/dashboards" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">Open Grafana</a>
-          </div>
-        </div>
-
-
-
-
-
-      <div class="card mb-4">
-        <div class="card-body">
-          <img src="/static/images/logo-prometheus.svg" alt="Prometheus Logo" class="logo">
-            <h5 class="card-title">Prometheus</h5>
-            <p class="card-text">Monitor CPU and memory in real-time.</p>
-            <a href="https://grafana.{{ domain }}/d/rYdddlPWj/node-exporter-full" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">View System Metrics</a>
-          </div>
-        </div>
-
-
-
-
-    <!-- OpenAI API Key Input Block -->
-    <div class="card mb-4">
-      <div class="card-body">
-        <img src="/static/images/logo-openai.svg" alt="OpenAI Logo" class="logo">
-        <h5 class="card-title">OpenAI API Key</h5>
-        <p class="card-text">Enter your OpenAI API key to access the AI features.</p>
-        <form id="openai-api-form">
-          <div class="mb-3">
-            <input type="text" id="api-key-input" class="form-control" placeholder="Enter your OpenAI API key">
-          </div>
-          <button type="submit" class="btn service-btn w-100">Submit API Key</button>
-        </form>
-      </div>
-    </div>
-
-
-          <!-- JupyterHub Input Block -->
-          <div class="card mb-4">
-            <div class="card-body">
-              <img src="/static/images/logo-jupyterhub.svg" alt="JupyterHub Logo" class="logo">
-              <h5 class="card-title">JupyterHub</h5>
-              <p class="card-text">Connect your AI Agent Lab with JupyterHub.</p>
-              <a href="https://jupyterhub.{{ domain }}/hub/token" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">Open JupyterHub</a>
+                        <h5 class="card-title">AI Agent Lab</h5>
+                        <p class="card-text">Experimenting with AI-Driven Applications in Real-Time, Powered by Data Streams and ML Processors.</p>
+                    </div>
+                </div>
             </div>
-          </div>
-        
 
-
-  <!-- File Upload Input Block -->
-
-<!-- Error message -->
-<div id="error-message" style="color:red; display:none;"></div>
-
-<div class="card mb-4">
-  <div class="card-body">
-    <img src="/static/images/logo-upload.svg" alt="Logo Upload" class="logo">
-    <h5 class="card-title">Upload a File</h5>
-    <div id="progress-container">
-      <div id="progress-bar" style="width: 0%; height: 20px; background-color: green;"></div>
-  </div>
-    <form id="upload-form" action="/upload" method="POST" enctype="multipart/form-data">
-      <input type="file" id="file" name="file" class="form-control mb-2" required>
-      <button type="button" onclick="validateFile(event)" class="btn service-btn w-100">Upload</button>
-    </form>
-  </div>
-</div>
+        </div>
 
 
 
-          <!-- DElete Uploaded File -->
-          <div class="card mb-4">
-            <div class="card-body">
-              <img src="/static/images/logo-delete.svg" alt="Delete Logo" class="logo">
-              <h5 class="card-title">Delete Uploaded Files</h5>
-              <div id="file-list">
-                <!-- Dynamically generated list of uploaded files will go here -->
-              </div>
+        <!-- Row for Grafana Dashboards -->
+        <div class="row">
+            <!-- Card 1 -->
+            <div class="col-lg-4 col-md-6 mb-0">
+                <div class="card">
+                    <div class="card-body">
+                        <iframe src="https://grafana.{{ domain }}/d-solo/rYdddlPWj/node-exporter-full?orgId=1&refresh=1m&theme=dark&panelId=77" class="grafana-iframe" frameborder="0"></iframe>
+                    </div>
+                </div>
             </div>
-          </div>
 
-    
-<!-- Service control -->
+            <!-- Card 2 -->
+            <div class="col-lg-4 col-md-6 mb-0">
+                <div class="card">
+                    <div class="card-body">
+                        <iframe src="https://grafana.{{ domain }}/d-solo/rYdddlPWj/node-exporter-full?orgId=1&refresh=1m&theme=dark&panelId=78" class="grafana-iframe" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
 
-<div class="card mb-4 support-card">
-  <div class="card-body">
-    <img src="/static/images/logo-docker.svg" alt="Docker Logo" class="logo">
-    <h5 class="card-title">Docker</h5>
-    <p class="card-text">Restart Services.</p>
-    <a href="https://aiagentui.{{ domain }}/restart/docker-vscode-1" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">VSCode</a>
-    <a href="https://aiagentui.{{ domain }}/restart/docker-questdb-1" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100 mt-2">QuestDB</a>
-    <a href="https://aiagentui.{{ domain }}/restart/docker-grafana-1" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100 mt-2">Grafana</a>
-    
-    <!-- Button for Nginx with JavaScript to trigger restart via AJAX -->
-    <button onclick="restartNginx()" class="btn service-btn w-100 mt-2">Nginx</button>
-
-    <div id="nginx-message" style="display:none; color: green;">Nginx is restarting. Please wait...</div>
-  </div>
-</div>
-
-      <!-- Additional service links here -->
-
-      <div class="card mb-4 support-card">
-        <div class="card-body">
-          <img src="/static/images/logo-github.svg" alt="Github Logo" class="logo">
-          <h5 class="card-title">GitHub</h5>
-          <p class="card-text">Get help and documentation for your AI Agent Lab.</p>
-          <a href="https://github.com/quantiota/AI-Agent-Lab" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">Help Docs</a>
-          <a href="https://github.com/quantiota/AI-Agent-Lab/issues" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100 mt-2">Contact Support</a>
-        <a href="https://github.com/quantiota/AI-Agent-Lab/discussions" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100 mt-2">Discussions</a>
+            <!-- Card 3 -->
+            <div class="col-lg-4 col-md-6 mb-0">
+                <div class="card">
+                    <div class="card-body">
+                        <iframe src="https://grafana.{{ domain }}/d-solo/rYdddlPWj/node-exporter-full?orgId=1&refresh=1m&theme=dark&panelId=74" class="grafana-iframe" frameborder="0"></iframe>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-
-      <!-- Right Side: Chatbot Panel -->
-
-
-  
-
-
-      <div class="col-md-8 right-panel">
-        <div class="right-panel-header">AI Agent UI</div>
-
-
-        
-
-
-          <!-- Predefined Question Block -->
- 
-        <!-- Chatbot Body -->
-        <div id="chatbot-body" class="right-panel-body">
-          <!-- Chat messages will appear here -->
-        </div>
-  
-
-
-        <!-- Chatbot Footer -->
-        <div class="right-panel-footer">
-
-
-          <input type="text" id="chatbot-input" placeholder="Type a message..." class="form-control flex-grow-1">
-          <button onclick="sendMessage()" class="btn">&#9658;</button>
-          
-        </div>
-      </div>
     </div>
 
 
+    <div class="container-full">
+        <div class="col-md-4 left-panel">
 
-        <!-- Footer -->
-        <footer class="d-flex justify-content-between align-items-center p-3">
-          <!-- Left side: Logo -->
-          <div class="footer-logo">
+            <h4>Service Links</h4>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="single-service-link">
+                        <div class="icon-container">
+                            <img src="https://coder.com/favicon-dark.svg" alt="Code server icon" class="icon">
+                        </div>
+
+                    </div>
+                    <h5 class="card-title">Code server</h5>
+
+                    <p class="card-text">Access your VSCode environment.</p>
+                    <a href="https://vscode.{{ domain }}" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">Open VSCode</a>
+                </div>
+            </div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="single-service-link">
+                        <div class="icon-container">
+                            <img src="https://questdb.io/favicon.ico" alt="questdb icon" class="icon">
+                        </div>
+
+                    </div>
+                    <h5 class="card-title">QuestDB</h5>
+                    <p class="card-text">Access your QuestDB for time-series data.</p>
+                    <a href="https://questdb.{{ domain }}" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">Open QuestDB</a>
+                </div>
+            </div>
+
+
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="single-service-link">
+                        <div class="icon-container">
+                            <img src="https://grafana.com/favicon.ico" alt="grafana icon" class="icon">
+                        </div>
+
+                    </div>
+                    <h5 class="card-title">Grafana</h5>
+                    <p class="card-text">Visualize data and monitor system metrics.</p>
+                    <a href="https://grafana.{{ domain }}/dashboards" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">Open Grafana</a>
+                </div>
+            </div>
+
+
+
+
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="single-service-link">
+                        <div class="icon-container">
+                            <img src="https://api.faviconkit.com/prometheus.io/64" alt="promotheus icon" class="icon">
+                        </div>
+
+                    </div>
+                    <h5 class="card-title">Prometheus</h5>
+                    <p class="card-text">Monitor CPU and memory in real-time.</p>
+                    <a href="https://grafana.{{ domain }}/d/rYdddlPWj/node-exporter-full" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">View System Metrics</a>
+                </div>
+            </div>
+
+
+
+
+            <!-- OpenAI API Key Input Block -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="single-service-link">
+                        <div class="icon-container">
+                            <img src="https://openai.com/favicon.ico" alt="openai icon" class="icon">
+                        </div>
+
+                    </div>
+                    <h5 class="card-title">OpenAI</h5>
+                    <p class="card-text">Enter your OpenAI API key to access the AI features.</p>
+                    <form id="openai-api-form">
+                        <div class="mb-3">
+                            <input type="text" id="api-key-input" class="form-control" placeholder="Enter your OpenAI API key">
+                        </div>
+                        <button type="submit" class="btn service-btn w-100">Submit API Key</button>
+                    </form>
+                </div>
+            </div>
+
+
+            <!-- JupyterHub Input Block -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="single-service-link">
+                        <div class="icon-container">
+                            <img src="https://jupyter.org/favicon.ico" alt="jupyterhub icon" class="icon">
+                        </div>
+
+                    </div>
+                    <h5 class="card-title">JupyterHub</h5>
+                    <p class="card-text">Connect your AI Agent Lab with JupyterHub.</p>
+                    <a href="https://jupyterhub.{{ domain }}/hub/token" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">Open JupyterHub</a>
+                </div>
+            </div>
+
+
+
+            <!-- File Upload Input Block -->
+
+            <!-- Error message -->
+            <div id="error-message" style="color:red; display:none;"></div>
+
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="single-service-link">
+                        <div class="icon-container">
+                            <img src="/static/images/favicon-upload.ico" alt="Upload  Favicon" class="icon">
+                        </div>
+                    </div>
+                    <h5 class="card-title">Upload a File</h5>
+                    <div id="progress-container">
+                        <div id="progress-bar" style="width: 0%; height: 20px; background-color: green;"></div>
+                    </div>
+                    <form id="upload-form" action="/upload" method="POST" enctype="multipart/form-data">
+                        <input type="file" id="file" name="file" class="form-control mb-2" required>
+                        <button type="button" onclick="validateFile(event)" class="btn service-btn w-100">Upload</button>
+                    </form>
+                </div>
+            </div>
+
+
+
+            <!-- DElete Uploaded File -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <div class="single-service-link">
+                        <div class="icon-container">
+                            <img src="/static/images/favicon-delete.ico" alt="Delete Favicon" class="icon">
+                        </div>
+
+                    </div>
+                    <h5 class="card-title">Delete Uploaded Files</h5>
+                    <div id="file-list">
+                        <!-- Dynamically generated list of uploaded files will go here -->
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Service control -->
+
+            <div class="card mb-4 support-card">
+                <div class="card-body">
+                    <div class="single-service-link">
+                        <div class="icon-container">
+                            <img src="https://www.docker.com/favicon.ico" alt="docker icon" class="icon">
+                        </div>
+
+                    </div>
+                    <h5 class="card-title">Docker</h5>
+                    <p class="card-text">Restart Services.</p>
+                    <a href="https://aiagentui.{{ domain }}/restart/docker-vscode-1" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">VSCode</a>
+                    <a href="https://aiagentui.{{ domain }}/restart/docker-questdb-1" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100 mt-2">QuestDB</a>
+                    <a href="https://aiagentui.{{ domain }}/restart/docker-grafana-1" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100 mt-2">Grafana</a>
+
+                    <!-- Button for Nginx with JavaScript to trigger restart via AJAX -->
+                    <button onclick="restartNginx()" class="btn service-btn w-100 mt-2">Nginx</button>
+
+                    <div id="nginx-message" style="display:none; color: green;">Nginx is restarting. Please wait...</div>
+                </div>
+            </div>
+
+            <!-- Restore a Backup -->
+            <div class="card mb-4 support-card">
+                <div class="card-body">
+                    <div class="single-service-link">
+                        <div class="icon-container">
+                            <img src="https://www.rsnapshot.org/favicon.ico" alt="Rsnapshot Logo" class="icon">
+                        </div>
+                    </div>
+                    <h5 class="card-title">Restore a Backup</h5>
+                    <div class="restore-section">
+                        <label for="restore-select">Select a Backup to Restore:</label>
+                        <select id="restore-select" class="form-select mb-3">
+                            <!-- Options populated by JavaScript based on available backups -->
+                        </select>
+                        <button id="restore-btn" class="btn service-btn w-100">Restore</button>
+                    </div>
+                    <div id="status-message"></div>
+                </div>
+            </div>
+
+
+
+
+
+            <!-- Additional service links here -->
+
+            <div class="card mb-4 support-card">
+                <div class="card-body">
+                    <div class="single-service-link">
+                        <div class="icon-container">
+                            <img src="https://github.com/favicon.ico" alt="github icon" class="icon">
+                        </div>
+
+                    </div>
+                    <h5 class="card-title">GitHub</h5>
+                    <p class="card-text">Get help and documentation for your AI Agent Lab.</p>
+                    <a href="https://github.com/quantiota/AI-Agent-Lab" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100">Help Docs</a>
+                    <a href="https://github.com/quantiota/AI-Agent-Lab/issues" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100 mt-2">Contact Support</a>
+                    <a href="https://github.com/quantiota/AI-Agent-Lab/discussions" target="_blank" rel="noopener noreferrer" class="btn service-btn w-100 mt-2">Discussions</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side: Chatbot Panel -->
+
+
+
+
+
+        <div class="col-md-8 right-panel">
+            <div class="right-panel-header">AI Agent UI</div>
+
+
+
+
+
+            <!-- Predefined Question Block -->
+
+            <!-- Chatbot Body -->
+            <div id="chatbot-body" class="right-panel-body">
+                <!-- Chat messages will appear here -->
+            </div>
+
+
+
+            <!-- Chatbot Footer -->
+            <div class="right-panel-footer">
+
+
+                <input type="text" id="chatbot-input" placeholder="Type a message..." class="form-control flex-grow-1">
+                <button onclick="sendMessage()" class="btn">&#9658;</button>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Footer -->
+    <footer class="d-flex justify-content-between align-items-center p-3">
+        <!-- Left side: Logo -->
+        <div class="footer-logo">
             <img src="/static/images/logo-aiagentlab-gray.svg" alt="ai agent lab logo" class="logo" />
-          </div>
-        
-          <!-- Center: Text -->
-          <div class="footer-text mx-auto text-center">
+        </div>
+
+        <!-- Center: Text -->
+        <div class="footer-text mx-auto text-center">
             <p>&copy; 2024 Quantiota. All rights reserved. |
-              <a href="https://github.com/quantiota/AI-Agent-Lab">GitHub</a> |
-              <a href="https://github.com/quantiota/AI-Agent-Lab/issues">Support</a>
+                <a href="https://github.com/quantiota/AI-Agent-Lab">GitHub</a> |
+                <a href="https://github.com/quantiota/AI-Agent-Lab/issues">Support</a>
             </p>
-          </div>
-        
-          <!-- Empty div to balance out the flex layout -->
-          <div class="footer-placeholder"></div>
-        </footer>
-        
+        </div>
 
-  
-        <script src="/static/js/script.js"></script>
+        <!-- Empty div to balance out the flex layout -->
+        <div class="footer-placeholder"></div>
+    </footer>
 
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    </body>
-    </html>
+
+
+    <script src="/static/js/script.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
