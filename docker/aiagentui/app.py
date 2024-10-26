@@ -171,5 +171,90 @@ def list_files():
 
 
 
+
+# List Available Backups Route
+
+@app.route('/api/list-backups', methods=['GET'])
+def list_backups():
+    backup_dir = "/backup/rsnapshot"
+    backup_types = ["hourly", "daily", "weekly", "monthly"]
+    backups = []
+
+    # Iterate over each backup type to list available snapshots
+    for backup_type in backup_types:
+        type_dir = os.path.join(backup_dir, backup_type)
+
+        try:
+            with os.scandir(backup_dir) as entries:
+                subdirs = [entry.name for entry in entries if entry.is_dir() and entry.name.startswith(backup_type)]
+                if subdirs:
+                    for snapshot in subdirs:
+                        snapshot_path = os.path.join(type_dir, snapshot)
+                        backups.append({
+                            "type": backup_type,
+                            "timestamp": snapshot,
+                            "path": snapshot_path
+                        })
+        except FileNotFoundError:
+            continue
+        except PermissionError:
+            continue
+
+    return jsonify({"backups": backups}), 200
+
+
+
+# Restore a Backup Route
+
+
+
+@app.route('/api/restore-backup', methods=['POST'])
+def restore_backup():
+    try:
+        data = request.get_json()
+        selected_backup = data.get("selectedBackup")
+
+        if not selected_backup:
+            return jsonify({"message": "No backup selected."}), 400
+
+        # Check if the selected backup exists
+        backup_path = f"/backup/rsnapshot/{selected_backup}"
+        if not os.path.exists(backup_path):
+            return jsonify({"message": f"Selected backup '{selected_backup}' does not exist."}), 400
+
+        app.logger.info(f"Starting restore process for backup: {selected_backup}")
+
+        # Add execute permission to the recovery script
+        
+        subprocess.run(["chmod", "+x", "/recovery-microserver.sh"], check=True)
+
+
+        # Execute the restore script
+        result = subprocess.run(
+            ["sh", "/recovery-microserver.sh"], 
+            check=True, 
+            env={"SELECTED_BACKUP": selected_backup, **os.environ},
+            capture_output=True,
+            text=True
+        )
+
+        app.logger.info(f"Restore process completed. Output: {result.stdout}")
+
+        return jsonify({"message": "Restore completed successfully!", "details": result.stdout}), 200
+
+    except subprocess.CalledProcessError as e:
+        error_output = e.stderr if e.stderr else str(e)
+        app.logger.error(f"Subprocess error during restore: {error_output}")
+        return jsonify({"message": f"Restore failed: {error_output}"}), 500
+
+    except Exception as e:
+        app.logger.error(f"Unexpected error during restore: {str(e)}")
+        return jsonify({"message": f"An unexpected error occurred: {str(e)}"}), 500
+
+
+
+
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
