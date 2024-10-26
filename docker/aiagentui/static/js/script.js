@@ -17,23 +17,21 @@ document.getElementById('openai-api-form').addEventListener('submit', function(e
         document.getElementById('chatbot-input').value = '';
   
         fetch('/chat', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({
-                    message: message
-                })
-            }).then(response => response.json())
-            .then(data => {
-                if (data.error) {
-                    appendMessage('bot', 'Error: ' + data.error);
-                } else {
-                    appendMessage('bot', data.response);
-                }
-            }).catch(error => {
-                appendMessage('bot', 'Error communicating with AI.');
-            });
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ message: message })
+        }).then(response => response.json())
+          .then(data => {
+              if (data.error) {
+                  appendMessage('bot', 'Error: ' + data.error);
+              } else {
+                  appendMessage('bot', data.response);
+              }
+          }).catch(error => {
+              appendMessage('bot', 'Error communicating with AI.');
+          });
     }
   }
   
@@ -79,7 +77,7 @@ document.getElementById('openai-api-form').addEventListener('submit', function(e
     } else {
         // Hide error message if the file is valid and submit the form
         document.getElementById('error-message').style.display = 'none';
-        document.getElementById('upload-form').submit(); // Submit the form if validation passed
+        document.getElementById('upload-form').submit();  // Submit the form if validation passed
     }
   }
   
@@ -95,60 +93,81 @@ document.getElementById('openai-api-form').addEventListener('submit', function(e
   });
   
   // JavaScript: script.js
+  // Function to fetch and display the list of backup files
   
-  // Function to fetch and display the list of uploaded files
   function fetchFiles() {
     fetch('/list-files')
-        .then(response => response.json())
-        .then(data => {
-            const fileList = document.getElementById('file-list');
-            fileList.innerHTML = ''; // Clear the existing list
+      .then(response => response.json())
+      .then(data => {
+        const fileList = document.getElementById('file-list');
+        fileList.innerHTML = ''; // Clear the existing list
   
-            data.files.forEach(file => {
-                // Create the container for each file item
-                const fileElement = document.createElement('div');
-                fileElement.className = 'file-item'; // Add the class for styling
+        // Sort the files from most recent to oldest
+        const sortedFiles = data.files.sort((a, b) => {
+          const [aType, aIndex] = a.split('.');
+          const [bType, bIndex] = b.split('.');
   
-                // Create a span to hold the file name
-                const fileNameSpan = document.createElement('span');
-                fileNameSpan.textContent = file;
+          // Sort by type first: hourly > daily > weekly > monthly
+          if (aType !== bType) {
+            if (aType === 'hourly') return -1;
+            if (bType === 'hourly') return 1;
+            if (aType === 'daily') return -1;
+            if (bType === 'daily') return 1;
+            if (aType === 'weekly') return -1;
+            if (bType === 'weekly') return 1;
+            return 0;
+          }
   
-                // Create a delete button
-                const deleteButton = document.createElement('button');
-                deleteButton.textContent = 'Delete';
-                deleteButton.onclick = () => deleteFile(file);
-  
-                // Append the filename and delete button to the file item
-                fileElement.appendChild(fileNameSpan);
-                fileElement.appendChild(deleteButton);
-  
-                // Add the file item to the file list container
-                fileList.appendChild(fileElement);
-            });
+          // If types are the same, sort by index (numerical order)
+          return parseInt(aIndex) - parseInt(bIndex);
         });
+  
+        // Create and append file elements after sorting
+        sortedFiles.forEach(file => {
+          const fileElement = document.createElement('div');
+          fileElement.className = 'file-item'; // Add the class for styling
+  
+          const fileNameSpan = document.createElement('span');
+          fileNameSpan.textContent = file;
+  
+          const deleteButton = document.createElement('button');
+          deleteButton.textContent = 'Delete';
+          deleteButton.onclick = () => deleteFile(file);
+  
+          fileElement.appendChild(fileNameSpan);
+          fileElement.appendChild(deleteButton);
+  
+          fileList.appendChild(fileElement);
+        });
+      });
   }
+  
+  // Call fetchFiles to display the list of files when the page loads
+  window.onload = fetchFiles;
+  
+  
+  // Call fetchFiles to display the list of files when the page loads
+  window.onload = fetchFiles;
   
   
   // Function to delete a file using AJAX
   function deleteFile(filename) {
     fetch('/delete-file', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-            body: new URLSearchParams({
-                filename
-            }),
-        })
-        .then(response => response.json())
-        .then(result => {
-            if (result.success) {
-                alert(result.success);
-                fetchFiles(); // Refresh the file list
-            } else {
-                alert(result.error);
-            }
-        });
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({ filename }),
+    })
+    .then(response => response.json())
+    .then(result => {
+      if (result.success) {
+        alert(result.success);
+        fetchFiles();  // Refresh the file list
+      } else {
+        alert(result.error);
+      }
+    });
   }
   
   // Call fetchFiles to display the list of files when the page loads
@@ -163,57 +182,82 @@ document.getElementById('openai-api-form').addEventListener('submit', function(e
   
     // Send an AJAX request to restart Nginx
     fetch('/restart/nginx')
-        .then(response => response.text())
-        .then(data => {
-            console.log('Nginx restart initiated');
-            // Optionally, you could add more logic here if needed
-        })
-        .catch(error => {
-            console.error('Error restarting Nginx:', error);
-        });
+      .then(response => response.text())
+      .then(data => {
+        console.log('Nginx restart initiated');
+        // Optionally, you could add more logic here if needed
+      })
+      .catch(error => {
+        console.error('Error restarting Nginx:', error);
+      });
   }
   
   
-  // Restore a Backup
-  
-  document.addEventListener("DOMContentLoaded", function() {
+  // Function to fetch and populate the backup list
+  function fetchBackups() {
     fetch('/api/list-backups')
         .then(response => response.json())
         .then(data => {
-            const restoreSelect = document.getElementById("restore-select");
+            const selectElement = document.getElementById('restore-select');
+            selectElement.innerHTML = ''; // Clear existing options
+            
+            // Add a default option
+            const defaultOption = document.createElement('option');
+            defaultOption.text = 'Select a backup';
+            defaultOption.value = '';
+            selectElement.add(defaultOption);
+  
+            // Add options for each backup
             data.backups.forEach(backup => {
-                const option = document.createElement("option");
-                option.value = backup.path;
-                option.textContent = `${backup.type} - ${backup.timestamp}`;
-                restoreSelect.appendChild(option);
+                const option = document.createElement('option');
+                option.text = `${backup.type} - ${backup.timestamp}`;
+                option.value = backup.timestamp;
+                selectElement.add(option);
             });
         })
         .catch(error => {
-            document.getElementById("status-message").innerText = "Failed to load backups.";
+            console.error('Error fetching backups:', error);
+            document.getElementById('status-message').textContent = 'Failed to load backups.';
         });
-  });
+  }
   
-  document.getElementById("restore-btn").addEventListener("click", function() {
-    const selectedBackup = document.getElementById("restore-select").value;
+  // Function to handle the restore button click
+  function handleRestore() {
+    const selectedBackup = document.getElementById('restore-select').value;
     if (!selectedBackup) {
-        document.getElementById("status-message").innerText = "Please select a backup to restore.";
+        document.getElementById('status-message').textContent = 'Please select a backup to restore.';
         return;
     }
   
+    // Disable the button and show a loading message
+    document.getElementById('restore-btn').disabled = true;
+    document.getElementById('status-message').textContent = 'Restoring backup...';
+  
     fetch('/api/restore-backup', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                backupPath: selectedBackup
-            })
-        })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById("status-message").innerText = data.message;
-        })
-        .catch(error => {
-            document.getElementById("status-message").innerText = "Restore failed: " + error.message;
-        });
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ selectedBackup: selectedBackup })
+    })
+    .then(response => response.json())
+    .then(data => {
+        document.getElementById('status-message').textContent = data.message;
+    })
+    .catch(error => {
+        console.error('Error restoring backup:', error);
+        document.getElementById('status-message').textContent = 'Failed to restore backup.';
+    })
+    .finally(() => {
+        // Re-enable the button
+        document.getElementById('restore-btn').disabled = false;
+    });
+  }
+  
+  // Add event listeners when the DOM is fully loaded
+  document.addEventListener('DOMContentLoaded', function() {
+    fetchBackups(); // Populate the dropdown when the page loads
+    document.getElementById('restore-btn').addEventListener('click', handleRestore);
   });
+  
+  
