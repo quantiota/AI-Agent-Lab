@@ -6,6 +6,7 @@ import requests
 import docker
 from werkzeug.utils import secure_filename
 import time
+import subprocess
 
 
 # Load domain.ltd from environment variable
