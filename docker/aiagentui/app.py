@@ -191,18 +191,31 @@ def list_backups():
                 if subdirs:
                     for snapshot in subdirs:
                         snapshot_path = os.path.join(type_dir, snapshot)
-                        backups.append({
-                            "type": backup_type,
-                            "timestamp": snapshot,
-                            "path": snapshot_path
-                        })
+                        # Get the timestamp from the snapshot name (assuming format like "hourly.0", "daily.1", etc.)
+                        try:
+                            # Get the modification time of the backup directory
+                            mod_time = os.path.getmtime(os.path.join(backup_dir, snapshot))
+                            backups.append({
+                                "type": backup_type,
+                                "timestamp": snapshot,
+                                "path": snapshot_path,
+                                "mod_time": mod_time
+                            })
+                        except OSError:
+                            continue
         except FileNotFoundError:
             continue
         except PermissionError:
             continue
 
-    return jsonify({"backups": backups}), 200
+    # Sort backups by modification time, most recent first
+    sorted_backups = sorted(backups, key=lambda x: x["mod_time"], reverse=True)
+    
+    # Remove mod_time from the response
+    for backup in sorted_backups:
+        del backup["mod_time"]
 
+    return jsonify({"backups": sorted_backups}), 200
 
 
 # Restore a Backup Route
@@ -227,7 +240,7 @@ def restore_backup():
 
         # Add execute permission to the recovery script
         
-        subprocess.run(["chmod", "+x", "/recovery-microserver.sh"], check=True)
+        # subprocess.run(["chmod", "+x", "/recovery-microserver.sh"], check=True)
 
 
         # Execute the restore script
