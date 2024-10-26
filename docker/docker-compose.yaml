@@ -50,7 +50,9 @@ services:
     volumes:
       - ./aiagentui:/aiagentui  # Optional: Mount the application directory for live reloading in development  
       - /var/run/docker.sock:/var/run/docker.sock
-      - ./aiagentui/uploads:/aiagentui/uploads   
+      - ./aiagentui/uploads:/aiagentui/uploads
+      - /backup/rsnapshot:/backup/rsnapshot:ro 
+      - /recovery-microserver.sh:/recovery-microserver.sh   
     env_file:
       - .env
 
