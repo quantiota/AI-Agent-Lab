@@ -1,4 +1,4 @@
-version: "3"
+# version: "3"
 
 services:
   vscode:
@@ -8,7 +8,6 @@ services:
     ports:
       - "8080:8080"
     volumes:
-      # volume used to access the `notebooks` folder
       - ../notebooks:/home/coder/project
     env_file:
       - .env
@@ -39,20 +38,18 @@ services:
     env_file:
       - .env
 
-   
-  aiagentui:  # Flask application service
-    build:   # Specify the location of your Dockerfile and application code
+  aiagentui:
+    build:
       context: aiagentui
       target: builder
-
     ports:
-      - "5000:5000"  # Map port 5000 of the container to port 5000 on the host
+      - "5000:5000"
     volumes:
-      - ./aiagentui:/aiagentui  # Optional: Mount the application directory for live reloading in development  
+      - ./aiagentui:/aiagentui
       - /var/run/docker.sock:/var/run/docker.sock
       - ./aiagentui/uploads:/aiagentui/uploads
-      - /backup/rsnapshot:/backup/rsnapshot:ro 
-      - /recovery-microserver.sh:/recovery-microserver.sh   
+      - /backup/rsnapshot:/backup/rsnapshot:ro
+      - /recovery-microserver.sh:/recovery-microserver.sh
     env_file:
       - .env
 
@@ -77,9 +74,7 @@ services:
       - grafana
       - questdb
       - aiagentui
-  # Refer to ./init.yaml to for initial SSL setup
-  # add the following line in in crontab (5 am, every monday)
-  #   0 5 * * 1 docker compose run certbot renew
+
   certbot:
     image: certbot/certbot
     ports: []
@@ -87,7 +82,6 @@ services:
       - /etc/letsencrypt:/etc/letsencrypt
       - /var/lib/letsencrypt:/var/lib/letsencrypt
       - ./nginx/.well-known/:/usr/share/nginx/html/.well-known/
-
 
 volumes:
   grafana-data:
