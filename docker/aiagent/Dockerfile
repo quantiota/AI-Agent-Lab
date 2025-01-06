@@ -12,8 +12,8 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 
 COPY . /aiagent
 
-ENTRYPOINT ["python3"]
-CMD ["app.py"]
+CMD ["flask", "run", "--host=0.0.0.0", "--port=5001"]
+
 
 FROM builder as dev-envs
 
