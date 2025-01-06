@@ -39,16 +39,31 @@ services:
     env_file:
       - .env
 
+
+  aiagent:
+    build:
+      context: aiagent    
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5001"  
+    volumes:
+      - ./grafana/dashboards:/grafana_dashboards   
+    depends_on:
+      - vscode      
+      - questdb     
+      - grafana     
+    env_file:
+      - .env   
+
    
-  aiagentui:  # Flask application service
-    build:   # Specify the location of your Dockerfile and application code
+  aiagentui:  
+    build:   
       context: aiagentui
       target: builder
-
     ports:
-      - "5000:5000"  # Map port 5000 of the container to port 5000 on the host
+      - "5000:5000" 
     volumes:
-      - ./aiagentui:/aiagentui  # Optional: Mount the application directory for live reloading in development  
+      - ./aiagentui:/aiagentui 
       - /var/run/docker.sock:/var/run/docker.sock
       - ./aiagentui/uploads:/aiagentui/uploads
       - /backup/rsnapshot:/backup/rsnapshot:ro 
