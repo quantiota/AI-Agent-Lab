@@ -82,7 +82,7 @@ graph TD
   %% AI & LangChain Workflow
   subgraph AI_Workflow["Core of the AI Agent Lab"]
     AgentUI -->|Sends requests| AIAgent["AI Agent<br>(Port 5001)"]
-    AIAgent -->|Sends responses| AgentUI
+    AIAgent -->|Returns response| AgentUI
     AIAgent -->|Uses| InputProcessing["Input Processing"]
     InputProcessing -->|Processes with| LLM["Language Model<br>(OpenAI API)"]
     LLM -->|Feeds into| Chains["Chains"]
