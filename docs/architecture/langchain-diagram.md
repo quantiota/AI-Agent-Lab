@@ -1,4 +1,4 @@
-## Task: Build LangChain Diagram
+## Build LangChain Diagram
 
 ### Instructions:
 1. **File**: Use the `langchain-diagram.md` file as the destination for the diagram.
