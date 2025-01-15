@@ -65,7 +65,7 @@ document.querySelector('input[type="file"]').addEventListener('change', function
 });
 
 function fetchFiles() {
-  fetch('/list-files')
+  fetch('/files/list-files')
     .then(response => response.json())
     .then(data => renderFileList(data.files))
     .catch(console.error);
@@ -90,7 +90,7 @@ function compareFiles(a, b) {
 }
 
 function deleteFile(filename) {
-  fetch('/delete-file', {
+  fetch('/files/delete-file', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: new URLSearchParams({ filename })
@@ -105,13 +105,13 @@ function deleteFile(filename) {
 
 function restartNginx() {
   document.getElementById('nginx-message').style.display = 'block';
-  fetch('/restart/nginx')
+  fetch('/containers/restart/nginx')
     .then(() => console.log('Nginx restart initiated'))
     .catch(console.error);
 }
 
 function fetchBackups() {
-  fetch('/api/list-backups')
+  fetch('/backups/api/list-backups')
     .then(response => response.json())
     .then(data => populateBackupList(data.backups))
     .catch(error => {
@@ -141,7 +141,7 @@ function handleRestore() {
   document.getElementById('restore-btn').disabled = true;
   document.getElementById('status-message').textContent = 'Restoring backup...';
 
-  fetch('/api/restore-backup', {
+  fetch('/backups/api/restore-backup', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ selectedBackup })

@@ -3,3 +3,4 @@ openai
 requests
 docker
 werkzeug
+python-dotenv  
