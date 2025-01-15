@@ -7,8 +7,7 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
-    volumes:
-      # volume used to access the `notebooks` folder
+    volumes:         
       - ../notebooks:/home/coder/project
     env_file:
       - .env
