@@ -1,5 +1,9 @@
 # AI Agent Lab
 
+
+> **Note**: This repository serves as a reference and template for developers who want to build their own AI agent on top of the lab infrastructure. For a production-ready Claude Code-powered version, see [AI Agent Host](https://github.com/quantiota/AI-Agent-Host).
+
+
 The AI Agent Lab is a module-based environment for working with the GPT-3.5 architecture, designed to facilitate rapid experimentation and testing of language models. The AI Agent Lab includes a docker-compose configuration with QuestDB, Grafana, Code-Server, Nginx and an AI Agent, providing a seamless interface for managing and querying data, visualizing results, and coding in real-time. With the AI Agent Lab, users can quickly set up a notebook environment and start experimenting with GPT-3.5 models, without the need for complex setup or configuration
 
 The AI Agent Lab is also the basis for the AI Agent Farm, a modular system for developing and deploying AI agents. By using the AI Agent Lab as a module in the AI Agent Farm, users can easily connect their agents to real-time data streams and other sources of information, allowing for more sophisticated and accurate decision-making. With its flexible and modular design, AI-Agent-Lab is a powerful tool for anyone working with GPT-3.5 models and data streams in their AI applications.
