@@ -4,4 +4,3 @@
  psycopg2-binary==2.9.12
  websocket-client==1.9.0
  openai==1.43.0
- asciinema
