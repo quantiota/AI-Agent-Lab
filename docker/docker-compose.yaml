@@ -9,7 +9,6 @@ services:
       - "8080:8080"
     volumes:         
       - ../notebooks:/home/coder/project
-      - ../docker:/home/coder/docker
     env_file:
       - .env
 
