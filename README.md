@@ -4,7 +4,7 @@
 >
 > *Sophistication is in the AI Agent Lab. Productivity is in the AI Agent Host.*
 
-![dashboard]
+![dashboard](https://raw.githubusercontent.com/quantiota/AI-Agent-Lab/refs/heads/main/docs/screenshots/dashboard.png)
 
 
 The AI Agent Lab is a module-based environment for working with **Claude (Anthropic)** models, designed to facilitate rapid experimentation and testing of language models. The AI Agent Lab includes a docker-compose configuration with QuestDB, Grafana, Code-Server, Nginx and an AI Agent, providing a seamless interface for managing and querying data, visualizing results, and coding in real-time. With the AI Agent Lab, users can quickly set up a notebook environment and start experimenting with Claude models, without the need for complex setup or configuration
