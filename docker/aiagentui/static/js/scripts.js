@@ -346,7 +346,7 @@ function uploadFileIcon(name) {
   const base = ({ csv: 'csv-01-stroke-rounded', txt: 'txt-01-stroke-rounded',
                   sql: 'sql-stroke-rounded',   pdf: 'pdf-01-stroke-rounded' })[ext]
                 || 'txt-01-stroke-rounded';
-  return { light: `/static/img/${base}-black.svg`, dark: `/static/img/${base}-white.svg` };
+  return `/static/img/${base}-black.svg`;   // single file; .app-icon colors it via CSS mask
 }
 
 function uploadFile(file) {
@@ -379,13 +379,12 @@ function renderFileList(files) {
   const list = document.getElementById('file-list');
   if (!list) return;
   list.innerHTML = '';
-  const isDark = document.body.classList.contains('is-dark');
   files.slice().sort((a, b) => a.localeCompare(b)).forEach(name => {
     const icon = uploadFileIcon(name);
     const row = document.createElement('div');
     row.className = 'upload-file-row';
     row.innerHTML =
-      `<img class="ufr-icon" alt="" src="${isDark ? icon.dark : icon.light}" data-icon-light="${icon.light}" data-icon-dark="${icon.dark}" />` +
+      `<span class="ufr-icon app-icon" aria-hidden="true" style="--icon: url('${icon}')"></span>` +
       `<span class="ufr-name"></span>` +
       `<button class="ufr-remove" type="button" title="Remove" aria-label="Remove">` +
         `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>` +

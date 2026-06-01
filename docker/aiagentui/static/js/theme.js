@@ -20,12 +20,8 @@ function applyTheme() {
       darkIcon.style.display = 'none';
     }
   
-    // Update images to match the current theme
-    document.querySelectorAll('img[data-icon-light][data-icon-dark]').forEach(icon => {
-      const newSrc = isDarkMode ? icon.getAttribute('data-icon-dark') : icon.getAttribute('data-icon-light');
-      icon.src = newSrc;
-      icon.srcset = `${newSrc} 2x`; // For high-resolution images
-    });
+    // Icons use the .app-icon standard (CSS mask + currentColor), so they follow
+    // the theme automatically — no src-swapping needed here.
 
     // Match the Grafana panels to the current theme (rewrite their ?theme= param)
     const grafanaTheme = isDarkMode ? 'dark' : 'light';

@@ -100,6 +100,18 @@ body {
   object-fit: contain;
 }
 
+/* Unified icon standard: one monochrome SVG rendered as a CSS mask and colored
+   via currentColor. Adapts to the theme through the color variable — no invert
+   filter, no JS src-swap, no black/white twin files. Set the file with --icon. */
+.app-icon {
+  display: inline-block;
+  flex: 0 0 auto;
+  background-color: currentColor;
+  color: var(--vf-color-text-default);
+  -webkit-mask: var(--icon) center / contain no-repeat;
+          mask: var(--icon) center / contain no-repeat;
+}
+
 .sidebar-label {
   text-align: center;
   max-width: 66px;
@@ -109,11 +121,8 @@ body {
   color: var(--vf-color-text-muted);
 }
 
-/* Icons that ship a dedicated dark-mode SVG (via data-icon-dark) opt out of
-   the invert filter to avoid being inverted twice. */
-.is-dark .sidebar-icon-img:not(.no-invert) {
-  filter: invert(1);
-}
+/* Dark mode is handled by the .app-icon standard (currentColor + CSS mask),
+   so no per-icon invert filter is needed. */
 
 /* ========================
    SIDEBAR POPOVER (per-icon dropdown)
