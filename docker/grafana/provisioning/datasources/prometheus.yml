@@ -4,8 +4,6 @@ datasources:
   - name: Prometheus
     type: prometheus
     access: proxy
-    isDefault: true
-    isDefault: true
     url: http://prometheus-ip-address:9090
     isDefault: true
     editable: false
