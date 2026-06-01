@@ -4,7 +4,7 @@ datasources:
   - name: Prometheus
     type: prometheus
     access: proxy
-    url: url: http://prometheus-ip-address:9090
+    url: http://prometheus-ip-address:9090
     isDefault: false
     editable: false
     uid: rYdddlPWk  # Ensure this UID is unique, used in the dashboard JSON
