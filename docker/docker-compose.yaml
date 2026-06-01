@@ -10,7 +10,7 @@ services:
     volumes:
       # volume used to access the `notebooks` folder
       - ../notebooks:/home/coder/project
-      - ../docker:/home/coder/docker
+      - ./aiagentui/uploads:/home/coder/project/uploads
       - claude-config:/home/coder/.config/claude-code
       - claude-data:/home/coder/.claude
 
