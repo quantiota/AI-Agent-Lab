@@ -1,0 +1,45 @@
+\begin{tikzpicture}[node distance=1cm, every node/.style={font=\small}]
+
+%%%%%%%%%% Nodes %%%%%%%%%%
+
+\node[default] (User) {User\\};
+
+% Docker Services (Top)
+\node[default, below left=1cm and 1cm of User] (certbot) {Certbot};
+\node[default, below=4cm of User] (nginx) {Nginx\\(Port 80, 443)};
+\node[default, below=2cm of nginx, xshift=-3cm] (codeserver) {code-server\\(Port 8080)};
+\node[default, left=of codeserver] (grafana) {Grafana\\(Port 3000)};
+\node[default, below=2cm of codeserver] (questdb) {QuestDB\\(Port 9000, 9009, 8812, 9003)};
+\begin{pgfonlayer}{bg}
+\node[
+    subgraph,
+    fit=(codeserver) (grafana) (questdb) (nginx) (certbot),
+    label={[font=\sffamily\bfseries, cyan!80!blue]above:Docker Services}
+] (DockerServices) {};
+\end{pgfonlayer}
+
+% Storage Layer (Bottom - Wider)
+\node[storage, text width=3cm, below=2cm of questdb, xshift=-2cm] (RAID) {RAID10};
+\node[default, below=2cm of questdb, xshift=2cm] (Backup) {Backup/Recovery\\rsnapshot};
+\begin{pgfonlayer}{bg}
+\node[
+    subgraph,
+    fit=(RAID) (Backup),
+    label={[font=\sffamily\bfseries, cyan!80!blue]below:localhost}
+] (storageLayer) {};
+\end{pgfonlayer}
+
+%%%%%%%%%% Connections %%%%%%%%%%
+
+\draw[arrow] ([xshift=0.1cm]User.south) to node[arrownode] {Interacts with} ([xshift=0.1cm]nginx.north);
+\draw[arrow] (nginx) to (nginx |- 0,-6.8) to node[arrownode] {Routes requests} (codeserver |- 0,-6.8) to (codeserver);
+\draw[arrow] ([xshift=-0.2cm]nginx.south) |- (codeserver |- 0,-6.4) to node[arrownode] {Routes requests} (grafana |- 0,-6.4) to (grafana);
+\draw[arrow] ([xshift=0.2cm]nginx.south) to node[arrownode] {Routes requests} ([xshift=0.2cm]nginx |- 0,-9.7) -| ([xshift=0.2cm]questdb.north);
+\draw[arrow] (codeserver) to node[arrownode] {Ingests data} (codeserver |- 0,-9.7) to (questdb);
+\draw[arrow] (grafana) to node[arrownode] {Queries data} (grafana |- 0,-9.7) -| ([xshift=-0.2cm]questdb.north);
+\draw[arrow] (certbot) to node[arrownode] {Manages SSL Certificates} (certbot |- 0,-3.8) -| ([xshift=-0.1cm]nginx.north);
+
+% Connection to storage (Implicit)
+\draw[arrow] (questdb) to node[arrownode] {Data Persistence} (storageLayer);
+
+\end{tikzpicture}

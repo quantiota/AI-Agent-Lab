@@ -1,0 +1,77 @@
+\begin{tikzpicture}[node distance=1cm, every node/.style={font=\small}]
+
+%%%%%%%%%% Nodes %%%%%%%%%%
+
+% Input Layer
+\node[input] (terminal) {Terminal Session\\(Claude Code)};
+\node[input, below=of terminal] (raw) {Raw Data:\\• Keystrokes\\• Screen Output\\• Commands};
+
+% Dual Processing Paths
+\node[realtime, below=1.5cm of raw, xshift=3.5cm] (realtime_detect) {Live Message Detection\\(Lightweight Classification)};
+\node[realtime, below=of realtime_detect] (message_buffer) {Message Buffer\\(2s timeout / 500 chars, debounce \& merge)};
+\node[realtime, below=of message_buffer] (stream_insert) {Stream Insert\\(Immediate QuestDB)};
+\begin{pgfonlayer}{bg}
+\node[
+	subgraph,
+    fit=(realtime_detect) (message_buffer) (stream_insert),
+    label={[font=\sffamily\bfseries, cyan!80!blue]above:Real-Time Streaming Path}
+] {};
+\end{pgfonlayer}
+\node[batch, below=1.5cm of raw, xshift=-3.5cm] (logs) {Session Logs\\• session.log • timing.log • meta.json};
+\node[batch, below=of logs] (parser) {Full Parse + Timestamp + Classify\\(Detailed Analysis)};
+\node[batch, below=of parser] (events) {Structured Events\\(JSON/CSV)};
+\node[batch, below=of events] (validate) {Integrity Check \& Gap Recovery\\(idempotent upsert)};
+\begin{pgfonlayer}{bg}
+\node[
+	subgraph,
+    fit=(logs) (parser) (events) (validate),
+    label={[font=\sffamily\bfseries, cyan!80!blue]above:Batch Validation Path}
+] {};
+\end{pgfonlayer}
+
+% Database Schema
+\node[storage, below=10.5cm of raw, xshift=-3.5cm] (questdb) {chat/events tables\\Time-series optimized};
+\node[schema, below=of questdb] (schema) {Schema Structure:\\• timestamp (TIMESTAMP)\\• session\_id (SYMBOL)\\• message\_type (SYMBOL)\\• content (STRING)\\• project\_tag (SYMBOL)\\• tool\_used (SYMBOL)\\• response\_quality (DOUBLE)\\• context\_tokens (INT)\\PARTITIONED BY DAY};
+\begin{pgfonlayer}{bg}
+\node[
+	subgraph,
+    fit=(questdb) (schema),
+    label={[font=\sffamily\bfseries, cyan!80!blue]below:QuestDB Storage Schema}
+] {};
+\end{pgfonlayer}
+
+% Intelligence Layer
+\node[storage, right=3cm of questdb] (extquestdb) {Exterior QuestDB Cluster\\Centralized Telemetry Repository};
+\node[intelligence, below=of extquestdb] (grafana) {Grafana Dashboards\\Real-time Analysis};
+\node[intelligence, below=of grafana] (ska) {Structured Knowledge Accumulation (SKA)};
+
+%%%%%%%%%% Connections %%%%%%%%%%
+
+% Flow Connections
+\draw[arrow] (terminal) to (raw);
+\draw[arrow] ([xshift=0.1cm]raw.south) to ++(0,-0.5) -| (realtime_detect);
+\draw[arrow] ([xshift=-0.1cm]raw.south) to ++(0,-0.5) -| (logs);
+
+% Real-time path
+\draw[arrow] (realtime_detect) to (message_buffer);
+\draw[arrow] (message_buffer) to (stream_insert);
+\draw[arrow] (stream_insert) to ++(0,-3.5) -| ([xshift=0.1cm]questdb.north);
+
+\draw[arrow] ([yshift=0.2cm]questdb.east) to ([yshift=0.2cm]extquestdb.west);
+\draw[arrow] ([yshift=-0.1cm]extquestdb.east) to ++(1,0) |- (grafana);
+\draw[arrow] ([yshift=0.1cm]extquestdb.east) to ++(1.2,0) |- (ska);
+
+% Batch validation path  
+\draw[arrow] (logs) to (parser);
+\draw[arrow] (parser) to (events);
+\draw[arrow] (events) to (validate);
+\draw[arrow] ([xshift=-0.1cm]validate.south) to ([xshift=-0.1cm]questdb.north);
+
+% Schema connection
+\draw[arrow] (questdb) to (schema);
+
+% Intelligence layer
+\draw[arrow] (questdb.east) to ++(2,0) |- (grafana);
+\draw[arrow] ([yshift=-0.2cm]questdb.east) to ++(1.8,0) |- (ska);
+
+\end{tikzpicture}
