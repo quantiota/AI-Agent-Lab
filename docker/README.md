@@ -158,6 +158,13 @@ APP_SECRET_KEY=your_very_secure_secret_key
 DOMAIN=domaim.tld
 
 ```
+and to define your domain name in the '**nginx.env**' file:
+
+```
+     # nginx/nginx.env
+    
+      DOMAIN=domain.tld
+```
 
 
 Remember to replace the placeholders with your actual domain, passwords, and usernames. 
