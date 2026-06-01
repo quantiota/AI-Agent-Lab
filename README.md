@@ -1,24 +1,24 @@
 # AI Agent Lab
 
-> **Note**: This repository serves as a reference and template for developers who want to build their own AI agent on top of the lab infrastructure. Claude Code can be added to the Code-Server container to provide AI-assisted development directly inside the lab. For a production-ready Claude Code-powered version, see [AI Agent Host](https://github.com/quantiota/AI-Agent-Host).
+> **Note**: This repository serves as a reference and template for developers who want to build their own AI agent on top of the lab infrastructure. Claude Code runs inside the Code-Server container to provide AI-assisted development directly inside the lab. For a production-ready Claude Code-powered version, see [AI Agent Host](https://github.com/quantiota/AI-Agent-Host).
 >
 > *Sophistication is in the AI Agent Lab. Productivity is in the AI Agent Host.*
 
 
-The AI Agent Lab is a module-based environment for working with the GPT-3.5 architecture, designed to facilitate rapid experimentation and testing of language models. The AI Agent Lab includes a docker-compose configuration with QuestDB, Grafana, Code-Server, Nginx and an AI Agent, providing a seamless interface for managing and querying data, visualizing results, and coding in real-time. With the AI Agent Lab, users can quickly set up a notebook environment and start experimenting with GPT-3.5 models, without the need for complex setup or configuration
+The AI Agent Lab is a module-based environment for working with **Claude (Anthropic)** models, designed to facilitate rapid experimentation and testing of language models. The AI Agent Lab includes a docker-compose configuration with QuestDB, Grafana, Code-Server, Nginx and an AI Agent, providing a seamless interface for managing and querying data, visualizing results, and coding in real-time. With the AI Agent Lab, users can quickly set up a notebook environment and start experimenting with Claude models, without the need for complex setup or configuration
 
-The AI Agent Lab is also the basis for the AI Agent Farm, a modular system for developing and deploying AI agents. By using the AI Agent Lab as a module in the AI Agent Farm, users can easily connect their agents to real-time data streams and other sources of information, allowing for more sophisticated and accurate decision-making. With its flexible and modular design, AI-Agent-Lab is a powerful tool for anyone working with GPT-3.5 models and data streams in their AI applications.
+The AI Agent Lab is also the basis for the AI Agent Farm, a modular system for developing and deploying AI agents. By using the AI Agent Lab as a module in the AI Agent Farm, users can easily connect their agents to real-time data streams and other sources of information, allowing for more sophisticated and accurate decision-making. With its flexible and modular design, AI-Agent-Lab is a powerful tool for anyone working with Claude models and data streams in their AI applications.
 
 
 To use AI Agent Lab with a remote JupyterHub environment, follow these steps:
 
-- Set up or use an existing remote JupyterHub that includes the necessary dependencies for working with GPT-3.5 models and data streams.
+- Set up or use an existing remote JupyterHub that includes the necessary dependencies for working with Claude models and data streams.
 
 - Launch the AI Agent Lab using the provided docker-compose file.
 
 - Connect to the remote JupyterHub environment from within the Code-Server interface provided by AI-Agent-Lab.
 
-Start working with GPT-3.5 models and data streams, using the pre-installed tools and libraries that are included in your remote environment.
+Start working with Claude models and data streams, using the pre-installed tools and libraries that are included in your remote environment.
 
 ## Features
 
@@ -31,9 +31,9 @@ Start working with GPT-3.5 models and data streams, using the pre-installed tool
 
 4. **Nginx**: Nginx is a widely-used web server and reverse proxy server. It enhances the AI Agent Lab by providing additional functionality for routing and load balancing, improving performance and security
 
-5. **AI Agent**: The AI Agent is the core backend service in the AI Agent Lab, handling AI processing, data retrieval, and related operations. 
+5. **AI Agent**: The AI Agent handles AI-assisted development inside the lab, powered by **Claude Code** (as an option) in the Code-Server container.
 
-6. **AI Agent UI**: The AI Agent UI provides an intuitive, web-based interface for interacting with the AI agent. 
+6. **AI Agent UI**: The AI Agent UI provides an intuitive, web-based chat interface, powered by **Claude (Anthropic)** as an option. It calls the Anthropic Messages API directly, with model switching across Haiku, Sonnet, and Opus. 
 
 
 
@@ -111,6 +111,4 @@ For optimal performance, the AI Agent Lab requires the following hardware setup:
 
 - [Grafana - The open observability platform](https://grafana.com/)
 
-- [Langchain](https://python.langchain.com)
- 
 - [MicroServer Gen8](https://www.storagereview.com/review/hp-proliant-microserver-gen8-review)

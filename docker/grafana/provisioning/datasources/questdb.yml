@@ -1,35 +1,18 @@
-# To remove the old QuestDB datasource (e.g. after a uid change or rename),
-# create a separate cleanup file in this directory — do NOT add the block below.
-# A single YAML can hold both `deleteDatasources` and `datasources:`, but Grafana
-# runs deletes BEFORE creates on each boot, so combining them here would delete
-# the datasource and immediately recreate it on every restart.
-#
-# Cleanup file example: ./cleanup-questdb.yaml
-#   apiVersion: 1
-#   deleteDatasources:
-#     - name: QuestDB
-#       orgId: 1
-#
-# After the next `docker compose restart grafana`, verify removal with:
-#   curl -s -u admin:admin http://localhost:3000/api/datasources
-# Then delete the cleanup file so it doesn't re-delete on future boots.
-
 apiVersion: 1
+
 datasources:
+  # https://grafana.com/docs/grafana/latest/datasources/postgres/#provisioning-example
   - name: QuestDB
-    type: questdb-questdb-datasource
-    uid: 2Bi8EToVz 
-    isDefault: true
+    type: postgres
+    access: proxy
+    url: questdb:8812
+    database: qdb
+    user: admin
+    uid: 2Bi8EToVz # the uid is used in the dashboard JSON file
     jsonData:
-      server: host.docker.internal
-      port: 8812
-      username: admin
-      tlsMode: disable
-      # timeout: <seconds>
-      # queryTimeout: <seconds>
-      maxOpenConnections: 100
-      maxIdleConnections: 100
-      maxConnectionLifetime: 14400
+      postgresVersion: 9.3
+      sslmode: disable
+      timescaledb: false
+    # https://grafana.com/docs/grafana/latest/administration/provisioning/#using-environment-variables
     secureJsonData:
       password: ${GRAFANA_QUESTDB_PASSWORD}
-      # tlsCACert: <string>  

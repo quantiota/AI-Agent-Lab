@@ -1,0 +1,2 @@
+# Local secrets — holds the Anthropic API key, passwords, and app secret
+.env

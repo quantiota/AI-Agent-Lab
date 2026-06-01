@@ -14,7 +14,7 @@ map $http_upgrade $connection_upgrade {
 # HTTP server to redirect all 80 traffic to SSL/HTTPS
 server {
     listen 80;
-    server_name vscode.${DOMAIN} questdb.${DOMAIN} grafana.${DOMAIN}  aiagentui.${DOMAIN};
+    server_name  vscode.${DOMAIN} questdb.${DOMAIN} grafana.${DOMAIN}  aiagentui.${DOMAIN};
 
     # Tell all requests to port 80 to be 302 redirected to HTTPS
     location / {
@@ -26,6 +26,7 @@ server {
         allow all;
     }
 }
+
 
 # HTTPS server to handle VS Code
 server {
@@ -47,7 +48,9 @@ server {
 
     # Managing literal requests to the VS Code front end
     location / {
-        proxy_pass http://vscode:8080;
+        resolver 127.0.0.11 valid=10s;
+        set $upstream_vscode vscode;
+        proxy_pass http://$upstream_vscode:8080;
 
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header Host $host;
@@ -95,7 +98,9 @@ server {
 
     # Managing literal requests to the Questdb front end
     location / {
-        proxy_pass http://questdb:9000;
+        resolver 127.0.0.11 valid=10s;
+        set $upstream_questdb questdb;
+        proxy_pass http://$upstream_questdb:9000;
         autoindex on;
         auth_basic "Restricted Content";
         auth_basic_user_file .htpasswd;
@@ -147,7 +152,9 @@ server {
 
     # Managing literal requests to the Grafana front end
     location / {
-        proxy_pass http://grafana:3000;
+        resolver 127.0.0.11 valid=10s;
+        set $upstream_grafana grafana;
+        proxy_pass http://$upstream_grafana:3000;
 
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header Host $host;
@@ -196,6 +203,8 @@ server {
     # Managing literal requests to the Chat front end
     location / {
         proxy_pass http://aiagentui:5000;
+        auth_basic "Restricted Content";
+        auth_basic_user_file .htpasswd;
 
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header Host $host;
@@ -215,3 +224,4 @@ server {
         allow all;
     }
 }
+

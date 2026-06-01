@@ -26,8 +26,17 @@ COPY requirements.txt /tmp/requirements.txt
 RUN pip install -r /tmp/requirements.txt
 
 
+
+# Create and set permissions for Claude directories
+RUN mkdir -p /home/coder/.claude /home/coder/.config/claude-code && \
+    chown -R coder:coder /home/coder/.claude /home/coder/.config && \
+    chmod -R u+rwX /home/coder/.claude /home/coder/.config
+
 # Switch to coder user
 USER coder
+
+# Install Claude Code via native installer
+RUN curl -fsSL https://claude.ai/install.sh | bash
 
 
 # Install VS Code extensions

@@ -135,6 +135,7 @@ if __name__ == "__main__":
     urls = [
         "wss://stream.binance.com:9443/ws/btcusdt@trade",
         "wss://stream.binance.com:9443/ws/ethusdt@trade"
+      
     ]
 
     # Start WebSocket connections in separate threads

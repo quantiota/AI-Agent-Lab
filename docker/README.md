@@ -145,24 +145,20 @@ QDB_PG_PORT=8812
 
 
 
-
 # Chatbot
-OPENAI_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+ANTHROPIC_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 
 # secret key
 
-SECRET_KEY=your_very_secure_secret_key
+APP_SECRET_KEY=your_very_secure_secret_key
+
+
+# domain
+DOMAIN=domaim.tld
 
 ```
 
-and to define your domain name in the '**nginx.env**' file:
-
-```
-     # nginx/nginx.env
-    
-      DOMAIN=domain.tld
-```
 
 Remember to replace the placeholders with your actual domain, passwords, and usernames. 
 
@@ -227,7 +223,7 @@ datasources:
     type: prometheus
     access: proxy
     url: http://prometheus-ip-address:9090
-    isDefault: false
+    isDefault: true
     editable: false
     uid: rYdddlPWj  # Ensure this UID is unique, used in the dashboard JSON
 ```

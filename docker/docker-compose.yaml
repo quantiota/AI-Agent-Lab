@@ -1,4 +1,4 @@
-version: "3"
+
 
 services:
   vscode:
@@ -7,15 +7,18 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
-    volumes:         
+    volumes:
+      # volume used to access the `notebooks` folder
       - ../notebooks:/home/coder/project
+      - ../docker:/home/coder/docker
+      - claude-config:/home/coder/.config/claude-code
+      - claude-data:/home/coder/.claude
+
     env_file:
       - .env
 
   grafana:
-    image: grafana/grafana:12.4.1
-    environment:
-      - GF_INSTALL_PLUGINS=questdb-questdb-datasource 
+    image: grafana/grafana:11.2.2
     ports:
       - "3000:3000"
     volumes:
@@ -23,15 +26,13 @@ services:
       - ./grafana/provisioning/datasources/:/etc/grafana/provisioning/datasources/
       - ./grafana/provisioning/dashboards/:/etc/grafana/provisioning/dashboards/
       - ./grafana/dashboards:/etc/dashboards
-    extra_hosts:
-      - "host.docker.internal:host-gateway"  
     depends_on:
       - questdb
     env_file:
       - .env
 
   questdb:
-    image: questdb/questdb:9.4.0
+    image: questdb/questdb:8.1.2
     ports:
       - "9000:9000"
       - "9009:9009"
@@ -43,34 +44,20 @@ services:
       - .env
 
 
-  aiagent:
-    build:
-      context: aiagent    
-      dockerfile: Dockerfile
-    ports:
-      - "5001:5001"  
-    volumes:
-      - ./grafana/dashboards:/grafana_dashboards   
-    depends_on:
-      - vscode      
-      - questdb     
-      - grafana     
-    env_file:
-      - .env   
-
    
-  aiagentui:  
-    build:   
+  aiagentui:  # Flask application service
+    build:   # Specify the location of your Dockerfile and application code
       context: aiagentui
       target: builder
+
     ports:
-      - "5000:5000" 
+      - "5000:5000"  # Map port 5000 of the container to port 5000 on the host
     volumes:
-      - ./aiagentui:/aiagentui 
+      - ./aiagentui:/aiagentui  # Optional: Mount the application directory for live reloading in development  
       - /var/run/docker.sock:/var/run/docker.sock
       - ./aiagentui/uploads:/aiagentui/uploads
       - /backup/rsnapshot:/backup/rsnapshot:ro 
-      - /recovery-microserver.sh:/recovery-microserver.sh   
+      - /recovery-microserver.sh:/recovery-microserver.sh
     env_file:
       - .env
 
@@ -88,13 +75,13 @@ services:
       - "80:80"
       - "443:443"
     env_file:
-      - .env
+      - ./nginx/nginx.env
     command: /bin/bash -c "envsubst '$$DOMAIN' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && exec nginx -g 'daemon off;'"
     depends_on:
       - vscode
       - grafana
       - questdb
-      - aiagentui
+      - aiagentui      
   # Refer to ./init.yaml to for initial SSL setup
   # add the following line in in crontab (5 am, every monday)
   #   0 5 * * 1 docker compose run certbot renew
@@ -110,3 +97,7 @@ services:
 volumes:
   grafana-data:
   questdb-data:
+  claude-config:
+  claude-data:
+
+

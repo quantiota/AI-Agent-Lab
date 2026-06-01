@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Agent Lab Dashboard</title>
+    <link href="/static/css/vanilla.css" rel="stylesheet">
+    <link href="/static/css/style.css" rel="stylesheet">
+  </head>
+  <body class="is-paper">
+
+    <!-- Flash messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <div class="flash-messages">
+      {% for category, message in messages %}
+      <div class="alert alert-{{ category }}">{{ message }}</div>
+      {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    <!-- Left Icon Sidebar -->
+    <aside class="icon-sidebar">
+      <nav class="sidebar-nav">
+        <div class="sidebar-item-wrap">
+          <button type="button" class="sidebar-item" onclick="toggleSidebarPopover(event, 'code-server')" aria-haspopup="menu" aria-expanded="false" title="Code Server">
+            <div class="sidebar-icon-wrap">
+              <img src="/static/img/coder.svg" alt="Code Server" class="sidebar-icon-img"
+                data-icon-light="/static/img/coder.svg"
+                data-icon-dark="/static/img/coder.svg" />
+            </div>
+            <span class="sidebar-label">Code Server</span>
+          </button>
+          <div class="sidebar-popover" id="pop-code-server" role="menu" hidden>
+            <a class="sidebar-popover-item" href="https://vscode.{{ domain }}" target="_blank" rel="noopener noreferrer" role="menuitem">
+              <span>Open Code Server</span>
+              <img class="sidebar-popover-icon" src="/static/img/link-square-01-stroke-rounded-black.svg" alt=""
+                data-icon-light="/static/img/link-square-01-stroke-rounded-black.svg"
+                data-icon-dark="/static/img/link-square-01-stroke-rounded-white.svg" />
+            </a>
+            <a class="sidebar-popover-item" href="https://coder.com/docs/code-server" target="_blank" rel="noopener noreferrer" role="menuitem">
+              <span>Learn More</span>
+              <img class="sidebar-popover-icon" src="/static/img/link-square-01-stroke-rounded-black.svg" alt=""
+                data-icon-light="/static/img/link-square-01-stroke-rounded-black.svg"
+                data-icon-dark="/static/img/link-square-01-stroke-rounded-white.svg" />
+            </a>
+          </div>
+        </div>
+        <div class="sidebar-item-wrap">
+          <button type="button" class="sidebar-item" onclick="toggleSidebarPopover(event, 'questdb')" aria-haspopup="menu" aria-expanded="false" title="QuestDB">
+            <div class="sidebar-icon-wrap">
+              <img src="/static/img/questdb.svg" alt="QuestDB" class="sidebar-icon-img"
+                data-icon-light="/static/img/questdb.svg"
+                data-icon-dark="/static/img/questdb.svg" />
+            </div>
+            <span class="sidebar-label">QuestDB</span>
+          </button>
+          <div class="sidebar-popover" id="pop-questdb" role="menu" hidden>
+            <a class="sidebar-popover-item" href="https://questdb.{{ domain }}" target="_blank" rel="noopener noreferrer" role="menuitem">
+              <span>Open QuestDB</span>
+              <img class="sidebar-popover-icon" src="/static/img/link-square-01-stroke-rounded-black.svg" alt=""
+                data-icon-light="/static/img/link-square-01-stroke-rounded-black.svg"
+                data-icon-dark="/static/img/link-square-01-stroke-rounded-white.svg" />
+            </a>
+            <a class="sidebar-popover-item" href="https://questdb.io/docs/" target="_blank" rel="noopener noreferrer" role="menuitem">
+              <span>Learn More</span>
+              <img class="sidebar-popover-icon" src="/static/img/link-square-01-stroke-rounded-black.svg" alt=""
+                data-icon-light="/static/img/link-square-01-stroke-rounded-black.svg"
+                data-icon-dark="/static/img/link-square-01-stroke-rounded-white.svg" />
+            </a>
+          </div>
+        </div>
+        <div class="sidebar-item-wrap">
+          <button type="button" class="sidebar-item" onclick="toggleSidebarPopover(event, 'grafana')" aria-haspopup="menu" aria-expanded="false" title="Grafana">
+            <div class="sidebar-icon-wrap">
+              <img src="/static/img/grafana.svg" alt="Grafana" class="sidebar-icon-img"
+                data-icon-light="/static/img/grafana.svg"
+                data-icon-dark="/static/img/grafana.svg" />
+            </div>
+            <span class="sidebar-label">Grafana</span>
+          </button>
+          <div class="sidebar-popover" id="pop-grafana" role="menu" hidden>
+            <a class="sidebar-popover-item" href="https://grafana.{{ domain }}/dashboards" target="_blank" rel="noopener noreferrer" role="menuitem">
+              <span>Open Grafana</span>
+              <img class="sidebar-popover-icon" src="/static/img/link-square-01-stroke-rounded-black.svg" alt=""
+                data-icon-light="/static/img/link-square-01-stroke-rounded-black.svg"
+                data-icon-dark="/static/img/link-square-01-stroke-rounded-white.svg" />
+            </a>
+            <a class="sidebar-popover-item" href="https://grafana.com/docs/" target="_blank" rel="noopener noreferrer" role="menuitem">
+              <span>Learn More</span>
+              <img class="sidebar-popover-icon" src="/static/img/link-square-01-stroke-rounded-black.svg" alt=""
+                data-icon-light="/static/img/link-square-01-stroke-rounded-black.svg"
+                data-icon-dark="/static/img/link-square-01-stroke-rounded-white.svg" />
+            </a>
+          </div>
+        </div>
+        <div class="sidebar-item-wrap">
+          <button type="button" class="sidebar-item" onclick="toggleSidebarPopover(event, 'prometheus')" aria-haspopup="menu" aria-expanded="false" title="Prometheus">
+            <div class="sidebar-icon-wrap">
+              <img src="/static/img/prometheus.svg" alt="Prometheus" class="sidebar-icon-img"
+                data-icon-light="/static/img/prometheus.svg"
+                data-icon-dark="/static/img/prometheus.svg" />
+            </div>
+            <span class="sidebar-label">Prometheus</span>
+          </button>
+          <div class="sidebar-popover" id="pop-prometheus" role="menu" hidden>
+            <a class="sidebar-popover-item" href="https://grafana.{{ domain }}/d/rYdddlPWj/node-exporter-full" target="_blank" rel="noopener noreferrer" role="menuitem">
+              <span>System Metrics</span>
+              <img class="sidebar-popover-icon" src="/static/img/link-square-01-stroke-rounded-black.svg" alt=""
+                data-icon-light="/static/img/link-square-01-stroke-rounded-black.svg"
+                data-icon-dark="/static/img/link-square-01-stroke-rounded-white.svg" />
+            </a>
+            <a class="sidebar-popover-item" href="https://prometheus.io/docs/" target="_blank" rel="noopener noreferrer" role="menuitem">
+              <span>Learn More</span>
+              <img class="sidebar-popover-icon" src="/static/img/link-square-01-stroke-rounded-black.svg" alt=""
+                data-icon-light="/static/img/link-square-01-stroke-rounded-black.svg"
+                data-icon-dark="/static/img/link-square-01-stroke-rounded-white.svg" />
+            </a>
+          </div>
+        </div>
+        <div class="sidebar-item-wrap">
+          <button type="button" class="sidebar-item" onclick="toggleSidebarPopover(event, 'claude')" aria-haspopup="menu" aria-expanded="false" title="Claude AI">
+            <div class="sidebar-icon-wrap">
+              <img src="/static/img/claude-stroke-rounded-black.svg" alt="Claude AI" class="sidebar-icon-img no-invert"
+                data-icon-light="/static/img/claude-stroke-rounded-black.svg"
+                data-icon-dark="/static/img/claude-stroke-rounded-white.svg" />
+            </div>
+            <span class="sidebar-label">Claude AI</span>
+          </button>
+          <div class="sidebar-popover" id="pop-claude" role="menu" hidden>
+            <a class="sidebar-popover-item" href="javascript:void(0)" role="menuitem" onclick="closeSidebarPopovers(); openModal('claude')">
+              <span>Claude API Key</span>
+              <img class="sidebar-popover-icon" src="/static/img/link-square-01-stroke-rounded-black.svg" alt=""
+                data-icon-light="/static/img/link-square-01-stroke-rounded-black.svg"
+                data-icon-dark="/static/img/link-square-01-stroke-rounded-white.svg" />
+            </a>
+            <a class="sidebar-popover-item" href="https://platform.claude.com/docs/en/home" target="_blank" rel="noopener noreferrer" role="menuitem">
+              <span>Learn More</span>
+              <img class="sidebar-popover-icon" src="/static/img/link-square-01-stroke-rounded-black.svg" alt=""
+                data-icon-light="/static/img/link-square-01-stroke-rounded-black.svg"
+                data-icon-dark="/static/img/link-square-01-stroke-rounded-white.svg" />
+            </a>
+          </div>
+        </div>
+        <div class="sidebar-item-wrap">
+          <button type="button" class="sidebar-item" onclick="toggleSidebarPopover(event, 'jupyterhub')" aria-haspopup="menu" aria-expanded="false" title="JupyterHub">
+            <div class="sidebar-icon-wrap">
+              <img src="/static/img/jupyterhub.svg" alt="JupyterHub" class="sidebar-icon-img"
+                data-icon-light="/static/img/jupyterhub.svg"
+                data-icon-dark="/static/img/jupyterhub.svg" />
+            </div>
+            <span class="sidebar-label">JupyterHub</span>
+          </button>
+          <div class="sidebar-popover" id="pop-jupyterhub" role="menu" hidden>
+            <a class="sidebar-popover-item" href="https://jupyterhub.{{ domain }}/hub/token" target="_blank" rel="noopener noreferrer" role="menuitem">
+              <span>Open JupyterHub</span>
+              <img class="sidebar-popover-icon" src="/static/img/link-square-01-stroke-rounded-black.svg" alt=""
+                data-icon-light="/static/img/link-square-01-stroke-rounded-black.svg"
+                data-icon-dark="/static/img/link-square-01-stroke-rounded-white.svg" />
+            </a>
+            <a class="sidebar-popover-item" href="https://jupyterhub.readthedocs.io/" target="_blank" rel="noopener noreferrer" role="menuitem">
+              <span>Learn More</span>
+              <img class="sidebar-popover-icon" src="/static/img/link-square-01-stroke-rounded-black.svg" alt=""
+                data-icon-light="/static/img/link-square-01-stroke-rounded-black.svg"
+                data-icon-dark="/static/img/link-square-01-stroke-rounded-white.svg" />
+            </a>
+          </div>
+        </div>
+        <button class="sidebar-item" onclick="openModal('upload')" title="Upload a File">
+          <div class="sidebar-icon-wrap">
+            <img src="/static/img/upload.svg" alt="Upload" class="sidebar-icon-img"
+              data-icon-light="/static/img/upload.svg"
+              data-icon-dark="/static/img/upload.svg" />
+          </div>
+          <span class="sidebar-label">Upload a File</span>
+        </button>
+        <button class="sidebar-item" onclick="openModal('restore')" title="Restore a Backup">
+          <div class="sidebar-icon-wrap">
+            <img src="/static/img/data-recovery.svg" alt="Restore" class="sidebar-icon-img"
+              data-icon-light="/static/img/data-recovery.svg"
+              data-icon-dark="/static/img/data-recovery.svg" />
+          </div>
+          <span class="sidebar-label">Restore a Backup</span>
+        </button>
+        <div class="sidebar-item-wrap">
+          <button type="button" class="sidebar-item" onclick="toggleSidebarPopover(event, 'docker')" aria-haspopup="menu" aria-expanded="false" title="Docker">
+            <div class="sidebar-icon-wrap">
+              <img src="/static/img/docker.svg" alt="Docker" class="sidebar-icon-img"
+                data-icon-light="/static/img/docker.svg"
+                data-icon-dark="/static/img/docker.svg" />
+            </div>
+            <span class="sidebar-label">Docker</span>
+          </button>
+          <div class="sidebar-popover" id="pop-docker" role="menu" hidden>
+            <a class="sidebar-popover-item" href="javascript:void(0)" role="menuitem" onclick="restartService('docker-vscode-1', 'VSCode')">
+              <span>Restart VSCode</span>
+              <img class="sidebar-popover-icon" src="/static/img/link-square-01-stroke-rounded-black.svg" alt=""
+                data-icon-light="/static/img/link-square-01-stroke-rounded-black.svg"
+                data-icon-dark="/static/img/link-square-01-stroke-rounded-white.svg" />
+            </a>
+            <a class="sidebar-popover-item" href="javascript:void(0)" role="menuitem" onclick="restartService('docker-questdb-1', 'QuestDB')">
+              <span>Restart QuestDB</span>
+              <img class="sidebar-popover-icon" src="/static/img/link-square-01-stroke-rounded-black.svg" alt=""
+                data-icon-light="/static/img/link-square-01-stroke-rounded-black.svg"
+                data-icon-dark="/static/img/link-square-01-stroke-rounded-white.svg" />
+            </a>
+            <a class="sidebar-popover-item" href="javascript:void(0)" role="menuitem" onclick="restartService('docker-grafana-1', 'Grafana')">
+              <span>Restart Grafana</span>
+              <img class="sidebar-popover-icon" src="/static/img/link-square-01-stroke-rounded-black.svg" alt=""
+                data-icon-light="/static/img/link-square-01-stroke-rounded-black.svg"
+                data-icon-dark="/static/img/link-square-01-stroke-rounded-white.svg" />
+            </a>
+            <a class="sidebar-popover-item" href="javascript:void(0)" role="menuitem" onclick="restartNginx()">
+              <span>Restart Nginx</span>
+              <img class="sidebar-popover-icon" src="/static/img/link-square-01-stroke-rounded-black.svg" alt=""
+                data-icon-light="/static/img/link-square-01-stroke-rounded-black.svg"
+                data-icon-dark="/static/img/link-square-01-stroke-rounded-white.svg" />
+            </a>
+            <div id="nginx-message" style="display:none; color: green; padding: 4px 12px; font-size: 13px;">Nginx is restarting. Please wait...</div>
+          </div>
+        </div>
+        <div class="sidebar-item-wrap">
+          <button type="button" class="sidebar-item" onclick="toggleSidebarPopover(event, 'github')" aria-haspopup="menu" aria-expanded="false" title="GitHub">
+            <div class="sidebar-icon-wrap">
+              <img src="/static/img/github.svg" alt="GitHub" class="sidebar-icon-img"
+                data-icon-light="/static/img/github.svg"
+                data-icon-dark="/static/img/github.svg" />
+            </div>
+            <span class="sidebar-label">GitHub</span>
+          </button>
+          <div class="sidebar-popover" id="pop-github" role="menu" hidden>
+            <a class="sidebar-popover-item" href="https://github.com/quantiota/AI-Agent-Lab/tree/main/docs" target="_blank" rel="noopener noreferrer" role="menuitem">
+              <span>Help Docs</span>
+              <img class="sidebar-popover-icon" src="/static/img/link-square-01-stroke-rounded-black.svg" alt=""
+                data-icon-light="/static/img/link-square-01-stroke-rounded-black.svg"
+                data-icon-dark="/static/img/link-square-01-stroke-rounded-white.svg" />
+            </a>
+            <a class="sidebar-popover-item" href="https://github.com/quantiota/AI-Agent-Lab/issues" target="_blank" rel="noopener noreferrer" role="menuitem">
+              <span>Create an Issue</span>
+              <img class="sidebar-popover-icon" src="/static/img/link-square-01-stroke-rounded-black.svg" alt=""
+                data-icon-light="/static/img/link-square-01-stroke-rounded-black.svg"
+                data-icon-dark="/static/img/link-square-01-stroke-rounded-white.svg" />
+            </a>
+            <a class="sidebar-popover-item" href="https://github.com/quantiota/AI-Agent-Lab/discussions" target="_blank" rel="noopener noreferrer" role="menuitem">
+              <span>Discussions</span>
+              <img class="sidebar-popover-icon" src="/static/img/link-square-01-stroke-rounded-black.svg" alt=""
+                data-icon-light="/static/img/link-square-01-stroke-rounded-black.svg"
+                data-icon-dark="/static/img/link-square-01-stroke-rounded-white.svg" />
+            </a>
+          </div>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-wrapper">
+
+      <!-- Top Header -->
+      <header class="top-header is-dark">
+        <div class="p-navigation__tagged-logo">
+          <a class="p-navigation__link" href="https://github.com/quantiota/AI-Agent-Lab" target="_blank" rel="noopener noreferrer">
+            <div class="p-navigation__logo-tag">
+              <img class="p-navigation__logo-icon" src="{{ url_for('static', filename='img/quantiota-white-icon.svg') }}" alt="AI Agent Lab">
+            </div>
+            <span class="p-navigation__logo-title">AI Agent Lab</span>
+          </a>
+        </div>
+        <div class="header-actions">
+          <button id="theme-toggle" class="theme-toggle-btn p-navigation__link">
+            <span style="display:inline-flex;align-items:center;">
+              <img src="/static/img/sun-02-stroke-standard-white.svg" alt="Light mode icon" class="theme-toggle-icon light-icon" width="24" height="24" style="display:block;">
+              <img src="/static/img/moon-02-stroke-standard-white.svg" alt="Dark mode icon" class="theme-toggle-icon dark-icon" width="24" height="24" style="display:none;">
+            </span>
+          </button>
+        </div>
+      </header>
+
+      <!-- Grafana Cards -->
+      <div class="cards-row">
+        <div class="metric-card">
+          <iframe src="https://grafana.{{ domain }}/d-solo/rYdddlPWj/node-exporter-full?orgId=1&refresh=1m&theme=light&panelId=77" class="grafana-iframe" frameborder="0"></iframe>
+        </div>
+        <div class="metric-card">
+          <iframe src="https://grafana.{{ domain }}/d-solo/rYdddlPWj/node-exporter-full?orgId=1&refresh=1m&theme=light&panelId=78" class="grafana-iframe" frameborder="0"></iframe>
+        </div>
+        <div class="metric-card">
+          <iframe src="https://grafana.{{ domain }}/d-solo/rYdddlPWj/node-exporter-full?orgId=1&refresh=1m&theme=light&panelId=74" class="grafana-iframe" frameborder="0"></iframe>
+        </div>
+      </div>
+
+      <!-- Chat Panel -->
+      <div class="chat-panel">
+
+        <!-- Chat Sidebar -->
+        <div class="chat-sidebar">
+          <div class="chat-sidebar-header">
+            <button class="icon-btn" title="Toggle sidebar">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2"/>
+                <line x1="9" y1="3" x2="9" y2="21"/>
+              </svg>
+            </button>
+            <button class="icon-btn" title="Search">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </button>
+            <button class="icon-btn" title="New chat" onclick="newChat()">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
+                <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+              </svg>
+            </button>
+          </div>
+
+          <div class="chat-agents-list">
+            <a class="chat-agent-item" href="javascript:void(0)" role="button" onclick="newChat()">
+              <div class="agent-icon-wrap">
+                <img src="/static/img/pencil-edit-02-stroke-rounded-black.svg" alt="New chat" class="agent-icon"
+                  data-icon-light="/static/img/pencil-edit-02-stroke-rounded-black.svg"
+                  data-icon-dark="/static/img/pencil-edit-02-stroke-rounded-white.svg" />
+              </div>
+              <span>New chat</span>
+            </a>
+            <a class="chat-agent-item" href="javascript:void(0)" role="button" title="Search chats" onclick="openSearch()">
+              <div class="agent-icon-wrap">
+                <img src="/static/img/search-01-stroke-rounded-black.svg" alt="Search chats" class="agent-icon"
+                  data-icon-light="/static/img/search-01-stroke-rounded-black.svg"
+                  data-icon-dark="/static/img/search-01-stroke-rounded-white.svg" />
+              </div>
+              <span>Search chats</span>
+            </a>
+            <a class="chat-agent-item" href="https://vscode.{{ domain }}" target="_blank" rel="noopener noreferrer">
+              <div class="agent-icon-wrap">
+                <img src="/static/img/code-simple-stroke-rounded-black.svg" alt="Code" class="agent-icon"
+                  data-icon-light="/static/img/code-simple-stroke-rounded-black.svg"
+                  data-icon-dark="/static/img/code-simple-stroke-rounded-white.svg" />
+              </div>
+              <span>Code</span>
+            </a>
+          </div>
+
+          <div id="chat-history" class="chat-history-section">
+            <!-- Chat history items populated by scripts.js -->
+          </div>
+
+          <div class="chat-sidebar-footer">
+            <div class="footer-copyright">© 2026 Quantiota</div>
+          </div>
+        </div>
+
+        <!-- Chat Main -->
+        <div class="chat-main">
+          <div class="chat-model-header">
+            <div class="model-dropdown" id="model-dropdown">
+              <button type="button" class="model-selector" id="model-selector-btn" onclick="toggleModelMenu(event)" aria-haspopup="listbox" aria-expanded="false">
+                <span id="model-label">Claude Haiku 4.5</span>
+                <svg class="model-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </button>
+              <ul class="model-menu" id="model-menu" role="listbox" hidden>
+                <li class="model-option" role="option" data-model="claude-haiku-4-5-20251001" aria-selected="true" onclick="selectModel(this)">Claude Haiku 4.5</li>
+                <li class="model-option" role="option" data-model="claude-sonnet-4-6" aria-selected="false" onclick="selectModel(this)">Claude Sonnet 4.6</li>
+                <li class="model-option" role="option" data-model="claude-opus-4-8" aria-selected="false" onclick="selectModel(this)">Claude Opus 4.8</li>                
+              </ul>
+              <input type="hidden" id="model-select" value="claude-haiku-4-5-20251001">
+            </div>
+          </div>
+
+          <div id="chatbot-body" class="chat-body">
+            <div class="chat-greeting">
+              <h2>What can I help with?</h2>
+            </div>
+          </div>
+
+          <div class="chat-input-area">
+            <div id="chat-attachment" class="chat-attachment" style="display:none;"></div>
+            <div class="chat-input-box">
+              <button class="attach-btn" title="Attach file" onclick="document.getElementById('chat-file-input').click()">
+                <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
+                </svg>
+              </button>
+              <input type="file" id="chat-file-input" class="chat-file-input"
+                accept=".txt,.csv,.sql,.md,.json,.log,.py,.js,.yml,.yaml,.html,.css,.xml,.tsv"
+                onchange="handleAttach(event)" />
+              <input type="text" id="chatbot-input" placeholder="Ask anything..." class="chat-input" onkeypress="handleChatEnter(event)" />
+              <button class="send-btn" onclick="sendMessage()" title="Send">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="19" x2="12" y2="5"/>
+                  <polyline points="5 12 12 5 19 12"/>
+                </svg>
+              </button>
+            </div>
+            <div class="chat-chips">
+              <button class="chip" onclick="usePrompt('Write a QuestDB SQL query that ')">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14a9 3 0 0 0 18 0V5"/><path d="M3 12a9 3 0 0 0 18 0"/></svg>
+                Write SQL
+              </button>
+              <button class="chip" onclick="usePrompt('Summarize the following:\n')">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                Summarize
+              </button>
+              <button class="chip" onclick="usePrompt('Explain this error and how to fix it:\n')">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                Explain error
+              </button>
+              <button class="chip" onclick="usePrompt('Give me advice about ')">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+                Get advice
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Claude AI -->
+    <div id="claude-modal" class="modal-overlay" onclick="closeModal('claude')">
+      <div class="modal-box" onclick="event.stopPropagation()">
+        <div class="modal-header">
+          <h3>Claude API Key</h3>
+          <button class="modal-close" onclick="closeModal('claude')">&#x2715;</button>
+        </div>
+        <div class="modal-body">
+          <p>Enter your Claude (Anthropic) API key to access AI features.</p>
+          <form id="claude-api-form" class="api-key-form">
+            <input type="text" id="api-key-input" class="api-key-input" placeholder="Enter your Anthropic API key" />
+            <button type="submit" class="api-key-submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Upload files -->
+    <div id="upload-modal" class="modal-overlay" onclick="closeModal('upload')">
+      <div class="modal-box" onclick="event.stopPropagation()">
+        <div class="modal-header">
+          <h3>Upload files</h3>
+          <button class="modal-close" onclick="closeModal('upload')">&#x2715;</button>
+        </div>
+        <div class="modal-body">
+          <form id="upload-form" action="/upload" method="POST" enctype="multipart/form-data">
+            <div class="upload-dropzone" id="upload-dropzone">
+              <div class="upload-dz-icon">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="12" y1="3" x2="12" y2="15"/>
+                  <polyline points="8 7 12 3 16 7"/>
+                  <path d="M5 14v3a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-3"/>
+                </svg>
+              </div>
+              <button type="button" class="upload-select-btn" onclick="document.getElementById('file').click()">Select file</button>
+              <div class="upload-dz-title">or drop files to upload</div>
+              <div class="upload-dz-hint">CSV, TXT, SQL or PDF. Max size of 800K</div>
+            </div>
+            <input type="file" id="file" name="file" class="upload-file-input" accept=".csv,.txt,.sql,.pdf" hidden />
+          </form>
+          <div id="error-message" class="upload-error" style="display:none;"></div>
+          <div id="file-list" class="upload-file-list"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Restore a Backup -->
+    <div id="restore-modal" class="modal-overlay" onclick="closeModal('restore')">
+      <div class="modal-box" onclick="event.stopPropagation()">
+        <div class="modal-header">
+          <h3>Select a Backup to Restore</h3>
+          <button class="modal-close" onclick="closeModal('restore')">&#x2715;</button>
+        </div>
+        <div class="modal-body">
+          <div class="restore-dropdown" id="restore-dropdown">
+            <button type="button" class="restore-selector" id="restore-selector-btn" onclick="toggleRestoreMenu(event)" aria-haspopup="listbox" aria-expanded="false">
+              <span id="restore-label" class="restore-placeholder">Select a Backup</span>
+              <svg class="restore-chevron" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="6 9 12 15 18 9"/>
+              </svg>
+            </button>
+            <ul class="restore-menu" id="restore-menu" role="listbox" hidden></ul>
+            <input type="hidden" id="restore-select" value="">
+          </div>
+          <div id="status-message"></div>
+        </div>
+        <div class="modal-footer">
+          <button id="restore-btn" class="restore-submit">Restore</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Search chats -->
+    <div id="search-modal" class="modal-overlay" onclick="closeModal('search')">
+      <div class="modal-box" onclick="event.stopPropagation()">
+        <div class="modal-header">
+          <h3>Search chats</h3>
+          <button class="modal-close" onclick="closeModal('search')">&#x2715;</button>
+        </div>
+        <div class="modal-body">
+          <input type="text" id="search-input" class="modal-input" placeholder="Search your conversations..." oninput="searchChats()" />
+          <div id="search-results" class="search-results"></div>
+        </div>
+      </div>
+    </div>
+
+    <script src="/static/js/scripts.js"></script>
+    <script src="/static/js/theme.js"></script>
+    <script>
+      function openModal(name) {
+        document.getElementById(name + '-modal').classList.add('active');
+      }
+      function closeModal(name) {
+        document.getElementById(name + '-modal').classList.remove('active');
+      }
+      function handleChatEnter(e) {
+        if (e.key === 'Enter') sendMessage();
+      }
+    </script>
+  </body>
+</html>
