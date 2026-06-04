@@ -6,6 +6,7 @@ import docker
 from werkzeug.utils import secure_filename
 import time
 import subprocess
+import re
 
 
 # Load domain.ltd from environment variable
@@ -251,48 +252,32 @@ def list_backups():
 
 
 
+# Only allow snapshot names like hourly.0 / daily.1 — also blocks path traversal.
+SAFE_BACKUP = re.compile(r'^(hourly|daily|weekly|monthly)\.\d+$')
+
 @app.route('/api/restore-backup', methods=['POST'])
 def restore_backup():
+    data = request.get_json(silent=True) or {}
+    selected = data.get("selectedBackup", "")
+
+    if not SAFE_BACKUP.match(selected):
+        return jsonify({"message": "Invalid backup name."}), 400
+    if not os.path.isdir(f"/backup/rsnapshot/{selected}"):
+        return jsonify({"message": f"Backup '{selected}' not found."}), 404
+
+    # Hand the restore off to the host-side recovery agent. The container never
+    # runs the destructive restore itself — it can only push a validated name
+    # into the pipe. Fire-and-forget: the restore rebuilds this very container,
+    # so a synchronous response could not reliably return anyway.
     try:
-        data = request.get_json()
-        selected_backup = data.get("selectedBackup")
+        with open("/run/recovery/request.pipe", "w") as pipe:
+            pipe.write(selected + "\n")
+    except OSError as e:
+        app.logger.error(f"Could not queue restore: {e}")
+        return jsonify({"message": "Restore agent unavailable."}), 503
 
-        if not selected_backup:
-            return jsonify({"message": "No backup selected."}), 400
-
-        # Check if the selected backup exists
-        backup_path = f"/backup/rsnapshot/{selected_backup}"
-        if not os.path.exists(backup_path):
-            return jsonify({"message": f"Selected backup '{selected_backup}' does not exist."}), 400
-
-        app.logger.info(f"Starting restore process for backup: {selected_backup}")
-
-        # Add execute permission to the recovery script
-        
-        # subprocess.run(["chmod", "+x", "/recovery-microserver.sh"], check=True)
-
-
-        # Execute the restore script
-        result = subprocess.run(
-            ["sh", "/recovery-microserver.sh"], 
-            check=True, 
-            env={"SELECTED_BACKUP": selected_backup, **os.environ},
-            capture_output=True,
-            text=True
-        )
-
-        app.logger.info(f"Restore process completed. Output: {result.stdout}")
-
-        return jsonify({"message": "Restore completed successfully!", "details": result.stdout}), 200
-
-    except subprocess.CalledProcessError as e:
-        error_output = e.stderr if e.stderr else str(e)
-        app.logger.error(f"Subprocess error during restore: {error_output}")
-        return jsonify({"message": f"Restore failed: {error_output}"}), 500
-
-    except Exception as e:
-        app.logger.error(f"Unexpected error during restore: {str(e)}")
-        return jsonify({"message": f"An unexpected error occurred: {str(e)}"}), 500
+    app.logger.info(f"Restore queued for backup: {selected}")
+    return jsonify({"message": "Restore queued. Please wait ~2 minutes for the stack to rebuild, then reload the page."}), 202
 
 
 
