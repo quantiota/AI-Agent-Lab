@@ -1,0 +1,16 @@
+# Install to: /etc/systemd/system/recovery-agent.service
+# Then:  sudo systemctl daemon-reload && sudo systemctl enable --now recovery-agent
+[Unit]
+Description=AI Agent Lab - backup restore agent (host side)
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=simple
+ExecStart=/usr/local/bin/recovery-agent.sh
+Restart=always
+RestartSec=2
+# Runs as root (default): needs to restore /home, /opt and run docker compose.
+
+[Install]
+WantedBy=multi-user.target
