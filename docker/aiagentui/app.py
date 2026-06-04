@@ -277,7 +277,7 @@ def restore_backup():
         return jsonify({"message": "Restore agent unavailable."}), 503
 
     app.logger.info(f"Restore queued for backup: {selected}")
-    return jsonify({"message": "Restore queued. Please wait ~2 minutes for the stack to rebuild, then reload the page."}), 202
+    return jsonify({"message": "Restore queued. Please wait ~3 minutes for the stack to rebuild, then reload the page."}), 202
 
 
 
