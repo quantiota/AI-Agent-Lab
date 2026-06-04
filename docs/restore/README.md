@@ -24,3 +24,8 @@ Verify:
 sudo systemctl status recovery-agent     # active (running)
 ls -la /run/recovery/                     # request.pipe exists
 ```
+
+
+Test from the AI Agent UI interface: 
+
+![restore a backup](./restore_a_backup.png)
