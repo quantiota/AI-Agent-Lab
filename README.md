@@ -38,6 +38,7 @@ Start working with Claude models and data streams, using the pre-installed tools
 
 6. **AI Agent UI**: The AI Agent UI provides an intuitive, web-based chat interface, powered by **Claude (Anthropic)** as an option. It calls the Anthropic Messages API directly, with model switching across Haiku, Sonnet, and Opus. 
 
+7. **SSO (Authelia)**: A single sign-on portal gates the whole lab behind **one login**. Authelia provides forward-authentication, so you sign in once and reach Code-Server, QuestDB, Grafana, and the AI Agent UI without re-entering credentials — and every service port stays unpublished, reachable only through Nginx over HTTPS.
 
 
 ## Getting Started
@@ -101,8 +102,10 @@ For optimal performance, the AI Agent Lab requires the following hardware setup:
 
 ## Roadmap
 
-- **Conversation-as-Telemetry (SKA)** — capture human-agent and agent-agent interactions as structured knowledge events in QuestDB, surfaced in Grafana; the foundation for forward-only knowledge accumulation ([SKA infrastructure preprint](https://github.com/quantiota/AI-Agent-Lab/blob/main/docs/roadmap/telemetry/ska_ai_infrastructure.pdf)).
-- **Flask Blueprint refactor** of the AI Agent UI.
+- **Per-user audit** on privileged actions (backup restore, service restarts), building on the SSO identity layer.
+- **Conversation-as-Telemetry (SKA)** — capture human-agent and agent-agent interactions as structured knowledge events in QuestDB, surfaced in Grafana; the foundation for forward-only knowledge accumulation ([SKA infrastructure preprint](./telemetry/ska_ai_infrastructure.pdf)).
+- **Flask Blueprint refactor** of the AI Agent UI, bundled with the SSO work.
+
 ## References
 
 
