@@ -1,0 +1,4 @@
+# code-server config — auth handled by Authelia at nginx, so disable code-server's own login.
+bind-addr: 0.0.0.0:8080
+auth: none
+cert: false
