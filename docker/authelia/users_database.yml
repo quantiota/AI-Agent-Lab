@@ -1,0 +1,15 @@
+# Authelia users — STARTER TEMPLATE (replaces .htpasswd)
+#
+# Generate the hashed password with:
+#   docker run --rm authelia/authelia:4.39 \
+#     authelia crypto hash generate argon2 --password 'your-password'
+# Then paste the resulting hash below.
+
+users:
+  admin:
+    disabled: false
+    displayname: 'Administrator'
+    password: 'CHANGE_ME_argon2_hash'
+    email: 'admin@example.com'
+    groups:
+      - admins

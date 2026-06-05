@@ -5,11 +5,12 @@ services:
     build:
       context: vscode
       dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
+    # ports:                # not published — reachable only via nginx + Authelia (code-server is auth:none)
+    #   - "8080:8080"
     volumes:
       # volume used to access the `notebooks` folder
       - ../notebooks:/home/coder/project
+      - ./vscode/config.yaml:/home/coder/.config/code-server/config.yaml   # auth: none (Authelia gates it)
       - ./aiagentui/uploads:/home/coder/project/uploads
       - claude-config:/home/coder/.config/claude-code
       - claude-data:/home/coder/.claude
@@ -20,9 +21,15 @@ services:
   grafana:
     image: grafana/grafana:12.4.1
     environment:
-      - GF_INSTALL_PLUGINS=questdb-questdb-datasource 
-    ports:
-      - "3000:3000"
+      - GF_INSTALL_PLUGINS=questdb-questdb-datasource
+      # Authelia auth-proxy: trust the Remote-User header set by nginx → no separate Grafana login
+      - GF_AUTH_PROXY_ENABLED=true
+      - GF_AUTH_PROXY_HEADER_NAME=Remote-User
+      - GF_AUTH_PROXY_HEADER_PROPERTY=username
+      - GF_AUTH_PROXY_AUTO_SIGN_UP=true
+      - GF_AUTH_PROXY_HEADERS=Email:Remote-Email Name:Remote-Name
+    # ports:                # not published — reachable only via nginx
+    #   - "3000:3000"
     volumes:
       - grafana-data:/var/lib/grafana
       - ./grafana/provisioning/datasources/:/etc/grafana/provisioning/datasources/
@@ -38,7 +45,7 @@ services:
   questdb:
     image: questdb/questdb:9.4.0
     ports:
-      - "9000:9000"
+      # - "9000:9000"    # not published — reachable only via nginx
       - "9009:9009"
       - "8812:8812"
       - "9003:9003"
@@ -48,20 +55,26 @@ services:
       - .env
 
 
-   
+  authelia:  # SSO login portal / forward-auth
+    image: authelia/authelia:4.39
+    volumes:
+      - ./authelia:/config
+    expose:
+      - "9091"            # internal only — reached by nginx as authelia:9091, NOT published to the host
+
   aiagentui:  # Flask application service
     build:   # Specify the location of your Dockerfile and application code
       context: aiagentui
       target: builder
 
-    ports:
-      - "5000:5000"  # Map port 5000 of the container to port 5000 on the host
+    # ports:                # not published — reachable only via nginx + Authelia
+    #   - "5000:5000"
     volumes:
       - ./aiagentui:/aiagentui  # Optional: Mount the application directory for live reloading in development  
       - /var/run/docker.sock:/var/run/docker.sock
       - ./aiagentui/uploads:/aiagentui/uploads
-      - /backup/rsnapshot:/backup/rsnapshot:ro 
-      - /run/recovery:/run/recovery 
+      - /backup/rsnapshot:/backup/rsnapshot:ro
+      - /run/recovery:/run/recovery
     env_file:
       - .env
 
@@ -71,6 +84,7 @@ services:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/conf.d/default.conf.template:/etc/nginx/conf.d/default.conf.template
       - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+      - ./nginx/snippets:/etc/nginx/snippets
       - /etc/letsencrypt:/etc/letsencrypt
       - ./nginx/.well-known/:/usr/share/nginx/html/.well-known/
       - ./nginx/certs/dhparam.pem:/etc/ssl/certs/dhparam.pem
@@ -85,7 +99,8 @@ services:
       - vscode
       - grafana
       - questdb
-      - aiagentui      
+      - aiagentui
+      - authelia
   # Refer to ./init.yaml to for initial SSL setup
   # add the following line in in crontab (5 am, every monday)
   #   0 5 * * 1 docker compose run certbot renew

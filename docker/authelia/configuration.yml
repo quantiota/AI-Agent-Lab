@@ -1,0 +1,71 @@
+# Authelia configuration — STARTER TEMPLATE
+#
+# ⚠️ Authelia changes its config schema between versions (breaking changes).
+#    Pin a version in docker-compose (e.g. authelia/authelia:4.39) and verify
+#    this against that version's docs before deploying.
+#
+# Replace every CHANGE_ME_* value. Generate long random secrets with:
+#   openssl rand -hex 64
+# In production, prefer the *_FILE env vars / Docker secrets over inline values.
+#
+# Domains resolve from DOMAIN in ../.env via Authelia's template filter,
+# which is already enabled on the authelia service in docker-compose.yaml.
+# You only set DOMAIN once in .env — never edit the domain here.
+
+theme: dark                                   # light | dark | grey | auto
+
+log:
+  level: info
+
+server:
+  address: 'tcp://0.0.0.0:9091'
+  asset_path: /config/assets/        # custom logo.png / favicon.ico / locales/ live here
+
+# ---- Who can log in (file backend; no LDAP needed) ----
+authentication_backend:
+  file:
+    path: /config/users_database.yml
+
+# ---- Identity validation (JWT secret — required by 4.39 for the password-reset flow) ----
+identity_validation:
+  reset_password:
+    jwt_secret: 'CHANGE_ME_jwt_secret'        # openssl rand -hex 64
+
+# ---- What each subdomain requires ----
+access_control:
+  default_policy: deny
+  rules:
+    - domain:
+        - 'vscode.{{ env "DOMAIN" }}'
+        - 'questdb.{{ env "DOMAIN" }}'
+        - 'aiagentui.{{ env "DOMAIN" }}'
+        - 'grafana.{{ env "DOMAIN" }}'
+      policy: one_factor                      # one_factor = password; two_factor = + 2FA
+
+# ---- Session (single cookie across all *.{{ env "DOMAIN" }} subdomains) ----
+session:
+  secret: 'CHANGE_ME_session_secret'
+  cookies:
+    - domain: '{{ env "DOMAIN" }}'
+      authelia_url: 'https://auth.{{ env "DOMAIN" }}'
+      default_redirection_url: 'https://aiagentui.{{ env "DOMAIN" }}'
+      expiration: '12 hours'        # session lifetime
+      inactivity: '1 hour'          # logged out after this much idle time
+      remember_me: '1 month'        # "Remember me" checkbox duration ('0' disables it)
+
+# ---- Brute-force protection ----
+regulation:
+  max_retries: 3
+  find_time: 2m
+  ban_time: 5m
+
+# ---- Storage: SQLite, single file, no extra container ----
+storage:
+  encryption_key: 'CHANGE_ME_encryption_key'
+  local:
+    path: /config/db.sqlite3
+
+# ---- Notifications: filesystem for testing; switch to SMTP for real 2FA/reset ----
+notifier:
+  filesystem:
+    filename: /config/notification.txt

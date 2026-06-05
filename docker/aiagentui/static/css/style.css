@@ -262,6 +262,32 @@ body {
   gap: 8px;
 }
 
+/* Header icon buttons — keep theme toggle + logout the same box so they align */
+.theme-toggle-btn,
+.header-logout {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  line-height: 0;
+}
+
+.header-logout .app-icon {
+  width: 24px;
+  height: 24px;
+  color: #fff;
+  transition: opacity 0.15s;
+}
+
+.header-logout:hover .app-icon {
+  opacity: 0.8;
+}
+
 .btn-header-outlined {
   display: inline-flex;
   align-items: center;
