@@ -50,7 +50,7 @@ To run the VSCode notebooks over HTTPS and ensure secure communication across yo
 
 - **Port 22 (SSH)**: For secure access to your server via SSH. This is useful for remote management, debugging, and manual configuration if needed.
 
-- **Port 8812 (QuestDB REST API)**: QuestDB uses port 8812 for its REST API. Make sure this port is forwarded if you plan to access or query QuestDB data remotely.
+- **Port 8812 (QuestDB Postgres-wire)**: QuestDB uses port 8812 for the Postgres-wire protocol (SQL clients and the Grafana QuestDB plugin). Make sure this port is forwarded if you plan to query QuestDB remotely.
 
 - **Port 9009 (QuestDB Influx Line Protocol)**: This port is used for the InfluxDB line protocol in QuestDB, allowing remote connections to ingest time-series data. Forwarding this port is essential if you're collecting time-series data from remote sources.
 
@@ -141,13 +141,13 @@ QDB_PG_PORT=8812
 # VSCode Grafana QuestDB AI Agent UI
 DOMAIN=domain.tld
 
-# Chatbot
-OPENAI_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+# AI Agent UI (Claude / Anthropic)
+ANTHROPIC_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 
-# secret key
+# Flask secret key
 
-SECRET_KEY=your_very_secure_secret_key
+APP_SECRET_KEY=your_very_secure_secret_key
 
 ```
 
