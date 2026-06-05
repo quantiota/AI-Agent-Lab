@@ -57,10 +57,16 @@ services:
 
   authelia:  # SSO login portal / forward-auth
     image: authelia/authelia:4.39
+    environment:
+      # Render configuration.yml through Authelia's template filter so {{ env "DOMAIN" }} resolves
+      - X_AUTHELIA_CONFIG=/config/configuration.yml
+      - X_AUTHELIA_CONFIG_FILTERS=template
     volumes:
       - ./authelia:/config
     expose:
       - "9091"            # internal only — reached by nginx as authelia:9091, NOT published to the host
+    env_file:
+      - .env              # provides DOMAIN to the template filter
 
   aiagentui:  # Flask application service
     build:   # Specify the location of your Dockerfile and application code
