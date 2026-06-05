@@ -212,7 +212,7 @@ datasources:
   - name: Prometheus
     type: prometheus
     access: proxy
-    url: http://prometheus-ip-address:9090
+    url: http://prometheus-local-ip-address:9090   # or url: https://prometheus.domain.tld
     isDefault: true
     editable: false
     uid: rYdddlPWj  # Ensure this UID is unique, used in the dashboard JSON
