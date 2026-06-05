@@ -2,7 +2,16 @@
 
 # README
 
+
 This folder contains configuration files and scripts for automating backups using **rsnapshot**, a filesystem snapshot utility based on `rsync`.
+
+## Install
+
+This command will update the package list and install rsnapshot on the system. 
+```
+sudo apt-get update && sudo apt-get install rsnapshot
+```
+
 
 ## Contents
 
