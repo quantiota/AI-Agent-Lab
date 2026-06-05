@@ -12,7 +12,7 @@ You will find all the Docker services set up in this folder.
 Access VSCode through [localhost:8080](http://localhost:8080).
 
 :lock:
-The password to access VSCode is `yourpassword` it can be set it in the [docker-compose.yaml file](docker-compose.yaml).
+Access is gated by **Authelia SSO**. code-server itself runs with `auth: none` (see `vscode/config.yaml`) — there is no separate code-server password.
 
 ### QuestDB
 
@@ -34,8 +34,7 @@ The user/password are the default one: `admin:quest` ([see the documentation](ht
 Access Grafana through [localhost:3000](http://localhost:3000).
 
 :lock:
-The user/password are the default one: `admin:admin`.
-You can add set the password adding the environment variable `GF_SECURITY_ADMIN_PASSWORD`.
+Access is gated by **Authelia SSO** via the auth-proxy `Remote-User` header — there is no separate Grafana login.
 
 :wrench: To configure Grafana, follow [this documentation](./grafana/README.md).
 
@@ -123,18 +122,15 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 Since the '**.env**' file already exists in the docker folder, please update it to include or modify the necessary variables as needed for your setup:
 
 ```
-# VSCode
-PASSWORD=yourpassword
+# VSCode — no password: code-server runs `auth: none` behind Authelia SSO
 
-# Grafana
+# Grafana — no admin login: access is via Authelia SSO (auth-proxy Remote-User header)
 GRAFANA_QUESTDB_PASSWORD=quest
-GF_AUTH_ANONYMOUS_ENABLED=false
+GF_AUTH_ANONYMOUS_ENABLED=true
 GF_AUTH_ANONYMOUS_ORG_ROLE=Viewer
 GF_AUTH_ANONYMOUS_ORG_NAME=Main Org.
 GF_AUTH_ANONYMOUS_ALLOW_EMBEDDING=true
 GF_SECURITY_ALLOW_EMBEDDING=true
-GF_SECURITY_ADMIN_USER=admin
-GF_SECURITY_ADMIN_PASSWORD=admin
 
 # QuestDB
 QDB_PG_USER=admin
@@ -143,33 +139,46 @@ QDB_PG_NAME=qdb
 QDB_PG_HOST=docker_host_ip_address
 QDB_PG_PORT=8812
 
-
+# VSCode Grafana QuestDB AI Agent UI
+DOMAIN=domain.tld
 
 # Chatbot
-ANTHROPIC_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+OPENAI_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 
 
 # secret key
 
-APP_SECRET_KEY=your_very_secure_secret_key
+SECRET_KEY=your_very_secure_secret_key
 
-
-# domain
-DOMAIN=domaim.tld
-
-```
-and to define your domain name in the '**nginx.env**' file:
-
-```
-     # nginx/nginx.env
-    
-      DOMAIN=domain.tld
 ```
 
 
 Remember to replace the placeholders with your actual domain, passwords, and usernames. 
 
 The environment variables will be replaced directly within the Nginx configuration file when the Docker services are started.
+
+#### Generate the Authelia secrets (SSO)
+
+Authelia's `authelia/configuration.yml` needs **three independent secret values**. Generate a fresh one for each — never reuse the same value across them:
+
+```
+openssl rand -hex 64   # jwt_secret      → identity_validation.reset_password.jwt_secret
+openssl rand -hex 64   # session secret  → session.secret
+openssl rand -hex 64   # encryption_key  → storage.encryption_key
+```
+
+then paste each generated value into its matching `CHANGE_ME_*` field. The domain itself is **not** edited here — it resolves from `DOMAIN` in `.env` via Authelia's template filter.
+
+#### Generate the Authelia user password (users database)
+
+Authelia stores its login users in `authelia/users_database.yml`. The password is kept as an **argon2 hash**, never in plain text. Generate the hash with:
+
+```
+docker run --rm authelia/authelia:4.39 \
+  authelia crypto hash generate argon2 --password 'your-password'
+```
+
+ then paste the resulting hash into the `password:` field (replacing `CHANGE_ME_argon2_hash`) and set the user's `email`.
 
 
 ### 3 Generate dhparam.pem file
@@ -189,7 +198,7 @@ openssl dhparam -out ./nginx/certs/dhparam.pem 2048
 
 Generating a dhparam file can take a long time. For a more secure (but slower) 4096-bit key, simply replace 2048 with 4096 in the above command.
 
-### 4 Generate .htpasswd file for QuestDB and AI Agent UI
+### 4 Generate .htpasswd file for QuestDB 
 
 The user/password are the default one: admin:admin
 
