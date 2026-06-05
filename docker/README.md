@@ -166,7 +166,7 @@ openssl rand -hex 64   # session secret  → session.secret
 openssl rand -hex 64   # encryption_key  → storage.encryption_key
 ```
 
-Copy `authelia/configuration.yml.sample` to `authelia/configuration.yml`, then paste each generated value into its matching `CHANGE_ME_*` field. The domain itself is **not** edited here — it resolves from `DOMAIN` in `.env` via Authelia's template filter.
+then paste each generated value into its matching `CHANGE_ME_*` field. The domain itself is **not** edited here — it resolves from `DOMAIN` in `.env` via Authelia's template filter.
 
 #### Generate the Authelia user password (users database)
 
@@ -177,7 +177,7 @@ docker run --rm authelia/authelia:4.39 \
   authelia crypto hash generate argon2 --password 'your-password'
 ```
 
-Copy `authelia/users_database.yml.sample` to `authelia/users_database.yml`, then paste the resulting hash into the `password:` field (replacing `CHANGE_ME_argon2_hash`) and set the user's `email`.
+then paste the resulting hash into the `password:` field (replacing `CHANGE_ME_argon2_hash`) and set the user's `email`.
 
 
 ### 3 Generate dhparam.pem file
