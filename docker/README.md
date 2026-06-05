@@ -24,7 +24,7 @@ Access the QuestDB web console at `https://questdb.yourdomain.tld`. Port 9000 is
 SQL clients (and the Grafana QuestDB plugin) connect over the Postgres-wire port `8812`.
 
 :lock:
-The web console is gated by **Authelia SSO** (it was previously protected by Nginx HTTP basic auth `admin:admin`, now removed). The default `admin:quest` credentials ([see the documentation](https://questdb.io/docs/reference/configuration/#postgres-wire-protocol)) are used by the QuestDB Grafana datasource plugin to connect to the database `qdb`.
+The web console is gated by **Authelia SSO**. The default `admin:quest` credentials ([see the documentation](https://questdb.io/docs/reference/configuration/#postgres-wire-protocol)) are used by the QuestDB Grafana datasource plugin to connect to the database `qdb`.
 
 ### Grafana
 
