@@ -2,7 +2,7 @@
 
 Install the host-side files (in this folder) onto the server.
 
-First, in `recovery-microserver.sh`, set `TARGET_USER` to the host user that owns the checkout (e.g. `devbox`).
+First, in `recovery-microserver.sh`, set `TARGET_USER` to the host user that owns the checkout (e.g. `devbox` —  `devbox@server:~$` ).
 
 Then run on the server as root — `root@server:~#`
 
