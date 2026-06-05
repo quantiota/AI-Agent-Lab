@@ -22,9 +22,6 @@ Replace " &lt;RAID-storage-UUID &gt;" with the UUID obtained from the previous s
 
 
 
-## Configuration
-
-Replace the default configuration files with those located in the config folder.
 
 
 
