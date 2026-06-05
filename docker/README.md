@@ -152,7 +152,7 @@ SECRET_KEY=your_very_secure_secret_key
 ```
 
 
-Remember to replace the placeholders with your actual domain, passwords, and usernames. 
+Remember to replace the placeholders with your actual domain and docker_host_ip_address. 
 
 The environment variables will be replaced directly within the Nginx configuration file when the Docker services are started.
 
