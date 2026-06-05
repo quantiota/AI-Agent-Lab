@@ -122,9 +122,8 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 Since the '**.env**' file already exists in the docker folder, please update it to include or modify the necessary variables as needed for your setup:
 
 ```
-# VSCode — no password: code-server runs `auth: none` behind Authelia SSO
 
-# Grafana — no admin login: access is via Authelia SSO (auth-proxy Remote-User header)
+# Grafana 
 GRAFANA_QUESTDB_PASSWORD=quest
 GF_AUTH_ANONYMOUS_ENABLED=true
 GF_AUTH_ANONYMOUS_ORG_ROLE=Viewer
