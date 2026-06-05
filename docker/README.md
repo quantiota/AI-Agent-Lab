@@ -213,9 +213,9 @@ datasources:
     type: prometheus
     access: proxy
     url: http://prometheus-local-ip-address:9090   # or url: https://prometheus.domain.tld
-    isDefault: true
+    isDefault: false
     editable: false
-    uid: rYdddlPWj  # Ensure this UID is unique, used in the dashboard JSON
+    uid: rYdddlPWk  # Ensure this UID is unique, used in the dashboard JSON
 ```
 
 Make sure your Prometheus server is configured to scrape metrics from the Node Exporter.
