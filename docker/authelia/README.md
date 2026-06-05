@@ -5,7 +5,7 @@ One login at `auth.<domain>` covers all subdomains; logout at `auth.<domain>/log
 
 ## Files
 - `configuration.yml` — main config: secrets, access-control rules, session, storage, asset_path
-- `users_database.yml` — users + argon2 password hashes (replaces `.htpasswd`)
+- `users_database.yml` — users + argon2 password hashes
 - `assets/` — custom `logo.png` / `favicon.ico` for the login page
 - `db.sqlite3` — Authelia storage (auto-created; do not edit)
 - `notification.txt` — file-notifier output (testing only)
