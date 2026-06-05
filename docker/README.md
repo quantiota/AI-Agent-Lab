@@ -156,7 +156,7 @@ and to define your domain name in the '**nginx.env**' file:
 ```
 # nginx/nginx.env
     
-DOMAIN=yourdomain
+DOMAIN=domain.tld
 ```
 
 
