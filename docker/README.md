@@ -9,7 +9,7 @@ You will find all the Docker services set up in this folder.
 :link: [docker image](https://hub.docker.com/r/codercom/code-server)
 :link: [github repository](https://github.com/coder/code-server)
 
-Access VSCode through [localhost:8080](http://localhost:8080).
+Access VSCode at `https://vscode.yourdomain.tld`. Port 8080 is **not published** — the service is reachable only through Nginx + Authelia SSO.
 
 :lock:
 Access is gated by **Authelia SSO**. code-server itself runs with `auth: none` (see `vscode/config.yaml`) — there is no separate code-server password.
@@ -20,18 +20,18 @@ Access is gated by **Authelia SSO**. code-server itself runs with `auth: none` (
 :link: [github repository](https://github.com/questdb/questdb)
 :link: [questdb Docker documentation](https://questdb.io/docs/get-started/docker/)
 
-Access QuestDB GUI through [localhost:9000](http://localhost:9000).
-Access the database using [localhost:8812](http://localhost:8812).
+Access the QuestDB web console at `https://questdb.yourdomain.tld`. Port 9000 is **not published** — reachable only through Nginx + Authelia SSO.
+SQL clients (and the Grafana QuestDB plugin) connect over the Postgres-wire port `8812`.
 
 :lock:
-The user/password are the default one: `admin:quest` ([see the documentation](https://questdb.io/docs/reference/configuration/#postgres-wire-protocol)) and the database name is `qdb`.
+The web console is gated by **Authelia SSO** (it was previously protected by Nginx HTTP basic auth `admin:admin`, now removed). The default `admin:quest` credentials ([see the documentation](https://questdb.io/docs/reference/configuration/#postgres-wire-protocol)) are used by the QuestDB Grafana datasource plugin to connect to the database `qdb`.
 
 ### Grafana
 
 :link: [docker image](https://hub.docker.com/r/grafana/grafana)
 :link: [github repository](https://github.com/grafana/grafana)
 
-Access Grafana through [localhost:3000](http://localhost:3000).
+Access Grafana at `https://grafana.yourdomain.tld`. Port 3000 is **not published** — reachable only through Nginx + Authelia SSO.
 
 :lock:
 Access is gated by **Authelia SSO** via the auth-proxy `Remote-User` header — there is no separate Grafana login.
@@ -167,7 +167,7 @@ openssl rand -hex 64   # session secret  → session.secret
 openssl rand -hex 64   # encryption_key  → storage.encryption_key
 ```
 
-then paste each generated value into its matching `CHANGE_ME_*` field. The domain itself is **not** edited here — it resolves from `DOMAIN` in `.env` via Authelia's template filter.
+Copy `authelia/configuration.yml.sample` to `authelia/configuration.yml`, then paste each generated value into its matching `CHANGE_ME_*` field. The domain itself is **not** edited here — it resolves from `DOMAIN` in `.env` via Authelia's template filter.
 
 #### Generate the Authelia user password (users database)
 
@@ -178,7 +178,7 @@ docker run --rm authelia/authelia:4.39 \
   authelia crypto hash generate argon2 --password 'your-password'
 ```
 
- then paste the resulting hash into the `password:` field (replacing `CHANGE_ME_argon2_hash`) and set the user's `email`.
+Copy `authelia/users_database.yml.sample` to `authelia/users_database.yml`, then paste the resulting hash into the `password:` field (replacing `CHANGE_ME_argon2_hash`) and set the user's `email`.
 
 
 ### 3 Generate dhparam.pem file
@@ -198,32 +198,7 @@ openssl dhparam -out ./nginx/certs/dhparam.pem 2048
 
 Generating a dhparam file can take a long time. For a more secure (but slower) 4096-bit key, simply replace 2048 with 4096 in the above command.
 
-### 4 Generate .htpasswd file for QuestDB 
-
-The user/password are the default one: admin:admin
-
-The **.htpasswd** file is used for basic HTTP authentication. You can change it using the **htpasswd** utility, which is part of the Apache HTTP Server package. Here's how to create an **.htpasswd** file with a user named **yourusername**:
-
-```
-# Note: For deployment testing, we are using an existing .htpasswd file. This step is skipped as the authentication setup is already in place.
-# Typically, you would create a new .htpasswd file for basic HTTP authentication using:
-# htpasswd -c ./nginx/.htpasswd yourusername
-# But for the purposes of testing, this step can be omitted.
-
-htpasswd -c ./nginx/.htpasswd yourusername
-
-```
-
-This command will prompt you for the password for **yourusername**. The **-c** flag tells **htpasswd** to create a new file. **Caution**: Using the **-c** flag will overwrite any existing **.htpasswd** file. 
-
-If **htpasswd** is not installed on your system, you can install it with **apt** on Ubuntu:
-
-```
-sudo apt-get install apache2-utils
-```
-
-
-### 5 **Metric Monitoring with Prometheus**: 
+### 4 **Metric Monitoring with Prometheus**: 
 
 To monitor system metrics like CPU, memory, and disk usage, you can now leverage the fully provisioned Prometheus database and the Node Exporter Full dashboard (ID 1860) within your Grafana instance. This setup provides a comprehensive view of system metrics collected via the Prometheus Node Exporter.
 
@@ -265,7 +240,7 @@ scrape_configs:
 
 ```
 
-### 6 Launching the Docker Stack and Starting Services
+### 5 Launching the Docker Stack and Starting Services
 
 After completing these steps, you can bring up the Docker stack using the following command:
 
