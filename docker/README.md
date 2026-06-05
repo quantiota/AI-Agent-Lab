@@ -151,6 +151,14 @@ APP_SECRET_KEY=your_very_secure_secret_key
 
 ```
 
+and to define your domain name in the '**nginx.env**' file:
+
+```
+# nginx/nginx.env
+    
+DOMAIN=yourdomain
+```
+
 
 Remember to replace the placeholders with your actual domain and docker_host_ip_address. 
 
