@@ -54,6 +54,8 @@ To run the VSCode notebooks over HTTPS and ensure secure communication across yo
 
 - **Port 9009 (QuestDB Influx Line Protocol)**: This port is used for the InfluxDB line protocol in QuestDB, allowing remote connections to ingest time-series data. Forwarding this port is essential if you're collecting time-series data from remote sources.
 
+- **Port 9100 (Node Exporter)**: Required only if your Prometheus server is **not** on the host network. Forward this port so Prometheus can reach the Node Exporter installed on the host machine and scrape system metrics (CPU, memory, disk, ...).
+
 ### Router Configuration (if applicable):
 
 If you're running your server from a local network (e.g., at home or in an office), you will need to configure port forwarding on your router to allow external traffic to access your server. Here's a general guide on how to configure your router for port forwarding:
