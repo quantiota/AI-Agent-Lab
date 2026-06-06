@@ -253,7 +253,16 @@ scrape_configs:
 
 ```
 
-### 5 Launching the Docker Stack and Starting Services
+### 5 Install the recovery agent (host)
+
+The in-app **backup-restore** relies on a small host-side agent — a systemd service watching a named pipe — that performs the privileged restore on the host. Install it **before** launching the stack so the restore feature works:
+
+```
+sudo systemctl enable --now recovery-agent
+```
+[Restore — Host Setup guide](https://github.com/quantiota/AI-Agent-Lab/tree/main/docs/restore) 
+
+### 6 Launching the Docker Stack and Starting Services
 
 After completing these steps, you can bring up the Docker stack using the following command:
 
@@ -262,9 +271,36 @@ docker compose up --build -d
 ```
 This will start all services as defined in your **docker-compose.yaml** file.
 
+
+
+
+
+### Configuration setup
 ```mermaid
-flowchart LR
-      dns["domain.tld<br/>A records: vscode · questdb · grafana · aiagentui · auth"] --> ip["IP address"]
+flowchart TD
+    A["FQDN · domain.tld<br/>vscode · questdb · grafana · aiagentui · auth"] --> B["Public IP address"]
+    B --> C["Port forwarding<br/>443 · 80 · 22 · 8812 · 9009 · 9100"]
+    C --> D["Server local IP address"]
+    D --> E["1 · Generate TLS certs"]
+    E --> F["2 · Set environment variables<br/>+ Authelia secrets & user hash"]
+    F --> G["3 · Generate dhparam.pem"]
+    G --> H["4 · Configure monitoring"]
+    H --> I["Install recovery agent on host<br/>"]
+    I --> J["5 · Launch the stack<br/>docker compose up --build -d"]
+
+    classDef dns fill:#DBEAFE,stroke:#2563EB,stroke-width:2px,color:#111827;
+    classDef network fill:#E0F2FE,stroke:#0284C7,stroke-width:2px,color:#0F172A;
+    classDef setup fill:#FEF3C7,stroke:#D97706,stroke-width:2px,color:#111827;
+    classDef monitor fill:#EDE9FE,stroke:#7C3AED,stroke-width:2px,color:#111827;
+    classDef success fill:#DCFCE7,stroke:#16A34A,stroke-width:2px,color:#052E16;
+
+    class A dns;
+    class B,C,D network;
+    class E,F,G setup;
+    class H monitor;
+    class I,J success;
+
+    linkStyle default stroke:#64748B,stroke-width:2px;
 ```
 
 
