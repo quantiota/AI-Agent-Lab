@@ -64,12 +64,15 @@ docker compose up --build -d
 
 ```
 
-5. Once the services are up and running, you can access the AI Agent Lab interfaces:
+5. Once the services are up and running:
 
-- QuestDB: Visit https://questdb.domain.tld in your web browser.
-- Grafana: Visit https://grafana.domain.tld in your web browser.
-- Code-Server: Visit https://vscode.domain.tld in your web browser.
-- AI Agent UI: Visit https://aigentui.domain.tld in your web browser.
+- **Sign in** once at the single sign-on portal — https://auth.domain.tld — which **redirects you to the AI Agent UI** (https://aiagentui.domain.tld), your dashboard for the whole lab.
+
+Each service is also directly reachable under the same SSO session from your dahsbord
+
+- Code-Server: https://vscode.domain.tld
+- Grafana: https://grafana.domain.tld
+- QuestDB: https://questdb.domain.tld
 
 6. To connect the AI Agent Lab to a remote JupyterHub environment from Code-Server:
 
