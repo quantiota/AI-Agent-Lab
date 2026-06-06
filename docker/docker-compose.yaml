@@ -94,7 +94,6 @@ services:
       - /etc/letsencrypt:/etc/letsencrypt
       - ./nginx/.well-known/:/usr/share/nginx/html/.well-known/
       - ./nginx/certs/dhparam.pem:/etc/ssl/certs/dhparam.pem
-      - ./nginx/.htpasswd:/etc/nginx/.htpasswd
     ports:
       - "80:80"
       - "443:443"

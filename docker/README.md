@@ -262,6 +262,13 @@ docker compose up --build -d
 ```
 This will start all services as defined in your **docker-compose.yaml** file.
 
+```mermaid
+flowchart LR
+      dns["domain.tld<br/>A records: vscode · questdb · grafana · aiagentui · auth"] --> ip["IP address"]
+```
+
+
+
 
 
 ## Understanding and Managing Docker Permissions in a Docker Stack
@@ -287,6 +294,7 @@ Please note that if the **coder** user in your Docker container needs specific p
 If you wish to enforce specific permissions within the container regardless of host permissions, you would likely need to handle this in the Dockerfile used to build your image, for example by adding **RUN chmod** commands to change the permissions after the volume is mounted. But keep in mind that it might not always work depending on the volume's nature, and the Dockerfile does not have direct access to the volumes at build time.
 
 Another option would be to use an entrypoint script in your Dockerfile that modifies the permissions of the directory when the container starts, but again, be cautious about potential security implications of changing permissions in this way.
+
 
 
 ### 2 Setting Default File and Directory Permissions for Git Clone Operations
