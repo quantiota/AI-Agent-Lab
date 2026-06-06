@@ -65,7 +65,7 @@ If you're running your server from a local network (e.g., at home or in an offic
 2. **Navigate to Port Forwarding section**: Look for a section called "Port Forwarding" or "Virtual Server." The location of this section varies depending on the router model.
 
 3. **Add new port forwarding rules** for each required port:
-   - **External Port**: Enter the external port number (e.g., 443, 80, 22, 8812, 9009).
+   - **External Port**: Enter the external port number (e.g., 443, 80, 22, 8812, 9009, 9100).
    - **Internal IP Address**: Enter the local IP address of the machine running the services (e.g., your server's local IP address).
    - **Internal Port**: Enter the same port number to forward the traffic internally.
    - **Protocol**: Choose either TCP or UDP, or select "Both" depending on the service requirements.
