@@ -285,8 +285,8 @@ flowchart TD
     E --> F["2 · Set environment variables<br/>+ Authelia secrets & user hash"]
     F --> G["3 · Generate dhparam.pem"]
     G --> H["4 · Configure monitoring"]
-    H --> I["Install recovery agent on host<br/>"]
-    I --> J["5 · Launch the stack<br/>docker compose up --build -d"]
+    H --> I["5 . Install recovery agent on host<br/>"]
+    I --> J["6 · Launch the stack<br/>docker compose up --build -d"]
 
     classDef dns fill:#DBEAFE,stroke:#2563EB,stroke-width:2px,color:#111827;
     classDef network fill:#E0F2FE,stroke:#0284C7,stroke-width:2px,color:#0F172A;
