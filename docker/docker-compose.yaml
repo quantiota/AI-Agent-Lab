@@ -81,6 +81,7 @@ services:
       - ./aiagentui/uploads:/aiagentui/uploads
       - /backup/rsnapshot:/backup/rsnapshot:ro
       - /run/recovery:/run/recovery
+      - aiagentui-data:/aiagentui/instance   # persisted app store (Claude API key, future app config) — survives rebuild + restore
     env_file:
       - .env
 
@@ -123,5 +124,5 @@ volumes:
   questdb-data:
   claude-config:
   claude-data:
-
+  aiagentui-data:
 
