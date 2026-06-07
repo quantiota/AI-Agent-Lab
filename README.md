@@ -105,7 +105,6 @@ For optimal performance, the AI Agent Lab requires the following hardware setup:
 
 ## Roadmap
 
-- **Per-user audit** on privileged actions (backup restore, service restarts), building on the SSO identity layer.
 - **Conversation-as-Telemetry (SKA)** — capture human-agent and agent-agent interactions as structured knowledge events in QuestDB, surfaced in Grafana; the foundation for forward-only knowledge accumulation ([SKA infrastructure preprint](https://github.com/quantiota/AI-Agent-Lab/blob/main/docs/roadmap/telemetry/ska_ai_infrastructure.pdf)).
 
 
