@@ -62,7 +62,7 @@ A specific topology trap: the resource you're trying to reach is on your LAN, bu
 
 ### Symptom
 
-`https://service.example.com` works from a phone on cellular but fails from another machine on the same LAN.
+`https://prometheus.domain.tld` works from a phone on cellular but fails from another machine on the same LAN.
 
 ### When the public URL is the right choice anyway
 
