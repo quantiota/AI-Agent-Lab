@@ -220,13 +220,18 @@ To ensure proper configuration, you need to modify the `prometheus-ip-address` U
 ```
 # /grafana/provisioning/datasources/prometheus.yml
 
+# Pick based on where Prometheus runs:
+#   - On the LAN (same network as the Docker host):  http://<lan-ip>:9090
+#   - Remote (different network):                    https://prometheus.domain.tld
+
+
 apiVersion: 1
 
 datasources:
   - name: Prometheus
     type: prometheus
     access: proxy
-    url: http://prometheus-local-ip-address:9090   # or url: https://prometheus.domain.tld
+    url: http://prometheus-local-ip-address:9090   
     isDefault: false
     editable: false
     uid: rYdddlPWk  # Ensure this UID is unique, used in the dashboard JSON
