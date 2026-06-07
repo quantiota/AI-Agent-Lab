@@ -1,3 +1,9 @@
+// CSRF token — read fresh from the <meta name="csrf-token"> tag (set in index.html) on each call.
+function getCsrf() {
+  const m = document.querySelector('meta[name="csrf-token"]');
+  return m ? m.content : '';
+}
+
 document.getElementById('claude-api-form').addEventListener('submit', function(event) {
   event.preventDefault();
   const input = document.getElementById('api-key-input');
@@ -8,7 +14,7 @@ document.getElementById('claude-api-form').addEventListener('submit', function(e
   }
   fetch('/save-key', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCsrf() },
     body: JSON.stringify({ apiKey: apiKey })
   })
     .then(r => r.json().then(d => ({ ok: r.ok, d })))
@@ -223,7 +229,7 @@ function sendMessage() {
 
   fetch('/chat', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCsrf() },
     // strip the display-only field before sending to the API
     body: JSON.stringify({ messages: chat.messages.map(m => ({ role: m.role, content: m.content })), model })
   })
@@ -375,7 +381,7 @@ function uploadFile(file) {
   hideError();
   const fd = new FormData();
   fd.append('file', file);
-  fetch('/upload', { method: 'POST', body: fd })
+  fetch('/upload', { method: 'POST', headers: { 'X-CSRFToken': getCsrf() }, body: fd })
     .then(r => { if (!r.ok) throw new Error('upload failed'); return r; })
     .then(() => fetchFiles())
     .catch(() => displayError('Upload failed. Please try again.'));
@@ -411,7 +417,7 @@ function renderFileList(files) {
 function deleteFile(filename) {
   fetch('/delete-file', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+    headers: { 'Content-Type': 'application/x-www-form-urlencoded', 'X-CSRFToken': getCsrf() },
     body: new URLSearchParams({ filename })
   })
     .then(response => response.json())
@@ -440,7 +446,7 @@ document.addEventListener('DOMContentLoaded', initUpload);
 
 function restartNginx() {
   document.getElementById('nginx-message').style.display = 'block';
-  fetch('/restart/nginx')
+  fetch('/restart/nginx', { method: 'POST', headers: { 'X-CSRFToken': getCsrf() } })
     .then(() => console.log('Nginx restart initiated'))
     .catch(console.error);
 }
@@ -452,7 +458,7 @@ function restartService(container, label) {
     msg.textContent = `${label} is restarting. Please wait... then reload the page.`;
     msg.style.display = 'block';
   }
-  fetch('/restart/' + container).catch(console.error);
+  fetch('/restart/' + container, { method: 'POST', headers: { 'X-CSRFToken': getCsrf() } }).catch(console.error);
 }
 
 function fetchBackups() {
@@ -540,7 +546,7 @@ function handleRestore() {
 
   fetch('/api/restore-backup', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCsrf() },
       body: JSON.stringify({ selectedBackup })
   })
   .then(response => response.json())

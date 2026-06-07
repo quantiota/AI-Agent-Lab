@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, abort, jsonify, redirect, url_for, abort, flash
+from flask_wtf.csrf import CSRFProtect
 import os
 import json
 import requests
@@ -18,6 +19,7 @@ app.config['UPLOAD_EXTENSIONS'] = ['.csv', '.sql', '.pdf', '.txt']
 app.config['UPLOAD_PATH'] = '/aiagentui/uploads'
 app.config['UPLOAD_MAX_BYTES'] = 800 * 1024   # 800K — matches the upload UI
 app.secret_key = os.environ.get('APP_SECRET_KEY', 'dev-only-change-me')
+csrf = CSRFProtect(app)
 
 # Claude API key: UI-set store file takes precedence, else the ANTHROPIC_API_KEY env (.env).
 CLAUDE_KEY_FILE = os.environ.get('CLAUDE_KEY_FILE', os.path.join(app.instance_path, 'claude_api_key'))
@@ -139,7 +141,7 @@ def chat():
 
 # Service controle
 
-@app.route('/restart/<container_name>', methods=['GET'])
+@app.route('/restart/<container_name>', methods=['POST'])
 def restart_container(container_name):
     # Check if the container name is valid
     if container_name in valid_containers:
@@ -159,7 +161,7 @@ def restart_container(container_name):
 
 
 
-@app.route('/restart/nginx', methods=['GET'])
+@app.route('/restart/nginx', methods=['POST'])
 def restart_nginx():
     # Restart the Nginx container
     container = client.containers.get('docker-nginx-1')

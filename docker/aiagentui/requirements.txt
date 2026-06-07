@@ -1,4 +1,5 @@
 flask
+flask-wtf
 requests
 docker
 werkzeug
