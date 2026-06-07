@@ -1,12 +1,25 @@
 document.getElementById('claude-api-form').addEventListener('submit', function(event) {
   event.preventDefault();
-  const apiKey = document.getElementById('api-key-input').value.trim();
-  if (apiKey) {
-      alert(`API Key Submitted: ${apiKey}`);
-      // Add logic to handle the Anthropic API key submission if needed
-  } else {
-      alert('Please enter your API key.');
+  const input = document.getElementById('api-key-input');
+  const apiKey = input.value.trim();
+  if (!apiKey) {
+    alert('Please enter your API key.');
+    return;
   }
+  fetch('/save-key', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ apiKey: apiKey })
+  })
+    .then(r => r.json().then(d => ({ ok: r.ok, d })))
+    .then(({ ok, d }) => {
+      alert(d.message || (ok ? 'API key saved.' : 'Could not save key.'));
+      if (ok) {
+        input.value = '';
+        closeModal('claude');
+      }
+    })
+    .catch(() => alert('Could not save the key. Please try again.'));
 });
 
 // ---- Chat history (stored in localStorage) ----

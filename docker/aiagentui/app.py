@@ -19,6 +19,19 @@ app.config['UPLOAD_PATH'] = '/aiagentui/uploads'
 app.config['UPLOAD_MAX_BYTES'] = 800 * 1024   # 800K — matches the upload UI
 app.secret_key = os.environ.get('APP_SECRET_KEY', 'dev-only-change-me')
 
+# Claude API key: UI-set store file takes precedence, else the ANTHROPIC_API_KEY env (.env).
+CLAUDE_KEY_FILE = os.environ.get('CLAUDE_KEY_FILE', os.path.join(app.instance_path, 'claude_api_key'))
+
+def get_claude_key():
+    try:
+        with open(CLAUDE_KEY_FILE) as f:
+            key = f.read().strip()
+            if key:
+                return key
+    except OSError:
+        pass
+    return os.environ.get('ANTHROPIC_API_KEY')
+
 client = docker.DockerClient(base_url='unix://var/run/docker.sock')
 
 # Define the valid container names
@@ -31,15 +44,32 @@ valid_containers = {
 
 @app.route('/')
 def index():
-    api_key_exists = "Yes" if os.environ.get('ANTHROPIC_API_KEY') else "No"
+    api_key_exists = "Yes" if get_claude_key() else "No"
     return render_template('index.html', api_key_exists=api_key_exists, domain=domain)
+
+
+@app.route('/save-key', methods=['POST'])
+def save_key():
+    data = request.get_json(silent=True) or {}
+    key = (data.get('apiKey') or '').strip()
+    if not key:
+        return jsonify({'message': 'Please enter an API key.'}), 400
+    try:
+        os.makedirs(os.path.dirname(CLAUDE_KEY_FILE), exist_ok=True)
+        with open(CLAUDE_KEY_FILE, 'w') as f:
+            f.write(key)
+        os.chmod(CLAUDE_KEY_FILE, 0o600)
+    except OSError as e:
+        app.logger.error(f"Could not save Claude key: {e}")
+        return jsonify({'message': 'Could not save the key (storage not writable).'}), 500
+    return jsonify({'message': 'API key saved.'}), 200
 
 
 
 
 @app.route('/chat', methods=['POST'])
 def chat():
-    anthropic_api_key = os.environ.get('ANTHROPIC_API_KEY')
+    anthropic_api_key = get_claude_key()
     if not anthropic_api_key:
         return jsonify({'error': 'Anthropic API key is not configured.'}), 500
 
