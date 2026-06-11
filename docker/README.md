@@ -105,7 +105,9 @@ docker compose -f init.yaml run certbot certonly -d aiagentui.domain.tld
 docker compose -f init.yaml run certbot certonly -d auth.domain.tld
 ```
 
-
+```
+docker compose -f init.yaml run certbot certonly -d gradio.domain.tld
+```
 
 **Important:** Replace **'domain.tld'** with your actual domain in the commands above.
 

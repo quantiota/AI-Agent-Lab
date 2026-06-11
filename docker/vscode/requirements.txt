@@ -2,6 +2,16 @@
 
 # some-MarketData-package==x.y.z   <- Comment or uncomment based on the application
 psycopg2-binary==2.9.12        
-websocket-client==1.9.0                                                                 
+websocket-client==1.9.0    
+
+
+# some-SKA Explorer package==x.y.z
+gradio
+torch==2.11.0
+torchvision==0.26.0
+numpy
+scipy
+seaborn
+matplotlib>=3.9
                     
        

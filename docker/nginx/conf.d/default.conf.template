@@ -14,7 +14,7 @@ map $http_upgrade $connection_upgrade {
 # HTTP server to redirect all 80 traffic to SSL/HTTPS
 server {
     listen 80;
-    server_name  ${DOMAIN} www.${DOMAIN} vscode.${DOMAIN} questdb.${DOMAIN} grafana.${DOMAIN}  aiagentui.${DOMAIN}  blog.${DOMAIN}  auth.${DOMAIN};
+    server_name  ${DOMAIN} www.${DOMAIN} vscode.${DOMAIN} questdb.${DOMAIN} grafana.${DOMAIN}  aiagentui.${DOMAIN}  gradio.${DOMAIN}  auth.${DOMAIN};
 
     # Tell all requests to port 80 to be 302 redirected to HTTPS
     location / {
@@ -242,6 +242,67 @@ server {
         allow all;
     }
 }
+
+
+# HTTPS server to handle Gradio apps (launched from code-server on port 7860)
+server {
+    listen 443 ssl;
+    server_name gradio.${DOMAIN};
+
+    ssl_certificate /etc/letsencrypt/live/gradio.${DOMAIN}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/gradio.${DOMAIN}/privkey.pem;
+
+    ssl_protocols TLSv1 TLSv1.1 TLSv1.2;
+    ssl_prefer_server_ciphers on;
+    ssl_dhparam /etc/ssl/certs/dhparam.pem;
+    ssl_ciphers 'ECDHE-RSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES256-GCM-SHA384:DHE-RSA-AES128-GCM-SHA256:DHE-DSS-AES128-GCM-SHA256:kEDH+AESGCM:ECDHE-RSA-AES128-SHA256:ECDHE-ECDSA-AES128-SHA256:ECDHE-RSA-AES128-SHA:ECDHE-ECDSA-AES128-SHA:ECDHE-RSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA384:ECDHE-RSA-AES256-SHA:ECDHE-ECDSA-AES256-SHA:DHE-RSA-AES128-SHA256:DHE-RSA-AES256-SHA:AES128-GCM-SHA256:AES256-GCM-SHA384:AES128-SHA256:AES256-SHA256:AES128-SHA:AES256-SHA:AES:CAMELLIA:DES-CBC3-SHA:!aNULL:!eNULL:!EXPORT:!DES:!RC4:!MD5:!PSK:!aECDH:!EDH-DSS-DES-CBC3-SHA:!EDH-RSA-DES-CBC3-SHA:!KRB5-DES-CBC3-SHA';
+    ssl_session_timeout 1d;
+    ssl_session_cache shared:SSL:50m;
+    ssl_stapling on;
+    ssl_stapling_verify on;
+    add_header Strict-Transport-Security max-age=15768000;
+
+    # Authelia forward-auth (SSO)
+    include /etc/nginx/snippets/authelia-location.conf;
+
+    # Gradio app served from the code-server container on :7860.
+    # The user runs `python app.py` in code-server; until then this returns 502.
+    location / {
+        include /etc/nginx/snippets/authelia-authrequest.conf;
+        resolver 127.0.0.11 valid=10s;
+        set $upstream_gradio vscode;
+        proxy_pass http://$upstream_gradio:7860;
+
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+
+        # websocket headers (Gradio uses websockets/SSE for live updates)
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_set_header X-Scheme $scheme;
+        # Gradio/uvicorn build absolute URLs (config.root, asset/SSE/websocket
+        # endpoints) from X-Forwarded-Proto. Without it the HTTPS page gets
+        # http:// URLs and the browser blocks them as mixed content, so the app
+        # shell loads but never renders. X-Scheme alone is not read by uvicorn.
+        proxy_set_header X-Forwarded-Proto $scheme;
+
+        proxy_buffering off;
+
+        # Generous timeouts — model runs / training loops can take a while
+        proxy_connect_timeout 60s;
+        proxy_send_timeout 300s;
+        proxy_read_timeout 300s;
+        send_timeout 300s;
+    }
+
+    # Managing requests to verify letsencrypt host
+    location ~ /.well-known {
+        allow all;
+    }
+}
+
 
 
 
