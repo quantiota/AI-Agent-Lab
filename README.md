@@ -82,6 +82,13 @@ Each service is also directly reachable under the same SSO session from your dah
 
 Start working with your notebooks and data, using the pre-installed tools and libraries that are included in your remote environment.
 
+## Notebooks
+
+The `notebooks/` directory ships ready-to-run examples covering both pillars of the lab:
+
+- **Market Data** — real-time Coinbase/Binance WebSocket feeds streamed into QuestDB and visualized in Grafana, plus a TA-Library of SQL indicators.
+- **SKA Explorer** — nine interactive Gradio demos of the Structured Knowledge Accumulation framework. 
+
 
 
 ### AI Agent Lab Architecture Diagram
