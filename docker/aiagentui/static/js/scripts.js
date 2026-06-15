@@ -28,18 +28,25 @@ document.getElementById('claude-api-form').addEventListener('submit', function(e
     .catch(() => alert('Could not save the key. Please try again.'));
 });
 
-// ---- Chat history (stored in localStorage) ----
+// ---- Chat history (persisted server-side via /chats — survives browser wipe + follows the user across devices) ----
 let chats = [];            // [{ id, title, messages: [{role, content, display?}] }]
 let currentChatId = null;
 let attachedFile = null;   // { name, content } pending attachment
 
+// Returns a promise — startup must await it before rendering.
 function loadChats() {
-  try { chats = JSON.parse(localStorage.getItem('aiagent_chats')) || []; }
-  catch (e) { chats = []; }
+  return fetch('/chats')
+    .then(r => (r.ok ? r.json() : []))
+    .then(data => { chats = Array.isArray(data) ? data : []; })
+    .catch(() => { chats = []; });
 }
 
 function saveChats() {
-  localStorage.setItem('aiagent_chats', JSON.stringify(chats));
+  fetch('/chats', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCsrf() },
+    body: JSON.stringify(chats)
+  }).catch(() => {});
 }
 
 function currentChat() {
@@ -136,21 +143,67 @@ function renderChat() {
   chat.messages.forEach(m => appendMessage(m.role === 'assistant' ? 'bot' : 'user', m.display || m.content));
 }
 
-// ---- File attachment (text files, read client-side) ----
+// ---- File attachment (text read as text; images read as base64 for vision) ----
+const IMAGE_TYPES = ['image/png', 'image/jpeg', 'image/gif', 'image/webp'];
+
 function handleAttach(event) {
   const file = event.target.files[0];
-  if (!file) return;
-  const MAX_BYTES = 200 * 1024; // 200 KB of text
-  if (file.size > MAX_BYTES) {
-    alert('File is too large to attach (max 200 KB of text).');
-    event.target.value = '';
+  if (file) attachFile(file);
+  event.target.value = ''; // allow re-selecting the same file
+}
+
+function attachFile(file) {
+  // Images → base64 data URL (sent as a vision block); everything else → text.
+  if (IMAGE_TYPES.includes(file.type)) {
+    const MAX_BYTES = 2 * 1024 * 1024; // 2 MB — kept modest (re-sent each turn + stored)
+    if (file.size > MAX_BYTES) { alert('Image is too large to attach (max 2 MB).'); return; }
+    const reader = new FileReader();
+    reader.onload = e => {
+      const dataUrl = e.target.result;               // data:image/png;base64,XXXX
+      attachedFile = {
+        name: file.name || 'image', kind: 'image', mediaType: file.type,
+        data: (dataUrl.split(',')[1] || ''), dataUrl
+      };
+      renderAttachment();
+    };
+    reader.onerror = () => alert('Could not read the image.');
+    reader.readAsDataURL(file);
     return;
   }
+  // PDFs → base64 document block (Claude reads text + figures natively).
+  if (file.type === 'application/pdf') {
+    const MAX_BYTES = 10 * 1024 * 1024; // 10 MB — re-sent each turn, so kept bounded
+    if (file.size > MAX_BYTES) { alert('PDF is too large to attach (max 10 MB).'); return; }
+    const reader = new FileReader();
+    reader.onload = e => {
+      attachedFile = {
+        name: file.name || 'document.pdf', kind: 'pdf',
+        mediaType: 'application/pdf', data: (e.target.result.split(',')[1] || '')
+      };
+      renderAttachment();
+    };
+    reader.onerror = () => alert('Could not read the PDF.');
+    reader.readAsDataURL(file);
+    return;
+  }
+  const MAX_BYTES = 200 * 1024; // 200 KB of text
+  if (file.size > MAX_BYTES) { alert('File is too large to attach (max 200 KB of text).'); return; }
   const reader = new FileReader();
-  reader.onload = e => { attachedFile = { name: file.name, content: e.target.result }; renderAttachment(); };
+  reader.onload = e => { attachedFile = { name: file.name, kind: 'text', content: e.target.result }; renderAttachment(); };
   reader.onerror = () => alert('Could not read the file.');
   reader.readAsText(file);
-  event.target.value = ''; // allow re-selecting the same file
+}
+
+// Paste an image straight into the chat (e.g. a Grafana screenshot).
+function handleChatPaste(event) {
+  const items = (event.clipboardData && event.clipboardData.items) || [];
+  for (const item of items) {
+    if (item.type && item.type.startsWith('image/')) {
+      const file = item.getAsFile();
+      if (file) { event.preventDefault(); attachFile(file); return; }
+    }
+  }
+  // no image on the clipboard → let the normal text paste happen
 }
 
 function renderAttachment() {
@@ -159,8 +212,11 @@ function renderAttachment() {
   if (!attachedFile) { el.style.display = 'none'; el.innerHTML = ''; return; }
   el.style.display = 'flex';
   const name = attachedFile.name.replace(/[<>&]/g, c => ({ '<': '&lt;', '>': '&gt;', '&': '&amp;' }[c]));
+  const lead = attachedFile.kind === 'image'
+    ? `<img src="${attachedFile.dataUrl}" alt="" class="attachment-thumb" />`
+    : (attachedFile.kind === 'pdf' ? '📄 ' : '📎 ');
   el.innerHTML =
-    `<span class="attachment-chip">📎 <span class="attachment-name">${name}</span>` +
+    `<span class="attachment-chip">${lead}<span class="attachment-name">${name}</span>` +
     `<button type="button" class="attachment-remove" onclick="clearAttachment()" title="Remove">✕</button></span>`;
 }
 
@@ -211,7 +267,21 @@ function sendMessage() {
   // What the model receives (includes the file) vs what the UI shows (clean)
   let apiContent = typed;
   let displayContent = typed;
-  if (attachedFile) {
+  if (attachedFile && attachedFile.kind === 'image') {
+    // Vision: an image block + a text block; the UI shows the image inline.
+    apiContent = [
+      { type: 'image', source: { type: 'base64', media_type: attachedFile.mediaType, data: attachedFile.data } },
+      { type: 'text', text: typed || 'Describe and explain this image.' }
+    ];
+    displayContent = (typed ? typed + '\n\n' : '') + `<img src="${attachedFile.dataUrl}" alt="${attachedFile.name}" class="chat-image" />`;
+  } else if (attachedFile && attachedFile.kind === 'pdf') {
+    // Document Q&A: a PDF document block + a text block; UI shows a filename chip.
+    apiContent = [
+      { type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: attachedFile.data } },
+      { type: 'text', text: typed || 'Summarize this document and list its key points.' }
+    ];
+    displayContent = (typed ? typed + '\n\n' : '') + `📄 ${attachedFile.name}`;
+  } else if (attachedFile) {
     apiContent = `Attached file "${attachedFile.name}":\n\n${attachedFile.content}` + (typed ? `\n\n${typed}` : '');
     displayContent = (typed ? typed + '\n\n' : '') + `📎 ${attachedFile.name}`;
   }
@@ -227,38 +297,63 @@ function sendMessage() {
   renderHistory();
   saveChats();
 
+  // Stream the reply into a bot bubble, re-rendering markdown as chunks arrive.
+  const botEl = appendMessage('bot', '');
+  const textSpan = botEl.querySelector('.message-text');
+  const body = document.getElementById('chatbot-body');
+  let full = '';
+
   fetch('/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCsrf() },
     // strip the display-only field before sending to the API
     body: JSON.stringify({ messages: chat.messages.map(m => ({ role: m.role, content: m.content })), model })
   })
-  .then(response => response.json())
-  .then(data => {
-    if (data.response) {
-      chat.messages.push({ role: 'assistant', content: data.response });
-      renderChat();
+  .then(async response => {
+    if (!response.ok || !response.body) {
+      const err = await response.text().catch(() => '');
+      textSpan.innerHTML = renderMarkdown(err || 'Error communicating with AI.');
+      return;
+    }
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      full += decoder.decode(value, { stream: true });
+      textSpan.innerHTML = renderMarkdown(full);
+      body.scrollTop = body.scrollHeight;
+    }
+    if (full.trim()) {
+      chat.messages.push({ role: 'assistant', content: full });
       saveChats();
-    } else {
-      appendMessage('bot', data.error || 'No response.');   // errors are shown but not stored
     }
   })
-  .catch(() => appendMessage('bot', 'Error communicating with AI.'));
+  .catch(() => { textSpan.innerHTML = renderMarkdown('Error communicating with AI.'); });
+}
+
+function renderMarkdown(text) {
+  try { return (window.marked ? marked.parse(text) : text); }
+  catch (e) { return text; }
 }
 
 function appendMessage(sender, text) {
   const messageDiv = document.createElement('div');
   messageDiv.className = `chat-message ${sender}-message`;
-  messageDiv.innerHTML = `<span class="message-text">${text}</span>`;
-  document.getElementById('chatbot-body').appendChild(messageDiv);
-  document.getElementById('chatbot-body').scrollTop = document.getElementById('chatbot-body').scrollHeight;
+  const html = sender === 'bot' ? renderMarkdown(text) : text;
+  messageDiv.innerHTML = `<span class="message-text">${html}</span>`;
+  const body = document.getElementById('chatbot-body');
+  body.appendChild(messageDiv);
+  body.scrollTop = body.scrollHeight;
+  return messageDiv;
 }
 
 // Initialise chat history on load
 document.addEventListener('DOMContentLoaded', function () {
-  loadChats();
-  renderHistory();
-  renderChat();
+  loadChats().then(() => {
+    renderHistory();
+    renderChat();
+  });
 });
 
 // Prefill the chat input with a starter prompt (used by the suggestion chips)

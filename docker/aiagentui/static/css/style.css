@@ -763,6 +763,23 @@ body {
   color: var(--vf-color-text-default);
 }
 
+.attachment-thumb {
+  height: 28px;
+  width: 28px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.chat-image {
+  max-width: 320px;
+  max-height: 320px;
+  width: auto;
+  height: auto;
+  border-radius: 8px;
+  margin-top: 4px;
+  display: block;
+}
+
 .chat-input-box {
   display: flex;
   align-items: center;

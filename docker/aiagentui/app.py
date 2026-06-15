@@ -1,8 +1,9 @@
-from flask import Flask, render_template, request, abort, jsonify, redirect, url_for, abort, flash
+from flask import Flask, render_template, request, abort, jsonify, redirect, url_for, abort, flash, Response
 from flask_wtf.csrf import CSRFProtect
 import os
 import json
 import requests
+import anthropic
 import docker
 from werkzeug.utils import secure_filename
 import time
@@ -23,6 +24,10 @@ csrf = CSRFProtect(app)
 
 # Claude API key: UI-set store file takes precedence, else the ANTHROPIC_API_KEY env (.env).
 CLAUDE_KEY_FILE = os.environ.get('CLAUDE_KEY_FILE', os.path.join(app.instance_path, 'claude_api_key'))
+
+# Conversations are persisted server-side here (the instance volume survives rebuild +
+# restore), so chats outlast a browser wipe and follow the user across browsers/devices.
+CHATS_FILE = os.environ.get('CHATS_FILE', os.path.join(app.instance_path, 'chats.json'))
 
 def get_claude_key():
     try:
@@ -69,6 +74,35 @@ def save_key():
 
 
 
+@app.route('/chats', methods=['GET'])
+def get_chats():
+    """Return the saved conversations (server-side store)."""
+    try:
+        with open(CHATS_FILE) as f:
+            return jsonify(json.load(f)), 200
+    except FileNotFoundError:
+        return jsonify([]), 200
+    except (OSError, ValueError):
+        # Unreadable / corrupt store: start clean rather than 500 the UI.
+        return jsonify([]), 200
+
+
+@app.route('/chats', methods=['POST'])
+def save_chats():
+    """Persist the full conversations array sent by the frontend."""
+    data = request.get_json(silent=True)
+    if not isinstance(data, list):
+        return jsonify({'error': 'Expected a list of chats.'}), 400
+    try:
+        os.makedirs(os.path.dirname(CHATS_FILE), exist_ok=True)
+        with open(CHATS_FILE, 'w') as f:
+            json.dump(data, f)
+    except OSError as e:
+        app.logger.error(f"Could not save chats: {e}")
+        return jsonify({'error': 'Could not save (storage not writable).'}), 500
+    return jsonify({'ok': True}), 200
+
+
 @app.route('/chat', methods=['POST'])
 def chat():
     anthropic_api_key = get_claude_key()
@@ -100,42 +134,55 @@ def chat():
     if model not in allowed_models:
         model = default_model
 
-    try:
-        # Create a message using the Anthropic Messages API
-        headers = {
-            'Content-Type': 'application/json',
-            'x-api-key': anthropic_api_key,
-            'anthropic-version': '2023-06-01',
-        }
+    client = anthropic.Anthropic(api_key=anthropic_api_key)
 
-        json_data = {
-            "model": model,
-            "max_tokens": 1024,
-            "system": (
-                "You are a helpful assistant. When the user attaches a file, its full "
-                "contents are included inline in their message. Treat that text as the "
-                "attached file and work with it directly — do not say you cannot access files."
-            ),
-            "messages": messages
-        }
+    system_prompt = (
+        "You are the assistant built into the AI Agent Lab dashboard — a single-user "
+        "research environment running QuestDB (time-series database), Grafana "
+        "(dashboards), VSCode/code-server (which includes Claude Code for agentic "
+        "coding), and nginx, all in Docker.\n\n"
+        "Your role is read-only: you explain, analyze, and answer questions about the "
+        "lab, its data, code, and research. You do not run commands, edit files, or "
+        "change the system — that is done by the user or by Claude Code inside "
+        "code-server. When a task needs execution, give the exact command or steps to "
+        "run there instead of saying you cannot access the system.\n\n"
+        "When the user attaches a file, its full contents are included inline in their "
+        "message; treat that text as the attached file and work with it directly.\n\n"
+        "Be concise and technical. No filler, no emoji. Use markdown for structure and "
+        "code blocks for commands and code.\n\n"
+        "The chat renders markdown only, not LaTeX. Write math as plain text using "
+        "unicode symbols (e.g. H(X) = -Σ p(i)·log p(i)), not LaTeX delimiters like "
+        "$$…$$ or \\frac — they would show as raw text."
+    )
 
-        response = requests.post(
-            'https://api.anthropic.com/v1/messages',
-            headers=headers,
-            json=json_data,
-            timeout=30  # Timeout after 30 seconds
-        )
+    # Adaptive thinking is supported on Opus/Sonnet (not Haiku). When it's on, give the
+    # answer more headroom since thinking tokens count toward max_tokens.
+    thinking_models = {"claude-opus-4-8", "claude-sonnet-4-6"}
+    stream_kwargs = {
+        "model": model,
+        "max_tokens": 1024,
+        "system": system_prompt,
+        "messages": messages,
+    }
+    if model in thinking_models:
+        stream_kwargs["thinking"] = {"type": "adaptive"}
+        stream_kwargs["max_tokens"] = 4096
 
-        if response.status_code != 200:
-            error_message = response.json().get('error', {}).get('message', 'Unknown error')
-            return jsonify({'error': error_message}), response.status_code
+    # Stream the reply as plain-text chunks (the frontend reads response.body and
+    # renders markdown as it arrives). text_stream yields only the visible answer —
+    # any thinking blocks are excluded. One user per instance, so holding a worker
+    # for the duration of the stream is fine.
+    def generate():
+        try:
+            with client.messages.stream(**stream_kwargs) as stream:
+                for text in stream.text_stream:
+                    yield text
+        except anthropic.APIStatusError as e:
+            yield f"\n\n[error: {e}]"
+        except Exception as e:
+            yield f"\n\n[error: {e}]"
 
-        assistant_message = response.json()['content'][0]['text']
-
-        return jsonify({'response': assistant_message}), 200
-
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
+    return Response(generate(), mimetype='text/plain; charset=utf-8')
 
 
 

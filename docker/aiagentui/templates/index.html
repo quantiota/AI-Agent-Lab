@@ -357,9 +357,9 @@
                 </svg>
               </button>
               <input type="file" id="chat-file-input" class="chat-file-input"
-                accept=".txt,.csv,.sql,.md,.json,.log,.py,.js,.yml,.yaml,.html,.css,.xml,.tsv"
+                accept=".txt,.csv,.sql,.md,.json,.log,.py,.js,.yml,.yaml,.html,.css,.xml,.tsv,.png,.jpg,.jpeg,.gif,.webp,.pdf"
                 onchange="handleAttach(event)" />
-              <input type="text" id="chatbot-input" placeholder="Ask anything..." class="chat-input" onkeypress="handleChatEnter(event)" />
+              <input type="text" id="chatbot-input" placeholder="Ask anything…  (paste an image to analyze it)" class="chat-input" onkeypress="handleChatEnter(event)" onpaste="handleChatPaste(event)" />
               <button class="send-btn" onclick="sendMessage()" title="Send">
                 <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                   <line x1="12" y1="19" x2="12" y2="5"/>
@@ -476,6 +476,7 @@
       </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="/static/js/scripts.js"></script>
     <script src="/static/js/theme.js"></script>
     <script>
