@@ -194,18 +194,6 @@ function attachFile(file) {
   reader.readAsText(file);
 }
 
-// Paste an image straight into the chat (e.g. a Grafana screenshot).
-function handleChatPaste(event) {
-  const items = (event.clipboardData && event.clipboardData.items) || [];
-  for (const item of items) {
-    if (item.type && item.type.startsWith('image/')) {
-      const file = item.getAsFile();
-      if (file) { event.preventDefault(); attachFile(file); return; }
-    }
-  }
-  // no image on the clipboard → let the normal text paste happen
-}
-
 function renderAttachment() {
   const el = document.getElementById('chat-attachment');
   if (!el) return;
@@ -332,6 +320,12 @@ function sendMessage() {
     }
   })
   .catch(() => { textSpan.innerHTML = renderMarkdown('Error communicating with AI.'); });
+}
+
+// Enable LaTeX math ($…$ inline, $$…$$ display). output:'html' keeps KaTeX from
+// emitting MathML — that's what crashed Chrome on the blog.
+if (window.marked && window.markedKatex) {
+  marked.use(markedKatex({ throwOnError: false, output: 'html' }));
 }
 
 function renderMarkdown(text) {

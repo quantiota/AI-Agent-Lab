@@ -149,10 +149,8 @@ def chat():
         "When the user attaches a file, its full contents are included inline in their "
         "message; treat that text as the attached file and work with it directly.\n\n"
         "Be concise and technical. No filler, no emoji. Use markdown for structure and "
-        "code blocks for commands and code.\n\n"
-        "The chat renders markdown only, not LaTeX. Write math as plain text using "
-        "unicode symbols (e.g. H(X) = -Σ p(i)·log p(i)), not LaTeX delimiters like "
-        "$$…$$ or \\frac — they would show as raw text."
+        "code blocks for commands and code. For math, use LaTeX: inline as $...$ and "
+        "display equations as $$...$$ — the chat renders it."
     )
 
     # Adaptive thinking is supported on Opus/Sonnet (not Haiku). When it's on, give the
