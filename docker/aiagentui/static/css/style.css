@@ -713,6 +713,34 @@ body {
   color: var(--vf-color-text-default);
 }
 
+.message-copy {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 4px;
+  padding: 4px;
+  border: none;
+  background: none;
+  color: var(--vf-color-text-muted);
+  cursor: pointer;
+  border-radius: 5px;
+  opacity: 0;
+  transition: opacity 0.12s ease, color 0.12s ease, background 0.12s ease;
+}
+
+.bot-message:hover .message-copy {
+  opacity: 1;
+}
+
+.message-copy:hover {
+  color: var(--vf-color-text-default);
+  background: var(--vf-color-background-alt);
+}
+
+.message-copy.copied {
+  color: #16a34a;
+  opacity: 1;
+}
+
 /* Chat Input */
 .chat-input-area {
   padding: 10px 16px 14px;
