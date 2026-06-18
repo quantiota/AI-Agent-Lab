@@ -10,8 +10,8 @@ cd host-setup
 chmod +x setup-host.sh */install-*.sh
 ./setup-host.sh          # runs all installers, in order
 ```
-Then follow the AI Agent Lab's main README to configure and start the stack
-(set the domain/secrets, issue certs, then bring up the `docker/` compose project).
+The host is now ready. **Then, separately, clone the AI Agent Lab** and follow its
+README to configure (domain/secrets/certs) and bring up the `docker/` compose project.
 
 ## Components (run order)
 | Component        | Installs                                                       |
