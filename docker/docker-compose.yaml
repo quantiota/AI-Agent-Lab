@@ -5,6 +5,8 @@ services:
     build:
       context: vscode
       dockerfile: Dockerfile
+    environment:
+      - CLAUDE_CONFIG_DIR=/home/coder/.claude  #web API persistence
     # ports:                # not published — reachable only via nginx + Authelia (code-server is auth:none)
     #   - "8080:8080"
     volumes:
