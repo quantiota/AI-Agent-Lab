@@ -4,7 +4,7 @@
 >
 > *Sophistication is in the AI Agent Lab. Productivity is in the AI Agent Host.*
 
-[![Watch the demo](thumbnail.png)](https://youtu.be/z6PmyvAsO7I/video)
+[![Watch the demo](demo/thumbnail.png)](https://youtu.be/z6PmyvAsO7I/video)
 
 
 
