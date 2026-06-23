@@ -40,6 +40,7 @@ access_control:
         - 'questdb.{{ env "DOMAIN" }}'
         - 'aiagentui.{{ env "DOMAIN" }}'
         - 'grafana.{{ env "DOMAIN" }}'
+        - 'gradio.{{ env "DOMAIN" }}'
       policy: one_factor                      # one_factor = password; two_factor = + 2FA
 
 # ---- Session (single cookie across all *.{{ env "DOMAIN" }} subdomains) ----
