@@ -14,7 +14,7 @@ from typing import Optional, Dict, Any
 class QuestDBStreamInserter:
     """Lightweight inserter for real-time message streaming"""
     
-    def __init__(self, host: str = '192.168.1.216', port: int = 8812, 
+    def __init__(self, host: str = 'host_ip_address', port: int = 8812, 
                  database: str = 'qdb', user: str = 'admin', password: str = 'quest'):
         self.host = host
         self.port = port
