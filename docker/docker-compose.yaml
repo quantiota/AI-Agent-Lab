@@ -15,6 +15,7 @@ services:
       - ./vscode/config.yaml:/home/coder/.config/code-server/config.yaml   # auth: none (Authelia gates it)
       - ./aiagentui/uploads:/home/coder/project/uploads
       - claude-config:/home/coder/.config/claude-code
+      - ../CLAUDE.md:/home/coder/.claude/CLAUDE.md:ro
       - claude-data:/home/coder/.claude
 
     env_file:
