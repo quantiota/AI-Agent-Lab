@@ -9,7 +9,6 @@ understand the environment you're operating in:
 git clone https://github.com/quantiota/AI-Agent-Lab
 ```
 
-Study it thoroughly — README, `docker-compose`, nginx, authelia, grafana provisioning —
-to learn how the services are wired (names, ports, datasources, the TLS/SSO path).
+Study it thoroughly — README, `docker-compose`, vscode, questdb, grafana, authelia, nginx, grafana provisioning — to learn how the services are wired (names, ports, datasources, the TLS/SSO path).
 **Only then** start the task, and build against the **real** services. Never guess —
 the quality and correctness of your result depend entirely on doing this first.
