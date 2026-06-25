@@ -13,17 +13,12 @@ have completed the reading below **and** written a short summary of what you lea
 
 ### 1 · Clone the repo (ephemeral by design)
 
-Clone into your **home directory** — not into the persistent `/home/coder/project`
-notebooks volume:
-
 ```bash
-git clone https://github.com/quantiota/AI-Agent-Lab ~/AI-Agent-Lab
+git clone https://github.com/quantiota/AI-Agent-Lab
 ```
 
-The home directory is **wiped when the stack is recreated**, and that is intentional:
-every fresh stack re-clones the repo, so you always study the **latest** version.
-Do not place the clone in `/home/coder/project` — it would persist there and go stale.
-If a clone from the current session already exists, reuse it; otherwise clone fresh.
+The clone is not persistent — it's wiped when the stack is recreated, so every
+fresh stack clones the latest repo.
 
 ### 2 · Mandatory reading — every one of these, in full
 
