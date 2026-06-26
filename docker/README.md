@@ -26,6 +26,19 @@ SQL clients (and the Grafana QuestDB plugin) connect over the Postgres-wire port
 :lock:
 The web console is gated by **Authelia SSO**. The default `admin:quest` credentials ([see the documentation](https://questdb.io/docs/reference/configuration/#postgres-wire-protocol)) are used by the QuestDB Grafana datasource plugin to connect to the database `qdb`.
 
+**Host kernel limits (required):** QuestDB requires higher kernel limits than the Linux defaults ([capacity planning](https://questdb.com/docs/getting-started/capacity-planning/)). Add the following to `/etc/sysctl.conf`:
+
+```
+fs.file-max=1048576
+vm.max_map_count=1048576
+```
+
+then apply with:
+
+```
+sudo sysctl -p
+```
+
 ### Grafana
 
 :link: [docker image](https://hub.docker.com/r/grafana/grafana)
