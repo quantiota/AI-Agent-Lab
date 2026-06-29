@@ -4,6 +4,8 @@
 >
 > *Sophistication is in the AI Agent Lab. Productivity is in the AI Agent Host.*
 
+Run **AI Agent Lab** on any machine anywhere and access it in the browser.
+
 [![Watch the demo](demo/thumbnail.png)](https://youtu.be/z6PmyvAsO7I/video)
 
 
