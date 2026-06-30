@@ -120,8 +120,6 @@ For optimal performance, the AI Agent Lab requires the following hardware setup:
 ## References
 
 
-- Connect to a JupyterHub from Visual Studio Code. [Visual Studio Code](https://code.visualstudio.com/docs/datascience/jupyter-notebooks#_connect-to-a-remote-jupyter-server)
-
 - Create an API Token. [JupyterHub](https://jupyterhub.readthedocs.io/en/stable/howto/rest.html#create-an-api-token)
 
 - [Visual Studio Code](https://code.visualstudio.com/)
