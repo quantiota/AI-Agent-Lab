@@ -38,7 +38,7 @@ fresh stack clones the latest repo.
 
 ### 3 · Remote JupyterHub GPU offload
 
-This lab includes the python package jupyterhub-exec.
+This lab includes the python package `jupyterhub-exec`.
 
 The package is installed in the Code-Server environment `/opt/venv` and provides the executable:
 
