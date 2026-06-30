@@ -35,6 +35,33 @@ fresh stack clones the latest repo.
 - `docker/authelia/` + `docker/nginx/` — the TLS / SSO path (single Authelia
   login at `auth.<domain>` gates every service).
 
+
+### 3 · Remote JupyterHub GPU offload
+
+This lab includes the python package jupyterhub-exec.
+
+The package is installed in the Code-Server environment `/opt/venv` and provides the executable:
+
+jh-exec
+
+You can run `jh-exec` directly from the Code-Server terminal.
+
+Check the remote JupyterHub connection:
+
+jh-exec kernels
+
+Run a simple remote execution test:
+
+jh-exec exec "print('JupyterHub connection OK')"
+
+Run a GPU test on the remote JupyterHub kernel:
+
+jh-exec exec "import torch; print(torch.cuda.is_available())"
+
+Connection settings are stored in `.env`.
+
+
+
 ### 3 · Before acting, state in your own words
 
 1. Which Python runs here and what's already installed (from the Dockerfile / requirements).
