@@ -68,7 +68,7 @@ docker compose up --build -d
 
 5. Once the services are up and running:
 
-- **Sign in** once at the single sign-on portal — https://auth.domain.tld — which **redirects you to the AI Agent UI** (https://aiagentui.domain.tld), your dashboard for the whole lab.
+- Sign in once at the single sign-on portal — https://auth.domain.tld — which redirects you to the AI Agent UI (https://aiagentui.domain.tld), your dashboard for the whole lab.
 
 Each service is also directly reachable under the same SSO session from your dahsbord
 
