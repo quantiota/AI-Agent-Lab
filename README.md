@@ -121,13 +121,12 @@ For optimal performance, the AI Agent Lab requires the following hardware setup:
 
 ## References
 
-
-- Create an API Token. [JupyterHub](https://jupyterhub.readthedocs.io/en/stable/howto/rest.html#create-an-api-token)
-
 - [Visual Studio Code](https://code.visualstudio.com/)
 
 - [QuestDB - The Fastest Open Source Time Series Database](https://questdb.io/)
 
 - [Grafana - The open observability platform](https://grafana.com/)
+
+- Create an API Token. [JupyterHub](https://jupyterhub.readthedocs.io/en/stable/howto/rest.html#create-an-api-token)
 
 - [MicroServer Gen8](https://www.storagereview.com/review/hp-proliant-microserver-gen8-review)
