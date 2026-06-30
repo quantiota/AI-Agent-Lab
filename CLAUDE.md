@@ -22,17 +22,17 @@ fresh stack clones the latest repo.
 
 ### 2 · Mandatory reading — every one of these, in full
 
-- **`docker/docker-compose.yaml`** — service names, ports, networks, volumes (how the stack is wired).
-- **`docker/vscode/Dockerfile` + `requirements.txt`** — **this is your Python environment.**
+- `docker/docker-compose.yaml` — service names, ports, networks, volumes (how the stack is wired).
+- `docker/vscode/Dockerfile` + `requirements.txt` — **this is your Python environment.**
   The venv lives at **`/opt/venv`** (its `PATH` is baked into the image) with packages
   already installed. **Never `pip install` before checking here** — the answer to
   "is X available?" is in this file.
-- **`docker/grafana/provisioning/datasources/`** — the QuestDB datasource UID and how Grafana connects.
-- **`docker/grafana/dashboards/*.json`** — the dashboard JSON shape to **reuse**, not reinvent.
-- **`notebooks/`** (especially the market-data Coinbase notebook) — the canonical
+- `docker/grafana/provisioning/datasources/` — the QuestDB datasource UID and how Grafana connects.
+- `docker/grafana/dashboards/*.json` — the dashboard JSON shape to **reuse**, not reinvent.
+- `notebooks/` (especially the market-data Coinbase notebook) — the canonical
   QuestDB connection pattern: **`psycopg2` → host `questdb`, port `8812`, user `admin`,
   password `quest`, database `qdb`** (ILP ingestion on `9009`).
-- **`docker/authelia/` + `docker/nginx/`** — the TLS / SSO path (single Authelia
+- `docker/authelia/` + `docker/nginx/` — the TLS / SSO path (single Authelia
   login at `auth.<domain>` gates every service).
 
 ### 3 · Before acting, state in your own words
