@@ -76,7 +76,7 @@ Each service is also directly reachable under the same SSO session from your dah
 - Grafana: https://grafana.domain.tld
 - QuestDB: https://questdb.domain.tld
 
-6. To connect the AI Agent Lab to a remote JupyterHub environment from Code-Server:
+6. For GPU compute offload,, connect the AI Agent Lab to a remote JupyterHub environment from Code-Server:
 
 - Set up or use an existing remote JupyterHub that includes the necessary dependencies for working with your notebooks and data.
 
