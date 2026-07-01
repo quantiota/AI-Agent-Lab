@@ -38,31 +38,35 @@ fresh stack clones the latest repo.
 
 ### 3 · Remote JupyterHub GPU offload
 
-This lab includes the python package `jupyterhub-exec`.
-
-The package is installed in the Code-Server environment `/opt/venv` and provides the executable:
-
-jh-exec
-
-You can run `jh-exec` directly from the Code-Server terminal.
+This lab includes the Python package `jupyterhub-exec`, installed in the Code-Server
+environment (`/opt/venv`), which provides the `jh-exec` executable. Run it directly from
+the Code-Server terminal to execute code on a remote JupyterHub GPU kernel.
 
 Check the remote JupyterHub connection:
 
+```bash
 jh-exec kernels
+```
 
 Run a simple remote execution test:
 
+```bash
 jh-exec exec "print('JupyterHub connection OK')"
+```
 
 Run a GPU test on the remote JupyterHub kernel:
 
+```bash
 jh-exec exec "import torch; print(torch.cuda.is_available())"
+```
 
-Connection settings are stored in `.env`.
+Connection settings (`JH_HOST`, `JH_USER`, `JH_TOKEN`, …) are stored in `.env`.
+For a public `https://` hub, set `JH_PORT=443` — otherwise `jh-exec` falls back to
+port 8000 and the connection is refused.
 
 
 
-### 3 · Before acting, state in your own words
+### 4 · Before acting, state in your own words
 
 1. Which Python runs here and what's already installed (from the Dockerfile / requirements).
 2. How to reach QuestDB and Grafana from inside this container (hostnames + ports).
