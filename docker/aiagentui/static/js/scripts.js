@@ -28,6 +28,31 @@ document.getElementById('claude-api-form').addEventListener('submit', function(e
     .catch(() => alert('Could not save the key. Please try again.'));
 });
 
+document.getElementById('jupyterhub-api-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const url   = document.getElementById('jh-url-input').value.trim();
+  const user  = document.getElementById('jh-user-input').value.trim();
+  const token = document.getElementById('jh-token-input').value.trim();
+  if (!url || !user || !token) {
+    alert('Please enter the Hub URL, username, and token.');
+    return;
+  }
+  fetch('/save-jh', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCsrf() },
+    body: JSON.stringify({ url: url, user: user, token: token })
+  })
+    .then(r => r.json().then(d => ({ ok: r.ok, d })))
+    .then(({ ok, d }) => {
+      alert(d.message || (ok ? 'JupyterHub connection saved.' : 'Could not save.'));
+      if (ok) {
+        document.getElementById('jh-token-input').value = '';
+        closeModal('jupyterhub');
+      }
+    })
+    .catch(() => alert('Could not save. Please try again.'));
+});
+
 // ---- Chat history (persisted server-side via /chats — survives browser wipe + follows the user across devices) ----
 let chats = [];            // [{ id, title, messages: [{role, content, display?}] }]
 let currentChatId = null;

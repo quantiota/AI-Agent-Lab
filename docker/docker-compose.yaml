@@ -17,7 +17,7 @@ services:
       - claude-config:/home/coder/.config/claude-code
       - ../CLAUDE.md:/home/coder/.claude/CLAUDE.md:ro
       - claude-data:/home/coder/.claude
-
+      - jh-config:/home/coder/jh   # JupyterHub connection config from the aiagentui box; jh-exec reads it via ~/.env symlink
     env_file:
       - .env
 
@@ -90,6 +90,7 @@ services:
       - /backup/rsnapshot:/backup/rsnapshot:ro
       - /run/recovery:/run/recovery
       - aiagentui-data:/aiagentui/instance   # persisted app store (Claude API key, future app config) — survives rebuild + restore
+      - jh-config:/aiagentui/jh   # JupyterHub config: /save-jh writes /aiagentui/jh/.env — shared with vscode
     env_file:
       - .env
 
@@ -133,4 +134,5 @@ volumes:
   claude-config:
   claude-data:
   aiagentui-data:
+  jh-config:
 

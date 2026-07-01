@@ -39,6 +39,27 @@ def get_claude_key():
         pass
     return os.environ.get('ANTHROPIC_API_KEY')
 
+
+# JupyterHub (jh-exec) connection: UI-set store on the shared volume takes precedence, else JH_* env.
+# Written as a .env-format file so the code-server container's jh-exec reads it natively.
+JH_CONFIG_FILE = os.environ.get('JH_CONFIG_FILE', '/aiagentui/jh/.env')
+
+def get_jh_config():
+    cfg = {}
+    try:
+        with open(JH_CONFIG_FILE) as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith('#') and '=' in line:
+                    k, v = line.split('=', 1)
+                    cfg[k.strip()] = v.strip()
+    except OSError:
+        pass
+    for k in ('JH_HOST', 'JH_USER', 'JH_TOKEN', 'JH_PORT'):
+        cfg.setdefault(k, os.environ.get(k, ''))
+    return cfg
+
+
 client = docker.DockerClient(base_url='unix://var/run/docker.sock')
 
 # Define the valid container names
@@ -52,7 +73,10 @@ valid_containers = {
 @app.route('/')
 def index():
     api_key_exists = "Yes" if get_claude_key() else "No"
-    return render_template('index.html', api_key_exists=api_key_exists, domain=domain)
+    jh = get_jh_config()
+    jh_key_exists = "Yes" if jh.get('JH_TOKEN') else "No"
+    return render_template('index.html', api_key_exists=api_key_exists, domain=domain,
+                           jh_host=jh.get('JH_HOST', ''), jh_key_exists=jh_key_exists)
 
 
 @app.route('/save-key', methods=['POST'])
@@ -70,6 +94,36 @@ def save_key():
         app.logger.error(f"Could not save Claude key: {e}")
         return jsonify({'message': 'Could not save the key (storage not writable).'}), 500
     return jsonify({'message': 'API key saved.'}), 200
+
+
+@app.route('/save-jh', methods=['POST'])
+def save_jh():
+    from urllib.parse import urlparse
+    data  = request.get_json(silent=True) or {}
+    url   = (data.get('url')   or '').strip().rstrip('/')
+    user  = (data.get('user')  or '').strip()
+    token = (data.get('token') or '').strip()
+    if not (url and user and token):
+        return jsonify({'message': 'Enter the Hub URL, user, and token.'}), 400
+    # Derive the port from the URL scheme so a public https hub doesn't hit the jh-exec 8000 default.
+    parsed = urlparse(url)
+    port = str(parsed.port) if parsed.port else ('443' if parsed.scheme == 'https' else '8000')
+    try:
+        os.makedirs(os.path.dirname(JH_CONFIG_FILE), exist_ok=True)
+        with open(JH_CONFIG_FILE, 'w') as f:
+            f.write(f"JH_HOST={url}\nJH_USER={user}\nJH_TOKEN={token}\nJH_PORT={port}\nJH_TIMEOUT=600\n")
+        os.chmod(JH_CONFIG_FILE, 0o600)
+        # vscode's jh-exec reads this as user 'coder' (uid 1000) over the shared volume;
+        # a 0600 root file would be unreadable there — hand ownership to that uid.
+        try:
+            os.chown(JH_CONFIG_FILE, int(os.environ.get('VSCODE_UID', '1000')),
+                                     int(os.environ.get('VSCODE_GID', '1000')))
+        except (OSError, PermissionError):
+            pass
+    except OSError as e:
+        app.logger.error(f"Could not save JupyterHub config: {e}")
+        return jsonify({'message': 'Could not save (storage not writable).'}), 500
+    return jsonify({'message': 'JupyterHub connection saved.'}), 200
 
 
 

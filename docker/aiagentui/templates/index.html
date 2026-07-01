@@ -139,13 +139,13 @@
             <span class="sidebar-label">JupyterHub</span>
           </button>
           <div class="sidebar-popover" id="pop-jupyterhub" role="menu" hidden>
-            <a class="sidebar-popover-item" href="https://hub.{{ domain }}/hub/token" target="_blank" rel="noopener noreferrer" role="menuitem">
+            <a class="sidebar-popover-item" href="{{ jh_host or 'https://hub.' ~ domain }}" target="_blank" rel="noopener noreferrer" role="menuitem">
               <span>Open JupyterHub</span>
               <span class="sidebar-popover-icon app-icon" aria-hidden="true"
                 style="--icon: url('/static/img/link-square-01-stroke-rounded-black.svg')"></span>
             </a>
-            <a class="sidebar-popover-item" href="https://jupyterhub.readthedocs.io/" target="_blank" rel="noopener noreferrer" role="menuitem">
-              <span>Learn More</span>
+            <a class="sidebar-popover-item" href="javascript:void(0)" role="menuitem" onclick="closeSidebarPopovers(); openModal('jupyterhub')">
+              <span>JupyterHub API Key</span>
               <span class="sidebar-popover-icon app-icon" aria-hidden="true"
                 style="--icon: url('/static/img/link-square-01-stroke-rounded-black.svg')"></span>
             </a>
@@ -402,6 +402,25 @@
           <p>Enter your Claude (Anthropic) API key to access AI features.</p>
           <form id="claude-api-form" class="api-key-form">
             <input type="password" id="api-key-input" class="api-key-input" placeholder="Enter your Anthropic API key" />
+            <button type="submit" class="api-key-submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: JupyterHub API Key -->
+    <div id="jupyterhub-modal" class="modal-overlay" onclick="closeModal('jupyterhub')">
+      <div class="modal-box" onclick="event.stopPropagation()">
+        <div class="modal-header">
+          <h3>JupyterHub API Key</h3>
+          <button class="modal-close" onclick="closeModal('jupyterhub')">&#x2715;</button>
+        </div>
+        <div class="modal-body">
+          <p>Connect this lab to a remote JupyterHub for GPU execution. Enter the Hub URL, your username, and an API token.</p>
+          <form id="jupyterhub-api-form" class="api-key-form">
+            <input type="text" id="jh-url-input" class="api-key-input" placeholder="Hub URL — e.g. https://hub.example.com" />
+            <input type="text" id="jh-user-input" class="api-key-input" placeholder="Username — e.g. agent-01" />
+            <input type="password" id="jh-token-input" class="api-key-input" placeholder="API token" />
             <button type="submit" class="api-key-submit">Submit</button>
           </form>
         </div>

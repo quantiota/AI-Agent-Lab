@@ -13,6 +13,7 @@ numpy
 scipy
 seaborn
 matplotlib>=3.9
+# Remote JupyterHub GPU offload (jh-exec bridge)
 jupyterhub-exec
                     
        

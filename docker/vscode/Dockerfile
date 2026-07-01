@@ -35,6 +35,10 @@ RUN mkdir -p /home/coder/.claude /home/coder/.config/claude-code && \
 # Switch to coder user
 USER coder
 
+# jh-exec reads ~/.env — point it at the shared jh-config volume (mounted at /home/coder/jh
+# at runtime, written by the aiagentui "JupyterHub API Key" box). Dangling until the volume mounts.
+RUN ln -sf /home/coder/jh/.env /home/coder/.env
+
 # Install Claude Code via native installer
 RUN curl -fsSL https://claude.ai/install.sh | bash
 
