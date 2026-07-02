@@ -1,20 +1,26 @@
-Currently, the AI Agent Lab  provides a seamless interface for managing and querying data, visualizing results, and coding in real-time. However, it would be highly beneficial to have a set of ready-to-use notebooks that we can use with the AI Agent Host, specifically in the field of data science.
+# Productivity Tools
 
-Therefore, we propose creating a set of data streams processing notebooks with corresponding machine learning notebooks to be used with the AI Agent Lab. These notebooks will provide users with a variety of data sources to choose from and machine learning templates to work with, making it easier to start experimenting with in the field of data science.
+Pre-installed Linux utilities that let Claude Code — or any local LLM / future AI —
+**produce and process documents end-to-end**, directly inside the AI Agent Lab, with **no
+external cloud service**. These are model-agnostic infrastructure utilities: the same tools
+serve any AI with system access.
 
-The available data sources could include but are not limited to:
+## Documents
 
-- Public datasets from Kaggle or UCI Machine Learning Repository
-- Streaming data sources such as Twitter API or stock market data
-- Web scraping tools to extract data from websites
+| Tool | Commands | Purpose |
+|------|----------|---------|
+| **Pandoc** | `pandoc` | Convert documents between Markdown, HTML, LaTeX, DOCX, EPUB, and PDF |
+| **TeX Live** | `pdflatex`, `xelatex`, `lualatex` | LaTeX engines — the backend Pandoc uses to render high-quality PDF |
+| **Poppler** | `pdftotext`, `pdftoppm`, `pdfinfo` | Extract text from PDFs, render pages to images, inspect PDF metadata |
 
-The machine learning templates could include but are not limited to:
+```bash
+pandoc report.md -o report.pdf        # Markdown → PDF (via LaTeX)
+pandoc report.md -o report.docx       # Markdown → Word
+pandoc document.md -o document.html --css style.css   # Markdown → styled HTML
+pdftotext input.pdf output.txt        # PDF → plain text
+```
 
-- Classification and regression algorithms
-- Natural Language Processing (NLP) techniques such as sentiment analysis or text classification
-- Clustering and dimensionality reduction techniques
+## Installation
 
-
-With this set of ready-to-use notebooks, users can easily experiment with different data sources and machine learning algorithms without having to start from scratch. It will also serve as a valuable resource for those new to data science, providing them with a clear starting point for their experimentation.
-
-We welcome contributions from the community to create and maintain this set of notebooks. Let's work together to make the AI Agent Lab a more powerful tool for data scientists!
+These tools are installed in the stack's `docker/vscode/Dockerfile` and available in every
+Code-Server terminal — self-contained, fast, and cloud-free.
