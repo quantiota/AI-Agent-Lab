@@ -20,6 +20,24 @@ pandoc document.md -o document.html --css style.css   # Markdown → styled HTML
 pdftotext input.pdf output.txt        # PDF → plain text
 ```
 
+## Images
+
+| Tool | Commands | Purpose |
+|------|----------|---------|
+| **ImageMagick** | `convert`, `mogrify` | Convert, resize, crop, and annotate images; rasterize SVG/PDF |
+| **ExifTool** | `exiftool` | Read, write, and strip image metadata (EXIF, IPTC, XMP) |
+| **rsvg-convert** | `rsvg-convert` | Render SVG to PNG/PDF (also ImageMagick's SVG delegate) |
+
+```bash
+convert image.png image.jpg                    # PNG → JPG
+convert input.jpg -resize 800x600 output.jpg   # Resize
+exiftool -all= figure.png                      # Strip all metadata (privacy)
+rsvg-convert -f pdf -o figure.pdf figure.svg   # SVG → PDF (for LaTeX figures)
+```
+
+> Programmatic image work is also available in Python via **Pillow** and **matplotlib**
+> (pre-installed in `/opt/venv`).
+
 ## Installation
 
 These tools are installed in the stack's `docker/vscode/Dockerfile` and available in every
