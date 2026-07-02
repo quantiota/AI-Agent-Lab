@@ -14,6 +14,9 @@ RUN apt-get update && apt-get install -y \
     pandoc \
     texlive \
     texlive-latex-extra \
+    imagemagick \
+    libimage-exiftool-perl \
+    librsvg2-bin \
     && rm -rf /var/lib/apt/lists/*
 
 # ---- Python virtual environment (PEP 668 compliant) ----
