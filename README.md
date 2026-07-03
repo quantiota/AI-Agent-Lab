@@ -82,7 +82,7 @@ Each service is also directly reachable under the same SSO session from your dah
 
 - Generate and provide a JupyterHub API token on the AI Agent Lab UI. This token is used by the AI Agent Lab to authenticate with the remote JupyterHub environment and access the assigned kernel.
 
-- Connect to the remote JupyterHub environment from within the Code-Server interface provided by the AI Agent Lab with `/opt/venv/bin/jh-exec run your-script.py` 
+- Connect to the remote JupyterHub environment from within the Code-Server interface provided by the AI Agent Lab with `/opt/venv/bin/jh-exec run <script.py>` 
 
 Start working with your notebooks and data, using the pre-installed tools and libraries that are included in your remote environment.
 
