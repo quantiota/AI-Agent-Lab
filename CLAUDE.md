@@ -42,6 +42,13 @@ This lab includes the Python package `jupyterhub-exec`, installed in the Code-Se
 environment (`/opt/venv`), which provides the `jh-exec` executable. Run it directly from
 the Code-Server terminal to execute code on a remote JupyterHub GPU kernel.
 
+**If JupyterHub is enabled for this lab, you have one dedicated GPU.** Your agent is pinned to
+a single GPU on the central JupyterHub server (via `CUDA_VISIBLE_DEVICES`), so a remote
+`torch.cuda.device_count()` returns `1` — that GPU is exclusively yours. Offload any heavy or
+GPU-bound work to it with `jh-exec run <script.py>`: the code runs on your GPU and streams its
+output back to this terminal — no local GPU, no code changes. If JupyterHub is not enabled,
+`jh-exec` has no kernel to reach and GPU offload is unavailable.
+
 Check the remote JupyterHub connection:
 
 ```bash
@@ -54,15 +61,17 @@ Run a simple remote execution test:
 jh-exec exec "print('JupyterHub connection OK')"
 ```
 
-Run a GPU test on the remote JupyterHub kernel:
+Confirm your dedicated GPU on the remote JupyterHub kernel:
 
 ```bash
-jh-exec exec "import torch; print(torch.cuda.is_available())"
+jh-exec exec "import torch; print(torch.cuda.is_available(), torch.cuda.device_count(), torch.cuda.get_device_name(0))"
 ```
 
-Connection settings (`JH_HOST`, `JH_USER`, `JH_TOKEN`, …) are stored in `.env`.
-For a public `https://` hub, set `JH_PORT=443` — otherwise `jh-exec` falls back to
-port 8000 and the connection is refused.
+This should print `True 1 <GPU name>` — one GPU, exclusively yours.
+
+Connection settings (`JH_HOST`, `JH_USER`, `JH_TOKEN`, `JH_PORT`, …) are stored in
+`~/jh/.env`, set automatically by the JupyterHub API Key box — you do not configure them
+by hand.
 
 
 
