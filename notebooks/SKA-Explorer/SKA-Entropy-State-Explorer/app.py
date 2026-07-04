@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from torchvision import datasets, transforms
 import gradio as gr
 import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 import io
 from datetime import datetime
 from PIL import Image
@@ -276,7 +277,7 @@ def clear_history():
 
 
 with gr.Blocks(title="SKA Entropy State Explorer") as demo:
-    gr.Image("logo.png", show_label=False, height=100, container=False)
+    gr.Image(os.path.join(BASE_DIR, "logo.png"), show_label=False, height=100, container=False)
     gr.Markdown("# SKA Entropy State Explorer")
     gr.Markdown("Compare the normalized entropy convergence state across different architectures. Each run is archived and compared.")
 
@@ -336,4 +337,4 @@ domain = os.environ.get("DOMAIN")
 if domain:
     print(f"Public URL (via nginx + SSO): https://gradio.{domain}")
 
-demo.launch(server_name="0.0.0.0", server_port=7860)
+demo.launch(server_name="0.0.0.0", server_port=7860, allowed_paths=[BASE_DIR])

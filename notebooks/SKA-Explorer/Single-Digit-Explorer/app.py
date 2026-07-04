@@ -12,6 +12,8 @@ import os
 from datetime import datetime
 from PIL import Image
 
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
 # Load MNIST from local data
 transform = transforms.Compose([transforms.ToTensor()])
 mnist_dataset = datasets.MNIST(root='./data', train=True, download=True, transform=transform)
@@ -272,7 +274,7 @@ def clear_history():
 
 
 with gr.Blocks(title="SKA Single Digit Explorer") as demo:
-    gr.Image("logo.png", show_label=False, height=100, container=False)
+    gr.Image(os.path.join(BASE_DIR, "logo.png"), show_label=False, height=100, container=False)
     gr.Markdown("# SKA Single Digit Explorer")
     gr.Markdown("Explore the 4D entropy state trajectory for a single digit across different architectures.")
 
@@ -332,4 +334,4 @@ domain = os.environ.get("DOMAIN")
 if domain:
     print(f"Public URL (via nginx + SSO): https://gradio.{domain}")
 
-demo.launch(server_name="0.0.0.0", server_port=7860)
+demo.launch(server_name="0.0.0.0", server_port=7860, allowed_paths=[BASE_DIR])

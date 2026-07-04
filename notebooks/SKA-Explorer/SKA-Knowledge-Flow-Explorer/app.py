@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from torchvision import datasets, transforms
 import gradio as gr
 import os
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 # Load MNIST from local data
 transform = transforms.Compose([transforms.ToTensor()])
@@ -172,7 +173,7 @@ def run_knowledge_flow(n1, n2, n3, n4, K, tau, samples_per_class, data_seed):
 
 
 with gr.Blocks(title="SKA Knowledge Flow Explorer") as demo:
-    gr.Image("logo.png", show_label=False, height=100, container=False)
+    gr.Image(os.path.join(BASE_DIR, "logo.png"), show_label=False, height=100, container=False)
     gr.Markdown("# SKA Knowledge Flow Explorer")
     gr.Markdown("Visualize the knowledge flow per layer across the forward learning steps, and its trajectory in knowledge space.")
 
@@ -228,4 +229,4 @@ domain = os.environ.get("DOMAIN")
 if domain:
     print(f"Public URL (via nginx + SSO): https://gradio.{domain}")
 
-demo.launch(server_name="0.0.0.0", server_port=7860)
+demo.launch(server_name="0.0.0.0", server_port=7860, allowed_paths=[BASE_DIR])
