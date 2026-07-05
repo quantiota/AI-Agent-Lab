@@ -35,5 +35,5 @@ chmod +x install-docker.sh
 ## Notes
 - Target: **Ubuntu 24.04, amd64** (Prometheus/node-exporter binaries are amd64).
 - TLS is **not** here — it's issued by the lab's certbot container (HTTP-01) at runtime.
-
+- `recovery-agent`: set `TARGET_USER` to your host user before running its installer.
 
