@@ -18,4 +18,4 @@ sudo install -m 0644 "$SCRIPT_DIR/recovery-agent.service" /etc/systemd/system/re
 
 # Enable (starts on boot)
 sudo systemctl daemon-reload
-sudo systemctl enable recovery-agent
+sudo systemctl enable --now recovery-agent
