@@ -1,5 +1,9 @@
 # AI Agent Lab — instructions for Claude Code
 
+
+The readme isn't something to summarize, it's something to execute. 
+
+
 ## ⚑ Rule #1 — Read the repo FULLY before you act
 
 You are running inside the vscode (code-server) container of a live AI Agent Lab
