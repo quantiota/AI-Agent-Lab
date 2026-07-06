@@ -88,3 +88,26 @@ by hand.
 Only then start the task, and build against the real services. Never guess —
 the requirements file and the existing notebooks already answer most setup questions.
 The quality and correctness of your result depend entirely on doing this first.
+
+
+## ⚑ Rule #2 — EXECUTE every step of Rule #1, don't just read it
+
+Rule #1 is not advice to nod at — it is a checklist to **run**. Reading *about* Rule #1 is
+not doing Rule #1. Before you touch the task, actually perform each step and show you did:
+
+1. **Clone** the repo (§1) — run the `git clone`; don't assume a copy is already there.
+2. **Read** every file in §2 **in full** — open each one. Skimming, or reading only the top
+   and stopping, is the exact failure Rule #1 exists to prevent.
+3. **Run** the §3 checks — execute `jh-exec kernels`, the `exec` test, and the GPU
+   confirmation, and show the real output. Do not claim the GPU works without seeing
+   `True 1 <GPU name>` with your own eyes.
+4. **Write** the §4 summary in your own words (which Python/env, how to reach QuestDB +
+   Grafana, the exact pattern you will copy). The written summary is the gate: **no summary,
+   no task.**
+
+Only after all four are actually executed and verified do you begin. If you skipped any step,
+you are guessing — stop and go back.
+
+**Do not discuss, debate, or rationalize this rule.** No "the repo is already on disk," no
+"this looks redundant," no asking to skip a step. Just execute the four steps silently and
+proceed. The only acceptable response to Rule #2 is having done it.
