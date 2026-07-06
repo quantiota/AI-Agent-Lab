@@ -1,19 +1,16 @@
 # AI Agent Lab — instructions for Claude Code
 
-
-The readme isn't something to summarize, it's something to execute. 
-
-
 ## ⚑ Rule #1 — Read the repo FULLY before you act
 
-You are running inside the vscode (code-server) container of a live AI Agent Lab
-stack. Do NOT run shell commands, install packages, or write code until you
-have completed the reading below and written a short summary of what you learned.
+You are running inside the `vscode` / `code-server` container of a live AI Agent Lab stack.
 
-> "I read the top-level files and stopped" is NOT enough — that is the exact
-> failure this rule exists to prevent. A shallow read leads to guessing: probing
-> for packages that are already installed, `pip install`-ing into a venv that
-> needs nothing, and inventing connection patterns the notebooks already define.
+Before doing any task-specific work, you must complete the onboarding checklist below.
+
+Do **not** install packages, modify files, run probes, write code, or change services until this checklist is complete.
+
+The only shell commands allowed before the checklist is complete are the mandatory onboarding commands explicitly listed in this file: cloning the repo, reading the required files, and running the JupyterHub checks.
+
+> "I read the top-level files and stopped" is not enough. That is the exact failure this rule exists to prevent. A shallow read leads to guessing: probing for packages that are already installed, `pip install`-ing into a venv that needs nothing, and inventing connection patterns the notebooks already define.
 
 ### 1 · Clone the repo (ephemeral by design)
 
@@ -42,36 +39,43 @@ fresh stack clones the latest repo.
 
 ### 3 · Remote JupyterHub GPU offload
 
-This lab includes the Python package `jupyterhub-exec`, installed in the Code-Server
-environment (`/opt/venv`), which provides the `jh-exec` executable. Run it directly from
-the Code-Server terminal to execute code on a remote JupyterHub GPU kernel.
+This lab may include the Python package `jupyterhub-exec`, installed in the Code-Server environment at `/opt/venv`, which provides the `jh-exec` executable.
 
-**If JupyterHub is enabled for this lab, you have one dedicated GPU.** Your agent is pinned to
-a single GPU on the central JupyterHub server (via `CUDA_VISIBLE_DEVICES`), so a remote
-`torch.cuda.device_count()` returns `1` — that GPU is exclusively yours. Offload any heavy or
-GPU-bound work to it with `jh-exec run <script.py>`: the code runs on your GPU and streams its
-output back to this terminal — no local GPU, no code changes. If JupyterHub is not enabled,
-`jh-exec` has no kernel to reach and GPU offload is unavailable.
+Run it directly from the Code-Server terminal to execute code on a remote JupyterHub GPU kernel.
 
-Check the remote JupyterHub connection:
+If JupyterHub is enabled for this lab, the agent has one dedicated GPU on the central JupyterHub server, pinned via `CUDA_VISIBLE_DEVICES`. In that case, remote `torch.cuda.device_count()` should return `1`, and that GPU is exclusively assigned to this lab.
+
+Offload heavy or GPU-bound work with:
+
+```bash
+jh-exec run <script.py>
+```
+
+The code runs on the remote GPU kernel and streams output back to the Code-Server terminal.
+
+If JupyterHub is not enabled, `jh-exec` will not have a kernel to reach. In that case, GPU offload is unavailable, and you must report that clearly instead of pretending the GPU works.
+
+Run these checks and show the real output:
 
 ```bash
 jh-exec kernels
 ```
 
-Run a simple remote execution test:
-
 ```bash
 jh-exec exec "print('JupyterHub connection OK')"
 ```
 
-Confirm your dedicated GPU on the remote JupyterHub kernel:
-
 ```bash
-jh-exec exec "import torch; print(torch.cuda.is_available(), torch.cuda.device_count(), torch.cuda.get_device_name(0))"
+jh-exec exec "import torch; print(torch.cuda.is_available(), torch.cuda.device_count(), torch.cuda.get_device_name(0) if torch.cuda.is_available() else 'no cuda')"
 ```
 
-This should print `True 1 <GPU name>` — one GPU, exclusively yours.
+Expected output when JupyterHub GPU offload is enabled:
+
+```text
+True 1 <GPU name>
+```
+
+If the output is different, do not guess. Report the exact result and continue only with the capabilities that are actually available.
 
 Connection settings (`JH_HOST`, `JH_USER`, `JH_TOKEN`, `JH_PORT`, …) are stored in
 `~/jh/.env`, set automatically by the JupyterHub API Key box — you do not configure them
@@ -90,24 +94,17 @@ the requirements file and the existing notebooks already answer most setup quest
 The quality and correctness of your result depend entirely on doing this first.
 
 
-## ⚑ Rule #2 — EXECUTE every step of Rule #1, don't just read it
+## ⚑ Rule #2 — EXECUTE every step of Rule #1, do not just read it
 
-Rule #1 is not advice to nod at — it is a checklist to **run**. Reading *about* Rule #1 is
-not doing Rule #1. Before you touch the task, actually perform each step and show you did:
+Rule #1 is not advice to acknowledge. It is a checklist to execute.
 
-1. **Clone** the repo (§1) — run the `git clone`; don't assume a copy is already there.
-2. **Read** every file in §2 **in full** — open each one. Skimming, or reading only the top
-   and stopping, is the exact failure Rule #1 exists to prevent.
-3. **Run** the §3 checks — execute `jh-exec kernels`, the `exec` test, and the GPU
-   confirmation, and show the real output. Do not claim the GPU works without seeing
-   `True 1 <GPU name>` with your own eyes.
-4. **Write** the §4 summary in your own words (which Python/env, how to reach QuestDB +
-   Grafana, the exact pattern you will copy). The written summary is the gate: **no summary,
-   no task.**
+Before touching the actual task, perform each step and show evidence that it was completed:
 
-Only after all four are actually executed and verified do you begin. If you skipped any step,
-you are guessing — stop and go back.
+1. **Clone** the repo — run `git clone https://github.com/quantiota/AI-Agent-Lab`.
+2. **Read** every file listed in Rule #1, section 2, in full.
+3. **Run** the JupyterHub checks from Rule #1, section 3, and show the real output.
+4. **Write** the Rule #1, section 4 summary in your own words.
 
-**Do not discuss, debate, or rationalize this rule.** No "the repo is already on disk," no
-"this looks redundant," no asking to skip a step. Just execute the four steps silently and
-proceed. The only acceptable response to Rule #2 is having done it.
+The written summary is the gate: **no summary, no task.**
+
+Do not debate, skip, shorten, or rationalize this checklist. Do not say "the repo is already on disk." Do not say "this looks redundant." Execute the checklist, report the required evidence, write the summary, and only then begin the task.
