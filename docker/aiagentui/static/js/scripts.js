@@ -53,6 +53,30 @@ document.getElementById('jupyterhub-api-form').addEventListener('submit', functi
     .catch(() => alert('Could not save. Please try again.'));
 });
 
+document.getElementById('email-api-form').addEventListener('submit', function(event) {
+  event.preventDefault();
+  const input = document.getElementById('email-pass-input');
+  const password = input.value.trim();
+  if (!password) {
+    alert('Please enter the mailbox password.');
+    return;
+  }
+  fetch('/save-email', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', 'X-CSRFToken': getCsrf() },
+    body: JSON.stringify({ password: password })
+  })
+    .then(r => r.json().then(d => ({ ok: r.ok, d })))
+    .then(({ ok, d }) => {
+      alert(d.message || (ok ? 'Password saved.' : 'Could not save.'));
+      if (ok) {
+        input.value = '';
+        closeModal('email');
+      }
+    })
+    .catch(() => alert('Could not save. Please try again.'));
+});
+
 // ---- Chat history (persisted server-side via /chats — survives browser wipe + follows the user across devices) ----
 let chats = [];            // [{ id, title, messages: [{role, content, display?}] }]
 let currentChatId = null;

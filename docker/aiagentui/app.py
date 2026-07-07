@@ -8,6 +8,7 @@ import docker
 from werkzeug.utils import secure_filename
 import time
 import subprocess
+import sys
 import re
 
 
@@ -60,6 +61,39 @@ def get_jh_config():
     return cfg
 
 
+# Email (email-agent): UI-set store on the shared volume takes precedence, else EMAIL_* env.
+EMAIL_CONFIG_FILE = os.environ.get('EMAIL_CONFIG_FILE', '/aiagentui/mail/.env')
+EMAIL_AGENT = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'email_agent.py')
+
+
+def get_email_config():
+    cfg = {}
+    try:
+        with open(EMAIL_CONFIG_FILE) as f:
+            for line in f:
+                line = line.strip()
+                if line and not line.startswith('#') and '=' in line:
+                    k, v = line.split('=', 1)
+                    cfg[k.strip()] = v.strip()
+    except OSError:
+        pass
+    for k in ('EMAIL_USER', 'EMAIL_PASS'):
+        cfg.setdefault(k, os.environ.get(k, ''))
+    return cfg
+
+
+def run_email_agent(*args):
+    """Call the bundled email-agent CLI with the stored creds; return parsed JSON."""
+    env = os.environ.copy()
+    env.update({k: v for k, v in get_email_config().items() if v})
+    try:
+        r = subprocess.run([sys.executable, EMAIL_AGENT, *args],
+                           capture_output=True, text=True, timeout=60, env=env)
+        return json.loads(r.stdout)
+    except Exception as e:
+        return {'error': f'{e}'}
+
+
 client = docker.DockerClient(base_url='unix://var/run/docker.sock')
 
 # Define the valid container names
@@ -75,8 +109,12 @@ def index():
     api_key_exists = "Yes" if get_claude_key() else "No"
     jh = get_jh_config()
     jh_key_exists = "Yes" if jh.get('JH_TOKEN') else "No"
+    em = get_email_config()
+    email_user = em.get('EMAIL_USER') or (f'info@{domain}' if domain and domain != 'Domain not set' else '')
+    email_key_exists = "Yes" if em.get('EMAIL_PASS') else "No"
     return render_template('index.html', api_key_exists=api_key_exists, domain=domain,
-                           jh_host=jh.get('JH_HOST', ''), jh_key_exists=jh_key_exists)
+                           jh_host=jh.get('JH_HOST', ''), jh_key_exists=jh_key_exists,
+                           email_user=email_user, email_key_exists=email_key_exists)
 
 
 @app.route('/save-key', methods=['POST'])
@@ -124,6 +162,33 @@ def save_jh():
         app.logger.error(f"Could not save JupyterHub config: {e}")
         return jsonify({'message': 'Could not save (storage not writable).'}), 500
     return jsonify({'message': 'JupyterHub connection saved.'}), 200
+
+
+@app.route('/save-email', methods=['POST'])
+def save_email():
+    data = request.get_json(silent=True) or {}
+    pw = (data.get('password') or '').strip()
+    if not pw:
+        return jsonify({'message': 'Enter the mailbox password.'}), 400
+    em = get_email_config()
+    user = em.get('EMAIL_USER') or (f'info@{domain}' if domain and domain != 'Domain not set' else '')
+    if not user:
+        return jsonify({'message': 'No mailbox address configured (DOMAIN not set).'}), 400
+    try:
+        os.makedirs(os.path.dirname(EMAIL_CONFIG_FILE), exist_ok=True)
+        with open(EMAIL_CONFIG_FILE, 'w') as f:
+            f.write(f'EMAIL_USER={user}\nEMAIL_PASS={pw}\n')
+        os.chmod(EMAIL_CONFIG_FILE, 0o600)
+        # the agent (vscode) reads this over the shared volume as uid 1000
+        try:
+            os.chown(EMAIL_CONFIG_FILE, int(os.environ.get('VSCODE_UID', '1000')),
+                                        int(os.environ.get('VSCODE_GID', '1000')))
+        except (OSError, PermissionError):
+            pass
+    except OSError as e:
+        app.logger.error(f"Could not save email config: {e}")
+        return jsonify({'message': 'Could not save (storage not writable).'}), 500
+    return jsonify({'message': f'Password saved for {user}.'}), 200
 
 
 
@@ -335,6 +400,36 @@ def list_files():
 
 
 # List Available Backups Route
+
+@app.route('/api/mail/inbox', methods=['GET'])
+def api_mail_inbox():
+    unread = request.args.get('unread') == '1'
+    folder = request.args.get('folder')
+    args = ['inbox', '--limit', '50']
+    if unread:
+        args.append('--unread')
+    if folder:
+        args += ['--folder', folder]
+    data = run_email_agent(*args)
+    if isinstance(data, dict) and 'error' not in data:
+        data['mailbox_addr'] = get_email_config().get('EMAIL_USER', '')
+    return jsonify(data)
+
+
+@app.route('/api/mail/folders', methods=['GET'])
+def api_mail_folders():
+    return jsonify(run_email_agent('folders'))
+
+
+@app.route('/api/mail/message/<uid>', methods=['GET'])
+def api_mail_message(uid):
+    if not uid.isdigit():
+        abort(404)
+    folder = request.args.get('folder')
+    # read-only monitor: never mark seen — that's the agent's unread state, not ours
+    args = ['read', uid] + (['--folder', folder] if folder else [])
+    return jsonify(run_email_agent(*args))
+
 
 @app.route('/api/list-backups', methods=['GET'])
 def list_backups():

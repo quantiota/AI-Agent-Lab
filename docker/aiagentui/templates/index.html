@@ -123,6 +123,11 @@
               <span class="sidebar-popover-icon app-icon" aria-hidden="true"
                 style="--icon: url('/static/img/link-square-01-stroke-rounded-black.svg')"></span>
             </a>
+            <a class="sidebar-popover-item" href="javascript:void(0)" role="menuitem" onclick="closeSidebarPopovers(); showMailPanel(false)">
+              <span>Claude AI</span>
+              <span class="sidebar-popover-icon app-icon" aria-hidden="true"
+                style="--icon: url('/static/img/link-square-01-stroke-rounded-black.svg')"></span>
+            </a>
             <a class="sidebar-popover-item" href="https://platform.claude.com/docs/en/home" target="_blank" rel="noopener noreferrer" role="menuitem">
               <span>Learn More</span>
               <span class="sidebar-popover-icon app-icon" aria-hidden="true"
@@ -195,6 +200,27 @@
                 style="--icon: url('/static/img/link-square-01-stroke-rounded-black.svg')"></span>
             </a>
             <div id="nginx-message" style="display:none; color: green; padding: 4px 12px; font-size: 13px;">Nginx is restarting. Please wait...</div>
+          </div>
+        </div>
+        <div class="sidebar-item-wrap">
+          <button type="button" class="sidebar-item" onclick="toggleSidebarPopover(event, 'mail')" aria-haspopup="menu" aria-expanded="false" title="Mail">
+            <div class="sidebar-icon-wrap">
+              <span class="sidebar-icon-img app-icon" role="img" aria-label="Mail"
+                style="--icon: url('/static/img/mail-at-sign-01-stroke-rounded-black.svg')"></span>
+            </div>
+            <span class="sidebar-label">Mail</span>
+          </button>
+          <div class="sidebar-popover" id="pop-mail" role="menu" hidden>
+            <a class="sidebar-popover-item" href="#" onclick="return openMail('inbox', event)" role="menuitem">
+              <span>Open Inbox</span>
+              <span class="sidebar-popover-icon app-icon" aria-hidden="true"
+                style="--icon: url('/static/img/link-square-01-stroke-rounded-black.svg')"></span>
+            </a>
+            <a class="sidebar-popover-item" href="#" onclick="return openMail('key', event)" role="menuitem">
+              <span>Set Password</span>
+              <span class="sidebar-popover-icon app-icon" aria-hidden="true"
+                style="--icon: url('/static/img/link-square-01-stroke-rounded-black.svg')"></span>
+            </a>
           </div>
         </div>
         <div class="sidebar-item-wrap">
@@ -389,7 +415,111 @@
           </div>
         </div>
       </div>
+
+      <!-- Mail Panel (reuses the chat 2-column frame) -->
+      <div class="chat-panel" id="mail-panel" style="display:none">
+        <div class="chat-sidebar">
+          <div class="chat-sidebar-header">
+            <button class="icon-btn" title="Back to chat" onclick="showMailPanel(false)">
+              <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+            <span class="mail-tabs">
+              <a href="javascript:void(0)" class="mail-tab is-active" id="mail-tab-inbox" onclick="mailTab('inbox')">Inbox</a>
+              <a href="javascript:void(0)" class="mail-tab" id="mail-tab-sent" onclick="mailTab('sent')">Sent</a>
+            </span>
+            <button class="icon-btn" title="Refresh" onclick="loadCurrentFolder()">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+            </button>
+          </div>
+          <div id="mail-list" class="chat-history-section"></div>
+          <div class="chat-sidebar-footer">
+            <div class="footer-copyright" id="mail-box-label"></div>
+          </div>
+        </div>
+        <div class="chat-main">
+          <div id="mail-view" class="mail-view">
+            <div class="mail-view-empty">Select a message to read.</div>
+          </div>
+        </div>
+      </div>
     </div>
+
+    <style>
+      #mail-panel .mail-tabs { display: flex; gap: 4px; flex: 1; padding: 0 6px; }
+      #mail-panel .mail-tab { font-size: 13px; padding: 4px 10px; border-radius: 8px; text-decoration: none; color: var(--vf-color-text-muted); }
+      #mail-panel .mail-tab.is-active { background: var(--vf-color-background-hover); color: var(--vf-color-text-default); font-weight: 600; }
+      #mail-list .mail-item { flex-direction: column; align-items: flex-start; gap: 2px; }
+      #mail-list .mail-item .mi-from { font-size: 13px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      #mail-list .mail-item .mi-subject { font-size: 12px; color: var(--vf-color-text-muted); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      #mail-list .mail-item.is-unread .mi-from { font-weight: 600; }
+      #mail-list .mail-item.is-unread .mi-from::before { content: "\2022"; color: var(--vf-color-text-muted); margin-right: 5px; }
+      .mail-view { padding: 24px; overflow: auto; height: 100%; box-sizing: border-box; }
+      .mail-view-empty { color: var(--vf-color-text-muted); }
+      .mail-msg-subject { font-size: 20px; font-weight: 600; margin-bottom: 6px; }
+      .mail-msg-meta { color: var(--vf-color-text-muted); font-size: 13px; }
+      .mail-msg-body { white-space: pre-wrap; word-wrap: break-word; font-family: inherit; margin-top: 16px; font-size: 14px; }
+    </style>
+    <script>
+      function mesc(s){return (s==null?'':String(s)).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+      function showMailPanel(on){
+        var chat=document.querySelector('.chat-panel:not(#mail-panel)');
+        var mail=document.getElementById('mail-panel');
+        if(chat)chat.style.display=on?'none':'';
+        if(mail)mail.style.display=on?'':'none';
+      }
+      var mailFolders={}, mailCurrent='inbox';
+      function openMail(mode,event){
+        if(event){event.preventDefault();}
+        var pop=document.getElementById('pop-mail'); if(pop)pop.hidden=true;
+        if(mode==='key'){ openModal('email'); return false; }
+        showMailPanel(true); mailTab('inbox'); return false;
+      }
+      function mailTab(which){
+        mailCurrent=which;
+        var ti=document.getElementById('mail-tab-inbox'), ts=document.getElementById('mail-tab-sent');
+        if(ti)ti.classList.toggle('is-active', which==='inbox');
+        if(ts)ts.classList.toggle('is-active', which==='sent');
+        document.getElementById('mail-view').innerHTML='<div class="mail-view-empty">Select a message to read.</div>';
+        loadCurrentFolder();
+      }
+      function loadCurrentFolder(){
+        if(mailCurrent==='sent'){
+          if(mailFolders.sent){ loadInbox(mailFolders.sent); return; }
+          fetch('/api/mail/folders').then(function(r){return r.json();}).then(function(d){
+            mailFolders=(d&&d.special)||{};
+            if(mailFolders.sent){ loadInbox(mailFolders.sent); }
+            else { document.getElementById('mail-list').innerHTML='<div style="padding:12px;color:var(--vf-color-text-muted)">No Sent folder found.</div>'; }
+          }).catch(function(){ document.getElementById('mail-list').innerHTML='<div style="padding:12px;color:#dc2626">Could not list folders.</div>'; });
+        } else { loadInbox(); }
+      }
+      function loadInbox(folder){
+        var list=document.getElementById('mail-list');
+        list.innerHTML='<div style="padding:12px;color:var(--vf-color-text-muted)">Loading…</div>';
+        var url='/api/mail/inbox'+(folder?('?folder='+encodeURIComponent(folder)):'');
+        fetch(url).then(function(r){return r.json();}).then(function(d){
+          if(d.error){list.innerHTML='<div style="padding:12px;color:#dc2626">'+mesc(d.error)+'</div>';return;}
+          var lbl=document.getElementById('mail-box-label'); if(lbl)lbl.textContent=d.mailbox_addr||'';
+          if(!d.envelopes||!d.envelopes.length){list.innerHTML='<div style="padding:12px;color:var(--vf-color-text-muted)">No messages.</div>';return;}
+          list.innerHTML=d.envelopes.map(function(e){
+            return '<a class="chat-agent-item mail-item'+(e.seen?'':' is-unread')+'" href="javascript:void(0)" onclick="loadMessage(\''+e.uid+'\',this)">'
+              +'<span class="mi-from">'+mesc(e.from)+'</span>'
+              +'<span class="mi-subject">'+mesc(e.subject||'(no subject)')+'</span></a>';
+          }).join('');
+        }).catch(function(err){list.innerHTML='<div style="padding:12px;color:#dc2626">'+mesc(err)+'</div>';});
+      }
+      function loadMessage(uid,el){
+        var v=document.getElementById('mail-view');
+        v.innerHTML='<div class="mail-view-empty">Loading…</div>';
+        var fq=(mailCurrent==='sent'&&mailFolders.sent)?('?folder='+encodeURIComponent(mailFolders.sent)):'';
+        fetch('/api/mail/message/'+encodeURIComponent(uid)+fq).then(function(r){return r.json();}).then(function(m){
+          if(m.error){v.innerHTML='<div style="color:#dc2626">'+mesc(m.error)+'</div>';return;}
+          v.innerHTML='<div class="mail-msg-subject">'+mesc(m.subject||'(no subject)')+'</div>'
+            +'<div class="mail-msg-meta"><strong>'+mesc(m.from)+'</strong> &middot; '+mesc(m.date)+'</div>'
+            +'<div class="mail-msg-meta">to '+mesc(m.to)+'</div>'
+            +'<div class="mail-msg-body">'+mesc(m.body)+'</div>';
+        }).catch(function(err){v.innerHTML='<div style="color:#dc2626">'+mesc(err)+'</div>';});
+      }
+    </script>
 
     <!-- Modal: Claude AI -->
     <div id="claude-modal" class="modal-overlay" onclick="closeModal('claude')">
@@ -421,6 +551,23 @@
             <input type="text" id="jh-url-input" class="api-key-input" placeholder="Hub URL — e.g. https://hub.example.com" />
             <input type="text" id="jh-user-input" class="api-key-input" placeholder="Username — e.g. agent-01" />
             <input type="password" id="jh-token-input" class="api-key-input" placeholder="API token" />
+            <button type="submit" class="api-key-submit">Submit</button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Email Password -->
+    <div id="email-modal" class="modal-overlay" onclick="closeModal('email')">
+      <div class="modal-box" onclick="event.stopPropagation()">
+        <div class="modal-header">
+          <h3>Mail Password</h3>
+          <button class="modal-close" onclick="closeModal('email')">&#x2715;</button>
+        </div>
+        <div class="modal-body">
+          <p>Set the password for this agent's mailbox{% if email_user %} <strong>{{ email_user }}</strong>{% endif %}.</p>
+          <form id="email-api-form" class="api-key-form">
+            <input type="password" id="email-pass-input" class="api-key-input" placeholder="Mailbox password" />
             <button type="submit" class="api-key-submit">Submit</button>
           </form>
         </div>
