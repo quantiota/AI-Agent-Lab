@@ -423,13 +423,21 @@
             <button class="icon-btn" title="Back to chat" onclick="showMailPanel(false)">
               <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
             </button>
-            <span class="mail-tabs">
-              <a href="javascript:void(0)" class="mail-tab is-active" id="mail-tab-inbox" onclick="mailTab('inbox')">Inbox</a>
-              <a href="javascript:void(0)" class="mail-tab" id="mail-tab-sent" onclick="mailTab('sent')">Sent</a>
-            </span>
+            <span class="mail-title">MailBox</span>
             <button class="icon-btn" title="Refresh" onclick="loadCurrentFolder()">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
             </button>
+          </div>
+          <div class="mail-search"><input type="text" class="modal-input" id="mail-search-input" placeholder="Search messages" onkeydown="if(event.key==='Enter'){event.preventDefault();mailSearch();}" oninput="if(!this.value.trim())loadCurrentFolder();" /></div>
+          <div class="mail-folders">
+            <a href="javascript:void(0)" class="mail-folder is-active" id="mail-folder-inbox" onclick="mailTab('inbox')">
+              <span class="app-icon mail-folder-ico" aria-hidden="true" style="--icon:url('/static/img/inbox-stroke-rounded-black.svg')"></span>
+              <span>Inbox</span>
+            </a>
+            <a href="javascript:void(0)" class="mail-folder" id="mail-folder-sent" onclick="mailTab('sent')">
+              <span class="app-icon mail-folder-ico" aria-hidden="true" style="--icon:url('/static/img/sent-02-stroke-rounded-black.svg')"></span>
+              <span>Sent</span>
+            </a>
           </div>
           <div id="mail-list" class="chat-history-section"></div>
           <div class="chat-sidebar-footer">
@@ -445,9 +453,16 @@
     </div>
 
     <style>
-      #mail-panel .mail-tabs { display: flex; gap: 4px; flex: 1; padding: 0 6px; }
-      #mail-panel .mail-tab { font-size: 13px; padding: 4px 10px; border-radius: 8px; text-decoration: none; color: var(--vf-color-text-muted); }
-      #mail-panel .mail-tab.is-active { background: var(--vf-color-background-hover); color: var(--vf-color-text-default); font-weight: 600; }
+      #mail-panel .mail-title { flex: 1; padding: 0 8px; font-size: 14px; font-weight: 600; color: var(--vf-color-text-default); }
+      #mail-panel .mail-folders { display: flex; flex-direction: column; gap: 2px; padding: 6px; border-bottom: 1px solid var(--vf-color-border-low, rgba(0,0,0,.1)); }
+      #mail-panel .mail-folder { display: flex; align-items: center; gap: 9px; padding: 7px 10px; border-radius: 8px; font-size: 13px; text-decoration: none; color: var(--vf-color-text-muted); }
+      #mail-panel .mail-folder-ico { width: 16px; height: 16px; color: inherit; opacity: .90; }
+      #mail-panel .mail-folder:hover { background: var(--vf-color-background-hover); }
+      #mail-panel .mail-folder.is-active { background: var(--vf-color-background-hover); color: var(--vf-color-text-default); font-weight: 600; }
+      #mail-panel .mail-more { display: block; text-align: center; padding: 9px; font-size: 12.5px; color: var(--vf-color-text-muted); text-decoration: none; }
+      #mail-panel .mail-more:hover { color: var(--vf-color-text-default); background: var(--vf-color-background-hover); }
+      #mail-panel .mail-search { padding: 8px 8px 4px; }
+      #mail-panel .mail-search .modal-input { width: 100%; box-sizing: border-box; }
       #mail-list .mail-item { flex-direction: column; align-items: flex-start; gap: 2px; }
       #mail-list .mail-item .mi-from { font-size: 13px; max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
       #mail-list .mail-item .mi-subject { font-size: 12px; color: var(--vf-color-text-muted); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -467,7 +482,7 @@
         if(chat)chat.style.display=on?'none':'';
         if(mail)mail.style.display=on?'':'none';
       }
-      var mailFolders={}, mailCurrent='inbox';
+      var mailFolders={}, mailCurrent='inbox', mailLimit=5, mailCache=[];
       function openMail(mode,event){
         if(event){event.preventDefault();}
         var pop=document.getElementById('pop-mail'); if(pop)pop.hidden=true;
@@ -475,8 +490,9 @@
         showMailPanel(true); mailTab('inbox'); return false;
       }
       function mailTab(which){
-        mailCurrent=which;
-        var ti=document.getElementById('mail-tab-inbox'), ts=document.getElementById('mail-tab-sent');
+        mailCurrent=which; mailLimit=5;
+        var si=document.getElementById('mail-search-input'); if(si)si.value='';
+        var ti=document.getElementById('mail-folder-inbox'), ts=document.getElementById('mail-folder-sent');
         if(ti)ti.classList.toggle('is-active', which==='inbox');
         if(ts)ts.classList.toggle('is-active', which==='sent');
         document.getElementById('mail-view').innerHTML='<div class="mail-view-empty">Select a message to read.</div>';
@@ -495,16 +511,37 @@
       function loadInbox(folder){
         var list=document.getElementById('mail-list');
         list.innerHTML='<div style="padding:12px;color:var(--vf-color-text-muted)">Loading…</div>';
-        var url='/api/mail/inbox'+(folder?('?folder='+encodeURIComponent(folder)):'');
+        var url='/api/mail/inbox?limit='+mailLimit+(folder?('&folder='+encodeURIComponent(folder)):'');
         fetch(url).then(function(r){return r.json();}).then(function(d){
           if(d.error){list.innerHTML='<div style="padding:12px;color:#dc2626">'+mesc(d.error)+'</div>';return;}
           var lbl=document.getElementById('mail-box-label'); if(lbl)lbl.textContent=d.mailbox_addr||'';
+          mailCache=d.envelopes||[];
           if(!d.envelopes||!d.envelopes.length){list.innerHTML='<div style="padding:12px;color:var(--vf-color-text-muted)">No messages.</div>';return;}
-          list.innerHTML=d.envelopes.map(function(e){
-            return '<a class="chat-agent-item mail-item'+(e.seen?'':' is-unread')+'" href="javascript:void(0)" onclick="loadMessage(\''+e.uid+'\',this)">'
-              +'<span class="mi-from">'+mesc(e.from)+'</span>'
-              +'<span class="mi-subject">'+mesc(e.subject||'(no subject)')+'</span></a>';
-          }).join('');
+          var html=renderMailRows(d.envelopes);
+          if(d.envelopes.length>=mailLimit){ html+='<a class="mail-more" href="javascript:void(0)" onclick="mailMore()">Load more</a>'; }
+          list.innerHTML=html;
+        }).catch(function(err){list.innerHTML='<div style="padding:12px;color:#dc2626">'+mesc(err)+'</div>';});
+      }
+      function mailMore(){ mailLimit+=5; loadCurrentFolder(); }
+      function renderMailRows(envs){
+        return envs.map(function(e){
+          return '<a class="chat-agent-item mail-item'+(e.seen?'':' is-unread')+'" href="javascript:void(0)" onclick="loadMessage(\''+e.uid+'\',this)">'
+            +'<span class="mi-from">'+mesc(e.from)+'</span>'
+            +'<span class="mi-subject">'+mesc(e.subject||'(no subject)')+'</span></a>';
+        }).join('');
+      }
+      function mailSearch(){
+        var q=(document.getElementById('mail-search-input').value||'').trim();
+        if(!q){ loadCurrentFolder(); return; }
+        var list=document.getElementById('mail-list');
+        list.innerHTML='<div style="padding:12px;color:var(--vf-color-text-muted)">Searching…</div>';
+        var folder=(mailCurrent==='sent'&&mailFolders.sent)?mailFolders.sent:'';
+        var url='/api/mail/search?q='+encodeURIComponent(q)+(folder?('&folder='+encodeURIComponent(folder)):'');
+        fetch(url).then(function(r){return r.json();}).then(function(d){
+          if(d.error){list.innerHTML='<div style="padding:12px;color:#dc2626">'+mesc(d.error)+'</div>';return;}
+          var envs=d.envelopes||[];
+          if(!envs.length){list.innerHTML='<div style="padding:12px;color:var(--vf-color-text-muted)">No matches.</div>';return;}
+          list.innerHTML=renderMailRows(envs);
         }).catch(function(err){list.innerHTML='<div style="padding:12px;color:#dc2626">'+mesc(err)+'</div>';});
       }
       function loadMessage(uid,el){

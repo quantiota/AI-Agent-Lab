@@ -405,9 +405,28 @@ def list_files():
 def api_mail_inbox():
     unread = request.args.get('unread') == '1'
     folder = request.args.get('folder')
-    args = ['inbox', '--limit', '50']
+    try:
+        limit = max(1, min(200, int(request.args.get('limit', '5'))))
+    except (TypeError, ValueError):
+        limit = 5
+    args = ['inbox', '--limit', str(limit)]
     if unread:
         args.append('--unread')
+    if folder:
+        args += ['--folder', folder]
+    data = run_email_agent(*args)
+    if isinstance(data, dict) and 'error' not in data:
+        data['mailbox_addr'] = get_email_config().get('EMAIL_USER', '')
+    return jsonify(data)
+
+
+@app.route('/api/mail/search', methods=['GET'])
+def api_mail_search():
+    q = (request.args.get('q') or '').strip()
+    if not q:
+        return jsonify({'query': '', 'count': 0, 'envelopes': []})
+    folder = request.args.get('folder')
+    args = ['search', '--text', q, '--limit', '100']
     if folder:
         args += ['--folder', folder]
     data = run_email_agent(*args)

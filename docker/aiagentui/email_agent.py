@@ -585,8 +585,24 @@ def cmd_reply(cfg, args):
 def cmd_search(cfg, args):
     M = imap_connect(cfg)
     try:
-        M.select(cfg["mailbox"], readonly=True)
-        typ, data = M.uid("search", None, *args.query.split())
+        mbox = getattr(args, "folder", None) or cfg["mailbox"]
+        styp, _ = M.select(_imap_folder(mbox), readonly=True)
+        if styp != "OK":
+            die(f"cannot open folder {mbox}")
+        text = getattr(args, "text", None)
+        if text is not None:
+            # free-text search across the WHOLE message (headers + body) via IMAP
+            # TEXT; quote it so multi-word phrases are one criterion. UTF-8 charset
+            # so non-ASCII queries work.
+            q = text.replace("\\", "\\\\").replace('"', '\\"')
+            try:
+                typ, data = M.uid("search", "UTF-8", "TEXT", '"%s"' % q)
+            except Exception:
+                typ, data = M.uid("search", None, "TEXT", '"%s"' % q)
+            label = text
+        else:
+            typ, data = M.uid("search", None, *args.query.split())
+            label = args.query
         if typ != "OK":
             die(f"search failed: {typ}")
         uids = data[0].split()
@@ -594,7 +610,7 @@ def cmd_search(cfg, args):
             uids = uids[-args.limit:]
         uids = list(reversed(uids))
         envs = [e for e in (_fetch_envelope(M, u) for u in uids) if e]
-        out({"query": args.query, "count": len(envs), "envelopes": envs})
+        out({"query": label, "count": len(envs), "envelopes": envs})
     finally:
         try:
             M.logout()
@@ -646,8 +662,10 @@ def main():
     prp.add_argument("--body", required=True)
     prp.add_argument("--all", action="store_true", help="reply-all (Cc original recipients)")
 
-    psr = sub.add_parser("search", help="raw IMAP SEARCH")
-    psr.add_argument("query", help='e.g. "FROM boss@x.com UNSEEN"')
+    psr = sub.add_parser("search", help="search messages (raw IMAP criteria, or --text)")
+    psr.add_argument("query", nargs="?", default="ALL", help='raw IMAP criteria, e.g. "FROM boss@x.com UNSEEN"')
+    psr.add_argument("--text", help="free-text search across headers + body (from/subject/body)")
+    psr.add_argument("--folder", help="folder to search (default INBOX)")
     psr.add_argument("--limit", type=int, default=20)
 
     pd = sub.add_parser("discover", help="show autodiscovered IMAP/SMTP settings (no login)")
