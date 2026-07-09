@@ -63,7 +63,7 @@ def get_jh_config():
 
 # Email (email-agent): UI-set store on the shared volume takes precedence, else EMAIL_* env.
 EMAIL_CONFIG_FILE = os.environ.get('EMAIL_CONFIG_FILE', '/aiagentui/mail/.env')
-EMAIL_AGENT = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'email_agent.py')
+EMAIL_AGENT = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'email-agent', 'email_agent.py')
 
 
 def get_email_config():

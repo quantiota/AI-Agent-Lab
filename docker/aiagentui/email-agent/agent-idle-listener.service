@@ -1,0 +1,22 @@
+[Unit]
+Description=Agent email IMAP IDLE listener (real-time new-mail -> tmux send-keys to live claude)
+Documentation=file:/home/coder/docker/aiagentui/email-agent/IDLE-INSTALL.md
+After=docker.service
+Requires=docker.service
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=10
+# The listener runs INSIDE the vscode container (it has `claude` + /opt/venv/imapclient).
+# Creds come from the mailui store (mail/.env) — nothing secret lives in this unit.
+# Kill any stray listener first so a restart never stacks duplicates in the container.
+ExecStartPre=-/usr/bin/docker exec -u coder docker-vscode-1 pkill -f idle-listener.py
+ExecStart=/usr/bin/docker exec -u coder docker-vscode-1 /opt/venv/bin/python /home/coder/docker/aiagentui/email-agent/idle-listener.py
+ExecStopPost=-/usr/bin/docker exec -u coder docker-vscode-1 pkill -f idle-listener.py
+
+# Optional tuning — pass into the container by adding to ExecStart, e.g.:
+#   docker exec -u coder -e MAX_NOTIFY_PER_HOUR=30 -e CLAUDE_SESSION=claude docker-vscode-1 ...
+
+[Install]
+WantedBy=multi-user.target

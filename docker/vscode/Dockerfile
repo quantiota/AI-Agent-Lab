@@ -10,6 +10,7 @@ RUN apt-get update && apt-get install -y \
     python3-pip \
     python3-venv \
     curl \
+    tmux \
     poppler-utils \
     pandoc \
     texlive \
@@ -39,6 +40,17 @@ RUN mkdir -p /home/coder/.claude /home/coder/.config/claude-code && \
     chown -R coder:coder /home/coder/.claude /home/coder/.config && \
     chmod -R u+rwX /home/coder/.claude /home/coder/.config
 
+# Auto-start Claude in a tmux session at container boot via code-server's ENTRYPOINTD
+# hook (=/entrypoint.d, runs as coder before code-server) so the email IDLE listener +
+# heartbeat can send-keys into the LIVE agent, and the session survives disconnects.
+COPY entrypoint.d/ /entrypoint.d/
+RUN chmod -R a+rx /entrypoint.d
+
+# Keep-alive wrapper the boot hook launches: runs claude in a respawn loop so the
+# tmux session survives claude exiting (crash/exit) and stays attachable.
+COPY claude-session.sh /usr/local/bin/claude-session
+RUN chmod a+rx /usr/local/bin/claude-session
+
 # Switch to coder user
 USER coder
 
@@ -48,6 +60,21 @@ RUN ln -sf /home/coder/jh/.env /home/coder/.env
 
 # Install Claude Code via native installer
 RUN curl -fsSL https://claude.ai/install.sh | bash
+
+# Auto-attach interactive terminals to the live `claude` tmux session (created by the
+# ENTRYPOINTD boot hook) so opening a terminal drops you straight into the live agent.
+# Guarded to interactive shells ($- contains 'i') so it NEVER blocks tool/non-tty shells.
+RUN printf '%s\n' \
+    '' \
+    '# --- auto-attach to the live `claude` agent tmux session (interactive only) ---' \
+    'case $- in' \
+    '  *i*)' \
+    '    if [ -z "$TMUX" ] && command -v tmux >/dev/null 2>&1; then' \
+    '      tmux attach -t claude 2>/dev/null' \
+    '    fi' \
+    '    ;;' \
+    'esac' \
+    >> /home/coder/.bashrc
 
 
 # Install VS Code extensions
