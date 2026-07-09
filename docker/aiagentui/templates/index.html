@@ -430,7 +430,7 @@
           </div>
           <div class="mail-search"><input type="text" class="modal-input" id="mail-search-input" placeholder="Search messages" onkeydown="if(event.key==='Enter'){event.preventDefault();mailSearch();}" oninput="if(!this.value.trim())loadCurrentFolder();" /></div>
           <div class="mail-folders">
-            <a href="javascript:void(0)" class="mail-folder is-active" id="mail-folder-inbox" onclick="mailTab('inbox')">
+            <a href="javascript:void(0)" class="mail-folder" id="mail-folder-inbox" onclick="mailTab('inbox')">
               <span class="app-icon mail-folder-ico" aria-hidden="true" style="--icon:url('/static/img/inbox-stroke-rounded-black.svg')"></span>
               <span>Inbox</span>
             </a>
@@ -482,12 +482,21 @@
         if(chat)chat.style.display=on?'none':'';
         if(mail)mail.style.display=on?'':'none';
       }
-      var mailFolders={}, mailCurrent='inbox', mailLimit=5, mailCache=[];
+      var mailFolders={}, mailCurrent='', mailLimit=5, mailCache=[];
       function openMail(mode,event){
         if(event){event.preventDefault();}
         var pop=document.getElementById('pop-mail'); if(pop)pop.hidden=true;
         if(mode==='key'){ openModal('email'); return false; }
-        showMailPanel(true); mailTab('inbox'); return false;
+        showMailPanel(true); mailReset(); return false;
+      }
+      function mailReset(){
+        mailCurrent=''; mailLimit=5;
+        var si=document.getElementById('mail-search-input'); if(si)si.value='';
+        var ti=document.getElementById('mail-folder-inbox'), ts=document.getElementById('mail-folder-sent');
+        if(ti)ti.classList.remove('is-active');
+        if(ts)ts.classList.remove('is-active');
+        document.getElementById('mail-list').innerHTML='';
+        document.getElementById('mail-view').innerHTML='<div class="mail-view-empty">Select a message to read.</div>';
       }
       function mailTab(which){
         mailCurrent=which; mailLimit=5;
@@ -499,6 +508,7 @@
         loadCurrentFolder();
       }
       function loadCurrentFolder(){
+        if(!mailCurrent){ return; }
         if(mailCurrent==='sent'){
           if(mailFolders.sent){ loadInbox(mailFolders.sent); return; }
           fetch('/api/mail/folders').then(function(r){return r.json();}).then(function(d){
@@ -531,6 +541,7 @@
         }).join('');
       }
       function mailSearch(){
+        if(!mailCurrent){ return; }
         var q=(document.getElementById('mail-search-input').value||'').trim();
         if(!q){ loadCurrentFolder(); return; }
         var list=document.getElementById('mail-list');
