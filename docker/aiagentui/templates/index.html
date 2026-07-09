@@ -525,40 +525,51 @@
         fetch(url).then(function(r){return r.json();}).then(function(d){
           if(d.error){list.innerHTML='<div style="padding:12px;color:#dc2626">'+mesc(d.error)+'</div>';return;}
           var lbl=document.getElementById('mail-box-label'); if(lbl)lbl.textContent=d.mailbox_addr||'';
-          mailCache=d.envelopes||[];
-          if(!d.envelopes||!d.envelopes.length){list.innerHTML='<div style="padding:12px;color:var(--vf-color-text-muted)">No messages.</div>';return;}
-          var html=renderMailRows(d.envelopes);
-          if(d.envelopes.length>=mailLimit){ html+='<a class="mail-more" href="javascript:void(0)" onclick="mailMore()">Load more</a>'; }
+          var envs=d.envelopes||[];
+          envs.forEach(function(e){ e._folder=folder||''; });
+          mailCache=envs;
+          if(!envs.length){list.innerHTML='<div style="padding:12px;color:var(--vf-color-text-muted)">No messages.</div>';return;}
+          var html=renderMailRows(envs);
+          if(envs.length>=mailLimit){ html+='<a class="mail-more" href="javascript:void(0)" onclick="mailMore()">Load more</a>'; }
           list.innerHTML=html;
         }).catch(function(err){list.innerHTML='<div style="padding:12px;color:#dc2626">'+mesc(err)+'</div>';});
       }
       function mailMore(){ mailLimit+=5; loadCurrentFolder(); }
       function renderMailRows(envs){
         return envs.map(function(e){
-          return '<a class="chat-agent-item mail-item'+(e.seen?'':' is-unread')+'" href="javascript:void(0)" onclick="loadMessage(\''+e.uid+'\',this)">'
+          return '<a class="chat-agent-item mail-item'+(e.seen?'':' is-unread')+'" href="javascript:void(0)" onclick="loadMessage(\''+e.uid+'\',\''+(e._folder||'')+'\')">'
             +'<span class="mi-from">'+mesc(e.from)+'</span>'
             +'<span class="mi-subject">'+mesc(e.subject||'(no subject)')+'</span></a>';
         }).join('');
       }
       function mailSearch(){
-        if(!mailCurrent){ return; }
         var q=(document.getElementById('mail-search-input').value||'').trim();
-        if(!q){ loadCurrentFolder(); return; }
         var list=document.getElementById('mail-list');
+        if(!q){ if(mailCurrent){ loadCurrentFolder(); } else { list.innerHTML=''; } return; }
         list.innerHTML='<div style="padding:12px;color:var(--vf-color-text-muted)">Searching…</div>';
-        var folder=(mailCurrent==='sent'&&mailFolders.sent)?mailFolders.sent:'';
-        var url='/api/mail/search?q='+encodeURIComponent(q)+(folder?('&folder='+encodeURIComponent(folder)):'');
-        fetch(url).then(function(r){return r.json();}).then(function(d){
-          if(d.error){list.innerHTML='<div style="padding:12px;color:#dc2626">'+mesc(d.error)+'</div>';return;}
-          var envs=d.envelopes||[];
-          if(!envs.length){list.innerHTML='<div style="padding:12px;color:var(--vf-color-text-muted)">No matches.</div>';return;}
-          list.innerHTML=renderMailRows(envs);
-        }).catch(function(err){list.innerHTML='<div style="padding:12px;color:#dc2626">'+mesc(err)+'</div>';});
+        function one(folder){
+          var u='/api/mail/search?q='+encodeURIComponent(q)+(folder?('&folder='+encodeURIComponent(folder)):'');
+          return fetch(u).then(function(r){return r.json();}).then(function(d){
+            var es=(d&&d.envelopes)||[]; es.forEach(function(e){ e._folder=folder||''; }); return es;
+          }).catch(function(){ return []; });
+        }
+        function run(sent){
+          var jobs=[ one('') ];                 // Inbox
+          if(sent){ jobs.push(one(sent)); }     // Sent
+          Promise.all(jobs).then(function(parts){
+            var envs=[].concat.apply([],parts);
+            envs.sort(function(a,b){ return new Date(b.date)-new Date(a.date); });
+            if(!envs.length){ list.innerHTML='<div style="padding:12px;color:var(--vf-color-text-muted)">No matches.</div>'; return; }
+            list.innerHTML=renderMailRows(envs);
+          });
+        }
+        if(mailFolders.sent){ run(mailFolders.sent); }
+        else { fetch('/api/mail/folders').then(function(r){return r.json();}).then(function(d){ mailFolders=(d&&d.special)||{}; run(mailFolders.sent||''); }).catch(function(){ run(''); }); }
       }
-      function loadMessage(uid,el){
+      function loadMessage(uid,folder){
         var v=document.getElementById('mail-view');
         v.innerHTML='<div class="mail-view-empty">Loading…</div>';
-        var fq=(mailCurrent==='sent'&&mailFolders.sent)?('?folder='+encodeURIComponent(mailFolders.sent)):'';
+        var fq=folder?('?folder='+encodeURIComponent(folder)):'';
         fetch('/api/mail/message/'+encodeURIComponent(uid)+fq).then(function(r){return r.json();}).then(function(m){
           if(m.error){v.innerHTML='<div style="color:#dc2626">'+mesc(m.error)+'</div>';return;}
           v.innerHTML='<div class="mail-msg-subject">'+mesc(m.subject||'(no subject)')+'</div>'
