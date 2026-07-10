@@ -16,3 +16,4 @@ matplotlib>=3.9
 # Remote JupyterHub GPU offload (jh-exec bridge)
 jupyterhub-exec==0.1.4
 imapclient
+matrix-nio
