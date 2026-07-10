@@ -523,6 +523,31 @@ def cmd_read(cfg, args):
             pass
 
 
+def cmd_move(cfg, args):
+    """Move a message out of the source folder into another (e.g. Junk). The ONLY
+    mutating command — move, never delete. Portable COPY + \\Deleted + EXPUNGE."""
+    M = imap_connect(cfg)
+    try:
+        src = getattr(args, "folder", None) or cfg["mailbox"]
+        dest = _resolve_special(M, args.to, create=True) if args.to in _SPECIAL_KINDS else args.to
+        if not dest:
+            die(f"could not resolve destination folder: {args.to}")
+        styp, _ = M.select(_imap_folder(src), readonly=False)   # read-write, to move
+        if styp != "OK":
+            die(f"folder not found: {src}")
+        ctyp, _ = M.uid("copy", args.uid, _imap_folder(dest))
+        if ctyp != "OK":
+            die(f"copy of uid {args.uid} to {dest} failed")
+        M.uid("store", args.uid, "+FLAGS", "(\\Deleted)")
+        M.expunge()
+        out({"ok": True, "uid": args.uid, "moved_from": src, "moved_to": dest})
+    finally:
+        try:
+            M.logout()
+        except Exception:
+            pass
+
+
 def cmd_send(cfg, args):
     if not cfg["user"]:
         die("missing EMAIL_USER in ~/.env")
@@ -650,6 +675,11 @@ def main():
     pr.add_argument("--mark-seen", action="store_true", help="mark the message \\Seen")
     pr.add_argument("--folder", default=None, help="folder the uid lives in (default INBOX)")
 
+    pm = sub.add_parser("move", help="move a message to another folder, e.g. Junk (move-only, never deletes)")
+    pm.add_argument("uid")
+    pm.add_argument("--to", required=True, help="destination: a special kind (junk/sent/trash/drafts) or a raw folder name")
+    pm.add_argument("--folder", default=None, help="source folder the uid lives in (default INBOX)")
+
     ps = sub.add_parser("send", help="send a message")
     ps.add_argument("--to", required=True)
     ps.add_argument("--subject", required=True)
@@ -677,6 +707,7 @@ def main():
         "inbox": cmd_inbox,
         "folders": cmd_folders,
         "read": cmd_read,
+        "move": cmd_move,
         "send": cmd_send,
         "reply": cmd_reply,
         "search": cmd_search,
