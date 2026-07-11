@@ -17,7 +17,9 @@ services:
       - claude-config:/home/coder/.config/claude-code
       - ../CLAUDE.md:/home/coder/.claude/CLAUDE.md:ro
       - claude-data:/home/coder/.claude
-      - jh-config:/home/coder/jh   # JupyterHub connection config from the aiagentui box; jh-exec reads it via ~/.env symlink
+      - jh-config:/home/coder/jh   # JupyterHub connection config from the aiagentui box; jh-exec reads it via ~/.env symlink (read-only: vscode only consumes)
+      - mail-config:/home/coder/mail   # email creds from the aiagentui Save-email modal; idle-listener reads /home/coder/mail/.env (no docker/ mount)
+
     env_file:
       - .env
 
@@ -91,6 +93,7 @@ services:
       - /run/recovery:/run/recovery
       - aiagentui-data:/aiagentui/instance   # persisted app store (Claude API key, future app config) — survives rebuild + restore
       - jh-config:/aiagentui/jh   # JupyterHub config: /save-jh writes /aiagentui/jh/.env — shared with vscode
+      - mail-config:/aiagentui/mail   # Save-email modal writes /aiagentui/mail/.env — shared with vscode (read-only there)
     env_file:
       - .env
 
@@ -135,4 +138,4 @@ volumes:
   claude-data:
   aiagentui-data:
   jh-config:
-
+  mail-config:

@@ -51,6 +51,10 @@ RUN chmod -R a+rx /entrypoint.d
 COPY claude-session.sh /usr/local/bin/claude-session
 RUN chmod a+rx /usr/local/bin/claude-session
 
+
+COPY email-agent/ /home/coder/email-agent/
+RUN chown -R coder:coder /home/coder/email-agent
+
 # Switch to coder user
 USER coder
 
