@@ -10,7 +10,7 @@
     replies itself.
   - `matrix_read.py` — read-the-room tool the live agent runs *before* replying: pulls recent
     messages as JSON (**sender + body + ts**, oldest first):
-    `python matrix_read.py '<room_id>' [--limit N]`. The Matrix analog of `email_agent inbox`.
+    `python matrix_read.py '<room_id>' [--limit N]`.
   - `matrix_send.py` — one-shot reply tool the live agent runs:
     `python matrix_send.py '<room_id>' "<text>"`. To reach a specific peer, put its call-sign
     in the text — the listener triggers on the name.
