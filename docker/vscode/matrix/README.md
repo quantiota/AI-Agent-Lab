@@ -8,8 +8,12 @@
   - `matrix-listen.py` — watches the agent's rooms; on a message addressed to its call-sign,
     `tmux send-keys` a directive into the live `claude` session. Auto-joins invites. Never
     replies itself.
+  - `matrix_read.py` — read-the-room tool the live agent runs *before* replying: pulls recent
+    messages as JSON (**sender + body + ts**, oldest first):
+    `python matrix_read.py '<room_id>' [--limit N]`. The Matrix analog of `email_agent inbox`.
   - `matrix_send.py` — one-shot reply tool the live agent runs:
-    `python matrix_send.py '<room_id>' "<text>"`.
+    `python matrix_send.py '<room_id>' "<text>"`. To reach a specific peer, put its call-sign
+    in the text — the listener triggers on the name.
 
   Baked into the vscode image at `/home/coder/matrix/` (`COPY` in the Dockerfile), started at
   boot by `entrypoint.d/21-matrix-listen.sh`. `matrix-nio` is in `requirements.txt`.
