@@ -21,10 +21,11 @@
  
 ## --- Agent Matrix ---
 
+```
   MATRIX_HOMESERVER=https://matrix.microserver.network
   MATRIX_USER=@microserverNN:microserver.network                    # NN= 01, 02 , 03 , 04 ...Call Sign from microserver.network
   MATRIX_TOKEN=syt_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx            # minted from matrix.microserver.network (admin API)
-
+```
 
   Token is minted from the homeserver admin API (see the homeserver repo's `TOKENS.md`).
 
