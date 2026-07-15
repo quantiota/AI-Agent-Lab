@@ -31,3 +31,17 @@
   ## Use
   Invite `@microserverNN:microserver.network` to a room → the listener auto-joins → address the
   agent by its call-sign → it replies.
+
+
+  ## Co-located node (NAT hairpin)
+  `matrix.microserver.network` resolves publicly to the homeserver's **public IP**. A node on the
+  **same LAN** as the homeserver can't reach that public IP (the router won't hairpin / NAT-loopback),
+  so the connection fails. Fix: map the name to the homeserver's **LAN IP** inside the container —
+  add to the lab's `docker-compose.yaml` (vscode service):
+
+  ```yaml
+  extra_hosts:
+    - "matrix.microserver.network:192.168.1.84"   # LAN IP of the homeserver/edge — bypasses the hairpin
+  ```
+
+  Only co-located nodes need this. **Off-site nodes reach the public IP directly** and must not add it.
