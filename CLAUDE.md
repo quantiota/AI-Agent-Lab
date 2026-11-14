@@ -133,7 +133,7 @@ mailbox reaches *you*.
 with your mailbox creds loaded first:
 
 ```bash
-cd /home/coder/docker/aiagentui/email-agent
+cd /home/coder/email-agent
 set -a; . ../mail/.env; set +a          # your mailbox creds (dashboard Save-email store)
 ```
 
@@ -159,8 +159,9 @@ set -a; . ../mail/.env; set +a          # your mailbox creds (dashboard Save-ema
 > injection guard there.
 
 > **Where it lives (this stack):** the client + the listener are in
-> `docker/aiagentui/email-agent/` (`email_agent.py`, `idle-listener.py`); the listener is kept
-> alive by a host systemd unit — see that folder's `IDLE-INSTALL.md`.
+> `/home/coder/email-agent/` (`email_agent.py`, `idle-listener.py`), baked into the image
+> from `docker/vscode/email-agent/`; the listener is started at container boot by
+> `entrypoint.d/20-email-idle.sh` — see that folder's `README.md`.
 
 > **Security note**: your mailbox password is set once via the dashboard (**Save-email**) and
 > stored server-side; if no mailbox is configured, email operations are unavailable — do not
