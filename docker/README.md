@@ -140,13 +140,13 @@ PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
 
 ### 2 Setup Environment Variables
 
-Since the '**.env**' file already exists in the docker folder, please update it to include or modify the necessary variables as needed for your setup:
+Copy '**.env.sample**' to '**.env**' in the docker folder (`cp .env.sample .env`), then update the variables as needed for your setup:
 
 ```
 
 # Grafana 
 GRAFANA_QUESTDB_PASSWORD=quest
-GF_AUTH_ANONYMOUS_ENABLED=true
+GF_AUTH_ANONYMOUS_ENABLED=false
 GF_AUTH_ANONYMOUS_ORG_ROLE=Viewer
 GF_AUTH_ANONYMOUS_ORG_NAME=Main Org.
 GF_AUTH_ANONYMOUS_ALLOW_EMBEDDING=true
@@ -298,7 +298,7 @@ This will start all services as defined in your **docker-compose.yaml** file.
 ### Configuration setup
 ```mermaid
 flowchart TD
-    A["FQDN · domain.tld<br/>vscode · questdb · grafana · aiagentui · auth"] --> B["Public IP address"]
+    A["FQDN · domain.tld<br/>vscode · questdb · grafana · aiagentui · auth · gradio"] --> B["Public IP address"]
     B --> C["Port forwarding<br/>443 · 80 · 22 · 8812 · 9009 · 9100"]
     C --> D["Server local IP address"]
     D --> E["1 · Generate TLS certs"]
