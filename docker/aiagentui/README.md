@@ -4,7 +4,7 @@ The web dashboard for the AI Agent Lab — a lightweight **Flask** app that serv
 
 ## Features
 
-- **Chat with Claude** — calls the Anthropic Messages API, with model switching across Haiku, Sonnet, and Opus. Conversations are kept in the browser (localStorage).
+- **Chat with Claude** — calls the Anthropic Messages API, with model switching across Haiku, Sonnet, and Opus. Conversations are kept in the server, on the aiagentui-data volume, so they survive a rebuild.
 - **Claude API key (bring-your-own-key)** — set your Anthropic key from the dashboard ("Claude API Key" panel). It's stored per-instance and persists across rebuilds/restores; falls back to `ANTHROPIC_API_KEY` in `.env` if unset. No shell or `.env` editing required.
 - **File upload** — upload `.csv` / `.sql` / `.pdf` / `.txt` (max 800 KB) into the shared `uploads/` folder.
 - **Backup restore** — list and restore `rsnapshot` snapshots.
