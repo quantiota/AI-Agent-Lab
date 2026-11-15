@@ -1,5 +1,11 @@
 # AI Agent Lab
 
+<p align="center">
+  <a href="https://www.amazon.com/dp/B0HRSG9GK3"><img src="banner/ai-agent-banner.png" alt="How to Build Your Own AI Agent with Claude Code — the book of the AI Agent Host, Lab and Farm" width="100%"></a>
+</p>
+<p align="center">The book of the AI Agent Host, Lab and Farm · <a href="https://www.amazon.com/dp/B0HRSG9GK3">Get it on Kindle</a></p>
+
+
 > **Note**: This repository serves as a reference and template for developers who want to build their own AI agent on top of the lab infrastructure. Claude Code runs inside the Code-Server container to provide AI-assisted development directly inside the lab. For a production-ready Claude Code-powered version, see [AI Agent Host](https://github.com/quantiota/AI-Agent-Host).
 >
 > *Sophistication is in the AI Agent Lab. Productivity is in the AI Agent Host.*
