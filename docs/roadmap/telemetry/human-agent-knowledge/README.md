@@ -1,4 +1,4 @@
-# Timestamped Chat History for AI Agent Host
+# Timestamped Chat History for AI Agent Lab
 
 ## Why We Need Persistent Chat Memory
 
@@ -11,9 +11,9 @@ Traditional AI interactions are **stateless** - each conversation starts from sc
 - **No Expertise Development**: AI remains generic instead of becoming specialized
 - **Inconsistent Responses**: Same questions may get different answers over time
 
-### The AI Agent Host Advantage
+### The AI Agent Lab Advantage
 
-The AI Agent Host's **infrastructure-first approach** enables persistent memory:
+The AI Agent Lab's **infrastructure-first approach** enables persistent memory:
 
 - **QuestDB Integration**: Time-series database perfect for conversation storage
 - **Local Data Control**: All conversations stored on your infrastructure
@@ -25,7 +25,7 @@ The AI Agent Host's **infrastructure-first approach** enables persistent memory:
 ### The Human Intelligence Parallel
 
 Humans learn **forward-only** — we don’t erase our history and retrain from zero every time we gain new knowledge.
-The AI Agent Host mirrors this natural process by storing **timestamped, structured memory** in QuestDB:
+The AI Agent Lab mirrors this natural process by storing **timestamped, structured memory** in QuestDB:
 
 - **Forward-Only Learning**: Each interaction becomes a permanent knowledge event, building cumulatively over time without retraining cycles.
 - **Uncertainty Reduction**: Every structured memory entry narrows the range of possible answers, allowing the AI to move from broad guesses to precise, informed solutions.
@@ -36,7 +36,7 @@ The result is an AI that evolves like a skilled colleague — learning from past
 
 ### The Two Phases of Applied AI: From Generalization to Forward-Only Specialization
 
-The AI Agent Host marks the **second natural phase** in the evolution of applied AI — a phase that could not exist without the first.
+The AI Agent Lab marks the **second natural phase** in the evolution of applied AI — a phase that could not exist without the first.
 
 
 
@@ -64,33 +64,33 @@ In SKA terms, each new piece of structured, time-stamped information **reduces i
 - **Resistance to Catastrophic Forgetting**: Pre-trained cognition from Phase 1 prevents overwriting previous knowledge.
 - **Low Cost, High Value**: Phase 1 is expensive and rare; Phase 2 runs on modest hardware, using interaction data already being generated in daily operation.
 
-The AI Agent Host is the **bridge** between these two phases — taking a powerful but generic AI and giving it the tools to evolve, specialize, and operate like a living intelligence.
+The AI Agent Lab is the **bridge** between these two phases — taking a powerful but generic AI and giving it the tools to evolve, specialize, and operate like a living intelligence.
 
 
 ## Agent-Agnostic Memory Inheritance
 
-One of the most powerful aspects of the AI Agent Host is that **memory belongs to the environment, not the agent**.
+One of the most powerful aspects of the AI Agent Lab is that **memory belongs to the environment, not the agent**.
 
 - **Decoupled Memory Layer**: The timestamped, structured knowledge base (QuestDB + logs) is an integral part of the infrastructure. It continuously accumulates knowledge, context, and operational history — independent of any specific AI agent.
 - **Swap Agents Without Resetting**: If you replace Claude with GPT, or integrate a custom SKA-based agent, the new agent automatically inherits the entire accumulated knowledge base. No migration, no retraining, no loss of continuity.
 - **Future-Proof Expertise**: This design ensures that as AI agents evolve, the persistent knowledge layer remains intact. Each new generation of agents builds on top of the existing accumulated expertise.
-- **Human-Like Continuity**: Just as humans retain their memories when learning new skills, the AI Agent Host provides a continuous memory stream that survives beyond any single AI model instance.
+- **Human-Like Continuity**: Just as humans retain their memories when learning new skills, the AI Agent Lab provides a continuous memory stream that survives beyond any single AI model instance.
 
-This architecture makes the AI Agent Host not just a tool for today, but a **long-term foundation for agentic AI ecosystems**.
+This architecture makes the AI Agent Lab not just a tool for today, but a **long-term foundation for agentic AI ecosystems**.
 
 
 
 
 ## Connection to Structured Knowledge Accumulation (SKA)
 
-The AI Agent Host is not only a production-ready agentic environment — it is also a **real-world operational platform for the Structured Knowledge Accumulation (SKA) framework**.
+The AI Agent Lab is not only a production-ready agentic environment — it is also a **real-world operational platform for the Structured Knowledge Accumulation (SKA) framework**.
 
 - **Timestamped, Structured Memory**: QuestDB logs every interaction with precise time ordering and rich metadata, providing the exact data foundation SKA uses to reduce uncertainty step-by-step.
 - **Forward-Only Learning**: Just as SKA advocates, the system never “forgets” or retrains from scratch — it continuously builds on past knowledge without overwriting prior expertise.
 - **Entropy Reduction Through Context**: Historical context retrieval allows the AI to collapse uncertainty, increasing decision precision over time — mirroring SKA’s entropy minimization principle.
 - **Live Data Integration**: The environment continuously streams real-world operational data, turning every interaction into a learning opportunity.
 
-This means that **deploying the AI Agent Host instantly gives you an SKA-compatible infrastructure**, ready for experimentation, research, or production use.
+This means that **deploying the AI Agent Lab instantly gives you an SKA-compatible infrastructure**, ready for experimentation, research, or production use.
 
 
 
@@ -102,7 +102,7 @@ This means that **deploying the AI Agent Host instantly gives you an SKA-compati
 Training Data → Model Training → Static Capabilities
 ```
 
-### AI Agent Host Learning
+### AI Agent Lab Learning
 ```
 Live Conversations → QuestDB Storage → Dynamic Context Retrieval → Evolving Expertise
 ```
@@ -262,7 +262,7 @@ Navigate to the `human-agent-knowledge/production` folder for complete deploymen
 
 ## Theoretical Foundation
 
-For the mathematical foundation behind this approach, see the [SKA Framework documentation](https://github.com/quantiota/AI-Agent-Host/tree/main/ska-framework/) which explains the principles of structured knowledge accumulation that enable AI learning through conversation data.
+For the mathematical foundation behind this approach, see the [SKA Framework documentation](https://github.com/quantiota/SKA-Protocol/tree/main/ska-protocol/papers) which explains the principles of structured knowledge accumulation that enable AI learning through conversation data.
 
 
 

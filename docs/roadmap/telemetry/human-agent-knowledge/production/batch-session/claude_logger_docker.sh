@@ -33,7 +33,7 @@ log_metadata() {
     "hostname": "$(hostname)",
     "claude_version": "$(claude --version 2>/dev/null || echo 'unknown')",
     "working_directory": "$(pwd)",
-    "environment": "AI Agent Host - Docker",
+    "environment": "AI Agent Lab - Docker",
     "log_files": {
         "session": "${SESSION_LOG}",
         "timing": "${TIMING_LOG}",

@@ -40,8 +40,8 @@ class ConversationParser:
     def _build_project_patterns(self) -> Dict[str, List[str]]:
         """Build patterns for detecting project context from conversation content"""
         return {
-            'ai-agent-host': [
-                r'ai.?agent.?host', r'claude.?code', r'questdb', r'grafana',
+            'ai-agent-lab': [
+                r'ai.?agent.?lab', r'claude.?code', r'questdb', r'grafana',
                 r'docker.*stack', r'agentic.*environment'
             ],
             'python': [

@@ -13,7 +13,7 @@ from typing import List, Dict, Optional, Any, Tuple
 from pathlib import Path
 
 # Import from our clean parser
-sys.path.append('/home/quant/AI-Agent-Host/claude-code/chat-history')
+sys.path.append(str(Path(__file__).resolve().parent))
 from conversation_parser_clean import ConversationMessage, ConversationParser
 
 class QuestDBInserter:

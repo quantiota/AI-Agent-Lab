@@ -44,7 +44,7 @@ log_metadata() {
     "hostname": "$(hostname)",
     "claude_version": "$(claude --version 2>/dev/null || echo 'unknown')",
     "working_directory": "$(pwd)",
-    "environment": "AI Agent Host - Real-time Streaming",
+    "environment": "AI Agent Lab - Real-time Streaming",
     "streaming": true,
     "log_files": {
         "session": "${SESSION_LOG}",
