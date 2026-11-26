@@ -1,5 +1,5 @@
 #!/bin/bash
-# Prepare an Ubuntu 24.04 host for the AI Agent Lab.
+# Prepare an Ubuntu 22.04 host for the AI Agent Lab.
 # Runs each component installer in order. Run from this folder: ./setup-host.sh
 set -e
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
