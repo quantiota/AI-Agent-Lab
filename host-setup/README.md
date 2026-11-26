@@ -1,6 +1,6 @@
 # AI Agent Lab — Host Setup
 
-Prepares a fresh **Ubuntu 24.04 (amd64)** host with everything needed to run the
+Prepares a fresh **Ubuntu 22.04 (amd64)** host with everything needed to run the
 AI Agent Lab — **before** you clone the lab itself. Each component is a
 self-contained subdirectory (`install-*.sh` + its config files).
 
@@ -33,7 +33,7 @@ chmod +x install-docker.sh
 ```
 
 ## Notes
-- Target: **Ubuntu 24.04, amd64** (Prometheus/node-exporter binaries are amd64).
+- Target: **Ubuntu 22.04, amd64** (Prometheus/node-exporter binaries are amd64).
 - TLS is **not** here — it's issued by the lab's certbot container (HTTP-01) at runtime.
 - `recovery-agent`: set `TARGET_USER` to your host user before running its installer.
 
